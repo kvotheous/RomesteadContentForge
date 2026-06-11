@@ -247,7 +247,12 @@ internal static class ScratchSpacFeature
                                 Flip = false,
                                 Scale = 1f,              // quad size = SpriteWidth/Height * Scale (rdll:119857)
                                 Tag = 0,                 // Tag 0 = never enters the skins path
-                                Horizontal3D = false,
+                                // STANDING, not flat: the draw branch applies the -pi/2 X-rotation (the
+                                // upright billboard) only when args.Horizontal3DPlane XOR sprite.Horizontal3D
+                                // (rdll:119874). Creature machines render with SpacRenderingArgs.Default
+                                // (Horizontal3DPlane=false), so the sprite flag must be TRUE — false drew
+                                // every from-scratch creature lying in the ground plane like a rug.
+                                Horizontal3D = true,
                                 HorizontalAndVertical = false,
                                 DepthOffset = 0f,
                                 VariationName = string.Empty,   // vanilla ParseSpacData always assigns it (cc:13641)
