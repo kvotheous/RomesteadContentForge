@@ -1,7 +1,7 @@
 # Content Forge — Getting Started
 
 _What this is: install + your first pack in 5 minutes, through to shipping. What this isn't: the field spec
-([PACKS.md](PACKS.md)) or a recipe collection ([COOKBOOK.md](COOKBOOK.md)). Docs index: [README.md](README.md)._
+([PACKS.md](PACKS.md)) or a recipe collection ([COOKBOOK.md](COOKBOOK.md)). Docs index: [README.md](../README.md)._
 
 You write a small **JSON file** (a "content pack"), drop it in a folder, and your items/spells/summons/quests/
 classes/placeables/creatures/dungeons are **in the game**. No compiling, no game files touched.
@@ -94,7 +94,7 @@ if you only use **`ForgeEditor.exe`**, you don't even need Python.
 
 ## 5. What you can add
 Items, weapons, spells, summons, creatures, dungeons, NPCs, quests, classes, placeables, events and more —
-the full capability list, deep-linked per feature, is the [README.md capability index](README.md#what-packs-can-do-capability-index--packsmd).
+the full capability list, deep-linked per feature, is the [README.md capability index](../README.md#what-packs-can-do-capability-index--packsmd).
 Every field: [PACKS.md](PACKS.md) · copy-paste recipes: [COOKBOOK.md](COOKBOOK.md) · valid ids: `reference/*.txt` ([REFERENCE.md](REFERENCE.md)).
 
 ## 6. Worked examples

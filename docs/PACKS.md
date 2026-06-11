@@ -2,7 +2,7 @@
 
 _What this is: the full field-by-field spec of the pack format. What this isn't: a tutorial
 ([GETTING_STARTED.md](GETTING_STARTED.md)), copy-paste recipes ([COOKBOOK.md](COOKBOOK.md)), or C#/tooling
-workflows ([ADVANCED.md](ADVANCED.md)). Docs index: [README.md](README.md)._
+workflows ([ADVANCED.md](ADVANCED.md)). Docs index: [README.md](../README.md)._
 
 **New here? Read `GETTING_STARTED.md` first** — install, a 5-minute first pack, and a feature tour. This file
 is the full field-by-field spec you come back to.

@@ -1,7 +1,7 @@
 # Content Forge — Pack Editor
 
 _What this is: the GUI pack editor — run it, build it, troubleshoot it. What this isn't: the pack format itself
-(see [../PACKS.md](../PACKS.md)). Docs index: [../README.md](../README.md)._
+(see [../docs/PACKS.md](../docs/PACKS.md)). Docs index: [../README.md](../README.md)._
 
 A cross-platform (Windows / macOS / Linux) visual editor for Content Forge packs. Builds its forms from
 `schema.json` (the field manifest mirroring `ContentPack.cs` + `PACKS.md`), so it always matches the pack format.

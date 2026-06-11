@@ -3,7 +3,7 @@
 Step-by-step walkthroughs for every open test: [TESTPLAN.md](TESTPLAN.md)
 
 _What this is: the T## checklist — what's tested, what's open, and how to test each feature. What this isn't:
-authoring docs (see [PACKS.md](PACKS.md)). Docs index: [README.md](README.md)._
+authoring docs (see [PACKS.md](PACKS.md)). Docs index: [README.md](../README.md)._
 
 `examples/test/test.json` (namespace **`cftest`**) is one pack exercising **every** framework feature; items
 are named `T## …` so they match the rows. Get items via the **Item Spawner** (F1) → search `cftest:`.

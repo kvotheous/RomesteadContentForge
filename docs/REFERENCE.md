@@ -1,7 +1,7 @@
 # Content Forge — Value Reference (id catalogs)
 
 _What this is: the long id catalogs (icons, items, displays, auras, drop tables…) to copy values from. What
-this isn't: the field spec — what each field means lives in [PACKS.md](PACKS.md). Docs index: [README.md](README.md)._
+this isn't: the field spec — what each field means lives in [PACKS.md](PACKS.md). Docs index: [README.md](../README.md)._
 
 Companion to **`PACKS.md`** — that file is the full **field-by-field spec** (every field, type, default, meaning,
 and the valid enum values explained). This file holds the long **id catalogs** to copy from.

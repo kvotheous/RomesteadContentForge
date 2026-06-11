@@ -1,8 +1,8 @@
 # Content Forge — example packs
 
 _What this is: the shipped example packs and what each demonstrates. What this isn't: a tutorial
-([../GETTING_STARTED.md](../GETTING_STARTED.md)) or step-by-step walkthroughs of these packs
-([../COOKBOOK.md](../COOKBOOK.md)). Docs index: [../README.md](../README.md)._
+([../docs/GETTING_STARTED.md](../docs/GETTING_STARTED.md)) or step-by-step walkthroughs of these packs
+([../docs/COOKBOOK.md](../docs/COOKBOOK.md)). Docs index: [../README.md](../README.md)._
 
 Self-contained packs that show how anyone builds content with the framework. Each is a normal pack — nothing
 special, no code. **To try one:** copy **all of the folder's files** (the `.json` plus its `.png`/`.tmx`/

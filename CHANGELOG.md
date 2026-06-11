@@ -2,7 +2,7 @@
 
 ## 1.0.0
 Initial release. Adds **brand-new content** to Romestead from JSON "content packs" in
-`BepInEx\config\RomesteadContentForge\packs\` — no game files touched, no compiling. See `PACKS.md` for the
+`BepInEx\config\RomesteadContentForge\packs\` — no game files touched, no compiling. See `docs/PACKS.md` for the
 full field reference and `REFERENCE.md` for the id catalogs.
 
 - **Announcement banners** — event/arena/handshake/two-handed messages now show as **big red text

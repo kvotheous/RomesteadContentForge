@@ -2,7 +2,7 @@
 
 _What this is: copy-paste recipes, organized by goal — paste, rename the namespace, tweak. What this isn't: the
 field spec (see [PACKS.md](PACKS.md)) or a tutorial (see [GETTING_STARTED.md](GETTING_STARTED.md)). Docs index:
-[README.md](README.md)._
+[README.md](../README.md)._
 
 Every recipe is a working pack fragment. Field meanings and valid values live in [PACKS.md](PACKS.md) — each
 recipe links the sections it uses. For complete shipping-ready packs, see the two

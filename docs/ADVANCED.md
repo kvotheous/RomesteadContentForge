@@ -2,7 +2,7 @@
 
 _What this is: the power-user doc — C# controllers, addon DLLs, vanilla-art extraction, FMOD bank authoring.
 What this isn't: needed for normal packs (JSON-only authoring is all in [PACKS.md](PACKS.md)). Docs index:
-[README.md](README.md)._
+[README.md](../README.md)._
 
 ## Contents
 
