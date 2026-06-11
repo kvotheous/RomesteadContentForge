@@ -262,5 +262,4 @@ resolve; the loader loads it first). The event path must match `castSound` exact
 One paragraph: at game startup the mod reads every pack json, resolves dependencies, and registers content
 through the game's own public `DataBase` add methods (a postfix on `SharedDataSetup.Setup`), injecting assets
 (PNG/TMX/yarn/audio) through the matching subsystems; everything else (replication, saves, co-op handshake)
-rides vanilla systems. The full architecture — feature by feature, with the Harmony patch map — is
-**[DESIGN.md](DESIGN.md)**.
+rides vanilla systems.

@@ -42,7 +42,6 @@ The release ships as **two zips** (Nexus Files tab / GitHub Releases):
 | Go beyond JSON — C# controllers, addon DLLs, art extraction, FMOD banks | [ADVANCED.md](docs/ADVANCED.md) |
 | Find valid ids (icons, items, creatures, auras, drop tables…) | [REFERENCE.md](docs/REFERENCE.md) + `reference/*.txt` |
 | See what's tested and how to test | [TESTING.md](docs/TESTING.md) |
-| Learn how the mod itself works inside | [DESIGN.md](docs/DESIGN.md) |
 | Read the changelog | [CHANGELOG.md](CHANGELOG.md) |
 | Use the GUI editor instead of hand-written JSON | [editor/README.md](editor/README.md) |
 | Copy from worked examples | [examples/README.md](examples/README.md) |
