@@ -75,7 +75,9 @@
     "aggro-radius": "220",
     "spac": "ww:werewolf_anims",
     "anim-map": "0=idle:loop,1=walk:loop,2=attack",
-    "walk-px-per-sec": "60"
+    "walk-px-per-sec": "60",
+    "sprite-scale": "0.85",
+    "sprite-offset-y": "6"
    }
   }
  ],

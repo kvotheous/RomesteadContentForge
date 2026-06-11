@@ -278,6 +278,14 @@ public sealed class ForgeCreatureAnimController : AbstractController
             _machine = new EntitySpacAnimationStateMachine(spac, stateDefs, transitions);
             _machine.Args = SpacRenderingArgs.Default;
             _machine.Args.SetDefaultEntityOffset(Entity);
+            // Visual tuning knobs (from-scratch art rarely matches the vanilla cell-margin conventions):
+            //   sprite-scale    — multiplies the quad size (default 1)
+            //   sprite-offset-y — px added to the vertical anchor (positive = sprite drawn HIGHER; the
+            //                     default anchor is collision-box-height/2 via SetDefaultEntityOffset)
+            float sScale = Parameters.GetFloat("sprite-scale", 1f);
+            if (sScale > 0f && sScale != 1f) _machine.Args.Scale = sScale;
+            float sOffY = Parameters.GetFloat("sprite-offset-y", 0f);
+            if (sOffY != 0f) _machine.Args.Offset += new Microsoft.Xna.Framework.Vector3(0f, sOffY, 0f);
             Entity.UsesSpac = true;
 
             // Initial state: spawn sets controller.State from the server model BEFORE EntityInitialize
