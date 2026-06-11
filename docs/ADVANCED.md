@@ -54,7 +54,7 @@ its `placeables[].controller` — exactly how the built-in presets themselves ar
 *Why C# and not Lua?* This API is Content Forge's scripting layer: controllers run **server-authoritatively**
 (effects replicate correctly in co-op), are **typed and compile-checked**, and ride the game's own stable
 controller extension point. The game does ship a Lua layer, but it is client-only, unsandboxed (a pack `.lua`
-would be arbitrary code execution), and abandoned in place by the developers — see `RESEARCH.md` §9.5.
+would be arbitrary code execution), and abandoned in place by the developers.
 
 **The class pair.** The split mirrors vanilla (GateController vs ServerGateController): **server types carry
 the gameplay effects** (heal, give, state, teleport — replicated by the game), **client types are presentation
@@ -263,4 +263,4 @@ One paragraph: at game startup the mod reads every pack json, resolves dependenc
 through the game's own public `DataBase` add methods (a postfix on `SharedDataSetup.Setup`), injecting assets
 (PNG/TMX/yarn/audio) through the matching subsystems; everything else (replication, saves, co-op handshake)
 rides vanilla systems. The full architecture — feature by feature, with the Harmony patch map — is
-**[DESIGN.md](DESIGN.md)**; per-feature engine findings are **[RESEARCH.md](RESEARCH.md)**.
+**[DESIGN.md](DESIGN.md)**.
