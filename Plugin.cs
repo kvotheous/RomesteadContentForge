@@ -537,9 +537,18 @@ internal static class CompanionPatch
             {
                 var me = comps[i].EntityWrapper;
                 float ang = (n == 1) ? 0f : i * (MathHelper.TwoPi / n);
+                // NEVER inherit the player's Z (mid-jump, standing on an entity): all wall collision is
+                // Z-band gated, and an inflated Z lifts the companion's band clear of every wall — the
+                // same float-noclip the spawn path grounds against. FloorHeight then LATCHES to the
+                // inflated Z (UpdateFloorHeight seeds its query with current Z), so it never self-heals.
                 var to = player.Position + new Vector3(MathF.Cos(ang) * PlaceDist, MathF.Sin(ang) * PlaceDist, 0f);
+                to.Z = 0f;
                 me.Velocity = Vector3.Zero;
                 EntitySController.UpdateEntityPosition(comps[i], to);
+                me.System.UpdateFloorHeight(me.Eid);                  // re-ground at the destination
+                var gp = me.Position;
+                gp.Z = me.System.General[me.Eid].FloorHeight;
+                me.Position = gp;
                 CreatureFixes.FaceToward(me, player.EntityWrapper);   // face the player once at the blink (replicated per tick)
             }
         }
