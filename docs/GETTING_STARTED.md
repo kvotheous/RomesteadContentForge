@@ -1,4 +1,6 @@
-# Content Forge — Getting Started
+# 🚀 Content Forge — Getting Started
+
+**[« Docs index](../README.md)**
 
 _What this is: install + your first pack in 5 minutes, through to shipping. What this isn't: the field spec
 ([PACKS.md](PACKS.md)) or a recipe collection ([COOKBOOK.md](COOKBOOK.md)). Docs index: [README.md](../README.md)._

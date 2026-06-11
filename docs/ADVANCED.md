@@ -1,4 +1,6 @@
-# Content Forge — Advanced
+# 🧪 Content Forge — Advanced
+
+**[« Docs index](../README.md)**
 
 _What this is: the power-user doc — C# controllers, addon DLLs, vanilla-art extraction, FMOD bank authoring.
 What this isn't: needed for normal packs (JSON-only authoring is all in [PACKS.md](PACKS.md)). Docs index:

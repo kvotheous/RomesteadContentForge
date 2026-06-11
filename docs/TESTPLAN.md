@@ -1,4 +1,6 @@
-# Content Forge — Test Plan (step-by-step walkthroughs)
+# 🧾 Content Forge — Test Plan (step-by-step walkthroughs)
+
+**[« Docs index](../README.md)**
 
 _What this is: a per-test walkthrough for every OPEN row in [TESTING.md](TESTING.md) (status 🔁) — exact steps,
 where each item comes from, what passes, what falsely looks like a fail, and how to re-run a test in a

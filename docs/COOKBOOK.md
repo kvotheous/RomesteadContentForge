@@ -1,4 +1,6 @@
-# Content Forge — Cookbook
+# 🍳 Content Forge — Cookbook
+
+**[« Docs index](../README.md)**
 
 _What this is: copy-paste recipes, organized by goal — paste, rename the namespace, tweak. What this isn't: the
 field spec (see [PACKS.md](PACKS.md)) or a tutorial (see [GETTING_STARTED.md](GETTING_STARTED.md)). Docs index:

@@ -1,4 +1,6 @@
-# Content Forge — Test Bench
+# ✅ Content Forge — Test Bench
+
+**[« Docs index](../README.md)**
 
 Step-by-step walkthroughs for every open test: [TESTPLAN.md](TESTPLAN.md)
 

@@ -1,4 +1,6 @@
-# Content Forge — Value Reference (id catalogs)
+# 🗂️ Content Forge — Value Reference (id catalogs)
+
+**[« Docs index](../README.md)**
 
 _What this is: the long id catalogs (icons, items, displays, auras, drop tables…) to copy values from. What
 this isn't: the field spec — what each field means lives in [PACKS.md](PACKS.md). Docs index: [README.md](../README.md)._

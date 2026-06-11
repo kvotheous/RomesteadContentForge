@@ -1,4 +1,6 @@
-# Content Forge — Complete Pack Reference
+# 📜 Content Forge — Complete Pack Reference
+
+**[« Docs index](../README.md)**
 
 _What this is: the full field-by-field spec of the pack format. What this isn't: a tutorial
 ([GETTING_STARTED.md](GETTING_STARTED.md)), copy-paste recipes ([COOKBOOK.md](COOKBOOK.md)), or C#/tooling
