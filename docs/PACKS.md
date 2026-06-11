@@ -38,7 +38,7 @@ section at a glance. The sections below are grouped the same way as the `README.
 - **Player Looks & Rigs** — [PlayerSkins](#playerskins-top-level-playerskins--the-players-own-look)
 - **Cookbook** — moved to [COOKBOOK.md](COOKBOOK.md) (copy-paste recipes by goal: flame sword, staff, chains, shrines, portals, walkthroughs…)
 - **Co-op & Safety** — [Co-op & saves](#co-op--saves)
-- **Tooling** — [Validate](#validate) · GUI editor: `editor/README.md` · id catalogs: `REFERENCE.md` + `reference/*.txt` · planned: `ROADMAP.md`
+- **Tooling** — [Validate](#validate) · GUI editor: `editor/README.md` · id catalogs: `REFERENCE.md` + `reference/*.txt`
 
 ---
 

@@ -19,3 +19,6 @@ Validator/obj/
 
 # Extracted vanilla game art (local tracing templates only — never redistribute)
 templates/
+
+# Internal planning - not published
+docs/ROADMAP.md

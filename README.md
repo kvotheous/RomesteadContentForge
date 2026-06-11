@@ -43,7 +43,6 @@ The release ships as **two zips** (Nexus Files tab / GitHub Releases):
 | Find valid ids (icons, items, creatures, auras, drop tables…) | [REFERENCE.md](docs/REFERENCE.md) + `reference/*.txt` |
 | See what's tested and how to test | [TESTING.md](docs/TESTING.md) |
 | Understand what's possible & why (engine internals, decompile findings) | [RESEARCH.md](docs/RESEARCH.md) |
-| See what's planned / parked | [ROADMAP.md](docs/ROADMAP.md) |
 | Learn how the mod itself works inside | [DESIGN.md](docs/DESIGN.md) |
 | Read the changelog | [CHANGELOG.md](CHANGELOG.md) |
 | Use the GUI editor instead of hand-written JSON | [editor/README.md](editor/README.md) |
