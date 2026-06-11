@@ -1,0 +1,26 @@
+title: Start
+---
+<<Actor wot_sage>>
+wot_sage: Welcome, traveler, to the World of Tales. #line:sage_01
+wot_sage: Every story ever told smoulders here as an ember. I keep them lit. #line:sage_02
+-> Where am I? #line:sage_opt_where
+    wot_sage: A realm beside your own, reachable only by the Storyteller's Arch. #line:sage_03
+    wot_sage: The dark you see is not night - it is the ink all tales are written in. #line:sage_04
+-> I want an ember. #line:sage_opt_ember
+    <<if GetInventoryItemAmount("wot:ember") > 0>>
+        wot_sage: The ember you already carry still glows, traveler. One tale at a time. #line:sage_11
+    <<elseif GetInventoryItemAmount("material:wood_stick") >= 3>>
+        wot_sage: Three sticks of honest wood... yes, a story needs a fire to be told by. #line:sage_05
+        <<ForgeTakeItem "material:wood_stick" 3>>
+        <<ForgeGiveItem "wot:ember" 1>>
+        wot_sage: Take this ember. Carry it home, and it will teach your hands a small magic. #line:sage_06
+    <<else>>
+        wot_sage: Bring me three wooden sticks - kindling for a tale - and one ember is yours. #line:sage_07
+    <<endif>>
+-> Tend my wounds, keeper. #line:sage_opt_heal
+    wot_sage: Hush now. Let this page turn for you. #line:sage_08
+    <<ForgeHeal 30>>
+-> Farewell. #line:sage_opt_bye
+    wot_sage: Every leaving is a story's end. Write a good one. #line:sage_09
+wot_sage: The embers and I will be here. #line:sage_10
+===

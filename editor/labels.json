@@ -1,0 +1,711 @@
+{
+ "_comment": "Field-label translations for the editor's right-pane forms. key -> { langcode -> label }. Missing language falls back to the English label, then the raw key. Add languages/keys freely.",
+ "id": {
+  "en": "id",
+  "tr_TR": "kimlik",
+  "de_DE": "ID",
+  "es_ES": "id"
+ },
+ "name": {
+  "en": "name",
+  "tr_TR": "ad",
+  "de_DE": "Name",
+  "es_ES": "nombre"
+ },
+ "nameLocalized": {
+  "en": "name (per language)",
+  "tr_TR": "ad (dile g\u00f6re)",
+  "de_DE": "Name (je Sprache)",
+  "es_ES": "nombre (por idioma)"
+ },
+ "description": {
+  "en": "description",
+  "tr_TR": "a\u00e7\u0131klama",
+  "de_DE": "Beschreibung",
+  "es_ES": "descripci\u00f3n"
+ },
+ "descriptionLocalized": {
+  "en": "description (per language)",
+  "tr_TR": "a\u00e7\u0131klama (dile g\u00f6re)",
+  "de_DE": "Beschreibung (je Sprache)",
+  "es_ES": "descripci\u00f3n (por idioma)"
+ },
+ "icon": {
+  "en": "icon",
+  "tr_TR": "simge",
+  "de_DE": "Symbol",
+  "es_ES": "icono"
+ },
+ "maxStack": {
+  "en": "max stack",
+  "tr_TR": "azami y\u0131\u011f\u0131n",
+  "de_DE": "max. Stapel",
+  "es_ES": "pila m\u00e1x."
+ },
+ "tier": {
+  "en": "tier",
+  "tr_TR": "kademe",
+  "de_DE": "Stufe",
+  "es_ES": "nivel"
+ },
+ "flags": {
+  "en": "flags",
+  "tr_TR": "etiketler",
+  "de_DE": "Flags",
+  "es_ES": "marcas"
+ },
+ "price": {
+  "en": "price",
+  "tr_TR": "fiyat",
+  "de_DE": "Preis",
+  "es_ES": "precio"
+ },
+ "light": {
+  "en": "light",
+  "tr_TR": "\u0131\u015f\u0131k",
+  "de_DE": "Licht",
+  "es_ES": "luz"
+ },
+ "equippable": {
+  "en": "equippable",
+  "tr_TR": "ku\u015fan\u0131labilir",
+  "de_DE": "Ausr\u00fcstbar",
+  "es_ES": "equipable"
+ },
+ "usable": {
+  "en": "usable",
+  "tr_TR": "kullan\u0131labilir",
+  "de_DE": "Benutzbar",
+  "es_ES": "usable"
+ },
+ "equipmentType": {
+  "en": "equipment type",
+  "tr_TR": "ekipman t\u00fcr\u00fc",
+  "de_DE": "Ausr\u00fcstungstyp",
+  "es_ES": "tipo de equipo"
+ },
+ "material": {
+  "en": "material",
+  "tr_TR": "malzeme",
+  "de_DE": "Material",
+  "es_ES": "material"
+ },
+ "displayId": {
+  "en": "display id (held look)",
+  "tr_TR": "g\u00f6r\u00fcn\u00fcm kimli\u011fi",
+  "de_DE": "Anzeige-ID",
+  "es_ES": "id de apariencia"
+ },
+ "statBonuses": {
+  "en": "stat bonuses",
+  "tr_TR": "stat bonuslar\u0131",
+  "de_DE": "Statusboni",
+  "es_ES": "bonos de estad\u00edstica"
+ },
+ "display": {
+  "en": "display (custom look)",
+  "tr_TR": "g\u00f6r\u00fcn\u00fcm",
+  "de_DE": "Anzeige",
+  "es_ES": "apariencia"
+ },
+ "weapon": {
+  "en": "weapon",
+  "tr_TR": "silah",
+  "de_DE": "Waffe",
+  "es_ES": "arma"
+ },
+ "shield": {
+  "en": "shield",
+  "tr_TR": "kalkan",
+  "de_DE": "Schild",
+  "es_ES": "escudo"
+ },
+ "spellTome": {
+  "en": "spell tome / scroll",
+  "tr_TR": "b\u00fcy\u00fc kitab\u0131",
+  "de_DE": "Zauberbuch",
+  "es_ES": "tomo de hechizo"
+ },
+ "skinName": {
+  "en": "skin name",
+  "tr_TR": "g\u00f6r\u00fcn\u00fcm ad\u0131",
+  "de_DE": "Skin-Name",
+  "es_ES": "nombre de skin"
+ },
+ "skinTag": {
+  "en": "skin tag",
+  "tr_TR": "g\u00f6r\u00fcn\u00fcm etiketi",
+  "de_DE": "Skin-Tag",
+  "es_ES": "etiqueta de skin"
+ },
+ "palette": {
+  "en": "palette",
+  "tr_TR": "palet",
+  "de_DE": "Palette",
+  "es_ES": "paleta"
+ },
+ "paletteRow": {
+  "en": "palette row",
+  "tr_TR": "palet sat\u0131r\u0131",
+  "de_DE": "Palettenzeile",
+  "es_ES": "fila de paleta"
+ },
+ "sheet": {
+  "en": "sheet (PNG)",
+  "tr_TR": "sayfa (PNG)",
+  "de_DE": "Blatt (PNG)",
+  "es_ES": "hoja (PNG)"
+ },
+ "frameWidth": {
+  "en": "frame width",
+  "tr_TR": "kare geni\u015fli\u011fi",
+  "de_DE": "Bildbreite",
+  "es_ES": "ancho de cuadro"
+ },
+ "frameHeight": {
+  "en": "frame height",
+  "tr_TR": "kare y\u00fcksekli\u011fi",
+  "de_DE": "Bildh\u00f6he",
+  "es_ES": "alto de cuadro"
+ },
+ "class": {
+  "en": "class",
+  "tr_TR": "s\u0131n\u0131f",
+  "de_DE": "Klasse",
+  "es_ES": "clase"
+ },
+ "swingTimer": {
+  "en": "swing timer",
+  "tr_TR": "savurma s\u00fcresi",
+  "de_DE": "Schwung-Timer",
+  "es_ES": "tiempo de golpe"
+ },
+ "knockback": {
+  "en": "knockback",
+  "tr_TR": "geri itme",
+  "de_DE": "R\u00fccksto\u00df",
+  "es_ES": "empuje"
+ },
+ "attackRange": {
+  "en": "attack range",
+  "tr_TR": "sald\u0131r\u0131 menzili",
+  "de_DE": "Angriffsreichweite",
+  "es_ES": "alcance de ataque"
+ },
+ "energyCost": {
+  "en": "energy cost",
+  "tr_TR": "enerji maliyeti",
+  "de_DE": "Energiekosten",
+  "es_ES": "coste de energ\u00eda"
+ },
+ "minDamage": {
+  "en": "min damage",
+  "tr_TR": "asgari hasar",
+  "de_DE": "Min. Schaden",
+  "es_ES": "da\u00f1o m\u00edn."
+ },
+ "maxDamage": {
+  "en": "max damage",
+  "tr_TR": "azami hasar",
+  "de_DE": "Max. Schaden",
+  "es_ES": "da\u00f1o m\u00e1x."
+ },
+ "stunPower": {
+  "en": "stun power",
+  "tr_TR": "sersemletme g\u00fcc\u00fc",
+  "de_DE": "Bet\u00e4ubung",
+  "es_ES": "aturdimiento"
+ },
+ "movementFactor": {
+  "en": "movement factor",
+  "tr_TR": "hareket \u00e7arpan\u0131",
+  "de_DE": "Bewegungsfaktor",
+  "es_ES": "factor de movimiento"
+ },
+ "damageVfx": {
+  "en": "hit VFX size",
+  "tr_TR": "vuru\u015f efekti boyu",
+  "de_DE": "Treffer-VFX",
+  "es_ES": "VFX de golpe"
+ },
+ "specialEnergyCost": {
+  "en": "charged energy cost",
+  "tr_TR": "y\u00fckl\u00fc sald\u0131r\u0131 enerjisi",
+  "de_DE": "Aufgeladene Energie",
+  "es_ES": "energ\u00eda cargada"
+ },
+ "trailColor": {
+  "en": "trail color",
+  "tr_TR": "iz rengi",
+  "de_DE": "Spurfarbe",
+  "es_ES": "color de estela"
+ },
+ "trailSheet": {
+  "en": "trail sheet (PNG)",
+  "tr_TR": "iz sayfas\u0131",
+  "de_DE": "Spur-Blatt",
+  "es_ES": "hoja de estela"
+ },
+ "hideTrail": {
+  "en": "hide trail",
+  "tr_TR": "izi gizle",
+  "de_DE": "Spur ausblenden",
+  "es_ES": "ocultar estela"
+ },
+ "castSpell": {
+  "en": "cast spell",
+  "tr_TR": "b\u00fcy\u00fc yap",
+  "de_DE": "Zauber wirken",
+  "es_ES": "lanzar hechizo"
+ },
+ "spellId": {
+  "en": "spell id",
+  "tr_TR": "b\u00fcy\u00fc kimli\u011fi",
+  "de_DE": "Zauber-ID",
+  "es_ES": "id de hechizo"
+ },
+ "castType": {
+  "en": "cast type",
+  "tr_TR": "yapma t\u00fcr\u00fc",
+  "de_DE": "Wirkungsart",
+  "es_ES": "tipo de lanzamiento"
+ },
+ "event": {
+  "en": "trigger event",
+  "tr_TR": "tetik olay\u0131",
+  "de_DE": "Ausl\u00f6ser",
+  "es_ES": "evento"
+ },
+ "probability": {
+  "en": "proc chance",
+  "tr_TR": "tetik \u015fans\u0131",
+  "de_DE": "Proc-Chance",
+  "es_ES": "prob. de activaci\u00f3n"
+ },
+ "target": {
+  "en": "target",
+  "tr_TR": "hedef",
+  "de_DE": "Ziel",
+  "es_ES": "objetivo"
+ },
+ "chargedSpellId": {
+  "en": "charged spell id",
+  "tr_TR": "y\u00fckl\u00fc b\u00fcy\u00fc kimli\u011fi",
+  "de_DE": "Aufgeladener Zauber",
+  "es_ES": "hechizo cargado"
+ },
+ "chargeTime": {
+  "en": "charge time",
+  "tr_TR": "y\u00fckleme s\u00fcresi",
+  "de_DE": "Ladezeit",
+  "es_ES": "tiempo de carga"
+ },
+ "blockStrength": {
+  "en": "block strength",
+  "tr_TR": "blok g\u00fcc\u00fc",
+  "de_DE": "Blockst\u00e4rke",
+  "es_ES": "fuerza de bloqueo"
+ },
+ "blockArcDegrees": {
+  "en": "block arc (degrees)",
+  "tr_TR": "blok a\u00e7\u0131s\u0131",
+  "de_DE": "Blockwinkel",
+  "es_ES": "arco de bloqueo"
+ },
+ "strongBlockArcDegrees": {
+  "en": "strong block arc",
+  "tr_TR": "g\u00fc\u00e7l\u00fc blok a\u00e7\u0131s\u0131",
+  "de_DE": "Starker Blockwinkel",
+  "es_ES": "arco de bloqueo fuerte"
+ },
+ "enterCost": {
+  "en": "raise cost",
+  "tr_TR": "kald\u0131rma maliyeti",
+  "de_DE": "Hebekosten",
+  "es_ES": "coste de alzar"
+ },
+ "type": {
+  "en": "type",
+  "tr_TR": "t\u00fcr",
+  "de_DE": "Typ",
+  "es_ES": "tipo"
+ },
+ "instantHeal": {
+  "en": "instant heal",
+  "tr_TR": "an\u0131nda iyile\u015fme",
+  "de_DE": "Sofortheilung",
+  "es_ES": "cura instant\u00e1nea"
+ },
+ "cooldown": {
+  "en": "cooldown",
+  "tr_TR": "bekleme s\u00fcresi",
+  "de_DE": "Abklingzeit",
+  "es_ES": "enfriamiento"
+ },
+ "usesMax": {
+  "en": "uses",
+  "tr_TR": "kullan\u0131m",
+  "de_DE": "Nutzungen",
+  "es_ES": "usos"
+ },
+ "radius": {
+  "en": "radius",
+  "tr_TR": "yar\u0131\u00e7ap",
+  "de_DE": "Radius",
+  "es_ES": "radio"
+ },
+ "color": {
+  "en": "color",
+  "tr_TR": "renk",
+  "de_DE": "Farbe",
+  "es_ES": "color"
+ },
+ "displayName": {
+  "en": "display name",
+  "tr_TR": "g\u00f6r\u00fcnen ad",
+  "de_DE": "Anzeigename",
+  "es_ES": "nombre visible"
+ },
+ "displayNameLocalized": {
+  "en": "name (per language)",
+  "tr_TR": "ad (dile g\u00f6re)",
+  "de_DE": "Name (je Sprache)",
+  "es_ES": "nombre (por idioma)"
+ },
+ "projectileDisplayId": {
+  "en": "projectile look",
+  "tr_TR": "mermi g\u00f6r\u00fcn\u00fcm\u00fc",
+  "de_DE": "Projektil-Look",
+  "es_ES": "apariencia de proyectil"
+ },
+ "particleTrail": {
+  "en": "particle trail",
+  "tr_TR": "par\u00e7ac\u0131k izi",
+  "de_DE": "Partikelspur",
+  "es_ES": "estela de part\u00edculas"
+ },
+ "castSound": {
+  "en": "cast sound",
+  "tr_TR": "b\u00fcy\u00fc sesi",
+  "de_DE": "Zauber-Sound",
+  "es_ES": "sonido de lanzamiento"
+ },
+ "projectileVelocity": {
+  "en": "projectile speed",
+  "tr_TR": "mermi h\u0131z\u0131",
+  "de_DE": "Projektilgeschw.",
+  "es_ES": "velocidad de proyectil"
+ },
+ "collisionRadius": {
+  "en": "collision radius",
+  "tr_TR": "\u00e7arp\u0131\u015fma yar\u0131\u00e7ap\u0131",
+  "de_DE": "Kollisionsradius",
+  "es_ES": "radio de colisi\u00f3n"
+ },
+ "applyAura": {
+  "en": "apply aura",
+  "tr_TR": "aura uygula",
+  "de_DE": "Aura anwenden",
+  "es_ES": "aplicar aura"
+ },
+ "attack": {
+  "en": "attack (damage)",
+  "tr_TR": "sald\u0131r\u0131 (hasar)",
+  "de_DE": "Angriff (Schaden)",
+  "es_ES": "ataque (da\u00f1o)"
+ },
+ "chain": {
+  "en": "chain (cast-on-hit)",
+  "tr_TR": "zincir (vurunca yap)",
+  "de_DE": "Kette (bei Treffer)",
+  "es_ES": "cadena (al golpear)"
+ },
+ "spell": {
+  "en": "spell",
+  "tr_TR": "b\u00fcy\u00fc",
+  "de_DE": "Zauber",
+  "es_ES": "hechizo"
+ },
+ "summon": {
+  "en": "summon (spawn creature)",
+  "tr_TR": "\u00e7a\u011f\u0131rma (yarat\u0131k)",
+  "de_DE": "Beschw\u00f6ren (Kreatur)",
+  "es_ES": "invocar (criatura)"
+ },
+ "creature": {
+  "en": "creature",
+  "tr_TR": "yarat\u0131k",
+  "de_DE": "Kreatur",
+  "es_ES": "criatura"
+ },
+ "behavior": {
+  "en": "behavior",
+  "tr_TR": "davran\u0131\u015f",
+  "de_DE": "Verhalten",
+  "es_ES": "comportamiento"
+ },
+ "count": {
+  "en": "count",
+  "tr_TR": "adet",
+  "de_DE": "Anzahl",
+  "es_ES": "cantidad"
+ },
+ "maxActive": {
+  "en": "max active (cap)",
+  "tr_TR": "azami canl\u0131 (limit)",
+  "de_DE": "max. aktiv (Limit)",
+  "es_ES": "m\u00e1x. activos (l\u00edmite)"
+ },
+ "bonusSkill": {
+  "en": "bonus skill (lvl 5)",
+  "tr_TR": "bonus yetenek (sv 5)",
+  "de_DE": "Bonus-Skill (Stufe 5)",
+  "es_ES": "habilidad bonus (nv 5)"
+ },
+ "skillBonuses": {
+  "en": "skill bonuses",
+  "tr_TR": "yetenek bonuslar\u0131",
+  "de_DE": "Skill-Boni",
+  "es_ES": "bonos de habilidad"
+ },
+ "startingInventory": {
+  "en": "starting inventory",
+  "tr_TR": "ba\u015flang\u0131\u00e7 envanteri",
+  "de_DE": "Start-Inventar",
+  "es_ES": "inventario inicial"
+ },
+ "startingClothes": {
+  "en": "starting clothes",
+  "tr_TR": "ba\u015flang\u0131\u00e7 k\u0131yafetleri",
+  "de_DE": "Start-Kleidung",
+  "es_ES": "ropa inicial"
+ },
+ "startingFavourPoints": {
+  "en": "starting favour points",
+  "tr_TR": "ba\u015flang\u0131\u00e7 l\u00fctuf puan\u0131",
+  "de_DE": "Start-Gunstpunkte",
+  "es_ES": "puntos de favor iniciales"
+ },
+ "entityType": {
+  "en": "entity type",
+  "tr_TR": "varl\u0131k t\u00fcr\u00fc",
+  "de_DE": "Entit\u00e4tstyp",
+  "es_ES": "tipo de entidad"
+ },
+ "attackType": {
+  "en": "attack type",
+  "tr_TR": "sald\u0131r\u0131 t\u00fcr\u00fc",
+  "de_DE": "Angriffsart",
+  "es_ES": "tipo de ataque"
+ },
+ "maxTargets": {
+  "en": "max targets",
+  "tr_TR": "azami hedef",
+  "de_DE": "Max. Ziele",
+  "es_ES": "objetivos m\u00e1x."
+ },
+ "multiplier": {
+  "en": "multiplier",
+  "tr_TR": "\u00e7arpan",
+  "de_DE": "Multiplikator",
+  "es_ES": "multiplicador"
+ },
+ "crafted": {
+  "en": "crafted item",
+  "tr_TR": "\u00fcretilen e\u015fya",
+  "de_DE": "Hergestelltes",
+  "es_ES": "objeto creado"
+ },
+ "amount": {
+  "en": "amount",
+  "tr_TR": "miktar",
+  "de_DE": "Menge",
+  "es_ES": "cantidad"
+ },
+ "station": {
+  "en": "station",
+  "tr_TR": "tezgah",
+  "de_DE": "Station",
+  "es_ES": "estaci\u00f3n"
+ },
+ "ingredients": {
+  "en": "ingredients",
+  "tr_TR": "malzemeler",
+  "de_DE": "Zutaten",
+  "es_ES": "ingredientes"
+ },
+ "frames": {
+  "en": "frames (cell order)",
+  "tr_TR": "kareler (h\u00fccre s\u0131ras\u0131)",
+  "de_DE": "Frames (Reihenfolge)",
+  "es_ES": "cuadros (orden)"
+ },
+ "frameDuration": {
+  "en": "frame duration",
+  "tr_TR": "kare s\u00fcresi",
+  "de_DE": "Frame-Dauer",
+  "es_ES": "duraci\u00f3n de cuadro"
+ },
+ "scale": {
+  "en": "scale",
+  "tr_TR": "\u00f6l\u00e7ek",
+  "de_DE": "Skalierung",
+  "es_ES": "escala"
+ },
+ "table": {
+  "en": "loot table",
+  "tr_TR": "ganimet tablosu",
+  "de_DE": "Beutetabelle",
+  "es_ES": "tabla de bot\u00edn"
+ },
+ "item": {
+  "en": "item",
+  "tr_TR": "e\u015fya",
+  "de_DE": "Gegenstand",
+  "es_ES": "objeto"
+ },
+ "chance": {
+  "en": "chance (%)",
+  "tr_TR": "\u015fans (%)",
+  "de_DE": "Chance (%)",
+  "es_ES": "probabilidad (%)"
+ },
+ "min": {
+  "en": "min",
+  "tr_TR": "asgari",
+  "de_DE": "Min",
+  "es_ES": "m\u00edn"
+ },
+ "max": {
+  "en": "max",
+  "tr_TR": "azami",
+  "de_DE": "Max",
+  "es_ES": "m\u00e1x"
+ },
+ "aura": {
+  "en": "aura",
+  "tr_TR": "aura",
+  "de_DE": "Aura",
+  "es_ES": "aura"
+ },
+ "namespace": {
+  "en": "namespace",
+  "tr_TR": "ad alan\u0131",
+  "de_DE": "Namensraum",
+  "es_ES": "espacio de nombres"
+ },
+ "author": {
+  "en": "author",
+  "tr_TR": "yazar",
+  "de_DE": "Autor",
+  "es_ES": "autor"
+ },
+ "version": {
+  "en": "version",
+  "tr_TR": "s\u00fcr\u00fcm",
+  "de_DE": "Version",
+  "es_ES": "versi\u00f3n"
+ },
+ "dependencies": {
+  "en": "dependencies",
+  "tr_TR": "ba\u011f\u0131ml\u0131l\u0131klar",
+  "de_DE": "Abh\u00e4ngigkeiten",
+  "es_ES": "dependencias"
+ },
+ "objectives": {
+  "en": "objectives",
+  "tr_TR": "hedefler",
+  "de_DE": "Ziele",
+  "es_ES": "objetivos"
+ },
+ "rewardRecipes": {
+  "en": "reward recipes",
+  "tr_TR": "\u00f6d\u00fcl tarifleri",
+  "de_DE": "Belohnungsrezepte",
+  "es_ES": "recetas de recompensa"
+ },
+ "repeatable": {
+  "en": "repeatable",
+  "tr_TR": "tekrarlanabilir",
+  "de_DE": "wiederholbar",
+  "es_ES": "repetible"
+ },
+ "base": {
+  "en": "Base creature",
+  "tr_TR": "Temel yaratik",
+  "de_DE": "Basis-Kreatur",
+  "es_ES": "Criatura base"
+ },
+ "biomes": {
+  "en": "Biomes (entrance)",
+  "tr_TR": "Biyomlar (giris)",
+  "de_DE": "Biome (Eingang)",
+  "es_ES": "Biomas (entrada)"
+ },
+ "dismissOnUnequip": {
+  "en": "Dismiss when item unequipped",
+  "tr_TR": "Esya cikarilinca dagit",
+  "de_DE": "Beim Ablegen aufloesen",
+  "es_ES": "Despedir al desequipar"
+ },
+ "exitDirection": {
+  "en": "Exit direction (0=E 1=S 2=W 3=N)",
+  "tr_TR": "Cikis yonu (0=D 1=G 2=B 3=K)",
+  "de_DE": "Ausgangsrichtung",
+  "es_ES": "Direccion de salida"
+ },
+ "exitNode": {
+  "en": "Exit box [x,y,w,h] px",
+  "tr_TR": "Cikis kutusu [x,y,g,y] px",
+  "de_DE": "Ausgangsbox [x,y,b,h] px",
+  "es_ES": "Caja de salida [x,y,an,al] px"
+ },
+ "healthMultiplier": {
+  "en": "Health multiplier",
+  "tr_TR": "Can carpani",
+  "de_DE": "Lebens-Multiplikator",
+  "es_ES": "Multiplicador de vida"
+ },
+ "height": {
+  "en": "Height (tiles)",
+  "tr_TR": "Yukseklik (karo)",
+  "de_DE": "Hoehe (Kacheln)",
+  "es_ES": "Alto (casillas)"
+ },
+ "lootTable": {
+  "en": "Loot table",
+  "tr_TR": "Ganimet tablosu",
+  "de_DE": "Beutetabelle",
+  "es_ES": "Tabla de botin"
+ },
+ "materials": {
+  "en": "Build cost (materials)",
+  "tr_TR": "Insa maliyeti",
+  "de_DE": "Baukosten",
+  "es_ES": "Coste de construccion"
+ },
+ "spawnedId": {
+  "en": "Vanilla decoration art",
+  "tr_TR": "Oyun dekor goruntusu",
+  "de_DE": "Vanilla-Dekor-Grafik",
+  "es_ES": "Arte de decoracion vanilla"
+ },
+ "tmx": {
+  "en": "Tiled map file (.tmx)",
+  "tr_TR": "Tiled harita dosyasi (.tmx)",
+  "de_DE": "Tiled-Kartendatei (.tmx)",
+  "es_ES": "Archivo de mapa Tiled (.tmx)"
+ },
+ "weight": {
+  "en": "Spawn weight",
+  "tr_TR": "Cikma agirligi",
+  "de_DE": "Spawn-Gewicht",
+  "es_ES": "Peso de aparicion"
+ },
+ "width": {
+  "en": "Width (tiles)",
+  "tr_TR": "Genislik (karo)",
+  "de_DE": "Breite (Kacheln)",
+  "es_ES": "Ancho (casillas)"
+ }
+}

@@ -1,0 +1,30 @@
+# Vanilla decoration ids — use one as a basic placeable's `spawnedId` (basic placeables reuse this art).
+# The number after the colon is an art variant (e.g. brazier:0, brazier:1, brazier:2 are 3 looks).
+big_bush:0
+big_bush:1
+big_bush:2
+big_tree:0
+big_tree:1
+big_tree:2
+bonfire:0
+bonfire:1
+bonfire:2
+bonfire:3
+brazier:0
+brazier:1
+brazier:2
+cyclop_statue:0
+fountain:2
+fountain:3
+horizontal_bush:0
+horizontal_bush:1
+horizontal_bush:2
+monument:0
+small_bush:0
+small_bush:1
+small_bush:2
+torch_bearer_statue:0
+vertical_bush:0
+vertical_bush:1
+vertical_bush:2
+vulcan_statue:0

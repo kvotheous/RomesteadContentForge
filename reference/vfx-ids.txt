@@ -1,0 +1,43 @@
+# Vanilla VFX ids — the two client VFX databases, extracted from Romestead.dll
+# (DataBaseSetup at rdll ~202085: AddVfxSpriteAnimations(SetupVfxSpritesAnimations()) +
+#  AddVfxSpacAnimations(SetupSpacVfx())).
+# Used by: weapon `hitVfx`, vfx overrides, explosion `spacVfx`, shrine/portal vfx params.
+# These lists are COMPLETE for vanilla — both databases are populated only from these
+# two code lists (plus SetupBloodVfxSpritesAnimations / CreateFlashingAnimation calls,
+# included below).
+#
+# == VfxSpacAnimationDataBase (17) — spac-based vfx; format: id  (spac / animation) ==
+cyclops_slam            (boss/cyclops/cyclops_slam / slam)
+cyclops_slam_flip       (boss/cyclops/cyclops_slam / slam, flipped)
+dust_poof_big           (vfx_dust / poof_big)
+explosion               (vfx_explosion1 / new_animation)
+hit:axe                 (vfx_tools / axe)
+hit:crit                (vfx_hits / crit)
+hit:med                 (vfx_hits / med)
+hit:pick                (vfx_tools / pick)
+hit:small               (vfx_hits / small)
+hit:thud                (vfx_hits / thud)
+player_attack1          (combat/vfx_attack1 / variant1)
+shockwave               (shockwave / shockwave)
+shockwave_small         (shockwave / shockwave, small)
+vfx:dustcircle          (vfx_dustcircle / dustcircle)
+vfx:quest_exclamation   (vfx_quest_marker / exclamation)
+vfx:quest_question      (vfx_quest_marker / question)
+vfx:stun                (vfx_stun / stun)
+#
+# == VfxSpritesAnimationDataBase (15) — sprite-sheet frame animations ==
+blood_explosion
+blood_slash
+blood_splatter
+blood_spray
+blood_spurt
+buffed
+crit
+damaged
+death
+fuse
+hit:physical
+phoenix_revive
+player:on_damage_slash
+stealth
+zombie_attack_warning

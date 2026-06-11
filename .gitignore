@@ -1,0 +1,21 @@
+# .NET build output
+bin/
+obj/
+*.user
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Editor exe build (PyInstaller) — the exe ships on Nexus, not in git
+editor/build/
+editor/dist/
+
+# Release artifacts — built by the release process, not committed
+*.zip
+Validator/bin/
+Validator/obj/
+
+# Extracted vanilla game art (local tracing templates only — never redistribute)
+templates/

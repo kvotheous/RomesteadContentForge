@@ -1,0 +1,22 @@
+# Map atmosphere track ids (maps[].music / maps[].ambience).
+# BOTH forms work: a bare track id from this list, OR a raw "event:/..." FMOD path
+# (raw paths are auto-registered by the mod — including your own bank's events).
+#
+# music (bare ids):
+dungeon                       # event:/music/dungeon/Dungeon
+dungeon_volcanic_additive     # event:/music/volcano/Volcano Dungeon - Additive
+*none*                        # silence
+#
+# ambience (bare ids):
+cave                          # event:/biomes/dungeon/dungeon_cave_ambience
+crypt                         # event:/biomes/dungeon/dungeon_crypt_ambience
+volcanic workshop             # event:/biomes/dungeon/dungeon_volcanic_workshop
+pyzifax arena                 # event:/biomes/dungeon/pyzifax_arena_ambience
+talos arena                   # event:/biomes/dungeon/talos_arena_ambience
+*none*                        # silence
+#
+# Useful raw music events (pass verbatim as maps[].music):
+# event:/music/day/village · event:/music/day/melancholic_3 · event:/music/day/peaceful_exploration
+# event:/music/night/village_night · event:/music/night_rain/night_rain · event:/music/dawn/dawn
+# event:/music/desert_biome/desert_biome · event:/music/ghost_town/ghost_biome
+# event:/music/volcano/Volcano Biome · event:/music/raid/raid · event:/music/bossfight/Bossfight - Additive

@@ -1,0 +1,73 @@
+{
+  "id": "necromancer",
+  "namespace": "necro",
+  "author": "Content Forge (example pack)",
+  "version": "1.1.0",
+  "description": "Example pack — a necromancer who raises the dead. Shows how anyone builds with Content Forge: summons (with count), a spell-tome, an on-swing staff, gear with stat bonuses, a recipe, a loot drop, and a custom playable CLASS. Copy it, rename the namespace, make your own.",
+
+  "spells": [
+    { "id": "necro:raise_skeletons", "displayName": "Raise Skeletons",
+      "summon": { "creature": "SkeletonWarrior", "count": 2, "maxActive": 6, "behavior": "guardian", "entityType": "PlayerSummon" } },
+    { "id": "necro:raise_skeleton", "displayName": "Raise Skeleton",
+      "summon": { "creature": "SkeletonWarrior", "maxActive": 6, "behavior": "companion", "entityType": "PlayerSummon" } }
+  ],
+
+  "items": [
+    { "id": "necro:book_of_dead", "name": "Book of the Dead",
+      "nameLocalized": { "tr_TR": "Ölüler Kitabı", "de_DE": "Buch der Toten" },
+      "description": "Equip in the offhand and attack to raise TWO skeleton warriors that fight for you.",
+      "icon": "scroll:brown", "tier": 6, "maxStack": 1, "price": 800,
+      "equippable": { "equipmentType": "Offhand", "spellTome": { "spellId": "necro:raise_skeletons", "energyCost": 15 } } },
+
+    { "id": "necro:bone_staff", "name": "Bone Staff",
+      "description": "Each swing raises a skeleton warrior to fight at your side.",
+      "icon": "sword:iron", "tier": 6, "maxStack": 1, "price": 1200,
+      "equippable": { "equipmentType": "Weapon", "material": "Iron",
+        "display": { "skinName": "Spear", "skinTag": 8 },
+        "weapon": { "class": "Sword", "swingTimer": 1.2, "attackRange": 20, "energyCost": 15, "hideTrail": true,
+          "minDamage": { "necro": 10 }, "maxDamage": { "necro": 20 },
+          "castSpell": { "spellId": "necro:raise_skeleton", "castType": "OnUse" } } } },
+
+    { "id": "necro:robe", "name": "Necromancer Robe",
+      "description": "+50 Energy and +25% Necro damage while worn.",
+      "icon": "ring:red", "tier": 5, "maxStack": 1, "price": 600,
+      "equippable": { "equipmentType": "Armor",
+        "statBonuses": { "Energy": { "additive": 50 }, "NecroDamageModifier": { "additive": 0.25 } } } }
+  ],
+
+  "recipes": [
+    { "id": "necro:recipe_book", "crafted": "necro:book_of_dead", "amount": 1, "ingredients": { "material:coal": 5 } }
+  ],
+
+  "drops": [
+    { "table": "enemy:fallen_sword", "item": "necro:book_of_dead", "chance": 2, "min": 1, "max": 1 }
+  ],
+
+  "quests": [
+    { "id": "necro:quest_initiation", "name": "Necromancer's Initiation",
+      "nameLocalized": { "tr_TR": "Nekromatik Yemini" },
+      "description": "Slay 5 Fallen Swordsmen to prove your command over death.",
+      "icon": "scroll:brown",
+      "objectives": [ { "type": "kill", "target": "FallenSword", "amount": 5 } ],
+      "rewardRecipes": [ "necro:recipe_book" ] }
+  ],
+
+  "classes": [
+    { "id": "necro:class:necromancer", "name": "Necromancer",
+      "nameLocalized": { "tr_TR": "Nekromatik" },
+      "bonusSkill": "skill:swords",
+      "skillBonuses": { "skill:swords": 5 },
+      "startingInventory": { "necro:book_of_dead": 1, "food:meat_small": 5, "material:coal": 10 },
+      "startingClothes": ["armor:civilian:1", "armor:civilian:legs"],
+      "startingFavourPoints": 2 }
+  ],
+
+  "furniture": [
+    { "id": "necro:bone_brazier", "name": "Bone Brazier",
+      "nameLocalized": { "tr_TR": "Kemik Mangalı" },
+      "description": "A grim brazier for the necromancer's lair.",
+      "spawnedId": "brazier:2", "icon": "sam",
+      "materials": { "material:coal": 5, "resource:stone": 3 },
+      "width": 1, "height": 1 }
+  ]
+}

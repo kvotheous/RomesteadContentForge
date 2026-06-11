@@ -1,0 +1,5 @@
+PySide6>=6.6
+
+# dev / test only (not needed to run the editor):
+#   pip install pytest        then: python -m pytest editor/tests -q
+# pytest>=8

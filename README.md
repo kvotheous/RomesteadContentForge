@@ -1,0 +1,59 @@
+# Romestead Content Forge — Documentation Index
+
+_What this is: the docs index — find the right doc below. What this isn't: the content itself (every row and
+capability link points at the doc that has it)._
+
+**Content Forge** is a BepInEx mod for Romestead that turns the game into a moddable platform: authors write
+**content packs** — plain JSON files (plus PNG / TMX / WAV / `.yarn` assets) dropped into
+`BepInEx\config\RomesteadContentForge\packs\` — and the mod injects their items, weapons, spells, summons,
+creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. No compiling, no
+game files touched; works in single-player and co-op (server-authoritative, save-safe uninstall).
+
+## Downloads — which zip is which
+
+The release ships as **two zips** (Nexus Files tab / GitHub Releases):
+
+| Zip | Contents | Who needs it |
+|---|---|---|
+| **`RomesteadContentForge-<version>.zip`** — *the mod* | `BepInEx\plugins\` DLLs (the mod + its YarnSpinner/CSV libraries). Extract over the game folder. | **Everyone** — players just installing packs, and creators. |
+| **`RomesteadContentForge-Authoring-<version>.zip`** — *the creator kit* | All docs (this index, PACKS/COOKBOOK/GETTING_STARTED…), the **GUI editor** (`ForgeEditor.exe` + source), `tools/` (art extraction, asset catalog, held-sheet generator), `examples/` (3 worked packs incl. the full test bench) and `reference/` (17 id catalogs). Unzip anywhere — nothing installs into the game. | **Pack creators.** Players don't need it. |
+
+`ForgeEditor.exe` is also offered as its own optional file for creators who only want the editor.
+
+## Find what you need
+
+| You want to… | Read |
+|---|---|
+| Make your first pack (install + 5-minute tutorial) | [GETTING_STARTED.md](GETTING_STARTED.md) |
+| Look up every field & option of the pack format | [PACKS.md](PACKS.md) |
+| Copy-paste a recipe for a goal ("a staff that casts fireballs", "a healing shrine"…) | [COOKBOOK.md](COOKBOOK.md) |
+| Go beyond JSON — C# controllers, addon DLLs, art extraction, FMOD banks | [ADVANCED.md](ADVANCED.md) |
+| Find valid ids (icons, items, creatures, auras, drop tables…) | [REFERENCE.md](REFERENCE.md) + `reference/*.txt` |
+| See what's tested and how to test | [TESTING.md](TESTING.md) |
+| Understand what's possible & why (engine internals, decompile findings) | [RESEARCH.md](RESEARCH.md) |
+| See what's planned / parked | [ROADMAP.md](ROADMAP.md) |
+| Learn how the mod itself works inside | [DESIGN.md](DESIGN.md) |
+| Read the changelog | [CHANGELOG.md](CHANGELOG.md) |
+| Use the GUI editor instead of hand-written JSON | [editor/README.md](editor/README.md) |
+| Copy from worked examples | [examples/README.md](examples/README.md) |
+
+## What packs can do (capability index → PACKS.md)
+
+- **Items & Gear** — [items](PACKS.md#item) (icons, stats, prices, light sources) · [equippables](PACKS.md#equippable) (slots, stat bonuses) · [consumables](PACKS.md#usable-item-usable--consumable--potion) · [recipes](PACKS.md#recipe) · [loot drops](PACKS.md#drop-mob--chest-loot) (tables **and** per-creature/wildlife drops)
+- **Combat & Weapons** — [weapons](PACKS.md#weapon) (melee/ranged, stun, swing arcs, combo steps) · [on-hit / on-use casts](PACKS.md#cast-weapon-castspell--fire-a-spell-from-a-weapon) · [scrolls & wands](PACKS.md#spelltome-equippable-spelltome--classic-scrollwand) · [shields](PACKS.md#shield-equippable-shield) · [held looks & swing trails](PACKS.md#display-equippable-display--custom-held-look) · [two-handed weapons](COOKBOOK.md#a-two-handed-staff) (`twoHanded`) · [held-sheet generator](ADVANCED.md#generating-a-held-item-sheet-from-one-drawing)
+- **Magic & Spells** — [spells](PACKS.md#spell) (projectiles, auras, chains) · [behaviors & casting requirements](PACKS.md#spell-behaviors-spellsplus--casting-requirements) (AoE, explosion, heal, cone, line, multi-projectile; skill/favour/quest/class gates)
+- **Summons** — [summon spells](PACKS.md#summon-spell-summon--spawn-a-creature-that-fights-for-you) (count, caps, guardian/companion) · [custom creatures](PACKS.md#creature-top-level-creatures--a-custom-creature) (clone + restat/recolor/repaint, swappable AI) · [8 built-in AI presets](PACKS.md#built-in-ai-presets-no-addon-dll-needed) (guard, coward, ranged, patrol, pack, summoner, healer, turret) · [fully custom creatures from your own PNGs](COOKBOOK.md#a-fully-custom-creature-from-one-png)
+- **World, Maps & Dungeons** — [Tiled-authored dungeon rooms](PACKS.md#map-top-level-maps--a-custom-dungeon-room) (entrances — incl. `retrofit` into existing saves — multi-room doors, vanilla-room replace) · [atmosphere](PACKS.md#map-atmosphere-fields-on-maps-entries) (music/ambience/light) · [pre-placed doodads](PACKS.md#pre-placed-doodads-props-in-your-maps) · [shops](PACKS.md#shop-top-level-shops--sell-your-items-at-the-market) · [crops](PACKS.md#crop-top-level-crops--plantable-crops)
+- **NPCs, Dialogue & Citizens** — [Yarn dialogue NPCs](PACKS.md#npc-top-level-npcs--a-talking-character-in-your-maps) (localized, give/take/heal commands) · [town citizens & overrides](PACKS.md#citizens-top-level-citizens--citizenoverrides--town-job-workers)
+- **Placeables & Buildings** — [placeables](PACKS.md#placeables-top-level-placeables-aliases-furniture--structures): [basic (vanilla art)](PACKS.md#basic-placeables-vanilla-art-via-spawnedid) · [custom-sprite](PACKS.md#custom-sprite-placeables-your-own-art) · [composite multi-part](PACKS.md#composite-placeables-multi-part-parts) (several PNG layers + per-part collision as ONE buildable) · [interactive presets](PACKS.md#interactive-placeables-controller-presets) (shrine / lever / dialogue / prop / portal) · [custom crafting stations](COOKBOOK.md#a-custom-crafting-station) (`station`) · [town buildings & work recipes](PACKS.md#town-building-top-level-townbuildings--a-citizen-staffed-workshop) (citizen-staffed workshops) · [pre-placed map props](PACKS.md#pre-placed-doodads-props-in-your-maps) · [your own C# controller](ADVANCED.md#custom-controllers-c)
+- **Quests & Progression** — [playable classes](PACKS.md#class-top-level-classes--a-new-playable-profession) · [world quests](PACKS.md#quest-top-level-quests--a-world-quest) · [skills](PACKS.md#skill-top-level-skills--a-new-player-skill) · [favour-tree nodes](PACKS.md#favour-top-level-favours--a-new-favour-tree-node) (vanilla tree or your pack's **own fullscreen favour screen** via `screen: true`)
+- **PvP, Arenas & Events** — [duel arenas](PACKS.md#arenas-top-level-arenas--duel-events-on-pvp-maps) (on `pvp: true` maps; summon kills credit the summoner) · [world events](PACKS.md#events-top-level-events--server-side-world-events) (waves, boss rush, hunts, raids — plus team battles, king-of-the-hill, checkpoint races)
+- **Visuals, Audio & Animation** — [palettes](PACKS.md#palette-custom-dye-ramp) · [vfx](PACKS.md#vfx-custom-sprite-animation-effect) · [particles & emitters](PACKS.md#particles--emitters-top-level-particles--emitters) · [spac remixes](PACKS.md#spacs-top-level-spacs--clone--reskinretime-a-vanilla-sprite-animation) · [from-scratch animations](PACKS.md#from-scratch-spacs-no-base--brand-new-animations-from-your-pngs) (brand-new spacs from your PNGs) · [player animation retiming](PACKS.md#player-animations-top-level-playeranimations--retime-the-rig-visual) · [drop-in sounds](PACKS.md#sounds-top-level-sounds--drop-in-audio-files) · [FMOD banks](ADVANCED.md#fmod-banks)
+- **Player Looks & Rigs** — [playerSkins](PACKS.md#playerskins-top-level-playerskins--the-players-own-look) (new hair, worn looks, reskins, body-rig repaint/tint)
+- **Forge tab** — the Skills & Favours window gains a third "Forge" toggle: installed packs, pack skills, learned pack favours.
+- **Pack Favours screen** — packs with `screen: true` favours get their own fullscreen favour tree (vanilla look) behind a fourth "Pack Favours" toggle ([COOKBOOK example](COOKBOOK.md#your-own-favour-tree-screen)).
+- **Announcement banners** — events/arena/handshake/two-handed messages show as big red text top-center; style, color, position and duration configurable in `RomesteadContentForge.cfg` ([PACKS.md — Mod settings](PACKS.md#mod-settings-romesteadcontentforgecfg)).
+- **Co-op & Safety** — [co-op rules & save safety](PACKS.md#co-op--saves) · the join handshake reports pack mismatches ([PACKS.md — Co-op & saves](PACKS.md#co-op--saves)) · uninstall-safe favours, crops, items
+- **Tooling** — [validators](PACKS.md#validate) (Python + .NET) · GUI editor ([editor/README.md](editor/README.md)) · `tools/xnb2png.ps1` art extractor ([ADVANCED.md](ADVANCED.md#art-extraction--sheet-discovery)) · id catalogs (`reference/*.txt`) · [cookbook](COOKBOOK.md)
+
+- `tools/asset_catalog.py` — generates `asset-catalog.html`, a browsable visual catalog of every game sprite + all referenceable ids.

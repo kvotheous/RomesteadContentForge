@@ -1,0 +1,11 @@
+title: Start
+---
+<<Actor cftest_tomb>>
+cftest_tomb: A voice echoes from the stone...
+cftest_tomb: You built me from a JSON file, and yet I speak.
+-> Bless me, old stone. (heal)
+    <<ForgeHeal 15>>
+    cftest_tomb: The stone hums warmly.
+-> Remain silent.
+    cftest_tomb: ...
+===

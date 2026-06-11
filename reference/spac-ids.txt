@@ -1,0 +1,112 @@
+# Spac ids (SpacDataBase) — sprite-animation-controller rigs.
+# Used by: weapon hitVfx fallback (spac+animation), spell spacVfx, custom spac `base`
+# (clone target), weapon trailSheet clone targets, forge_creature_anim `spac`.
+#
+# KNOWN-PARTIAL: the full database is loaded from the game content file `db/spacs/spacs`
+# (not present in the decompiled C#). This list is every spac id that vanilla CODE looks up
+# (SpacDataBase.GetSpacOrNull/GetSpacOrCrash, SpacCopyManager.GetPaletteVersion,
+# VfxSpacAnimationData.SpacId literals across all four decompiles). Ids that exist only in
+# the data file and are never referenced from code will be missing here.
+#
+# NOT spac ids: SpacCopyManager.GetCachedSkin cache keys ("bone_crab", "explosive_turtle",
+# "lava_snake", "master_engineer") are runtime clones, not registered SpacDataBase entries.
+#
+# == creature rigs (skeletal animation sets for creatures/bosses/player) ==
+bear_cub_new_animations
+bear_new_animations
+big_scorpion_animations
+bird_animations
+boar_body_animations
+boar_head_animations
+boss/phoenix/phoenix_animations
+boss/phoenix/phoenix_head_animations
+boss/phoenix/phoenix_head_phase2_animations
+boss/phoenix/phoenix_phase2_animations
+bushcrab_new_animations
+cyclops_animations
+deer_female_animations
+engineer_animations
+fallen
+fallen_crawler_animations
+fallen_elite
+fallen_explosive
+fallen_spear_animations
+fallen_sword_animations
+fire_elemental_animations
+frog_new_animations
+ghostly_woman_animations
+goat_body_animations
+goat_female_head_animations
+goat_male_head_animations
+lava_construct_lower_animations
+lava_construct_upper_animations
+lava_spitter_animations
+lizard_animations
+magus_animations
+medusa_new_animations
+minerva/Minerva_animations
+minerva/minerva_head_animations
+mouse_new_animations
+new_phoenix_animations
+new_turtle_animations
+player_new_animations
+potman_new_animations
+rabbit_new_animations
+rat_animations
+rockcrab_animations
+satyr_bandit_animations
+satyr_boss_animations
+satyr_brute
+satyr_ranger_animations
+satyr_tiny_body_animations
+satyr_tiny_head_animations
+scarab_animations
+skeleton_animations
+skeleton_ash_animations
+skeleton_ranger_animations
+skeleton_ranger_ash_animations
+skull_animations
+small_scorpion_animations
+snake_animations
+squirrel_new_animations
+vulture_animations
+wolf_animations
+wolf_new_animations
+wraith_lower_animations
+wraith_new_animations
+#
+# == prop / device rigs (interactables, traps, boss-arena devices) ==
+auto_ballista_animations
+boss/talos/chain_cannon
+boss/talos/steam_vent
+cauldron_animations
+chest_animations
+chest_bulky_animations
+coal_trap
+environment/sulphur_vent
+environment/sulphur_vent_large
+exploding_pot
+fire_statue_animations
+incendiary_pot
+laser_statue_animations
+lever_animations
+lightning_pot
+poison_pot
+spike_trap
+target_dummy
+#
+# == effect spacs (pure VFX sheets — these are the SpacIds behind the vfx catalog;
+#    good base for spell spacVfx / hitVfx) ==
+boss/cyclops/cyclops_slam
+combat/vfx_attack1
+shockwave
+vfx_dust
+vfx_dustcircle
+vfx_explosion1
+vfx_hits
+vfx_poof
+vfx_quest_marker
+vfx_rooted
+vfx_skull
+vfx_stun
+vfx_tools

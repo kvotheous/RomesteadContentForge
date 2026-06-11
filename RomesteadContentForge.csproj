@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>RomesteadContentForge</AssemblyName>
+    <Product>Romestead Content Forge</Product>
+    <Authors>kvotheous</Authors>
+    <Company>kvotheous</Company>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <!-- CS0649: content-pack DTO fields are populated by the JSON deserializer via reflection. -->
+    <NoWarn>CA1416;CA2252;CS0649</NoWarn>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>RomesteadContentForge</RootNamespace>
+    <!-- copy NuGet package DLLs (YarnSpinner.Compiler chain) into bin so they can ship next to the plugin -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <!-- Path to your Romestead install (game DLL references — the game is NOT distributed with this repo).
+       Override without editing this file: `dotnet build -p:GameDir="D:\Games\Romestead"`. -->
+  <PropertyGroup>
+    <GameDir Condition="'$(GameDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\romestead</GameDir>
+  </PropertyGroup>
+
+  <!-- The standalone validator is its own console project; keep its sources out of the mod build. -->
+  <ItemGroup>
+    <Compile Remove="Validator\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.NET.CoreCLR" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+    <!-- Yarn dialogue compilation (NPCs). MUST stay 2.5.x — the game ships YarnSpinner.dll 2.5.0 (ysc 3.x
+         bytecode is incompatible). Deploy YarnSpinner.Compiler.dll + Antlr4.Runtime.Standard.dll next to the
+         plugin; YarnSpinner.dll + Google.Protobuf.dll resolve from the game's own copies at runtime. -->
+    <PackageReference Include="YarnSpinner.Compiler" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Romestead">
+      <HintPath>$(GameDir)\Romestead.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Shared">
+      <HintPath>$(GameDir)\Shared.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="CandideCreator.Shared">
+      <HintPath>$(GameDir)\CandideCreator.Shared.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="CandideServer">
+      <HintPath>$(GameDir)\CandideServer.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(GameDir)\MonoGame.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,118 @@
+[center][size=6][b][color=#f0bd77]Romestead Content Forge[/color][/b][/size]
+[i]Add your own items, weapons, spells, and more to Romestead — from simple JSON files. No coding, no game edits.[/i][/center]
+
+[line]
+
+Content Forge is a modding framework: drop a [i].json[/i] "content pack" in a folder and it injects brand-new content straight into the game's databases at load. Your creations behave like real game content — they spawn, equip, deal damage, heal, craft, and show up in the [b]Item Spawner[/b] automatically.
+
+[size=5][b][color=#f0bd77]What you can make[/color][/b][/size]
+[list]
+[*][b]Items[/b] — anything: name, description, icon, tier, stack size, sell/buy price.
+[*][b]Icons[/b] — reuse any in-game icon, [b]or import your own .png[/b].
+[*][b]Gear[/b] — helmets/armor/boots/trinkets/capes with [b]stat bonuses[/b] (health, crit, move speed, damage, resistances…).
+[*][b]Weapons (full stats)[/b] — [b]melee[/b] (swords, spears, daggers, sledgehammers, fists) and [b]ranged[/b] (bows, crossbows, javelins): damage by element, knockback, reach, [b]stagger/stun[/b], [b]move-speed-while-swinging[/b], [b]charged heavy attacks[/b], [b]proc chance[/b] (e.g. 25% ignite), on-hit auras, and [b]+stat bonuses while held[/b].
+[*][b]Shields[/b] — custom block strength and arc.
+[*][b]Spells, scrolls, wands & staves[/b] — projectile/status spells cast by an Offhand [b]spell-tome[/b] or a melee weapon that fires [b]on swing[/b] (a staff with a real animation) or [b]on hit[/b] (ignite/poison weapons).
+[*][b]Composed spells[/b] — a spell can [b]chain[/b] others on impact: an arrow that spawns lightning, a fireball that also ignites. Chains nest for multi-stage effects.
+[*][b]Custom held looks[/b] — reuse a vanilla model, [b]recolor[/b] one with a custom [b]palette[/b] (dye), or paint your [b]own held sprite sheet[/b].
+[*][b]Swing trails[/b] — recolor the slash, replace its [b]shape[/b] with your own art, or [b]hide[/b] it (for staves).
+[*][b]Custom VFX[/b] — your own sprite-animation effects, or reskin a vanilla effect.
+[*][b]Custom sounds[/b] — reuse the game's audio, or just point a pack at your own [b]wav/ogg/mp3/flac[/b] files (no FMOD tooling needed; FMOD banks also supported).
+[*][b]Loot[/b] — add your items to [b]mob/chest drop tables[/b] with a % chance — or straight onto a [b]creature[/b] (wildlife included: bears and wolves can finally drop your items).
+[*][b]Summons (necromancer)[/b] — a spell can spawn creatures that [b]fight for you[/b] (skeletons, skulls, wolves…), with a per-cast [b]count[/b] and a [b]max-active cap[/b] (oldest despawns). Set each to [b]guardian[/b] (stays put) or [b]companion[/b] (blinks to your side when you wander off).
+[*][b]Playable classes[/b] — add a [b]profession to character creation[/b] (skill head-start + starting gear/clothes/favour). The bundled [b]Necromancer[/b] example ships a class, a 2-skeleton book, a staff, a robe and a recipe.
+[*][b]World quests[/b] — auto-activating [b]kill/collect/loot/craft/harvest[/b] quests that [b]unlock crafting recipes[/b] when finished — no NPC or dialogue needed.
+[*][b]Placeable furniture[/b] — buildable [b]decorations in the construction menu[/b], reusing vanilla art with your own name, icon, build cost and footprint. The recipe auto-unlocks so it's always available.
+[*][b]Custom creatures[/b] — clone a vanilla creature into an [b]elite/recolored variant[/b] (new id, [b]more health[/b], [b]color tint[/b], custom name) reusing its AI, then summon it like any creature.
+[*][b]Brand-new monsters from your art[/b] — [b]from-scratch sprite animations[/b] (no vanilla art at all) plus [b]8 built-in AI brains[/b] (guard, coward, ranged caster, patroller, pack hunter, summoner, healer, turret): a fully custom creature from one PNG.
+[*][b]Custom dungeons & worlds[/b] — author maps in the [b]free Tiled editor[/b]: [b]multi-room dungeons[/b] (doors link rooms) with an [b]overworld entrance[/b] new worlds roll like any vanilla one — or [b]retrofit into your EXISTING save[/b] — plus per-map [b]music, ambience and ambient light[/b]. No game tools needed.
+[*][b]Portals[/b] — a placeable that [b]teleports players into your custom world[/b] from anywhere (and back).
+[*][b]Dialogue NPCs[/b] — talking characters in your maps, written as plain-text [b]YarnSpinner[/b] files (lines, options, conditions, portraits) with per-language translations. Dialogue can [b]check your bag, take payment, give items and heal[/b] — merchants, quest-givers, lore drops.
+[*][b]Interactive placeables[/b] — healing [b]shrines[/b], [b]levers[/b], [b]talking statues/gravestones[/b], props and portals: server-authoritative, save-persistent, optional [b]indestructible[/b] flag for quest temples.
+[*][b]Custom art everywhere[/b] — placeables can ship [b]their own sprite[/b] (with ambient animation), and custom creatures accept [b]fully repainted animation rigs[/b].
+[*][b]Player skins[/b] — new [b]hair styles in character creation[/b], reskins of vanilla character parts, and brand-new [b]worn armor looks[/b] your items can wear (dyeable via palettes).
+[*][b]Custom skills[/b] — real [b]skills-screen entries[/b] (icon, localized name, levels 0–100, favour on level-up) trained by your weapons and spells.
+[*][b]Favour-tree nodes[/b] — new nodes in the gods' favour tree (stat bonuses / auras / recipe unlocks), [b]uninstall-safe[/b] (removing a pack auto-refunds the point — never blocks login).
+[*][b]Custom favour screen[/b] — packs can ship their [b]own fullscreen favour tree[/b] (vanilla look: draggable grid, connection lines, click to unlock) behind a "Pack Favours" button in the Skills & Favours window.
+[*][b]Announcement banners[/b] — event/arena/mod messages as [b]big red text top-center[/b] (or the classic toast) — style, color, position, duration configurable in RomesteadContentForge.cfg.
+[*][b]Drop-in sounds[/b] — put a .wav/.ogg next to your pack and use it for spell casts, shrines, portals. No audio tools needed.
+[*][b]Swing-arc control[/b] — melee weapons can sweep any cone width (a 300° whirl-cleaver is one line of JSON).
+[*][b]Player body rigs[/b] — tint or repaint the player's animated body itself, every frame.
+[*][b]More spell behaviors[/b] — multi-shot fans, [b]lingering AoE pools[/b], [b]explosions[/b], self/party [b]heals[/b] — and [b]casting requirements[/b] (skill level, favour, quest, class) with a custom denial message.
+[*][b]PvP zones & duel arenas[/b] — flag a map [b]pvp: true[/b] and players can fight inside it (no item loss on death there; player damage stays blocked everywhere else). Bind an [b]arena[/b] to it: kill announcements in chat, timed matches, an item prize for the winner.
+[*][b]Co-op mod handshake[/b] — joining clients report their installed packs; the host gets chat warnings about missing packs, version mismatches, or unmodded players.
+[*][b]World events[/b] — wave-defense arenas, boss rushes, timed hunt contests, scheduled vanilla raids — plus [b]team battles[/b], [b]king-of-the-hill[/b] and [b]checkpoint races[/b] — all from JSON.
+[*][b]Custom citizens[/b] — new town workers with fixed names, looks and job mastery; edit vanilla citizen types too.
+[*][b]Town workshops & work recipes[/b] — clone a vanilla job-building into your own buildable workshop and teach its workers [b]new recipes[/b] (a Grand Bakery that bakes [i]your[/i] bread).
+[*][b]Multi-part buildings[/b] — compose several sprites, each with its own collision box, into [b]ONE buildable monument[/b] with walkable gaps.
+[*][b]Deep weapon feel[/b] — per-combo-step damage/arc/timing, [b]two-handed weapons[/b], custom effect animations, retimed player animations — and a tool that turns [b]one drawing into a full held-weapon sheet[/b].
+[*][b]Custom crafting stations[/b] — your placeable opens its own crafting window with its own recipes.
+[*][b]Pre-placed map props[/b] — campfires, chests, any entity or your own PNG (with collision) directly in your maps.
+[*][b]Visual asset catalog[/b] — one command generates a browsable HTML of every game sprite + all referenceable ids.
+[*][b]Quest item rewards[/b] and [b]vanilla-dungeon interior replacement[/b].
+[*][b]Crops & farming[/b] — plantable seeds with growth stages; farmsteads auto-farm them.
+[*][b]Shops[/b] — new stock sections at the Market.
+[*][b]Custom particles & emitters[/b] — your own particle textures and emitter shapes for torches, shrines, auras.
+[*][b]Multi-language[/b] — names/descriptions per language; follows the player's game language. NPC dialogue translates too.
+[*][b]Consumables[/b] (food/potions), [b]light sources[/b] (torches), and [b]crafting recipes[/b].
+[/list]
+Many packs coexist safely: each declares an [b]id / namespace / version / dependencies[/b], so different authors' content never collides. A cross-platform [b]visual editor[/b] ships with the mod for those who'd rather not write JSON.
+
+[size=5][b][color=#f0bd77]How it works[/color][/b][/size]
+[list=1]
+[*]Install the mod. On first run it creates a packs folder with a [b]working sample pack[/b] and a demo custom icon.
+[*]Edit or add [i].json[/i] files there (and drop [i].png[/i] icons alongside).
+[*]Launch — your content is in the game. Spawn it via [b]Item Spawner (F1)[/b], craft it, or find it where you placed it.
+[/list]
+Full authoring guide with every field, valid values, stat keys, and damage types is in [b]PACKS.md[/b] (in the mod folder).
+
+A taste:
+[code]{
+  "id": "mymod",
+  "strings": { "mymod:flameblade:name": "Flameblade" },
+  "items": [
+    { "id": "mymod:flameblade", "name": "mymod:flameblade:name", "icon": "sword:iron", "tier": 5,
+      "equippable": { "equipmentType": "Weapon", "displayId": "cdd:iron_sword",
+        "weapon": { "class": "Sword", "minDamage": { "pyro": 80 }, "maxDamage": { "pyro": 120 } } } }
+  ]
+}[/code]
+
+[size=5][b][color=#f0bd77]Requirements[/color][/b][/size]
+[list]
+[*][b]Romestead[/b]
+[*][b]Romestead BepInEx Mod Loader[/b] (BepInEx 6 for .NET/CoreCLR) — required dependency. Install it first.
+[*][b]Romestead Item Spawner[/b] (recommended) — to easily spawn and test your created items.
+[/list]
+
+[size=5][b][color=#f0bd77]Installation[/color][/b][/size]
+
+[b]Which file do I download?[/b]
+[list]
+[*][b]RomesteadContentForge-<version>.zip[/b] — the mod itself ([i]BepInEx\plugins\[/i] DLLs). [b]Everyone needs this[/b].
+[*][b]RomesteadContentForge-Authoring-<version>.zip[/b] — the [b]creator kit[/b]: all docs (field reference, cookbook, getting-started), the GUI editor, art/asset tools, worked example packs and 17 id catalogs. Only for pack [b]creators[/b]; unzips anywhere (nothing installs into the game).
+[*][b]ForgeEditor.exe[/b] — optional standalone GUI editor, for creators who want just the editor.
+[/list]
+[list=1]
+[*]Install the [b]Romestead BepInEx Mod Loader[/b] and confirm it works.
+[*]Download this mod's archive and extract it [b]into your Romestead game folder[/b] (the archive has the correct [i]BepInEx\plugins\[/i] layout).
+[*]Launch once — the sample pack appears in [i]BepInEx\config\RomesteadContentForge\packs\[/i].
+[*]Edit the sample or add your own packs, then relaunch.
+[/list]
+
+[size=5][b][color=#f0bd77]Notes & Compatibility[/color][/b][/size]
+[list]
+[*][b]Co-op:[/b] the [b]host[/b] must run the mod (content is server-authoritative); ideally all players run it with the [b]same packs[/b]. Against an unmodded host, modded content won't be present.
+[*][b]Save-safe:[/b] if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
+[*][b]Custom icons[/b] should be authored at [b]18×18[/b] (the game's item-icon size) with a transparent margin.
+[*]Pairs with the author's other Romestead mods (Item/Building/Citizen/Creature Spawners, Map Travel, Cheat Menu, QoL).
+[/list]
+
+[size=5][b][color=#f0bd77]Credits[/color][/b][/size]
+[list]
+[*][b]kvotheous[/b] — mod author.
+[*][b]IceBoxStudio[/b] — Romestead BepInEx Mod Loader.
+[*][b]BepInEx Team[/b] — framework and HarmonyX.
+[*]The [b]Romestead[/b] devs for a moddable game.
+[/list]
+
+[center][i]Forge responsibly — and share what you make.[/i][/center]

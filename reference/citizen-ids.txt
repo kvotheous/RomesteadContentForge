@@ -1,0 +1,9 @@
+# Vanilla citizen type ids (CitizenDataBase). Stats: Efficiency/Expertise/Happiness/FoodCost/ExpGain/LoyaltyGain.
+citizen:generic        8/8/0/8/1/1     # the ONLY type that arrives by itself
+citizen:blacksmith     11/11/0/10/1/1  # wild-recruit template (LegendaryBlacksmith)
+citizen:lumberjack     13/8/0/10/1/1   # wild-recruit template (LegendaryLumberjack)
+citizen:leatherworker  8/13/0/10/1/1   # wild-recruit template (LegendaryLeatherworker)
+citizen:merchant       9/9/0/10/1/1    # wild-recruit template (LegendaryMerchant)
+# Job ids for citizens[].jobLevels:
+# job:baker job:blacksmith job:carpenter job:carrier job:digger job:farmer job:leatherworker
+# job:lumberjack job:merchant job:miner job:philosopher job:potter job:priest job:sculptor job:unemployed

@@ -1,0 +1,110 @@
+# Vanilla favour ids (89) — FavourDataBase, built from Shared.dll
+# Setup.SetupFavours() -> CeresFavours/DianaFavours/MarsFavours/MercuryFavours/
+# MinervaFavours/VenusFavours/VulcanFavours (GodFavourSetup: Id = IdPrefix + ShortId).
+# Used by: a forge favour's `parent` (and any vanilla-favour reference).
+# Format: id | display name | effect (aura: = grants that aura; flag: = sets that
+# player flag, =N is FlagValue1). Listed in vanilla column/tier order per god.
+# COMPLETE for vanilla: the favour database is populated only from these code lists.
+#
+# == ceres (9) ==
+ceres_favour:unarmed_powerful_strike | Knockout | flag: unarmed_powerful_strike=1
+ceres_favour:unarmed_armor_damage | Heavy Weight Punch | flag: unarmed_armor_damage=0.25
+ceres_favour:unarmed_knockout_reset | Pugil | flag: unarmed_knockout_reset
+ceres_favour:unarmed_dash | Knuckle Dash | flag: unarmed_dash
+ceres_favour:throwing_attack_bonus | Throwing Attack | aura: aura:favour:throwing_attack_bonus
+ceres_favour:throwing_stun | Concussive Blow | aura: aura:favour:throwing_stun_applicator
+ceres_favour:grappling_hook_speed_range | Far Reach | flag: grappling_hook_speed_range=0.2
+ceres_favour:throwing_damage | Feat of Strength | aura: aura:favour:throwing_damage
+ceres_favour:grappling_hook_hold_attach | Attaching Hooks | flag: grappling_hook_hold_attach
+#
+# == diana (12) ==
+diana_favour:crossbow_downtime | Quick Reloads | flag: crossbow_downtime=0.5
+diana_favour:crossbow_hit_speed | Rapidus | flag: crossbow_hit_speed
+diana_favour:crossbow_energy_cost | Efficient Crossbows | flag: crossbow_energy_cost=0.3
+diana_favour:crossbow_equip_in_main_hand | Instrumentum Domini | flag: crossbow_equip_in_main_hand
+diana_favour:attack_speed | Fast Attacks | aura: aura:favour:attack_speed
+diana_favour:piercing_damage | Piercing Damage | aura: aura:favour:piercing_damage
+diana_favour:ranged_attack_bonus2 | Ranged Attack Bonus | aura: aura:favour:ranged_attack_bonus2
+diana_favour:attack_speed2 | Faster Attacks | aura: aura:favour:attack_speed2
+diana_favour:arrow_not_consume | Magical Quiver | flag: arrow_not_consume=0.2
+diana_favour:bow_range_and_speed | Sagittarius | flag: bow_range_and_speed=0.2
+diana_favour:bow_perfect_shot | Sagittarius Peritus | flag: bow_perfect_shot=0.5
+diana_favour:bow_damage_stack | Thrill of the Hunt | flag: bow_damage_stack
+#
+# == mars (14) ==
+mars_favour:sword_downtime_and_range | Gladius Peritus | flag: sword_downtime_and_range=0.1
+mars_favour:sword_bleed | Acutus Gladius | aura: aura:favour:deep_wounds_applicator
+mars_favour:sword_bleed_bonus_damage | Ruthless | flag: sword_bleed_bonus_damage=0.25
+mars_favour:sword_whirlwind | Whirlwind | flag: sword_whirlwind
+mars_favour:melee_attack_power | Attack Power | aura: aura:favour:melee_attack_power
+mars_favour:overall_damage | Overall Damage | aura: aura:favour:overall_damage
+mars_favour:weapon_range | Weapon Range | aura: aura:favour:weapon_range
+mars_favour:melee_damage | Melee Damage | aura: aura:favour:melee_damage
+mars_favour:melee_damage2 | Massive Melee Damage | aura: aura:favour:melee_damage2
+mars_favour:sword_bleed_damage_reduction | Bleeding Them Dry | flag: sword_bleed_damage_reduction=0.25
+mars_favour:spear_range_speed | Hasta Lanista | flag: spear_range_speed=0.1
+mars_favour:spear_charge_speed | Spear Focus | flag: spear_charge_speed=0.25
+mars_favour:spear_armor_penetration | Expose Armor | aura: aura:favour:spear_armor_pen_applicator
+mars_favour:spear_dash | Hasta Domini | flag: spear_dash=1.25
+#
+# == mercury (20) ==
+mercury_favour:melee_tome_cast | Spell Blade Master | aura: aura:favour:tome_melee_cast
+mercury_favour:tome_spell_blade | Magicae Gladio | flag: tome_spell_blade=0.2
+mercury_favour:tome_dash_energy | Discipulus | flag: tome_dash_energy=0.5
+mercury_favour:tome_magic_penetration | Affliction of Magic | flag: tome_magic_penetration=0.3
+mercury_favour:tome_equip_in_main_hand | Dominus Magus | flag: tome_equip_in_main_hand
+mercury_favour:magic_attack_power | Magic Attack | aura: aura:favour:magic_attack_power
+mercury_favour:magic_attack_power_bonuses | Magic Attack Bonuses | aura: aura:favour:magic_attack_power_bonuses
+mercury_favour:fire_damage | Fire Damage | aura: aura:favour:fire_damage
+mercury_favour:aqua_damage | Aqua Damage | aura: aura:favour:aqua_damage
+mercury_favour:naure_damage | Nature Damage | aura: aura:favour:nature_damage  (sic — vanilla typo "naure")
+mercury_favour:necro_damage | Necro Damage | aura: aura:favour:necro_damage
+mercury_favour:cosmo_damage | Cosmo Damage | aura: aura:favour:cosmo_damage
+mercury_favour:magic_armor | Magic Armor | aura: aura:favour:magic_armor
+mercury_favour:movement_speed | Movement Speed | aura: aura:favour:movement_speed
+mercury_favour:magic_armor_bonuses | Magic Armor Bonus | aura: aura:favour:magic_armor_bonuses
+mercury_favour:tome_charge_speed | Charge Speed | flag: tome_charge_faster=0.25
+mercury_favour:torch | Lumen | aura: aura:favour:torch
+mercury_favour:shroom_bar | Mushroom Forager | (no aura/flag — handled in code)
+mercury_favour:crit_movement_speed | Critical Thrill | aura: aura:favour:crit_movement_speed_applicator
+mercury_favour:dash_invincibility | Acrobatic | flag: dash_invincibility
+#
+# == minerva (8) ==
+minerva_favour:pickaxe_power | Cuniculator | aura: aura:favour:pickaxe_power
+minerva_favour:construct_hit_area_progress | Construction Plan | flag: construct_hit_area_progress=0.25
+minerva_favour:max_health | Max Health | aura: aura:favour:max_health
+minerva_favour:max_energy | Max Energy | aura: aura:favour:max_energy
+minerva_favour:potion_cooldown | Potion Cooldown | flag: potion_cooldown_reduction=0.25
+minerva_favour:roads_built | Road Maker | flag: more_roads_built=1
+minerva_favour:lumber_axe_power | Lignator | aura: aura:favour:axe_power
+minerva_favour:construct_crit_area | Aedificator | flag: construct_crit_area=2
+#
+# == venus (9) ==
+venus_favour:dagger_projectile | Volans Pugionem | flag: dagger_projectile=1.1
+venus_favour:dagger_range_and_speed | Dagger Technique | flag: dagger_range_and_speed=0.15
+venus_favour:dagger_backstab | Backstab | flag: dagger_backstab=0.5
+venus_favour:dagger_movement_speed | Pugio Peritum | flag: dagger_movement_speed
+venus_favour:crit_damage2 | Critical Damage | aura: aura:favour:crit_damage2
+venus_favour:bed_hp_regen | Power Napper | flag: bed_hp_regen=0.15
+venus_favour:crit_chance | Favoured Luck | aura: aura:favour:crit_chance
+venus_favour:damage_energy_reg | Amor Interfectorem | aura: aura:favour:damage_energy_reg_applicator
+venus_favour:crit_damage | Passionate Strikes | aura: aura:favour:crit_damage
+#
+# == vulcan (17) ==
+vulcan_favour:fire_dash | Earthquake | flag: fire_dash=0.2
+vulcan_favour:shield_energy_regeneration | Shield Adept | flag: shield_energy_reg=0.5
+vulcan_favour:shield_perfect_block_window | Perfect Blocker | flag: shield_perfect_block_window=0.5
+vulcan_favour:shield_slam | Shield Slam | flag: shield_double_tap
+vulcan_favour:shield_enrage | Enrage | flag: shield_enrage
+vulcan_favour:overall_armor | Armored | aura: aura:favour:overall_armor
+vulcan_favour:knockback_resistance | Steadfast | aura: aura:favour:knockback_resistance
+vulcan_favour:armor_bonus | Armor | aura: aura:favour:armor_bonus
+vulcan_favour:knockback_bonus | Knockback | aura: aura:favour:knockback_bonus
+vulcan_favour:all_resistances | All Resistances | aura: aura:favour:all_resistances
+vulcan_favour:slow_root_resistance | Slow and Root Resistances | aura: aura:favour:slow_root_resistance
+vulcan_favour:shield_arc | Shield Arc | flag: shield_arc_increase=0.25
+vulcan_favour:perfect_block_speed | Perfect Block Speed | flag: shield_perfect_block_speed
+vulcan_favour:sledgehammer_movement_range | Sledgehammer Adept | flag: sledgehammer_movement_range=0.1
+vulcan_favour:sledgehammer_damage | Fierceness | flag: sledgehammer_damage=0.1
+vulcan_favour:sledgehammer_charge | Sledgehammer Mastery | flag: sledgehammer_charge_speed=0.3
+vulcan_favour:sledgehammer_shockwave | Shockwave | flag: sledgehammer_shockwave

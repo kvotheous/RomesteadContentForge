@@ -1,0 +1,11 @@
+# Romestead raid ids — use as 'raidData' in a scheduledRaid event.
+# id              tier  weight (0 = never random-fires in vanilla)
+raid:rats          1    0
+raid:potmen        1    0.8
+raid:grey_satyr    1    1.5
+raid:fallen:1      1    0      (war-declaration raid)
+raid:pyzifax       1    0      (boss raid)
+raid:satyr         2    1      (war-declaration raid)
+raid:gorgons       2    0.08
+raid:cyclopelli    3    1
+raid:fallen:3      3    1      (war-declaration raid)

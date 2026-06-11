@@ -1,0 +1,553 @@
+# FMOD sound event paths (520) — every `event:/...` string literal across all four
+# vanilla decompiles (Romestead.dll, Shared.dll, CandideServer.dll,
+# CandideCreator.Shared.dll), deduped, grouped by top-level FMOD folder.
+# Used by: spell `castSound`, sfx params (interactives/stations/doodads), and a
+# map's `music`/`ambience` raw paths (any event:/ path is accepted there).
+# KNOWN-PARTIAL: extracted from code literals; events that exist in the FMOD banks
+# but are never referenced from C# will be missing.
+#
+# == event:/biomes (26) ==
+event:/biomes/desert/desert_day_ambience
+event:/biomes/desert/desert_night_ambience
+event:/biomes/dungeon/dungeon_cave_ambience
+event:/biomes/dungeon/dungeon_crypt_ambience
+event:/biomes/dungeon/dungeon_volcanic_workshop
+event:/biomes/dungeon/pyzifax_arena_ambience
+event:/biomes/dungeon/talos_arena_ambience
+event:/biomes/error_ambience
+event:/biomes/forest/forest_day_ambience
+event:/biomes/forest/forest_night_ambience
+event:/biomes/ghost_town/ghost_town_day_ambience
+event:/biomes/ghost_town/ghost_town_night_ambience
+event:/biomes/plains/plains_day_ambience
+event:/biomes/plains/plains_night_ambience
+event:/biomes/swamp/swamp_day_ambience
+event:/biomes/swamp/swamp_night_ambience
+event:/biomes/volcanic/volcanic_day_ambience
+event:/biomes/volcanic/volcanic_geyser
+event:/biomes/volcanic/volcanic_geyser_large
+event:/biomes/volcanic/volcanic_lavapool_large
+event:/biomes/volcanic/volcanic_lavapool_small
+event:/biomes/volcanic/volcanic_night_ambience
+event:/biomes/water/water_ripple
+event:/biomes/weather/rain
+event:/biomes/weather/storm
+event:/biomes/weather/weather effects/lightning_strike
+#
+# == event:/buildings (36) ==
+event:/buildings/ballista/ballista_chargeup
+event:/buildings/ballista/ballista_fire
+event:/buildings/blacksmith/blacksmith_furnace_outside
+event:/buildings/building_built
+event:/buildings/catapult/catapult_fire
+event:/buildings/catapult/catapult_lower_scoop
+event:/buildings/catapult/catapult_turning
+event:/buildings/cauldron_cooking
+event:/buildings/construction_hammer_fail
+event:/buildings/construction_hammer_hit
+event:/buildings/construction_remove
+event:/buildings/create_construction_site
+event:/buildings/furniture_entity_deselect
+event:/buildings/furniture_entity_select
+event:/buildings/furniture_fail_place
+event:/buildings/furniture_place
+event:/buildings/furniture_remove
+event:/buildings/furniture_rotate
+event:/buildings/furniture_style_change
+event:/buildings/furniture_style_change_click
+event:/buildings/furniture_style_move
+event:/buildings/infrastructure_built
+event:/buildings/manual_mill_produce
+event:/buildings/manual_mill_push
+event:/buildings/place_bedroll
+event:/buildings/place_entity
+event:/buildings/place_furniture
+event:/buildings/traps/bullethell_trap_shoot
+event:/buildings/traps/coal_trap_active
+event:/buildings/traps/dart_trap_active
+event:/buildings/traps/dart_trap_wall_hit
+event:/buildings/traps/falling_platform_trap
+event:/buildings/traps/knife_trap_active
+event:/buildings/traps/laser_statue_chargeup
+event:/buildings/traps/laser_statue_shoot
+event:/buildings/upgrade_building
+#
+# == event:/citizens (3) ==
+event:/citizens/citizen_generic_vocalization_female
+event:/citizens/citizen_generic_vocalization_male
+event:/citizens/citizen_gift_neutral_sfx
+#
+# == event:/creature (182) ==
+event:/creature/Large Rat/large_rat_aggro
+event:/creature/Large Rat/large_rat_attack
+event:/creature/Large Rat/large_rat_die
+event:/creature/Large Rat/large_rat_hurt
+event:/creature/Magus/magus_aggro
+event:/creature/Magus/magus_charge_spell
+event:/creature/Magus/magus_die
+event:/creature/Phoenix/boss_phoenix__firebeath_start
+event:/creature/Phoenix/boss_phoenix_breath_attack_looping
+event:/creature/Phoenix/boss_phoenix_breath_attack_start
+event:/creature/Phoenix/boss_phoenix_die
+event:/creature/Phoenix/boss_phoenix_heal
+event:/creature/Phoenix/boss_phoenix_hurt
+event:/creature/Phoenix/boss_phoenix_intro
+event:/creature/Phoenix/boss_phoenix_meteor_attack
+event:/creature/Phoenix/boss_phoenix_rebirth_scream
+event:/creature/Phoenix/phoenix_boss_hatching_pulse
+event:/creature/Phoenix/phoenix_boss_slam
+event:/creature/Satyr/boss/satyr_boss_bullethell_start
+event:/creature/Satyr/boss/satyr_boss_death
+event:/creature/Satyr/boss/satyr_boss_enraged
+event:/creature/Satyr/boss/satyr_boss_fireballs
+event:/creature/Satyr/boss/satyr_boss_intro
+event:/creature/Satyr/boss/satyr_boss_jump
+event:/creature/Satyr/boss/satyr_boss_jump_enraged
+event:/creature/Satyr/boss/satyr_boss_land
+event:/creature/Satyr/boss/satyr_boss_throw
+event:/creature/Satyr/boss/satyr_boss_wirlwind_looping
+event:/creature/Satyr/large/satyr_large_aggro
+event:/creature/Satyr/large/satyr_large_attack
+event:/creature/Satyr/large/satyr_large_die
+event:/creature/Satyr/large/satyr_large_hurt
+event:/creature/Satyr/medium/satyr_medium_aggro
+event:/creature/Satyr/medium/satyr_medium_attack
+event:/creature/Satyr/medium/satyr_medium_die
+event:/creature/Satyr/medium/satyr_medium_hurt
+event:/creature/Satyr/small/satyr_small_aggro
+event:/creature/Satyr/small/satyr_small_attack
+event:/creature/Satyr/small/satyr_small_die
+event:/creature/Satyr/small/satyr_small_hurt
+event:/creature/Talos/talos_bridge_platform_looping
+event:/creature/Talos/talos_cannon_charge
+event:/creature/Talos/talos_cannon_shoot
+event:/creature/Talos/talos_cave_rumble
+event:/creature/Talos/talos_chain_big
+event:/creature/Talos/talos_chain_end
+event:/creature/Talos/talos_chain_looping
+event:/creature/Talos/talos_crash
+event:/creature/Talos/talos_death
+event:/creature/Talos/talos_death_chain_break
+event:/creature/Talos/talos_elevator_light_up
+event:/creature/Talos/talos_elevator_moving
+event:/creature/Talos/talos_shoulder_cannon_shoot
+event:/creature/Talos/talos_weak_spot_hit
+event:/creature/Talos/talos_weak_spot_steam
+event:/creature/bandit/bandit_charge
+event:/creature/bandit/human_death
+event:/creature/bandit/stretch
+event:/creature/bandit/unsheathe
+event:/creature/bear/bear_aggro
+event:/creature/bear/bear_cub_die
+event:/creature/bear/bear_cub_hurt
+event:/creature/bear/bear_cub_noise
+event:/creature/bear/bear_die
+event:/creature/bear/bear_hurt
+event:/creature/birds/bird_aggro
+event:/creature/birds/bird_attack
+event:/creature/birds/bird_attack_variation
+event:/creature/birds/bird_die
+event:/creature/birds/bird_hurt
+event:/creature/birds/bird_wingflap
+event:/creature/birds/phoenix_egg_pulse
+event:/creature/boar/boar_attack
+event:/creature/boar/boar_die
+event:/creature/boar/boar_run
+event:/creature/crabs/bonecrab/bone_crab_aggro
+event:/creature/crabs/bushcrab/bush_crab_aggro
+event:/creature/crabs/rockcrab/rock_crab_aggro
+event:/creature/critters/critter_squeek
+event:/creature/critters/frog_ribbit
+event:/creature/critters/scarab_fly_looping
+event:/creature/cyclops/cyclops_cave_rumble
+event:/creature/cyclops/cyclops_death
+event:/creature/cyclops/cyclops_eye_bounce
+event:/creature/cyclops/cyclops_eye_move
+event:/creature/cyclops/cyclops_handraise
+event:/creature/cyclops/cyclops_handsmash
+event:/creature/cyclops/cyclops_hurt_above
+event:/creature/cyclops/cyclops_hurt_below
+event:/creature/cyclops/cyclops_lazerballs_enraged
+event:/creature/cyclops/cyclops_lazerballs_normal
+event:/creature/cyclops/cyclops_lazerballs_normal_single
+event:/creature/cyclops/cyclops_lazerbeam
+event:/creature/cyclops/cyclops_mob_drop
+event:/creature/cyclops/cyclops_roar_enraged
+event:/creature/cyclops/cyclops_roar_intro
+event:/creature/cyclops/cyclops_roar_normal
+event:/creature/deer/deer_run
+event:/creature/engineers/engineer_attack
+event:/creature/engineers/engineer_die
+event:/creature/engineers/engineer_hurt
+event:/creature/fire elemental/fire_elemental_aggro
+event:/creature/fire elemental/fire_elemental_attack
+event:/creature/fire elemental/fire_elemental_crackle_looping
+event:/creature/fire elemental/fire_elemental_die
+event:/creature/fire elemental/fire_elemental_hurt
+event:/creature/fire elemental/fire_elemental_windup
+event:/creature/fire elemental/fire_elemental_windup_range
+event:/creature/fire statue/fire_statue_attack
+event:/creature/fire statue/fire_statue_die
+event:/creature/fire statue/fire_statue_hurt
+event:/creature/general archers/creature_bow_shoot
+event:/creature/general archers/creature_bow_string_tighten
+event:/creature/general archers/creature_grab_arrow
+event:/creature/generic beast/beast_bite_large
+event:/creature/generic beast/beast_bite_medium
+event:/creature/generic beast/beast_bite_small
+event:/creature/generic beast/generic_beast_aggro
+event:/creature/generic beast/generic_beast_attack
+event:/creature/generic beast/generic_beast_hurt
+event:/creature/goat/goat_aggro
+event:/creature/goat/goat_charge
+event:/creature/goat/goat_die
+event:/creature/goat/goat_hurt
+event:/creature/goat/goat_stunned
+event:/creature/jumping_skull/jumping_skull_die
+event:/creature/lava construct/lava_construct_aggro
+event:/creature/lava construct/lava_construct_aoe_attack
+event:/creature/lava construct/lava_construct_aoe_attack_start
+event:/creature/lava construct/lava_construct_die
+event:/creature/lava construct/lava_construct_footstep
+event:/creature/lava construct/lava_construct_hurt
+event:/creature/lava construct/lava_construct_idle_looping
+event:/creature/lava construct/lava_construct_slam_attack
+event:/creature/lava construct/lava_construct_spin_attack_chargeup
+event:/creature/lava construct/lava_construct_spin_attack_looping
+event:/creature/lava construct/lava_construct_spin_attack_start
+event:/creature/lava spitter/lava_spitter_aggro
+event:/creature/lava spitter/lava_spitter_attack
+event:/creature/lava spitter/lava_spitter_die
+event:/creature/lava spitter/lava_spitter_emerge
+event:/creature/lava spitter/lava_spitter_hurt
+event:/creature/long_swing
+event:/creature/medusa/medusa_aggro
+event:/creature/medusa/medusa_attack
+event:/creature/medusa/medusa_die
+event:/creature/medusa/medusa_hurt
+event:/creature/medusa/medusa_petrify
+event:/creature/minerva/minerva_death
+event:/creature/minerva/minerva_dive
+event:/creature/minerva/minerva_flyover
+event:/creature/minerva/minerva_hurt
+event:/creature/minerva/minerva_intro
+event:/creature/minerva/minerva_wingflap
+event:/creature/minerva/npc_generic_footstep_heavy
+event:/creature/potman/potman_die
+event:/creature/potman/potman_grunt
+event:/creature/potman/potman_throw
+event:/creature/scorpions/scorpion_aggro
+event:/creature/scorpions/scorpion_attack
+event:/creature/scorpions/scorpion_die
+event:/creature/skeletons/skeleton_aggro
+event:/creature/skeletons/skeleton_die
+event:/creature/snakes/snake_aggro
+event:/creature/snakes/snake_attack
+event:/creature/snakes/snake_die
+event:/creature/wolf/wolf_aggro
+event:/creature/wolf/wolf_die
+event:/creature/wolf/wolf_howl
+event:/creature/wolf/wolf_hurt
+event:/creature/wolf/wolf_run
+event:/creature/wraith/wraith_aggro
+event:/creature/wraith/wraith_attack
+event:/creature/wraith/wraith_die
+event:/creature/wraith/wraith_move
+event:/creature/zombie/crawler/crawler_attack
+event:/creature/zombie/crawler/crawler_laugh
+event:/creature/zombie/zombie_aggro
+event:/creature/zombie/zombie_attack
+event:/creature/zombie/zombie_bloat_swell
+event:/creature/zombie/zombie_die
+event:/creature/zombie/zombie_grunt
+#
+# == event:/effects (20) ==
+event:/effects/bleed
+event:/effects/buff
+event:/effects/buff_favour
+event:/effects/buff_regeneration
+event:/effects/buff_small
+event:/effects/curse
+event:/effects/drum_hit
+event:/effects/exploding_flash_warning
+event:/effects/exploding_pot_fuse
+event:/effects/flames
+event:/effects/flint_break
+event:/effects/ignite
+event:/effects/lute_hit
+event:/effects/petrification
+event:/effects/poisoned
+event:/effects/root
+event:/effects/sharpen_flint
+event:/effects/slow
+event:/effects/small_red_rock_break
+event:/effects/stun
+#
+# == event:/environment (19) ==
+event:/environment/Village raids/village_raid_announce
+event:/environment/Village raids/village_raid_end_fail
+event:/environment/Village raids/village_raid_end_success
+event:/environment/Village raids/village_raid_start
+event:/environment/ancient_temple/Lazer
+event:/environment/ancient_temple/lazer
+event:/environment/ancient_temple/lazer_wall_sparks
+event:/environment/ancient_temple/pressure_plate
+event:/environment/ancient_temple/water_wheel
+event:/environment/beehive_looping
+event:/environment/dungeon/door_dungeon_unlock
+event:/environment/dungeon/dungeon_gate_open
+event:/environment/harvest
+event:/environment/objects/lever1_off
+event:/environment/objects/lever1_on
+event:/environment/plant_seed
+event:/environment/puzzles/puzzle_complete
+event:/environment/tree/tree_falling
+event:/environment/tree/tree_shake
+#
+# == event:/hits (58) ==
+event:/hits/destruction/armor_smash
+event:/hits/destruction/barricade_break
+event:/hits/destruction/crate_smash
+event:/hits/destruction/egg_crack
+event:/hits/destruction/fruit_smash
+event:/hits/destruction/glass_smash
+event:/hits/destruction/gore
+event:/hits/destruction/gore_small
+event:/hits/destruction/pot_smash
+event:/hits/destruction/rock_smash
+event:/hits/destruction/shrubbery_smash
+event:/hits/destruction/split_wooden_log
+event:/hits/explosive/bomb_variation
+event:/hits/explosive/bombs
+event:/hits/explosive/boulder_crash
+event:/hits/flesh_impact
+event:/hits/general_thud
+event:/hits/hit_fire
+event:/hits/hit_lazer
+event:/hits/hit_piercing
+event:/hits/hit_slashing
+event:/hits/hit_unarmed
+event:/hits/impact/generic_impact_stone
+event:/hits/impact/generic_impact_wood
+event:/hits/impact/impact_armor
+event:/hits/impact/impact_bone
+event:/hits/impact/impact_ethereal
+event:/hits/impact/impact_flesh
+event:/hits/impact/impact_perfect_block
+event:/hits/impact/impact_shield
+event:/hits/impact/impact_shrubbery
+event:/hits/impact/impact_stone
+event:/hits/impact/impact_storage
+event:/hits/impact/impact_thick_wood
+event:/hits/impact/impact_wood
+event:/hits/water/water_submerge
+event:/hits/weapons/arrow_hit
+event:/hits/weapons/blunt/blunt_hit_bone
+event:/hits/weapons/blunt/blunt_hit_ethereal
+event:/hits/weapons/blunt/blunt_hit_flesh
+event:/hits/weapons/blunt/blunt_hit_furniture
+event:/hits/weapons/blunt/blunt_hit_shield
+event:/hits/weapons/blunt/blunt_hit_stone
+event:/hits/weapons/blunt/blunt_hit_wood
+event:/hits/weapons/sharp/sharp_hit_bone
+event:/hits/weapons/sharp/sharp_hit_ethereal
+event:/hits/weapons/sharp/sharp_hit_flesh
+event:/hits/weapons/sharp/sharp_hit_furniture
+event:/hits/weapons/sharp/sharp_hit_shield
+event:/hits/weapons/sharp/sharp_hit_stone
+event:/hits/weapons/sharp/sharp_hit_wood
+event:/hits/weapons/slash/slash_hit_bone
+event:/hits/weapons/slash/slash_hit_ethereal
+event:/hits/weapons/slash/slash_hit_flesh
+event:/hits/weapons/slash/slash_hit_furniture
+event:/hits/weapons/slash/slash_hit_shield
+event:/hits/weapons/slash/slash_hit_stone
+event:/hits/weapons/slash/slash_hit_wood
+#
+# == event:/interface (56) ==
+event:/interface/Crafting/ui_crafting_blacksmith
+event:/interface/Crafting/ui_crafting_claypit
+event:/interface/Crafting/ui_crafting_leatherworker
+event:/interface/Crafting/ui_crafting_order_start
+event:/interface/Crafting/ui_crafting_pottery
+event:/interface/Crafting/ui_crafting_quarry
+event:/interface/Crafting/ui_crafting_sawmill
+event:/interface/Crafting/ui_crafting_university
+event:/interface/altar/ui_altar_teleport
+event:/interface/altar/ui_altar_upgrade
+event:/interface/cancel
+event:/interface/cinematic intro/sfx_cinematic_intro
+event:/interface/close_window
+event:/interface/crafting/ui_crafting_button_craft
+event:/interface/crafting/ui_crafting_quarry
+event:/interface/crafting/ui_crafting_sawmill
+event:/interface/favours/ui_favours_unlearn
+event:/interface/furniture/ui_furniture_mode_enter
+event:/interface/furniture/ui_furniture_select
+event:/interface/furniture/ui_furniture_style_close
+event:/interface/furniture/ui_furniture_style_open
+event:/interface/holder_drop
+event:/interface/holder_pickup
+event:/interface/main menu/ui_mainmenu_back
+event:/interface/main menu/ui_mainmenu_click
+event:/interface/main menu/ui_mainmenu_startgame
+event:/interface/navigate
+event:/interface/offering/ui_complete_quest_objective
+event:/interface/offering/ui_interface_worship_interact
+event:/interface/offering/ui_offering_offer
+event:/interface/offering/ui_offering_unlock_god
+event:/interface/offering/ui_offering_unlock_worship_reward
+event:/interface/offering/ui_worship_accept_quest
+event:/interface/offering/ui_worship_sacrifice
+event:/interface/open_map
+event:/interface/open_table
+event:/interface/open_window
+event:/interface/player inventory/ui_inventory_close
+event:/interface/player inventory/ui_inventory_equip_armor
+event:/interface/player inventory/ui_inventory_equip_general
+event:/interface/player inventory/ui_inventory_equip_weapon
+event:/interface/player inventory/ui_inventory_item_discard
+event:/interface/player inventory/ui_inventory_open
+event:/interface/player inventory/ui_inventory_sort
+event:/interface/player inventory/ui_inventory_trash
+event:/interface/player inventory/ui_inventory_unequip_armor
+event:/interface/player inventory/ui_inventory_unequip_weapon
+event:/interface/player inventory/ui_player_loot
+event:/interface/select
+event:/interface/ui_chat_citizen_added
+event:/interface/ui_chat_message
+event:/interface/ui_chat_savegame
+event:/interface/ui_chat_scribble
+event:/interface/ui_construction_mode_enter
+event:/interface/ui_logistics_mode_enter
+event:/interface/ui_tutorial_open
+#
+# == event:/items (45) ==
+event:/items/Cart/cart_move
+event:/items/Cart/cart_start
+event:/items/bow/arrow_thud
+event:/items/bow/bow_full_charge
+event:/items/bow/bow_shoot
+event:/items/bow/bow_shoot_full_charge
+event:/items/bow/bow_shove
+event:/items/bow/bow_string_tighten
+event:/items/bucket/bucket_splash
+event:/items/bucket/fill_bucket_construction_material
+event:/items/bucket/fill_bucket_sand
+event:/items/bucket/fill_bucket_water
+event:/items/chain_hit
+event:/items/chain_throw
+event:/items/chests/chest_close
+event:/items/chests/chest_open
+event:/items/chests/chest_special_open
+event:/items/chests/chest_stone_open
+event:/items/chests/chest_unlock
+event:/items/coin_drop
+event:/items/coin_pickup
+event:/items/dagger_swing
+event:/items/drink
+event:/items/eat
+event:/items/fist_swing
+event:/items/hand_crossbow/hand_crossbow_shoot
+event:/items/pickup_furniture
+event:/items/pickup_item
+event:/items/player_charge_drink
+event:/items/player_charge_eat
+event:/items/shield/shield_defense_break
+event:/items/shield/shield_perfect_block
+event:/items/sledgehammer/sledgehammer_full_charge
+event:/items/sledgehammer/sledgehammer_shockwave
+event:/items/sledgehammer/sledgehammer_start_charging
+event:/items/sledgehammer/sledgehammer_swing
+event:/items/sledgehammer/sledgehammer_swing_charged
+event:/items/sledgehammer/sledgehammer_thud
+event:/items/spear/spear_pierce_swing
+event:/items/spear/spear_thud
+event:/items/spear_slash_swing
+event:/items/sword/sword/sword_swing
+event:/items/sword/sword/sword_whirlwind
+event:/items/sword/sword_swing
+event:/items/sword/sword_thud
+#
+# == event:/music (31) ==
+event:/music/bossfight/Bossfight - Additive
+event:/music/cyclops/cyclops_additive
+event:/music/dawn/dawn
+event:/music/day/melancholic_3
+event:/music/day/peaceful_exploration
+event:/music/day/village
+event:/music/desert_biome/desert_biome
+event:/music/dungeon/Dungeon
+event:/music/error_music
+event:/music/ghost_town/ghost_biome
+event:/music/main_menu/cinematic_intro_music
+event:/music/main_menu/main_menu
+event:/music/night/village_night
+event:/music/night_rain/night_rain
+event:/music/phoenix/phoenix
+event:/music/pyzifax/pyzifax_additive
+event:/music/raid/raid
+event:/music/stingers/dungeon_discovered
+event:/music/stingers/guardian_of_minerva_nest_discovered_2
+event:/music/stingers/quest_complete
+event:/music/stingers/secret_big_discovered
+event:/music/stingers/secret_big_discovered_dungeon
+event:/music/stingers/secret_big_discovered_spatialized
+event:/music/stingers/secret_big_discovered_spatialized_dungeon
+event:/music/stingers/secret_hint
+event:/music/stingers/secret_hint_spatialized
+event:/music/stingers/secret_small_discovered
+event:/music/stingers/secret_small_discovered_spatialized
+event:/music/talos_prototype/talos_prototype_additive
+event:/music/volcano/Volcano Biome
+event:/music/volcano/Volcano Dungeon - Additive
+#
+# == event:/player (18) ==
+event:/player/coin_pickup
+event:/player/crit
+event:/player/damage/player_drown
+event:/player/damage/player_hit
+event:/player/damage/player_massive_damage
+event:/player/footsteps/fields/footsteps_field
+event:/player/footsteps/footsteps_grass
+event:/player/footsteps/footsteps_sand
+event:/player/footsteps/footsteps_stone
+event:/player/footsteps/footsteps_water
+event:/player/interact/map_transition
+event:/player/interact/pick_up_key
+event:/player/interact/pick_up_pot
+event:/player/interact/player_grab
+event:/player/interact/push_stone
+event:/player/interact/throw
+event:/player/movement/dash
+event:/player/player_gain_favourpoint
+#
+# == event:/spells (23) ==
+event:/spells/cast_fireball
+event:/spells/cast_fireball_massive
+event:/spells/cast_massive_fireball
+event:/spells/cast_spell_cosmo
+event:/spells/cast_spell_healing
+event:/spells/cast_spell_lightning
+event:/spells/cast_spell_nature
+event:/spells/cast_spell_necro
+event:/spells/cast_spell_projectile
+event:/spells/cast_spell_projectile_volley
+event:/spells/cast_spell_start
+event:/spells/cast_spell_stone
+event:/spells/cast_spell_summon
+event:/spells/cast_spell_water
+event:/spells/channel_spell
+event:/spells/charge_spell
+event:/spells/shockwave
+event:/spells/spell_cosmo_looping
+event:/spells/spell_fire_looping
+event:/spells/spell_healing_looping
+event:/spells/spell_nature_looping
+event:/spells/spell_necro_looping
+event:/spells/spell_water_looping
+#
+# == event:/voiceovers (3) ==
+event:/voiceovers/vx_cinematic_intro
+event:/voiceovers/vx_minerva_attack
+event:/voiceovers/vx_minerva_interact

@@ -1,0 +1,16 @@
+line:hermit_01,cftest_hermit: Ah... bir ziyaretçi. Bu odaya yolu düşen az kişi var.
+line:hermit_02,cftest_hermit: Bu oda Content Forge ile yapıldı - ben de öyle.
+line:hermit_opt_who,Sen kimsin?
+line:hermit_03,cftest_hermit: Ben Test Münzevisi. Paket yazarlarının düz metinle diyalog yazabildiğinin kanıtıyım.
+line:hermit_04,cftest_hermit: Paketin yanındaki bir .yarn dosyası; oyun açılırken derlenir. Araç yok, editör yok.
+line:hermit_opt_bless,Bir kutsama isterim. (seni iyileştirir)
+line:hermit_05,cftest_hermit: Kımıldama.
+line:hermit_06,cftest_hermit: İşte. Sıcaklık birkaç saniye sürecek.
+line:hermit_opt_trade,Takas edecek bir şeyin var mı? (2 kömür ver, emanet al)
+line:hermit_07,cftest_hermit: Kömür! Harika. Şu eski emaneti al - benim işime yaramaz.
+line:hermit_08,cftest_hermit: Bana iki parça kömür getir, sonra konuşuruz.
+line:hermit_opt_bye,Elveda.
+line:hermit_09,cftest_hermit: Paketlerin hep geçerli olsun.
+line:hermit_10,cftest_hermit: Yolun açık olsun, gezgin.
+line:hermit_opt_seek,Seni aramaya gönderildim.
+line:hermit_11,cftest_hermit: O hâlde arayışın burada bitiyor. Kanıt olarak kutsamamı al.

@@ -1,0 +1,182 @@
+{
+  "id": "worldoftales",
+  "namespace": "wot",
+  "author": "Content Forge",
+  "version": "1.0.0",
+  "items": [
+    {
+      "id": "wot:ember",
+      "name": "Storybook Ember",
+      "nameLocalized": {
+        "tr_TR": "Masal Koru"
+      },
+      "description": "A smouldering fragment of an untold tale. The Keeper trades them for kindling.",
+      "descriptionLocalized": {
+        "tr_TR": "Anlatilmamis bir masalin tuten parcasi. Bekci bunlari catira karsilik verir."
+      },
+      "icon": "ring:smoldering",
+      "tier": 3,
+      "maxStack": 10,
+      "price": 50,
+      "flags": "Quest"
+    },
+    {
+      "id": "wot:lucky_charm",
+      "name": "Storyteller's Charm",
+      "nameLocalized": {
+        "tr_TR": "Masalcinin Tilsimi"
+      },
+      "description": "Woven around a storybook ember. +50 Health, +10% Move Speed while worn.",
+      "descriptionLocalized": {
+        "tr_TR": "Bir masal korunun etrafina orulmus. Takiliyken +50 Can, +%10 Hareket Hizi."
+      },
+      "icon": "ring:orange",
+      "tier": 4,
+      "maxStack": 1,
+      "price": 250,
+      "equippable": {
+        "equipmentType": "Trinket",
+        "material": "Gold",
+        "statBonuses": {
+          "Health": {
+            "additive": 50
+          },
+          "MovementSpeed": {
+            "additive": 0.1
+          }
+        }
+      }
+    }
+  ],
+  "placeables": [
+    {
+      "id": "wot:tales_portal",
+      "name": "Storyteller's Arch",
+      "nameLocalized": {
+        "tr_TR": "Masalcinin Kemeri"
+      },
+      "description": "Build it anywhere; step through into the World of Tales.",
+      "icon": "sam",
+      "materials": {
+        "resource:stone": 4,
+        "material:wood_stick": 2
+      },
+      "width": 2,
+      "height": 2,
+      "cloneEntity": "WorkbenchGuid",
+      "controller": "forge_portal",
+      "controllerParams": {
+        "map": "wot:tales_realm",
+        "vfx": "dust_poof_big",
+        "tooltip": "The World of Tales waits beyond",
+        "message": "The arch fills with ink-dark light..."
+      }
+    }
+  ],
+  "maps": [
+    {
+      "id": "wot:tales_realm",
+      "name": "World of Tales",
+      "tmx": "realm.tmx",
+      "exitDirection": 1,
+      "music": "event:/music/dungeon/Dungeon",
+      "musicVolume": 0.7,
+      "ambience": "crypt",
+      "ambientLight": [
+        0.4,
+        0.3,
+        0.55
+      ],
+      "doodads": [
+        {
+          "entity": "CampFire",
+          "position": [
+            120,
+            80
+          ]
+        },
+        {
+          "entity": "Chest",
+          "position": [
+            200,
+            90
+          ]
+        },
+        {
+          "sprite": "crystal.png",
+          "position": [
+            64,
+            200
+          ],
+          "collision": [
+            16,
+            10
+          ]
+        }
+      ]
+    }
+  ],
+  "npcs": [
+    {
+      "id": "wot:sage",
+      "map": "wot:tales_realm",
+      "position": [
+        160,
+        120
+      ],
+      "yarn": "sage.yarn",
+      "startNode": "Start",
+      "tint": [
+        150,
+        60,
+        255
+      ],
+      "actors": {
+        "wot_sage": "Keeper of Tales"
+      },
+      "actorsLocalized": {
+        "tr_TR": {
+          "wot_sage": "Masallar Bekcisi"
+        }
+      },
+      "translations": {
+        "tr_TR": "sage.tr_TR.csv"
+      }
+    }
+  ],
+  "quests": [
+    {
+      "id": "wot:q_embers",
+      "name": "A Tale Worth Telling",
+      "nameLocalized": {
+        "tr_TR": "Anlatmaya Deger Bir Masal"
+      },
+      "description": "Beyond the Storyteller's Arch, a keeper trades embers for kindling. Bring one home.",
+      "descriptionLocalized": {
+        "tr_TR": "Masalcinin Kemeri'nin otesinde bir bekci, catira karsilik kor veriyor. Bir tane eve getir."
+      },
+      "icon": "scroll:brown",
+      "objectives": [
+        {
+          "type": "collect",
+          "target": "wot:ember",
+          "amount": 1
+        }
+      ],
+      "rewardRecipes": [
+        "wot:r_charm"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "id": "wot:r_charm",
+      "crafted": "wot:lucky_charm",
+      "amount": 1,
+      "ingredients": {
+        "wot:ember": 1,
+        "material:linen": 1
+      }
+    }
+  ]
+}

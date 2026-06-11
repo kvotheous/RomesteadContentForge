@@ -1,0 +1,3787 @@
+{
+ "_comment": "Field manifest for the Content Forge pack editor. Mirrors RomesteadContentForge/ContentPack.cs + PACKS.md. The editor builds its forms from this - add a field here when the DTO gains one, and editor + previews update. Field types: string,int,float,bool,enum,object,array,dict(keyed object),damageMap(type->float),file(png path),pointList([x,y] per line). Sections may set dict:true (the whole section is one key->value map), singleton:true (one object), aliases:[...] (alternate JSON keys for the same section, e.g. placeables/structures for furniture). file fields may set filter:'yarn' - the editor adds an 'Edit dialogue...' button opening the yarn dialogue editor. dict fields with valueType:'string' + keySource:'languages' (and the 'localized' sugar type) render as the per-language table widget.",
+ "version": 2,
+ "enums": {
+  "equipmentType": [
+   "Weapon",
+   "Offhand",
+   "Helmet",
+   "Armor",
+   "Boots",
+   "Trinket",
+   "Back"
+  ],
+  "weaponClass": [
+   "Sword",
+   "Spear",
+   "Dagger",
+   "Sledgehammer",
+   "Bow",
+   "Crossbow",
+   "Javelin",
+   "Fists",
+   "Shield"
+  ],
+  "material": [
+   "",
+   "Wood",
+   "Flint",
+   "Copper",
+   "Bronze",
+   "Iron",
+   "Steel",
+   "Gold",
+   "Silver",
+   "Leather",
+   "Cloth"
+  ],
+  "castType": [
+   "OnHit",
+   "OnUse"
+  ],
+  "spellEvent": [
+   "OnEntityHit",
+   "OnAnyHit"
+  ],
+  "target": [
+   "Target",
+   "Self"
+  ],
+  "damageVfx": [
+   "Normal",
+   "Small",
+   "None"
+  ],
+  "damageType": [
+   "true",
+   "slashing",
+   "piercing",
+   "bludgeoning",
+   "pyro",
+   "chloro",
+   "aqua",
+   "cosmo",
+   "necro"
+  ],
+  "usableType": [
+   "Healing",
+   "Special"
+  ],
+  "attackType": [
+   "Magic",
+   "Melee",
+   "Ranged"
+  ],
+  "chainEvent": [
+   "OnAnyHit",
+   "OnEntityHit",
+   "OnTerrainHit",
+   "OnSpellEnded"
+  ],
+  "chainTarget": [
+   "Target",
+   "Self",
+   "TargetGround",
+   "ProjectilePosition"
+  ],
+  "summonEntityType": [
+   "PlayerSummon",
+   "HostileSummon",
+   "Hostile",
+   "Friendly",
+   "Neutral"
+  ],
+  "summonBehavior": [
+   "guardian",
+   "companion"
+  ],
+  "objectiveType": [
+   "kill",
+   "collect",
+   "loot",
+   "craft",
+   "harvest"
+  ],
+  "eventType": [
+   "waveDefense",
+   "bossRush",
+   "huntContest",
+   "scheduledRaid",
+   "teamBattle",
+   "koth",
+   "race"
+  ],
+  "eventSchedule": [
+   "",
+   "night",
+   "day",
+   "newDay"
+  ],
+  "god": [
+   "minerva",
+   "mars",
+   "ceres",
+   "mercury",
+   "venus",
+   "vulcan",
+   "diana"
+  ],
+  "tomeTarget": [
+   "Target",
+   "Self",
+   "TargetGround"
+  ],
+  "cropType": [
+   "Plant",
+   "Mushroom",
+   "Tree",
+   "FruitTree",
+   "Flower"
+  ],
+  "fadeType": [
+   "fadeOverTime",
+   "fadeOut",
+   "fadeIn",
+   "fadeInAndOut"
+  ],
+  "spawnAreaType": [
+   "point",
+   "cube",
+   "cylinder",
+   "line",
+   "sphere"
+  ]
+ },
+ "_sourcesNote": "Editable comboboxes for id fields. file = a reference/*.txt catalog (one id per line, '#'/blank skipped); list = inline; pack = ids defined in the current pack's section (intra-pack refs). Editable so your own NEW ids are still type-able.",
+ "sources": {
+  "icons": {
+   "file": "reference/icon-ids.txt"
+  },
+  "displays": {
+   "file": "reference/display-ids.txt"
+  },
+  "auras": {
+   "file": "reference/aura-ids.txt"
+  },
+  "items": {
+   "file": "reference/item-ids.txt",
+   "pack": "items"
+  },
+  "dropTables": {
+   "file": "reference/droptable-ids.txt"
+  },
+  "spells": {
+   "pack": "spells"
+  },
+  "vfxIds": {
+   "pack": "vfx",
+   "file": "reference/vfx-ids.txt"
+  },
+  "creatures": {
+   "file": "reference/creature-ids.txt",
+   "pack": "creatures"
+  },
+  "skills": {
+   "list": [
+    "skill:swords",
+    "skill:spears",
+    "skill:daggers",
+    "skill:sledgehammers",
+    "skill:bows",
+    "skill:crossbows",
+    "skill:throwing",
+    "skill:shields",
+    "skill:tomes",
+    "skill:unarmed",
+    "skill:mining",
+    "skill:woodcutting",
+    "skill:construction"
+   ],
+   "pack": "skills"
+  },
+  "statKeys": {
+   "list": [
+    "Health",
+    "Energy",
+    "EnergyRegeneration",
+    "Armor",
+    "CritChance",
+    "AttackSpeed",
+    "MovementSpeed",
+    "MeleeDamage",
+    "RangedDamage",
+    "MagicDamage",
+    "ThrowingDamage",
+    "PickaxePower",
+    "AxePower",
+    "HealingDoneModifier",
+    "Knockback",
+    "KnockbackResistance",
+    "MagicDamageModifier",
+    "RangedDamageModifier",
+    "ThrowingDamageModifier",
+    "BludgeoningDamageModifier",
+    "PiercingDamageModifier",
+    "NecroDamageModifier",
+    "ChloroDamageModifier",
+    "PyroDamageModifier",
+    "CosmoDamageModifier",
+    "PyroResistance",
+    "AquaResistance",
+    "ChloroResistance",
+    "CosmoResistance",
+    "NecroResistance",
+    "PiercingResistance",
+    "BludgeoningResistance",
+    "MagicResistance"
+   ]
+  },
+  "skinNames": {
+   "list": [
+    "Sword",
+    "Sword_leaf",
+    "Sword_long",
+    "Dagger",
+    "Spear",
+    "Hammer",
+    "Hammer_axe",
+    "Cestus",
+    "Bow",
+    "Crossbow",
+    "javelin"
+   ]
+  },
+  "palettes": {
+   "list": [
+    "weapon",
+    "metal",
+    "leather",
+    "fabric",
+    "details"
+   ],
+   "pack": "palettes"
+  },
+  "particleTrails": {
+   "list": [
+    "small_fireball_blue",
+    "small_fireball_flame",
+    "fireball_flame",
+    "big_waterball",
+    "green_sparks2",
+    "blue_sparks5",
+    "red_sparks",
+    "black_and_green_sparks"
+   ]
+  },
+  "languages": {
+   "list": [
+    "en",
+    "zh_CN",
+    "de_DE",
+    "es_ES",
+    "fr_FR",
+    "pl_PL",
+    "pt_BR",
+    "ru_RU",
+    "ja_JP",
+    "tr_TR",
+    "ko_KR",
+    "sk_SK",
+    "zh_TW"
+   ]
+  },
+  "decorations": {
+   "file": "reference/decoration-ids.txt"
+  },
+  "maps": {
+   "pack": "maps"
+  },
+  "quests": {
+   "pack": "quests"
+  },
+  "classes": {
+   "pack": "classes"
+  },
+  "recipes": {
+   "pack": "recipes"
+  },
+  "entities": {
+   "file": "reference/entity-ids.txt"
+  },
+  "spacIds": {
+   "file": "reference/spac-ids.txt",
+   "pack": "spacs"
+  },
+  "favourIds": {
+   "file": "reference/favour-ids.txt",
+   "pack": "favours"
+  },
+  "biomes": {
+   "file": "reference/biome-ids.txt"
+  },
+  "soundEvents": {
+   "file": "reference/sound-event-ids.txt",
+   "packDict": "sounds",
+   "keyPrefix": "cf:sound:{ns}:"
+  },
+  "raids": {
+   "file": "reference/raid-ids.txt"
+  },
+  "musicTracks": {
+   "file": "reference/music-track-ids.txt"
+  },
+  "citizenTypes": {
+   "file": "reference/citizen-ids.txt",
+   "pack": "citizens"
+  },
+  "jobs": {
+   "list": [
+    "job:baker",
+    "job:blacksmith",
+    "job:lumberjack",
+    "job:leatherworker",
+    "job:merchant"
+   ]
+  },
+  "citizenStats": {
+   "list": [
+    "efficiency",
+    "expertise",
+    "happiness",
+    "foodCost",
+    "experienceGain",
+    "loyaltyGain"
+   ]
+  },
+  "placeableControllers": {
+   "list": [
+    "forge_station",
+    "forge_shrine",
+    "forge_lever",
+    "forge_dialogue",
+    "forge_portal"
+   ]
+  },
+  "creatureControllers": {
+   "list": [
+    "forge_guard",
+    "forge_coward",
+    "forge_ranged",
+    "forge_patrol",
+    "forge_pack",
+    "forge_summoner",
+    "forge_healer",
+    "forge_turret",
+    "skeletonarcher",
+    "wolf"
+   ]
+  },
+  "clientControllers": {
+   "list": [
+    "forge_creature_anim"
+   ]
+  },
+  "spellTypes": {
+   "list": [
+    "spelltype:single_projectile_attack",
+    "spelltype:area_of_effect",
+    "spelltype:explosion",
+    "spelltype:cone_attack",
+    "spelltype:line_attack",
+    "spelltype:multiple_projectile_attack",
+    "spelltype:heal",
+    "spelltype:mass_heal"
+   ]
+  },
+  "townBuildingBases": {
+   "list": [
+    "building:bakery:0",
+    "building:blacksmith:0",
+    "building:farmstead:1"
+   ]
+  },
+  "stations": {
+   "list": [
+    "campfire",
+    "cauldron",
+    "clay-barrel",
+    "war-table"
+   ]
+  },
+  "animStates": {
+   "list": [
+    "idle",
+    "walk",
+    "run",
+    "attack1",
+    "attack2",
+    "attack3",
+    "dagger_attack",
+    "hammer_attack1",
+    "hammer_attack2",
+    "spear_attack",
+    "bow_pull",
+    "crossbow_shoot"
+   ]
+  }
+ },
+ "manifest": [
+  {
+   "key": "id",
+   "type": "string",
+   "help": "Pack id, unique across installed packs."
+  },
+  {
+   "key": "namespace",
+   "type": "string",
+   "help": "Your prefix; all content ids should be '<namespace>:...'."
+  },
+  {
+   "key": "author",
+   "type": "string"
+  },
+  {
+   "key": "version",
+   "type": "string",
+   "default": "1.0.0"
+  },
+  {
+   "key": "description",
+   "type": "string"
+  },
+  {
+   "key": "dependencies",
+   "type": "array",
+   "item": {
+    "type": "string"
+   },
+   "help": "Pack ids this pack needs."
+  },
+  {
+   "key": "apiVersion",
+   "type": "int",
+   "default": 1,
+   "help": "content-format version this pack targets (leave 1)"
+  }
+ ],
+ "sections": {
+  "items": {
+   "label": "Items",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "Unique, namespaced e.g. mymod:flameblade"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "Display name (default / fallback language)"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name: pick a language, type the translation."
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language description."
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "default": "sam",
+     "source": "icons",
+     "help": "Vanilla icon id or your icons id"
+    },
+    {
+     "key": "maxStack",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "tier",
+     "type": "int"
+    },
+    {
+     "key": "flags",
+     "type": "string",
+     "help": "comma-sep: Food, Material, Ammunition, Money, Millable, Quest, Seed, Offering"
+    },
+    {
+     "key": "price",
+     "type": "int"
+    },
+    {
+     "key": "equippable",
+     "type": "object",
+     "fields": [
+      {
+       "key": "equipmentType",
+       "type": "enum",
+       "enum": "equipmentType"
+      },
+      {
+       "key": "material",
+       "type": "enum",
+       "enum": "material"
+      },
+      {
+       "key": "entityAuraId",
+       "type": "string",
+       "source": "auras",
+       "help": "optional: existing aura id giving the stat effect"
+      },
+      {
+       "key": "displayId",
+       "type": "string",
+       "source": "displays",
+       "help": "Reuse a vanilla held look (cdd:...)"
+      },
+      {
+       "key": "statBonuses",
+       "type": "dict",
+       "valueType": "statBonus",
+       "keySource": "statKeys",
+       "help": "Stat -> {additive/multiplier}. Works on gear AND weapons."
+      },
+      {
+       "key": "display",
+       "type": "object",
+       "fields": [
+        {
+         "key": "skinName",
+         "type": "string",
+         "source": "skinNames",
+         "help": "Sword, Sword_long, Spear, Dagger, Hammer, Bow..."
+        },
+        {
+         "key": "skinTag",
+         "type": "int",
+         "default": 8,
+         "help": "8 = main hand, 11 = offhand"
+        },
+        {
+         "key": "palette",
+         "type": "string",
+         "source": "palettes",
+         "help": "weapon/metal/leather... or your palette id"
+        },
+        {
+         "key": "paletteRow",
+         "type": "int"
+        },
+        {
+         "key": "sheet",
+         "type": "file",
+         "help": "Custom held-art PNG (rig-aligned)"
+        },
+        {
+         "key": "frameWidth",
+         "type": "int",
+         "default": 48
+        },
+        {
+         "key": "frameHeight",
+         "type": "int",
+         "default": 48
+        }
+       ]
+      },
+      {
+       "key": "weapon",
+       "type": "object",
+       "fields": [
+        {
+         "key": "class",
+         "type": "enum",
+         "enum": "weaponClass",
+         "default": "Sword"
+        },
+        {
+         "key": "swingTimer",
+         "type": "float",
+         "default": 1.0
+        },
+        {
+         "key": "knockback",
+         "type": "float"
+        },
+        {
+         "key": "attackRange",
+         "type": "float",
+         "default": 24,
+         "help": "Reach. 0 = hits nothing!"
+        },
+        {
+         "key": "energyCost",
+         "type": "float"
+        },
+        {
+         "key": "minDamage",
+         "type": "damageMap"
+        },
+        {
+         "key": "maxDamage",
+         "type": "damageMap"
+        },
+        {
+         "key": "stunPower",
+         "type": "float",
+         "help": "0..1 stagger"
+        },
+        {
+         "key": "movementFactor",
+         "type": "float",
+         "default": 1.0,
+         "help": "move speed while attacking"
+        },
+        {
+         "key": "damageVfx",
+         "type": "enum",
+         "enum": "damageVfx",
+         "default": "Normal"
+        },
+        {
+         "key": "specialEnergyCost",
+         "type": "float"
+        },
+        {
+         "key": "trailColor",
+         "type": "string",
+         "help": "#RRGGBB recolor the slash"
+        },
+        {
+         "key": "trailSheet",
+         "type": "file",
+         "help": "Custom slash-shape PNG"
+        },
+        {
+         "key": "hideTrail",
+         "type": "bool"
+        },
+        {
+         "key": "castSpell",
+         "type": "object",
+         "fields": [
+          {
+           "key": "spellId",
+           "type": "string",
+           "source": "spells"
+          },
+          {
+           "key": "castType",
+           "type": "enum",
+           "enum": "castType",
+           "default": "OnHit"
+          },
+          {
+           "key": "event",
+           "type": "enum",
+           "enum": "spellEvent",
+           "default": "OnEntityHit"
+          },
+          {
+           "key": "probability",
+           "type": "float",
+           "help": "0..1 proc chance (blank = always)"
+          },
+          {
+           "key": "target",
+           "type": "enum",
+           "enum": "target",
+           "default": "Target"
+          },
+          {
+           "key": "chargedSpellId",
+           "type": "string",
+           "source": "spells"
+          },
+          {
+           "key": "chargeTime",
+           "type": "float",
+           "default": 0.3
+          }
+         ]
+        },
+        {
+         "key": "hitVfx",
+         "type": "string",
+         "source": "vfxIds",
+         "help": "extra VFX at the hit position (your vfx id or a vanilla hit:* spac id)"
+        },
+        {
+         "key": "hitVfxScale",
+         "type": "float",
+         "default": 1,
+         "help": "scale (sprite vfx only)"
+        },
+        {
+         "key": "skillId",
+         "type": "string",
+         "help": "skill this weapon trains/scales (your pack skill)",
+         "source": "skills"
+        },
+        {
+         "key": "attackArcDegrees",
+         "type": "float",
+         "default": 0,
+         "help": "melee swing-cone width in degrees (vanilla 144; 300 = near-circle). Spears ignore it."
+        },
+        {
+         "key": "attackArcOffsetPx",
+         "type": "float",
+         "default": 0,
+         "help": "forward offset (px) of the swing cone origin; negative pulls toward the body"
+        },
+        {
+         "key": "comboSteps",
+         "type": "array",
+         "item": {
+          "type": "object",
+          "fields": [
+           {
+            "key": "damageMultiplier",
+            "type": "float",
+            "default": 0
+           },
+           {
+            "key": "arcDegrees",
+            "type": "float",
+            "default": 0
+           },
+           {
+            "key": "swingTimerScale",
+            "type": "float",
+            "default": 1
+           }
+          ]
+         },
+         "help": "per-combo-step tuning: index = hit of the chain (sword 3 steps; dagger cycles; sledge step 0)"
+        },
+        {
+         "key": "twoHanded",
+         "type": "bool",
+         "default": false,
+         "help": "offhand slot kept empty while held (ejects to bag; blocks bows/crossbows too)"
+        }
+       ]
+      },
+      {
+       "key": "shield",
+       "type": "object",
+       "fields": [
+        {
+         "key": "blockStrength",
+         "type": "float",
+         "default": 0.6
+        },
+        {
+         "key": "blockArcDegrees",
+         "type": "float",
+         "default": 60
+        },
+        {
+         "key": "strongBlockArcDegrees",
+         "type": "float",
+         "default": 50
+        },
+        {
+         "key": "enterCost",
+         "type": "float"
+        }
+       ]
+      },
+      {
+       "key": "spellTome",
+       "type": "object",
+       "fields": [
+        {
+         "key": "spellId",
+         "type": "string",
+         "source": "spells"
+        },
+        {
+         "key": "energyCost",
+         "type": "float"
+        },
+        {
+         "key": "swingTimer",
+         "type": "float",
+         "default": 1.0
+        },
+        {
+         "key": "target",
+         "type": "enum",
+         "default": "Target",
+         "help": "Target / Self / TargetGround â€” heal spells need Self",
+         "enum": "tomeTarget"
+        },
+        {
+         "key": "chargedSpellId",
+         "type": "string",
+         "source": "spells",
+         "help": "special-attack (charged) spell"
+        },
+        {
+         "key": "chargeTime",
+         "type": "float",
+         "default": 0.3
+        },
+        {
+         "key": "specialEnergyCost",
+         "type": "float"
+        },
+        {
+         "key": "movementFactor",
+         "type": "float",
+         "default": 0.5,
+         "help": "move speed while attacking/charging"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "key": "usable",
+     "type": "object",
+     "fields": [
+      {
+       "key": "type",
+       "type": "enum",
+       "enum": "usableType",
+       "default": "Special"
+      },
+      {
+       "key": "instantHeal",
+       "type": "float"
+      },
+      {
+       "key": "cooldown",
+       "type": "float"
+      },
+      {
+       "key": "usesMax",
+       "type": "int",
+       "default": 1
+      },
+      {
+       "key": "spellId",
+       "type": "string",
+       "source": "spells",
+       "help": "advanced: explicit spell cast on use"
+      },
+      {
+       "key": "slowHeal",
+       "type": "float",
+       "help": "total HP healed over slowHealTime (type Healing)"
+      },
+      {
+       "key": "slowHealTime",
+       "type": "float"
+      }
+     ]
+    },
+    {
+     "key": "light",
+     "type": "object",
+     "fields": [
+      {
+       "key": "radius",
+       "type": "float",
+       "default": 128,
+       "help": "px - the vanilla torch is 128"
+      },
+      {
+       "key": "strength",
+       "type": "float",
+       "default": 1
+      }
+     ]
+    }
+   ]
+  },
+  "spells": {
+   "label": "Spells",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string"
+    },
+    {
+     "key": "displayName",
+     "type": "string"
+    },
+    {
+     "key": "displayNameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language spell name."
+    },
+    {
+     "key": "spellTypeId",
+     "type": "string",
+     "source": "spellTypes",
+     "default": "spelltype:single_projectile_attack",
+     "help": "built-in spell behavior; usually leave default (the behavior blocks below override it)"
+    },
+    {
+     "key": "duration",
+     "type": "float",
+     "default": 1.5,
+     "help": "spell lifetime in seconds"
+    },
+    {
+     "key": "projectileDisplayId",
+     "type": "string",
+     "default": "arrow_spell",
+     "source": "displays"
+    },
+    {
+     "key": "particleTrail",
+     "type": "string",
+     "source": "particleTrails"
+    },
+    {
+     "key": "castSound",
+     "type": "string",
+     "source": "soundEvents",
+     "help": "event:/... (vanilla or your bank)"
+    },
+    {
+     "key": "projectileVelocity",
+     "type": "float",
+     "default": 320
+    },
+    {
+     "key": "collisionRadius",
+     "type": "float",
+     "default": 6
+    },
+    {
+     "key": "applyAura",
+     "type": "string",
+     "source": "auras",
+     "help": "aura id -> makes it an apply-aura spell (ignite/poison)"
+    },
+    {
+     "key": "attack",
+     "type": "object",
+     "fields": [
+      {
+       "key": "attackType",
+       "type": "enum",
+       "enum": "attackType",
+       "default": "Magic"
+      },
+      {
+       "key": "maxTargets",
+       "type": "int",
+       "default": 1
+      },
+      {
+       "key": "multiplier",
+       "type": "float",
+       "default": 1.0
+      },
+      {
+       "key": "knockback",
+       "type": "float"
+      },
+      {
+       "key": "minDamage",
+       "type": "damageMap"
+      },
+      {
+       "key": "maxDamage",
+       "type": "damageMap"
+      },
+      {
+       "key": "skillId",
+       "type": "string",
+       "help": "skill that scales this spell + gains XP",
+       "source": "skills"
+      }
+     ]
+    },
+    {
+     "key": "chain",
+     "type": "array",
+     "help": "On hit/end, cast other spells (arrow+lightning, fireball+ignite).",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "event",
+        "type": "enum",
+        "enum": "chainEvent",
+        "default": "OnAnyHit"
+       },
+       {
+        "key": "spell",
+        "type": "string",
+        "source": "spells",
+        "help": "spell to cast on the event"
+       },
+       {
+        "key": "target",
+        "type": "enum",
+        "enum": "chainTarget",
+        "default": "Target"
+       }
+      ]
+     }
+    },
+    {
+     "key": "summon",
+     "type": "object",
+     "help": "Makes this a SUMMON spell â€” spawns a creature that fights for you (necromancer).",
+     "fields": [
+      {
+       "key": "creature",
+       "type": "string",
+       "source": "creatures",
+       "help": "creature to summon (e.g. JumpingSkull, SkeletonWarrior)"
+      },
+      {
+       "key": "count",
+       "type": "int",
+       "default": 1,
+       "help": "how many to spawn per cast (e.g. 2)"
+      },
+      {
+       "key": "maxActive",
+       "type": "int",
+       "default": 0,
+       "help": "0 = unlimited; else max kept alive (oldest despawns)"
+      },
+      {
+       "key": "behavior",
+       "type": "enum",
+       "enum": "summonBehavior",
+       "default": "guardian",
+       "help": "guardian = stays put; companion = teleports back to you when idle"
+      },
+      {
+       "key": "entityType",
+       "type": "enum",
+       "enum": "summonEntityType",
+       "default": "PlayerSummon"
+      },
+      {
+       "key": "dismissOnUnequip",
+       "type": "bool",
+       "default": false,
+       "help": "despawn summons when the casting item is unequipped"
+      },
+      {
+       "key": "parameters",
+       "type": "dict",
+       "valueType": "string",
+       "help": "advanced: extra spawn params passed to the creature"
+      }
+     ]
+    },
+    {
+     "key": "aoe",
+     "type": "object",
+     "help": "lingering damage circle (chain off a projectile for cursor placement)",
+     "fields": [
+      {
+       "key": "radius",
+       "type": "float",
+       "default": 48
+      },
+      {
+       "key": "height",
+       "type": "float",
+       "default": 16
+      },
+      {
+       "key": "tickSeconds",
+       "type": "float",
+       "default": 0.5
+      },
+      {
+       "key": "applyAura",
+       "type": "string",
+       "source": "auras"
+      },
+      {
+       "key": "lightsource",
+       "type": "bool",
+       "default": true
+      },
+      {
+       "key": "affectsEnvironment",
+       "type": "bool",
+       "default": false
+      }
+     ]
+    },
+    {
+     "key": "explosion",
+     "type": "object",
+     "help": "instant blast (great as a chain step)",
+     "fields": [
+      {
+       "key": "radius",
+       "type": "float",
+       "default": 32
+      },
+      {
+       "key": "spacVfx",
+       "type": "string",
+       "source": "spacIds"
+      }
+     ]
+    },
+    {
+     "key": "cone",
+     "type": "object",
+     "help": "melee-style cone sweep in front of the caster",
+     "fields": [
+      {
+       "key": "range",
+       "type": "float",
+       "default": 48
+      },
+      {
+       "key": "angleDegrees",
+       "type": "float",
+       "default": 90
+      },
+      {
+       "key": "distanceOffset",
+       "type": "float",
+       "default": 0
+      },
+      {
+       "key": "tickSeconds",
+       "type": "float",
+       "default": 0,
+       "help": "0 = hit each target once; >0 = re-hit every N sec"
+      }
+     ]
+    },
+    {
+     "key": "line",
+     "type": "object",
+     "help": "damaging line/beam (fire breath); growth needs a particleTrail",
+     "fields": [
+      {
+       "key": "length",
+       "type": "float",
+       "default": 128
+      },
+      {
+       "key": "width",
+       "type": "float",
+       "default": 25
+      },
+      {
+       "key": "growSeconds",
+       "type": "float",
+       "default": 0
+      },
+      {
+       "key": "tickSeconds",
+       "type": "float",
+       "default": 0.6
+      }
+     ]
+    },
+    {
+     "key": "multiProjectile",
+     "type": "object",
+     "help": "fan of projectiles",
+     "fields": [
+      {
+       "key": "count",
+       "type": "int",
+       "default": 3
+      },
+      {
+       "key": "spreadDegrees",
+       "type": "float",
+       "default": 24
+      }
+     ]
+    },
+    {
+     "key": "heal",
+     "type": "object",
+     "help": "self heal/regen â€” cast with tome target Self",
+     "fields": [
+      {
+       "key": "amount",
+       "type": "float",
+       "default": 0
+      },
+      {
+       "key": "regenAmount",
+       "type": "float",
+       "default": 0
+      },
+      {
+       "key": "regenSeconds",
+       "type": "float",
+       "default": 0
+      }
+     ]
+    },
+    {
+     "key": "massHeal",
+     "type": "object",
+     "help": "heal all players in a radius (server-authoritative)",
+     "fields": [
+      {
+       "key": "amount",
+       "type": "float",
+       "default": 0
+      },
+      {
+       "key": "percentOfMaxHealth",
+       "type": "float",
+       "default": 0
+      },
+      {
+       "key": "radius",
+       "type": "float",
+       "default": 80
+      }
+     ]
+    },
+    {
+     "key": "requires",
+     "type": "object",
+     "help": "casting gate: skill level / favour / quest / class",
+     "fields": [
+      {
+       "key": "skill",
+       "type": "string",
+       "help": "skill id",
+       "source": "skills"
+      },
+      {
+       "key": "skillLevel",
+       "type": "int",
+       "default": 1
+      },
+      {
+       "key": "favour",
+       "type": "string",
+       "source": "favourIds"
+      },
+      {
+       "key": "quest",
+       "type": "string",
+       "source": "quests"
+      },
+      {
+       "key": "class",
+       "type": "string",
+       "source": "classes"
+      },
+      {
+       "key": "message",
+       "type": "string",
+       "help": "custom denial text"
+      }
+     ]
+    }
+   ]
+  },
+  "recipes": {
+   "label": "Recipes",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string"
+    },
+    {
+     "key": "crafted",
+     "type": "string",
+     "source": "items",
+     "help": "item id produced"
+    },
+    {
+     "key": "amount",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "station",
+     "type": "string",
+     "help": "blank/campfire/cauldron/clay-barrel/war-table",
+     "source": "stations"
+    },
+    {
+     "key": "ingredients",
+     "type": "dict",
+     "valueType": "int",
+     "keySource": "items",
+     "help": "itemId -> count"
+    }
+   ]
+  },
+  "palettes": {
+   "label": "Palettes",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, use as display.palette"
+    },
+    {
+     "key": "sheet",
+     "type": "file",
+     "help": "PNG ramp: row0 = source colors, rows below = variants"
+    }
+   ]
+  },
+  "vfx": {
+   "label": "VFX",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "new id, or a vanilla vfx id to reskin (e.g. blood_slash)"
+    },
+    {
+     "key": "sheet",
+     "type": "file",
+     "help": "PNG frame sheet"
+    },
+    {
+     "key": "frameWidth",
+     "type": "int",
+     "default": 48
+    },
+    {
+     "key": "frameHeight",
+     "type": "int",
+     "default": 48
+    },
+    {
+     "key": "frames",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "cell indices in play order"
+    },
+    {
+     "key": "frameDuration",
+     "type": "int",
+     "default": 3
+    },
+    {
+     "key": "scale",
+     "type": "float",
+     "default": 1.0
+    }
+   ]
+  },
+  "drops": {
+   "label": "Drops",
+   "idField": "item",
+   "fields": [
+    {
+     "key": "table",
+     "type": "string",
+     "source": "dropTables",
+     "help": "drop-table id (reference/droptable-ids.txt)"
+    },
+    {
+     "key": "item",
+     "type": "string",
+     "source": "items"
+    },
+    {
+     "key": "chance",
+     "type": "float",
+     "default": 5,
+     "help": "percent"
+    },
+    {
+     "key": "min",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "max",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "aura",
+     "type": "string",
+     "source": "auras"
+    }
+   ]
+  },
+  "quests": {
+   "label": "Quests",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:quest_x"
+    },
+    {
+     "key": "name",
+     "type": "string"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language description."
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons"
+    },
+    {
+     "key": "objectives",
+     "type": "array",
+     "help": "goals (all must be met)",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "type",
+        "type": "enum",
+        "enum": "objectiveType",
+        "default": "kill",
+        "help": "kill/collect/loot/craft/harvest/handIn/chop/build/equip/interact"
+       },
+       {
+        "key": "target",
+        "type": "string",
+        "help": "kill: a creature name; collect/loot/craft/harvest: an item id"
+       },
+       {
+        "key": "amount",
+        "type": "int",
+        "default": 1
+       }
+      ]
+     }
+    },
+    {
+     "key": "rewardRecipes",
+     "type": "array",
+     "item": {
+      "type": "string",
+      "source": "recipes"
+     },
+     "help": "crafting recipe ids unlocked on completion"
+    },
+    {
+     "key": "repeatable",
+     "type": "bool"
+    },
+    {
+     "key": "rewardItems",
+     "type": "dict",
+     "help": "itemId -> amount granted on completion (every online player)",
+     "valueType": "int",
+     "keySource": "items"
+    }
+   ]
+  },
+  "classes": {
+   "label": "Classes",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:class:necromancer"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "shown in the character-creation picker"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "bonusSkill",
+     "type": "string",
+     "source": "skills",
+     "default": "skill:swords",
+     "help": "a skill set to level 5 â€” MUST be valid"
+    },
+    {
+     "key": "skillBonuses",
+     "type": "dict",
+     "valueType": "int",
+     "keySource": "skills",
+     "help": "skill -> starting level"
+    },
+    {
+     "key": "startingInventory",
+     "type": "dict",
+     "valueType": "int",
+     "keySource": "items",
+     "help": "item -> amount"
+    },
+    {
+     "key": "startingClothes",
+     "type": "array",
+     "item": {
+      "type": "string",
+      "source": "items"
+     },
+     "help": "equipped clothing/armor ids"
+    },
+    {
+     "key": "startingFavourPoints",
+     "type": "int"
+    }
+   ]
+  },
+  "furniture": {
+   "label": "Placeables",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:bone_brazier"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "shown in the build menu"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language description."
+    },
+    {
+     "key": "spawnedId",
+     "type": "string",
+     "source": "decorations",
+     "help": "which vanilla decoration art to place"
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "default": "sam",
+     "help": "build-menu icon"
+    },
+    {
+     "key": "materials",
+     "type": "dict",
+     "valueType": "int",
+     "keySource": "items",
+     "help": "build cost: resource -> amount (empty = free)"
+    },
+    {
+     "key": "width",
+     "type": "int",
+     "default": 2
+    },
+    {
+     "key": "height",
+     "type": "int",
+     "default": 2
+    },
+    {
+     "key": "indestructible",
+     "type": "bool",
+     "default": false,
+     "help": "cannot be demolished/destroyed (quest shrines, temples)"
+    },
+    {
+     "key": "yarn",
+     "type": "file",
+     "filter": "yarn",
+     "help": "TALKING placeable: .yarn dialogue next to the pack"
+    },
+    {
+     "key": "startNode",
+     "type": "string",
+     "default": "Start",
+     "help": "dialogue node the yarn opens at"
+    },
+    {
+     "key": "actors",
+     "type": "dict",
+     "valueType": "string",
+     "help": "<<Actor key>> -> speaker display name"
+    },
+    {
+     "key": "sprite",
+     "type": "file",
+     "help": "Tier 2: your PNG replaces the cloned entity art"
+    },
+    {
+     "key": "spriteFrameWidth",
+     "type": "int",
+     "default": 0
+    },
+    {
+     "key": "spriteFrameHeight",
+     "type": "int",
+     "default": 0
+    },
+    {
+     "key": "spriteFrames",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "looping ambient animation cells"
+    },
+    {
+     "key": "spriteFrameDuration",
+     "type": "float",
+     "default": 0.15
+    },
+    {
+     "key": "station",
+     "type": "string",
+     "help": "crafting-station id: recipes with this station craft here (needs cloneEntity)"
+    },
+    {
+     "key": "cloneEntity",
+     "type": "string",
+     "source": "entities",
+     "help": "vanilla entity to clone (needed by controller/yarn/sprite/station) - an EntityIds name or Guid"
+    },
+    {
+     "key": "controller",
+     "type": "string",
+     "source": "placeableControllers",
+     "help": "preset (forge_shrine / forge_lever / forge_dialogue / forge_portal) or a registered name; station defaults to forge_station"
+    },
+    {
+     "key": "controllerParams",
+     "type": "dict",
+     "valueType": "string",
+     "help": "controller parameters, e.g. heal: 25, cooldown: 30, tooltip: ..."
+    },
+    {
+     "key": "spriteOffset3D",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "render offset [x, up, depth] px"
+    },
+    {
+     "key": "parts",
+     "type": "array",
+     "help": "COMPOSITE: several PNG layers + per-part collision as ONE buildable (no yarn/station/controller)",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "sprite",
+        "type": "file",
+        "help": "this layer's PNG"
+       },
+       {
+        "key": "offset",
+        "type": "array",
+        "item": {
+         "type": "float"
+        },
+        "help": "[x, yUp] px from the anchor tile center (flat: [x, depth])"
+       },
+       {
+        "key": "depth",
+        "type": "float",
+        "help": "draw-sort bias px (positive = behind)"
+       },
+       {
+        "key": "scale",
+        "type": "float",
+        "default": 1
+       },
+       {
+        "key": "opacity",
+        "type": "float",
+        "default": 1
+       },
+       {
+        "key": "angle",
+        "type": "int",
+        "help": "degrees clockwise"
+       },
+       {
+        "key": "flip",
+        "type": "bool"
+       },
+       {
+        "key": "flat",
+        "type": "bool",
+        "help": "lay flat on the ground (rugs, shadows)"
+       },
+       {
+        "key": "frameWidth",
+        "type": "int"
+       },
+       {
+        "key": "frameHeight",
+        "type": "int"
+       },
+       {
+        "key": "frame",
+        "type": "int",
+        "help": "which sheet cell to draw"
+       },
+       {
+        "key": "collision",
+        "type": "array",
+        "item": {
+         "type": "float"
+        },
+        "help": "[w,h] px blocking box (omit = walk-through)"
+       },
+       {
+        "key": "collisionOffset",
+        "type": "array",
+        "item": {
+         "type": "float"
+        },
+        "help": "[x,y] px WORLD offset of the box (y = south)"
+       }
+      ]
+     }
+    }
+   ],
+   "aliases": [
+    "placeables",
+    "structures"
+   ]
+  },
+  "creatures": {
+   "label": "Creatures",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:tough_skeleton (summon by this id)"
+    },
+    {
+     "key": "base",
+     "type": "string",
+     "source": "creatures",
+     "help": "vanilla creature to clone"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "display name"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "healthMultiplier",
+     "type": "float",
+     "default": 1,
+     "help": "scale base max health (3 = 3x)"
+    },
+    {
+     "key": "color",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "optional [r,g,b] 0-255 sprite tint"
+    },
+    {
+     "key": "sheet",
+     "type": "file",
+     "help": "repaint the rig: 1:1 PNG of the base FIRST sheet"
+    },
+    {
+     "key": "sheets",
+     "type": "dict",
+     "valueType": "file",
+     "help": "multi-sheet: vanilla sheet basename -> PNG"
+    },
+    {
+     "key": "controller",
+     "type": "string",
+     "source": "creatureControllers",
+     "help": "CUSTOM AI: a server controller (vanilla like skeletonarcher/wolf, a forge_* preset, or your addon's)"
+    },
+    {
+     "key": "controllerParams",
+     "type": "dict",
+     "valueType": "string",
+     "help": "overrides merged over the base controller's params (forge_creature_anim: spac, anim-map, ...)"
+    },
+    {
+     "key": "clientController",
+     "type": "string",
+     "source": "clientControllers",
+     "help": "CLIENT visuals controller (forge_creature_anim for data-driven animations); unset = keep the base's"
+    }
+   ]
+  },
+  "maps": {
+   "label": "Maps",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:crypt"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "display name"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "tmx",
+     "type": "string",
+     "help": ".tmx filename next to the pack (Tiled editor, 16x16, ground/structure layers)"
+    },
+    {
+     "key": "biomes",
+     "type": "array",
+     "item": {
+      "type": "string",
+      "source": "biomes"
+     },
+     "help": "overworld biomes for the entrance, e.g. biome:forest. Empty = no auto-entrance"
+    },
+    {
+     "key": "weight",
+     "type": "float",
+     "default": 100,
+     "help": "POI roll weight"
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "default": "dungeon_skull",
+     "help": "map icon id"
+    },
+    {
+     "key": "lootTable",
+     "type": "string",
+     "help": "optional dungeon loot-table id",
+     "source": "dropTables"
+    },
+    {
+     "key": "exitDirection",
+     "type": "int",
+     "default": 1,
+     "help": "0=E 1=S 2=W 3=N"
+    },
+    {
+     "key": "exitNode",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "[x,y,w,h] px exit box; default bottom-center"
+    },
+    {
+     "key": "exit",
+     "type": "bool",
+     "default": true,
+     "help": "false = inner room (reached via doors only)"
+    },
+    {
+     "key": "doors",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "edge",
+        "type": "int",
+        "default": 3,
+        "help": "door side: 0=E 1=S 2=W 3=N"
+       },
+       {
+        "key": "target",
+        "type": "string",
+        "help": "map id this door leads to"
+       },
+       {
+        "key": "node",
+        "type": "array",
+        "item": {
+         "type": "float"
+        },
+        "help": "[x,y,w,h] px; default edge-center"
+       }
+      ]
+     },
+     "help": "doors into other rooms (multi-room dungeons)"
+    },
+    {
+     "key": "music",
+     "type": "string",
+     "help": "FMOD music event for this map",
+     "source": "musicTracks"
+    },
+    {
+     "key": "ambience",
+     "type": "string",
+     "help": "FMOD ambience event",
+     "source": "musicTracks"
+    },
+    {
+     "key": "musicVolume",
+     "type": "float",
+     "default": 1
+    },
+    {
+     "key": "ambientLight",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "[r,g,b] 0..1 ambient light (dark realm = low)"
+    },
+    {
+     "key": "pvp",
+     "type": "bool",
+     "default": false,
+     "help": "players can damage each other in this map; dying there spawns NO grave"
+    },
+    {
+     "key": "replace",
+     "type": "string",
+     "help": "vanilla dungeon room id whose interior this map replaces (exitDirection must match)"
+    },
+    {
+     "key": "exteriorMap",
+     "type": "string",
+     "default": "maps/poi/forest/td_animal_den",
+     "help": "vanilla exterior map containing the entrance prop (only matters with biomes)"
+    },
+    {
+     "key": "retrofit",
+     "type": "bool",
+     "default": false,
+     "help": "also place the entrance into EXISTING saves (once per save; needs biomes)"
+    },
+    {
+     "key": "doodads",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "id",
+        "type": "string",
+        "help": "optional stable id (else derived from map id + index)"
+       },
+       {
+        "key": "entity",
+        "type": "string",
+        "help": "EntityIds name / Guid / pack id (reference/entity-ids.txt)",
+        "source": "entities"
+       },
+       {
+        "key": "sprite",
+        "type": "file",
+        "help": "OR a PNG next to the pack"
+       },
+       {
+        "key": "position",
+        "type": "array",
+        "item": {
+         "type": "float"
+        }
+       },
+       {
+        "key": "collision",
+        "type": "array",
+        "item": {
+         "type": "float"
+        },
+        "help": "[w,h] px blocking box (sprite props)"
+       },
+       {
+        "key": "spriteFrames",
+        "type": "array",
+        "item": {
+         "type": "int"
+        }
+       },
+       {
+        "key": "spriteFrameDuration",
+        "type": "float",
+        "default": 0.15
+       },
+       {
+        "key": "spriteFrameWidth",
+        "type": "int",
+        "help": "frame cell width px (0 = whole PNG is one frame)"
+       },
+       {
+        "key": "spriteFrameHeight",
+        "type": "int"
+       },
+       {
+        "key": "spriteOffset3D",
+        "type": "array",
+        "item": {
+         "type": "float"
+        },
+        "help": "render offset [x, up, depth] px"
+       }
+      ]
+     },
+     "help": "props pre-placed in this map"
+    }
+   ]
+  },
+  "shops": {
+   "label": "Shops",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:wares:1"
+    },
+    {
+     "key": "items",
+     "type": "array",
+     "item": {
+      "type": "string"
+     },
+     "help": "item ids for sale (need a price)"
+    },
+    {
+     "key": "merchantLevel",
+     "type": "int",
+     "default": 1,
+     "help": "min merchant job level"
+    },
+    {
+     "key": "biomeCategory",
+     "type": "string",
+     "help": "optional: plains/forest/desert/volcanic/..."
+    },
+    {
+     "key": "extraGoodsWorship",
+     "type": "bool",
+     "default": false,
+     "help": "requires market_extra_goods worship"
+    }
+   ]
+  },
+  "particles": {
+   "label": "Particles",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:ember"
+    },
+    {
+     "key": "texture",
+     "type": "file",
+     "help": "PNG frame grid next to the pack (or use vanillaSheet)"
+    },
+    {
+     "key": "vanillaSheet",
+     "type": "string",
+     "help": "reuse a vanilla sheet path, e.g. media/particles/dust3"
+    },
+    {
+     "key": "frameWidth",
+     "type": "int",
+     "default": 8
+    },
+    {
+     "key": "frameHeight",
+     "type": "int",
+     "default": 8
+    },
+    {
+     "key": "frames",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "cell indices = animated"
+    },
+    {
+     "key": "frameDuration",
+     "type": "float",
+     "default": 0.06
+    },
+    {
+     "key": "loop",
+     "type": "bool",
+     "default": false
+    },
+    {
+     "key": "removeOnFinish",
+     "type": "bool",
+     "default": true
+    },
+    {
+     "key": "color",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "[r,g,b,a] 0..1"
+    },
+    {
+     "key": "emissiveness",
+     "type": "float",
+     "default": 0
+    },
+    {
+     "key": "vertical",
+     "type": "bool",
+     "default": true
+    },
+    {
+     "key": "maxLife",
+     "type": "float",
+     "default": 1.5
+    },
+    {
+     "key": "fade",
+     "type": "object",
+     "fields": [
+      {
+       "key": "type",
+       "type": "enum",
+       "default": "fadeOut",
+       "enum": "fadeType"
+      },
+      {
+       "key": "time",
+       "type": "float",
+       "default": 0.5
+      }
+     ]
+    },
+    {
+     "key": "gravity",
+     "type": "float",
+     "default": 0
+    },
+    {
+     "key": "friction",
+     "type": "object",
+     "fields": [
+      {
+       "key": "ground",
+       "type": "float"
+      },
+      {
+       "key": "air",
+       "type": "float"
+      }
+     ]
+    },
+    {
+     "key": "light",
+     "type": "object",
+     "fields": [
+      {
+       "key": "radius",
+       "type": "float"
+      },
+      {
+       "key": "color",
+       "type": "array",
+       "item": {
+        "type": "float"
+       }
+      }
+     ]
+    },
+    {
+     "key": "hslDrift",
+     "type": "object",
+     "help": "hue/sat/lum shift over time",
+     "fields": [
+      {
+       "key": "h",
+       "type": "float"
+      },
+      {
+       "key": "s",
+       "type": "float"
+      },
+      {
+       "key": "l",
+       "type": "float"
+      },
+      {
+       "key": "hDrift",
+       "type": "float",
+       "help": "per-second drift"
+      },
+      {
+       "key": "sDrift",
+       "type": "float"
+      },
+      {
+       "key": "lDrift",
+       "type": "float"
+      }
+     ]
+    }
+   ]
+  },
+  "emitters": {
+   "label": "Emitters",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced; usable as a spell particleTrail etc."
+    },
+    {
+     "key": "particles",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "id",
+        "type": "string"
+       },
+       {
+        "key": "weight",
+        "type": "int",
+        "default": 100
+       }
+      ]
+     },
+     "help": "weighted particle ids (yours or vanilla like dust:small)"
+    },
+    {
+     "key": "spawnFrequency",
+     "type": "float",
+     "default": 0.05,
+     "help": "SECONDS between spawn ticks"
+    },
+    {
+     "key": "emitterLifetime",
+     "type": "float",
+     "default": -1
+    },
+    {
+     "key": "amountSpawned",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "offset",
+     "type": "array",
+     "item": {
+      "type": "float"
+     }
+    },
+    {
+     "key": "spawnArea",
+     "type": "object",
+     "fields": [
+      {
+       "key": "type",
+       "type": "enum",
+       "default": "point",
+       "help": "point/cube/cylinder/line/sphere",
+       "enum": "spawnAreaType"
+      },
+      {
+       "key": "radius",
+       "type": "float"
+      },
+      {
+       "key": "size",
+       "type": "array",
+       "item": {
+        "type": "float"
+       }
+      }
+     ]
+    },
+    {
+     "key": "velocity",
+     "type": "object",
+     "fields": [
+      {
+       "key": "min",
+       "type": "float"
+      },
+      {
+       "key": "max",
+       "type": "float"
+      },
+      {
+       "key": "direction",
+       "type": "array",
+       "item": {
+        "type": "float"
+       }
+      }
+     ]
+    },
+    {
+     "key": "rotation",
+     "type": "object",
+     "fields": [
+      {
+       "key": "minDeg",
+       "type": "float"
+      },
+      {
+       "key": "maxDeg",
+       "type": "float"
+      }
+     ]
+    },
+    {
+     "key": "acceleration",
+     "type": "object",
+     "help": "constant acceleration span",
+     "fields": [
+      {
+       "key": "min",
+       "type": "float"
+      },
+      {
+       "key": "max",
+       "type": "float"
+      },
+      {
+       "key": "direction",
+       "type": "array",
+       "item": {
+        "type": "float"
+       },
+       "help": "default [0,0,1] = up"
+      }
+     ]
+    }
+   ]
+  },
+  "crops": {
+   "label": "Crops",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:crop:lavender"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "informational (crops have no name UI)"
+    },
+    {
+     "key": "dryGrowthMinutes",
+     "type": "float",
+     "default": 40
+    },
+    {
+     "key": "wetGrowthMinutes",
+     "type": "float",
+     "default": 20
+    },
+    {
+     "key": "stageCount",
+     "type": "int",
+     "help": "MUST equal display.stages length"
+    },
+    {
+     "key": "biomes",
+     "type": "array",
+     "item": {
+      "type": "string"
+     },
+     "help": "biome categories (plains/forest/desert/volcanic); empty = anywhere"
+    },
+    {
+     "key": "anyDirt",
+     "type": "bool",
+     "default": false
+    },
+    {
+     "key": "repeatable",
+     "type": "bool",
+     "default": false
+    },
+    {
+     "key": "cropType",
+     "type": "enum",
+     "default": "Plant",
+     "help": "Plant/Mushroom/Tree/FruitTree/Flower",
+     "enum": "cropType"
+    },
+    {
+     "key": "drops",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "item",
+        "type": "string",
+        "source": "items"
+       },
+       {
+        "key": "min",
+        "type": "int",
+        "default": 1
+       },
+       {
+        "key": "max",
+        "type": "int",
+        "default": 1
+       },
+       {
+        "key": "chance",
+        "type": "float",
+        "default": 100
+       }
+      ]
+     }
+    },
+    {
+     "key": "wildDrops",
+     "type": "array",
+     "help": "optional wild-harvest yield",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "item",
+        "type": "string",
+        "source": "items"
+       },
+       {
+        "key": "min",
+        "type": "int",
+        "default": 1
+       },
+       {
+        "key": "max",
+        "type": "int",
+        "default": 1
+       },
+       {
+        "key": "chance",
+        "type": "float",
+        "default": 100
+       }
+      ]
+     }
+    },
+    {
+     "key": "display",
+     "type": "object",
+     "fields": [
+      {
+       "key": "sheet",
+       "type": "string",
+       "help": "vanilla sheet path"
+      },
+      {
+       "key": "file",
+       "type": "file",
+       "help": "or your PNG"
+      },
+      {
+       "key": "frameWidth",
+       "type": "int",
+       "default": 16
+      },
+      {
+       "key": "frameHeight",
+       "type": "int",
+       "default": 32
+      },
+      {
+       "key": "offset3D",
+       "type": "array",
+       "item": {
+        "type": "float"
+       }
+      },
+      {
+       "key": "stages",
+       "type": "array",
+       "item": {
+        "type": "object",
+        "fields": [
+         {
+          "key": "frames",
+          "type": "array",
+          "item": {
+           "type": "int"
+          }
+         },
+         {
+          "key": "duration",
+          "type": "float",
+          "default": 0
+         },
+         {
+          "key": "horizontal",
+          "type": "bool",
+          "default": false
+         },
+         {
+          "key": "offset3D",
+          "type": "array",
+          "item": {
+           "type": "float"
+          },
+          "help": "per-stage draw offset"
+         }
+        ]
+       }
+      },
+      {
+       "key": "disableRandomFlip",
+       "type": "bool",
+       "default": false
+      }
+     ]
+    },
+    {
+     "key": "seed",
+     "type": "object",
+     "fields": [
+      {
+       "key": "id",
+       "type": "string"
+      },
+      {
+       "key": "name",
+       "type": "string"
+      },
+      {
+       "key": "nameLocalized",
+       "type": "dict",
+       "valueType": "string",
+       "keySource": "languages",
+       "help": "Per-language seed name."
+      },
+      {
+       "key": "descriptionLocalized",
+       "type": "dict",
+       "valueType": "string",
+       "keySource": "languages",
+       "help": "Per-language seed description."
+      },
+      {
+       "key": "icon",
+       "type": "string",
+       "source": "icons",
+       "default": "sam"
+      },
+      {
+       "key": "price",
+       "type": "int",
+       "default": 10
+      },
+      {
+       "key": "tier",
+       "type": "int",
+       "default": 1
+      },
+      {
+       "key": "maxStack",
+       "type": "int",
+       "default": 100
+      },
+      {
+       "key": "description",
+       "type": "string"
+      }
+     ]
+    }
+   ]
+  },
+  "npcs": {
+   "label": "NPCs",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:hermit"
+    },
+    {
+     "key": "map",
+     "type": "string",
+     "help": "id of a map in THIS pack",
+     "source": "maps"
+    },
+    {
+     "key": "position",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "[x, y] px from map top-left"
+    },
+    {
+     "key": "yarn",
+     "type": "file",
+     "filter": "yarn",
+     "help": ".yarn dialogue file next to the pack"
+    },
+    {
+     "key": "startNode",
+     "type": "string",
+     "default": "Start"
+    },
+    {
+     "key": "dialogueDistance",
+     "type": "float",
+     "default": 32
+    },
+    {
+     "key": "actors",
+     "type": "dict",
+     "valueType": "string",
+     "help": "<<Actor key>> -> speaker display name"
+    },
+    {
+     "key": "translations",
+     "type": "dict",
+     "valueType": "file",
+     "help": "locale -> csv file of line-id,text (browse; or use the yarn editor grid which writes these for you)"
+    },
+    {
+     "key": "tint",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "unique body: [r,g,b] 0-255 tint over the NPC body sheet"
+    },
+    {
+     "key": "sheets",
+     "type": "dict",
+     "help": "unique body: {\"no_weapons\": \"yourbody.png\"} â€” 1:1 repaint of the satyr body sheet (48x48)",
+     "valueType": "file"
+    }
+   ]
+  },
+  "skills": {
+   "label": "Skills",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "keep the skill: prefix, e.g. skill:runeology"
+    },
+    {
+     "key": "name",
+     "type": "string"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages"
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language description."
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "default": "sam"
+    },
+    {
+     "key": "value",
+     "type": "float",
+     "default": 0.5,
+     "help": "per-level damage scalar (value * level/100)"
+    },
+    {
+     "key": "xpGainFactor",
+     "type": "float",
+     "default": 1
+    }
+   ]
+  },
+  "playerSkins": {
+   "label": "PlayerSkins",
+   "idField": null,
+   "singleton": true,
+   "fields": [
+    {
+     "key": "reskins",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "tag",
+        "type": "string",
+        "help": "hair/eyes/tunic/armour/shoulders/decoration/sleeves/legwear/footwear/headwearBack/headwearMiddle/headwearFront/back/shield"
+       },
+       {
+        "key": "part",
+        "type": "string",
+        "help": "vanilla part file name"
+       },
+       {
+        "key": "sheet",
+        "type": "file"
+       },
+       {
+        "key": "sheet2",
+        "type": "file",
+        "help": "the -2 facing variation"
+       }
+      ]
+     },
+     "help": "1:1 repaints of vanilla character parts"
+    },
+    {
+     "key": "hair",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "name",
+        "type": "string"
+       },
+       {
+        "key": "sheet",
+        "type": "file"
+       },
+       {
+        "key": "sheet2",
+        "type": "file"
+       }
+      ]
+     },
+     "help": "new char-creation hair styles (2640x240 + 2688x240, 48x48 cells)"
+    },
+    {
+     "key": "parts",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "tag",
+        "type": "string"
+       },
+       {
+        "key": "name",
+        "type": "string"
+       },
+       {
+        "key": "sheet",
+        "type": "file"
+       },
+       {
+        "key": "sheet2",
+        "type": "file"
+       }
+      ]
+     },
+     "help": "new worn parts for looks to reference"
+    },
+    {
+     "key": "looks",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "id",
+        "type": "string",
+        "help": "items wear it via equippable.displayId"
+       },
+       {
+        "key": "fragments",
+        "type": "array",
+        "item": {
+         "type": "object",
+         "fields": [
+          {
+           "key": "tag",
+           "type": "string"
+          },
+          {
+           "key": "part",
+           "type": "string"
+          },
+          {
+           "key": "palette",
+           "type": "string"
+          },
+          {
+           "key": "row",
+           "type": "int",
+           "default": 0
+          }
+         ]
+        }
+       },
+       {
+        "key": "hideHair",
+        "type": "bool",
+        "default": false
+       }
+      ]
+     },
+     "help": "worn appearances (CharacterDisplayData)"
+    },
+    {
+     "key": "rig",
+     "type": "object",
+     "help": "body rig repaint: sheets {basename: png} + optional tint [r,g,b] (citizens/UI previews unaffected)",
+     "fields": [
+      {
+       "key": "sheets",
+       "type": "dict",
+       "valueType": "file"
+      },
+      {
+       "key": "tint",
+       "type": "array",
+       "item": {
+        "type": "int"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "arenas": {
+   "label": "Arenas",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced, e.g. mymod:colosseum"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "shown in chat lines"
+    },
+    {
+     "key": "map",
+     "type": "string",
+     "source": "maps",
+     "help": "a map in THIS pack with pvp:true"
+    },
+    {
+     "key": "announceKills",
+     "type": "bool",
+     "default": true
+    },
+    {
+     "key": "winnerReward",
+     "type": "string",
+     "source": "items",
+     "help": "item given to the match winner (per kill when endless)"
+    },
+    {
+     "key": "rewardAmount",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "minPlayers",
+     "type": "int",
+     "default": 2
+    },
+    {
+     "key": "durationSeconds",
+     "type": "int",
+     "default": 300,
+     "help": "0 = endless free-for-all"
+    }
+   ]
+  },
+  "favours": {
+   "label": "Favours",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string"
+    },
+    {
+     "key": "name",
+     "type": "string"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages"
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages"
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "default": "sam"
+    },
+    {
+     "key": "screen",
+     "type": "bool",
+     "default": false,
+     "help": "true = node lives on the custom Pack Favours screen (parent optional, must be another screen node)"
+    },
+    {
+     "key": "parent",
+     "type": "string",
+     "help": "favour id to attach under, e.g. minerva_favour:lumber_axe_power",
+     "source": "favourIds"
+    },
+    {
+     "key": "position",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "[column,row]; rows 10+ always free"
+    },
+    {
+     "key": "god",
+     "type": "enum",
+     "default": "minerva",
+     "enum": "god"
+    },
+    {
+     "key": "statBonuses",
+     "type": "dict",
+     "help": "permanent stat bonuses while learned (gear keys)",
+     "valueType": "statBonus",
+     "keySource": "statKeys"
+    },
+    {
+     "key": "aura",
+     "type": "string",
+     "source": "auras"
+    },
+    {
+     "key": "recipe",
+     "type": "string",
+     "source": "recipes"
+    },
+    {
+     "key": "flagId",
+     "type": "string",
+     "help": "advanced: vanilla character flag"
+    },
+    {
+     "key": "flagValue1",
+     "type": "float",
+     "default": 0
+    },
+    {
+     "key": "flagValue2",
+     "type": "float",
+     "default": 0
+    }
+   ]
+  },
+  "events": {
+   "label": "Events",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string"
+    },
+    {
+     "key": "name",
+     "type": "string"
+    },
+    {
+     "key": "type",
+     "type": "enum",
+     "enum": "eventType",
+     "help": "required: picks the behavior"
+    },
+    {
+     "key": "map",
+     "type": "string",
+     "source": "maps"
+    },
+    {
+     "key": "waves",
+     "type": "array",
+     "item": {
+      "type": "object",
+      "fields": [
+       {
+        "key": "creatures",
+        "type": "dict",
+        "valueType": "int",
+        "keySource": "creatures"
+       },
+       {
+        "key": "delaySeconds",
+        "type": "int",
+        "default": 10
+       }
+      ]
+     }
+    },
+    {
+     "key": "bosses",
+     "type": "array",
+     "item": {
+      "type": "string",
+      "source": "creatures"
+     },
+     "help": "bossRush: creature ids, fought one at a time"
+    },
+    {
+     "key": "target",
+     "type": "string",
+     "source": "creatures"
+    },
+    {
+     "key": "durationSeconds",
+     "type": "int",
+     "default": 600
+    },
+    {
+     "key": "schedule",
+     "type": "enum",
+     "enum": "eventSchedule"
+    },
+    {
+     "key": "everyNDays",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "raidData",
+     "type": "string",
+     "help": "raid:rats raid:potmen raid:grey_satyr raid:satyr raid:gorgons raid:cyclopelli ...",
+     "source": "raids"
+    },
+    {
+     "key": "immediate",
+     "type": "bool",
+     "default": false
+    },
+    {
+     "key": "reward",
+     "type": "string",
+     "source": "items"
+    },
+    {
+     "key": "rewardAmount",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "minPlayers",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "announceWaves",
+     "type": "bool",
+     "default": true
+    },
+    {
+     "key": "cooldownSeconds",
+     "type": "int",
+     "default": 300
+    },
+    {
+     "key": "killsToWin",
+     "type": "int",
+     "default": 10,
+     "help": "teamBattle: team kills needed to win"
+    },
+    {
+     "key": "point",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "koth: hill center [x,y] in map px"
+    },
+    {
+     "key": "hillRadius",
+     "type": "float",
+     "default": 80,
+     "help": "koth: hill radius px"
+    },
+    {
+     "key": "scoreToWin",
+     "type": "int",
+     "default": 60,
+     "help": "koth: hill-seconds needed to win"
+    },
+    {
+     "key": "checkpoints",
+     "type": "pointList",
+     "help": "race: ordered checkpoints, one 'x, y' (map px) per line"
+    },
+    {
+     "key": "checkpointRadius",
+     "type": "float",
+     "default": 40,
+     "help": "race: 'passed' within this many px"
+    },
+    {
+     "key": "timeLimitSeconds",
+     "type": "int",
+     "default": 300,
+     "help": "race: abort if nobody finishes in time"
+    }
+   ]
+  },
+  "citizens": {
+   "label": "Citizens",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string"
+    },
+    {
+     "key": "name",
+     "type": "string"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages"
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "default": "ui:citizen"
+    },
+    {
+     "key": "stats",
+     "type": "dict",
+     "help": "efficiency/expertise/happiness/foodCost/experienceGain/loyaltyGain (defaults 8/8/0/10/1/1)",
+     "valueType": "float",
+     "keySource": "citizenStats"
+    },
+    {
+     "key": "weight",
+     "type": "int",
+     "default": 100,
+     "help": "arrival share vs vanilla generic (100); 0 = never arrives"
+    },
+    {
+     "key": "jobLevels",
+     "type": "dict",
+     "help": "job:blacksmith etc -> 0..4",
+     "valueType": "int",
+     "keySource": "jobs"
+    },
+    {
+     "key": "look",
+     "type": "object",
+     "fields": [
+      {
+       "key": "male",
+       "type": "bool"
+      },
+      {
+       "key": "hair",
+       "type": "int"
+      },
+      {
+       "key": "hairColor",
+       "type": "int"
+      },
+      {
+       "key": "eyeColor",
+       "type": "int"
+      },
+      {
+       "key": "body",
+       "type": "int"
+      },
+      {
+       "key": "tunic",
+       "type": "int"
+      },
+      {
+       "key": "tunicColor",
+       "type": "int"
+      },
+      {
+       "key": "shoeColor",
+       "type": "int"
+      },
+      {
+       "key": "displayIds",
+       "type": "array",
+       "item": {
+        "type": "string"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "spacs": {
+   "label": "Spacs",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string"
+    },
+    {
+     "key": "base",
+     "type": "string",
+     "help": "vanilla spac id to clone - OMIT for a from-scratch spac (own PNGs + animations)",
+     "source": "spacIds"
+    },
+    {
+     "key": "sheets",
+     "type": "dict",
+     "help": "sheet basename -> PNG (wrong name once = log prints real names)",
+     "valueType": "file"
+    },
+    {
+     "key": "frameDurationScale",
+     "type": "float",
+     "default": 1
+    },
+    {
+     "key": "frames",
+     "type": "array",
+     "item": {
+      "type": "int"
+     },
+     "help": "clone only: resequence - indices into the BASE frame list, in play order"
+    },
+    {
+     "key": "directions",
+     "type": "int",
+     "default": 1,
+     "help": "from-scratch: 1 (no facing), 4 (rows E,S,W,N) or 8 (rows E,SE,S,SW,W,NW,N,NE)"
+    },
+    {
+     "key": "frameWidth",
+     "type": "int",
+     "help": "from-scratch: cell width px (0 = whole PNG is one frame)"
+    },
+    {
+     "key": "frameHeight",
+     "type": "int",
+     "help": "from-scratch: cell height px"
+    },
+    {
+     "key": "animations",
+     "type": "dict",
+     "valueType": "object",
+     "help": "from-scratch: animation name -> frames/timing (directions>1: frames are COLUMN indices)",
+     "fields": [
+      {
+       "key": "frames",
+       "type": "array",
+       "item": {
+        "type": "int"
+       },
+       "help": "cell indices, in play order"
+      },
+      {
+       "key": "tickLength",
+       "type": "float",
+       "default": 8,
+       "help": "ticks each frame shows (60 = 1s)"
+      },
+      {
+       "key": "loop",
+       "type": "bool",
+       "default": false,
+       "help": "advisory: looping is chosen where the spac is used"
+      },
+      {
+       "key": "sheet",
+       "type": "string",
+       "help": "multi-sheet spacs: which sheets key this draws from"
+      }
+     ]
+    }
+   ]
+  },
+  "shopAdditions": {
+   "label": "ShopAdditions",
+   "idField": "shop",
+   "fields": [
+    {
+     "key": "shop",
+     "type": "string",
+     "help": "EXISTING vanilla shop section id, e.g. all:1, forest:2"
+    },
+    {
+     "key": "items",
+     "type": "array",
+     "item": {
+      "type": "string",
+      "source": "items"
+     },
+     "help": "item ids to add (need a price)"
+    }
+   ]
+  },
+  "citizenOverrides": {
+   "label": "CitizenOverrides",
+   "idField": null,
+   "dict": true,
+   "keySource": "citizenTypes",
+   "valueType": "object",
+   "help": "edit EXISTING citizen types by id (citizen:generic, citizen:blacksmith, ...)",
+   "fields": [
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "help": "replace the portrait icon"
+    },
+    {
+     "key": "stats",
+     "type": "dict",
+     "valueType": "float",
+     "keySource": "citizenStats",
+     "help": "merged per-key into the type's DefaultStats"
+    },
+    {
+     "key": "weight",
+     "type": "int",
+     "help": "only meaningful on citizen:generic - its share of the arrival roll (0 = only pack citizens arrive)"
+    }
+   ]
+  },
+  "townBuildings": {
+   "label": "TownBuildings",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "namespaced construction id, e.g. mymod:grand_bakery"
+    },
+    {
+     "key": "base",
+     "type": "string",
+     "source": "townBuildingBases",
+     "help": "required: vanilla BuildingData id to clone (fixes maps/footprint/slots)"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "build-menu name"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language description."
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "help": "default: the base's icon"
+    },
+    {
+     "key": "materials",
+     "type": "dict",
+     "valueType": "int",
+     "keySource": "items",
+     "help": "construction cost, e.g. resource:lumber -> 5; default: the base's"
+    },
+    {
+     "key": "buildProgress",
+     "type": "float",
+     "default": -1,
+     "help": "hammering effort; -1 = the base's"
+    },
+    {
+     "key": "appeal",
+     "type": "float",
+     "default": -1,
+     "help": "decoration cap; -1 = the base's"
+    },
+    {
+     "key": "job",
+     "type": "string",
+     "source": "jobs",
+     "help": "optional: replace the slot job (worker type employed inside); default: the base's"
+    },
+    {
+     "key": "townDefence",
+     "type": "int",
+     "help": "optional town defence contribution; blank = the base's"
+    }
+   ]
+  },
+  "workRecipes": {
+   "label": "WorkRecipes",
+   "idField": "id",
+   "fields": [
+    {
+     "key": "id",
+     "type": "string",
+     "help": "vanilla convention: recipe:mymod:garum_bread"
+    },
+    {
+     "key": "job",
+     "type": "string",
+     "source": "jobs",
+     "help": "required: the job that learns it"
+    },
+    {
+     "key": "level",
+     "type": "int",
+     "default": 1,
+     "help": "job level that unlocks it"
+    },
+    {
+     "key": "output",
+     "type": "string",
+     "source": "items",
+     "help": "required: crafted item id (or a construction resource with resourceOutput)"
+    },
+    {
+     "key": "amount",
+     "type": "int",
+     "default": 1
+    },
+    {
+     "key": "resourceOutput",
+     "type": "bool",
+     "default": false,
+     "help": "true = output is a construction RESOURCE (resource:lumber tier)"
+    },
+    {
+     "key": "ingredients",
+     "type": "dict",
+     "valueType": "int",
+     "keySource": "items",
+     "help": "item -> count, pulled from the building's storage"
+    },
+    {
+     "key": "resources",
+     "type": "dict",
+     "valueType": "int",
+     "help": "construction resource -> count (internal resource storage)"
+    },
+    {
+     "key": "progress",
+     "type": "float",
+     "default": 30,
+     "help": "work effort (bread 30, armor ~60-150)"
+    },
+    {
+     "key": "experience",
+     "type": "float",
+     "default": 3,
+     "help": "job XP per completion"
+    },
+    {
+     "key": "fuel",
+     "type": "bool",
+     "default": false,
+     "help": "needs the building's furnace lit"
+    },
+    {
+     "key": "name",
+     "type": "string",
+     "help": "optional; default: the output item's name"
+    },
+    {
+     "key": "nameLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language name."
+    },
+    {
+     "key": "description",
+     "type": "string"
+    },
+    {
+     "key": "descriptionLocalized",
+     "type": "dict",
+     "valueType": "string",
+     "keySource": "languages",
+     "help": "Per-language description."
+    },
+    {
+     "key": "icon",
+     "type": "string",
+     "source": "icons",
+     "help": "optional; default: the output item's icon"
+    },
+    {
+     "key": "unrepeatable",
+     "type": "bool",
+     "default": false,
+     "help": "can't be set to repeat in the work queue"
+    }
+   ]
+  },
+  "icons": {
+   "label": "Icons",
+   "idField": null,
+   "dict": true,
+   "valueType": "file",
+   "help": "custom icons: icon id -> PNG filename next to the pack"
+  },
+  "strings": {
+   "label": "Strings",
+   "idField": null,
+   "dict": true,
+   "valueType": "string",
+   "help": "advanced: raw localization keys -> text, e.g. cf:flameblade:name -> Flameblade"
+  },
+  "sounds": {
+   "label": "Sounds",
+   "idField": null,
+   "dict": true,
+   "valueType": "file",
+   "help": "raw audio next to the pack (wav/ogg/mp3/flac): key -> file; played as cf:sound:<ns>:<key>"
+  },
+  "playerAnimations": {
+   "label": "PlayerAnimations",
+   "idField": null,
+   "dict": true,
+   "keySource": "animStates",
+   "valueType": "object",
+   "help": "player anim state name -> retime (47 states, see PACKS.md); frameDurationScale 2 = half speed",
+   "fields": [
+    {
+     "key": "frameDurationScale",
+     "type": "float",
+     "default": 1,
+     "help": "must be > 0 and != 1"
+    }
+   ]
+  }
+ },
+ "valueTypes": {
+  "statBonus": {
+   "type": "object",
+   "fields": [
+    {
+     "key": "additive",
+     "type": "float"
+    },
+    {
+     "key": "multiplier",
+     "type": "float"
+    }
+   ]
+  }
+ },
+ "groups": [
+  {
+   "label": "Items & Gear",
+   "sections": [
+    "items",
+    "recipes",
+    "drops"
+   ]
+  },
+  {
+   "label": "Magic & Spells",
+   "sections": [
+    "spells"
+   ]
+  },
+  {
+   "label": "Summons & Creatures",
+   "sections": [
+    "creatures"
+   ]
+  },
+  {
+   "label": "World, Maps & Dungeons",
+   "sections": [
+    "maps",
+    "shops",
+    "shopAdditions",
+    "crops"
+   ]
+  },
+  {
+   "label": "NPCs & Citizens",
+   "sections": [
+    "npcs",
+    "citizens",
+    "citizenOverrides"
+   ]
+  },
+  {
+   "label": "Placeables & Buildings",
+   "sections": [
+    "furniture",
+    "townBuildings",
+    "workRecipes"
+   ]
+  },
+  {
+   "label": "Quests & Progression",
+   "sections": [
+    "classes",
+    "quests",
+    "skills",
+    "favours"
+   ]
+  },
+  {
+   "label": "PvP, Arenas & Events",
+   "sections": [
+    "arenas",
+    "events"
+   ]
+  },
+  {
+   "label": "Visuals, Audio & Animation",
+   "sections": [
+    "palettes",
+    "vfx",
+    "particles",
+    "emitters",
+    "spacs",
+    "playerAnimations",
+    "sounds",
+    "icons"
+   ]
+  },
+  {
+   "label": "Player Looks & Rigs",
+   "sections": [
+    "playerSkins"
+   ]
+  },
+  {
+   "label": "Advanced",
+   "sections": [
+    "strings"
+   ]
+  }
+ ]
+}

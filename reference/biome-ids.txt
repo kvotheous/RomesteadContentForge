@@ -1,0 +1,53 @@
+# Biome ids and biome categories — two DIFFERENT namespaces, don't mix them:
+#
+#   * Prefixed BIOME ids ("biome:plains") = actual map terrain biomes (Shared.BiomeIds
+#     consts + BiomeData registrations in CandideServer). Use these where a field wants
+#     a biome id — e.g. a forge map's biome.
+#   * Bare CATEGORY names ("plains") = BiomeCategoryDataBase (SetupBiomeCategories, 9
+#     entries). Crops (`biomes`), shops (`BiomeCategory`), and work recipes
+# (note: the game's internal work-recipe model can biome-gate recipes; the pack format does not expose this yet)
+#
+# Each biome maps to one category (shown after the arrow, from the vanilla BiomeData
+# list in CandideServer.decompiled.cs). Both lists are COMPLETE for vanilla.
+#
+# == biome ids (28) -> category ==
+biome:beach -> other
+biome:desert -> desert
+biome:desert_edge -> desert
+biome:flat -> flat
+biome:forest -> forest
+biome:forest_autumn -> forest
+biome:forest_deep -> forest
+biome:forest_light -> plains
+biome:ghosttown -> ghost_land
+biome:ghosttown_center -> other
+biome:interior -> interior
+biome:lake -> other
+biome:lake_island -> other
+biome:lake_small -> other
+biome:mountains -> other
+biome:ocean -> other
+biome:plains -> plains
+biome:plains_dry -> plains
+biome:river -> other
+biome:road -> plains
+biome:swamp -> swamp
+biome:test -> other            (dev/test biome)
+biome:volcanic -> other        (note: the volcanic CORE is category "other";
+biome:volcanic_center -> other  only the edge/tendril_volcano are category "volcanic")
+biome:volcanic_edge -> volcanic
+biome:volcanic_tendril -> other
+biome:volcanic_tendril_desert -> desert
+biome:volcanic_tendril_volcano -> volcanic
+# (biome:error also exists as the engine's missing-id fallback — not placeable)
+#
+# == biome categories (9) — the bare names crops/shops/work-recipes use ==
+desert      (Desert)
+flat        (Flat Land)
+forest      (Forest)
+ghost_land  (Ghost Land)
+interior    (Interior)
+other       (Other)
+plains      (Plains)
+swamp       (Swamp)
+volcanic    (Volcanic)

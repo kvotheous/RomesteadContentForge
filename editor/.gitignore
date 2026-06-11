@@ -1,0 +1,5 @@
+# PyInstaller / Python build outputs (per-OS binaries are built by build.py or CI, not committed)
+__pycache__/
+build/
+dist/
+*.spec

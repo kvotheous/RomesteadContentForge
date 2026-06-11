@@ -1,0 +1,392 @@
+# Client creature/prop controller anim-int maps - extracted from Romestead.dll client
+# controllers (EntitySpacAnimationStateMachine State lists + Transition predicates on
+# `State == N` + OnServerSetState / ReceiveEntityAnimationMessage switches).
+#
+# Used by: AI preset anim-int params + forge_creature_anim anim-map. Two channels:
+#   * state int - persistent controller state the server replicates (OnServerSetState;
+#                 the client plays the anim whose transition checks `State == N`).
+#   * anim byte - one-shot animation message (ReceiveEntityAnimationMessage switch).
+# A controller may use either or both. `states:` is the full ordered State[] list the
+# rig's state machine was built with (= valid animation names in that spac).
+#
+# KNOWN-PARTIAL: only mappings readable in the decompile are listed. Controllers whose
+# handlers set fields instead of calling SetState directly (e.g. cyclops, old wolf) are
+# marked. Movement states (idle/walk/run) often also auto-switch on velocity client-side.
+
+WolfController
+  spac: wolf_new_animations
+  states: idle, run, walk
+  state int: 0=idle  1=walk  2=run
+
+AlphaWolfController
+  spac: wolf_new_animations
+  states: idle, walk, run
+  state int: 0=idle  1=walk  2=run
+
+(old wolf rig: TestEntity controller)
+  spac: wolf_animations
+  states: idle, run, walk, charge, attack, howl, diagonals
+  state int: 1=howl
+
+BoarController
+  spac: boar_body_animations + boar_head_animations
+  states: idle, walk, run, attack_to_idle, charge, attack
+  state int: 0=idle  1=walk  2=run  5=attack_to_idle
+  anim byte: 3=charge  4=attack
+
+DeerController
+  spac: deer_female_animations
+  states: idle, run, alert, alert_loop, walk
+  state int: 0=idle  1=walk  2=run  4=alert  5=alert_loop
+
+BearController
+  spac: bear_new_animations
+  states: idle, walk, run, attack, bite
+  state int: 0=idle  1=walk  2=run  3=attack  4=bite
+
+BearCubController
+  spac: bear_cub_new_animations
+  states: idle, walk, run
+  state int: 0=idle  1=walk  2=run
+
+GoatController
+  spac: goat_body_animations + goat_male_head_animations/goat_female_head_animations (per sex)
+  states: idle, walk, run, charge
+  state int: 0=idle  1=walk  2=run  3=charge
+
+BigScorpionController
+  spac: big_scorpion_animations
+  states: idle, walk, walk2, attack_right_pincer, attack_left_pincer, attack_sting, attack_double_pincer
+  state int: 0=idle  1=walk  2=walk2  3=attack_right_pincer  4=attack_left_pincer  5=attack_sting  6=attack_double_pincer
+
+SmallScorpionController
+  spac: small_scorpion_animations
+  states: idle, walk, attack
+  state int: 0=idle  3=attack
+
+CrabController (base of BushCrab/RockCrab/BoneCrab)
+  spac: bushcrab_new_animations (BushCrab) / rockcrab_animations (RockCrab) / 'bone_crab' runtime clone (BoneCrab)
+  states: idle, walk, attack, sneakattack, hidden, hidden_eyes
+  state int: 0=idle  1=walk  2=attack  3=hidden  4=hidden_eyes  5=sneakattack
+  anim byte: 2=attack
+
+ScarabController
+  spac: scarab_animations
+  states: idle, walk, fly, wings
+  state int: 0=idle  1=walk  2=fly  3=wings
+
+SnakeController
+  spac: snake_animations
+  states: idle, slither
+  state int: 0=idle
+
+LizardController
+  spac: lizard_animations
+  states: idle, walk, run
+  state int: 0=idle  1=walk  2=run
+
+FrogController
+  spac: frog_new_animations
+  states: idle, croak, jump, tongue
+  state int: 0=idle  3=tongue  4=croak
+
+TurtleController
+  spac: new_turtle_animations
+  states: idle, walk, shell, withdraw, emerge
+  state int: 0=idle  1=walk  2=withdraw  3=shell  4=emerge
+
+RatController
+  spac: rat_animations
+  states: idle, run, attack, land, tail_wag
+  state int: 0=idle  1=tail_wag  4=attack  5=land
+
+MouseController
+  spac: mouse_new_animations
+  states: idle, idle_tail, run
+  state int: 0=idle  1=idle_tail
+
+RabbitController
+  spac: rabbit_new_animations
+  states: idle, run
+  state int: 0=idle
+
+SquirrelController
+  spac: squirrel_new_animations
+  states: idle, run
+  state int: 0=idle
+
+BirdController
+  spac: bird_animations
+  states: idle, hop, fly, peck
+  state int: 0=idle  1=hop  2=fly  3=peck
+
+VultureController
+  spac: vulture_animations
+  states: idle, fly, glide, attack, eat
+  state int: 0=idle  1=fly  2=glide  4=eat
+
+FallenController
+  spac: fallen
+  states: idle, walk, attack
+  state int: 0=idle  1=walk  2=attack
+
+FallenSwordController
+  spac: fallen_sword_animations
+  states: idle, walk, attack
+  state int: 0=idle  1=walk  2=attack
+
+FallenSpearController
+  spac: fallen_spear_animations
+  states: idle, walk, throw
+  state int: 0=idle  1=walk  2=throw
+
+FallenCrawlerController
+  spac: fallen_crawler_animations
+  states: idle, crawl, attack
+  state int: 0=idle  1=crawl  2=attack
+
+FallenCenturionController
+  spac: fallen_elite
+  states: idle, walk, attack
+  note: state-int mapping not readable in decompile (states listed only)
+
+FallenBloatController
+  spac: fallen_explosive
+  states: idle, walk, attack, explode
+  state int: 0=idle  1=walk  2=attack  3=explode
+
+SkeletonWarriorController
+  spac: skeleton_animations / skeleton_ash_animations (ash variant)
+  states: idle, walk, attack, attack_windup, attack_swing
+  state int: 0=idle  1=walk  2=attack
+  anim byte: 0=idle  2=attack  4=attack_windup  5=attack_swing
+  server state (explicit): 1=walk
+
+SkeletonArcherController
+  spac: skeleton_ranger_animations / skeleton_ranger_ash_animations (ash variant)
+  states: idle, walk, grab_arrow, load_arrow, draw_bowstring, shoot_arrow, shoot_arrow_blend
+  state int: 0=idle  1=walk  2=grab_arrow  3=load_arrow  4=draw_bowstring  5=shoot_arrow
+
+SatyrBarbarianController
+  spac: satyr_bandit_animations
+  states: idle, walk, attack, die
+  state int: 0=idle  1=walk  2=attack
+  anim byte: 3=die
+
+SatyrBruteController
+  spac: satyr_brute
+  states: idle, walk, punch, die
+  state int: 0=idle  1=walk  2=punch
+  anim byte: 3=die
+
+SatyrRangerController
+  spac: satyr_ranger_animations
+  states: idle, walk, aim, attack, die
+  state int: 0=idle  1=walk  2=aim  3=attack
+  anim byte: 4=die
+
+SatyrTinyController
+  spac: satyr_tiny_body_animations + satyr_tiny_head_animations
+  states: idle, run, attack
+  state int: 0=idle  3=attack
+
+MedusaController
+  spac: medusa_new_animations
+  states: idle, slither, petrify, whip, summon
+  state int: 0=idle  1=slither  2=petrify  3=whip  4=summon
+
+Magus*Controller (Ceres/Diana/Mars/Mercury/Minerva/Orcus/Venus/Vulcan - all identical)
+  spac: magus_animations (palette row per god)
+  states: idle, walk, channel, hit, cast_up, cast_forward, death
+  state int: 0=idle  3=channel  4=hit  5=cast_up  6=cast_forward  7=death
+  anim byte: 0=idle  4=hit  7=death
+
+WraithController
+  spac: wraith_new_animations + wraith_lower_animations
+  states: hover, idle_neutral, idle_aggro, attack1, attack2
+  state int: 0=idle_neutral  1=idle_aggro  2=attack1  3=attack2
+
+GhostlyWomanController
+  spac: ghostly_woman_animations
+  states: idle, attack
+  state int: 0=idle  1=attack
+
+JumpingSkullController
+  spac: skull_animations
+  states: idle, jump, bite
+  state int: 0=idle  1=jump  2=bite
+
+PotManController
+  spac: potman_new_animations
+  states: idle, run, walk, pickup, throw, idle_still
+  state int: 0=idle  1=walk  2=run  3=throw  4=pickup  5=idle_still
+
+AshManController
+  spac: potman_new_animations (recolor)
+  states: idle, walk, run
+  state int: 0=idle  1=walk
+
+FireElementalController
+  spac: fire_elemental_animations
+  states: idle, melee_windup, melee, ranged
+  state int: 0=idle  1=melee_windup  2=melee  3=ranged
+
+LavaSpitterController
+  spac: lava_spitter_animations
+  states: hidden, idle, emerge, submerge, attack
+  state int: 0=idle  1=hidden  2=emerge  3=submerge  4=attack
+
+LavaConstructController
+  spac: lava_construct_lower_animations + lava_construct_upper_animations
+  states: dormant, wake_up, idle, attack, walk, start_spin, spin, stop_spin, aoe_start, aoe_windup, aoe_attack
+  state int: 0=dormant  1=wake_up  2=idle  5=attack  6=start_spin  7=spin  8=stop_spin  9=aoe_start  10=aoe_windup  11=aoe_attack
+
+EngineerController
+  spac: engineer_animations
+  states: idle, walk, attack
+  state int: 0=idle  1=walk  2=attack
+
+MasterEngineerController
+  spac: engineer_animations ('master_engineer' runtime clone)
+  states: idle, walk, attack
+  state int: 0=idle  1=walk  2=attack
+  anim byte: 3=attack
+
+PhoenixController (mini phoenix)
+  spac: new_phoenix_animations
+  states: fly, attack
+  state int: 1=fly  3=attack
+
+CitizenControllerBase (citizens + humanoid NPCs; the player rig)
+  spac: player_new_animations
+  states: idle, run, stopping, attack1, attack2, attack3, lifting, lifting_running, lifting_walking, lifting_idle, bow_pull, bow_hold, bow_shoot, shield_ready, shield_hold, shield_walk, dash, spear, unarmed, construction_ready, construction_performing, chopping_ready, chopping_performing, running_cart, spear_shield, attack_idle, bow_walk, hammer_ready, hammer_hold, hammer_walk, hammer_attack1, hammer_attack2, dagger_attack, shield_ready_spear, shield_hold_spear, shield_walk_spear, spear_walk, sitting, crossbow, dash2, walking, javelin_hold, javelin_throw, javelin_walk
+  state int: 0=idle/stopping  1=run  3=attack1  4=attack2  5=attack3  6=lifting  7=lifting_running  8=lifting_walking  9=lifting_idle  10=bow_pull  11=bow_hold  12=bow_shoot  13=shield_ready  14=shield_hold  15=shield_walk  16=dash  17=spear  18=unarmed  19=construction_ready  20=construction_performing  21=chopping_ready  22=chopping_performing  23=running_cart  24=spear_shield  25=attack_idle  26=bow_walk  27=hammer_ready  28=hammer_hold  29=hammer_walk  30=hammer_attack1  31=hammer_attack2  32=dagger_attack  33=shield_ready_spear  34=shield_hold_spear  35=shield_walk_spear  36=spear_walk  37=sitting  38=crossbow  39=dash2  40=walking  41=javelin_hold  42=javelin_throw  43=javelin_walk
+
+CyclopsBodyController (boss)
+  spac: cyclops_animations
+  states: body_idle, stun, prepare_squeeze, squeeze, shoot_laser, recover_laser, recover, hidden_body, hidden_shake, emerge, hidden, in_hole, hide, emerge_2, in_hole_shout, death, arm_idle, hidden_arm, raise_arm, slam_arm
+  note: state-int mapping not readable in decompile (states listed only)
+
+PyzifaxController (satyr boss)
+  spac: satyr_boss_animations
+  states: attack_windup, attack, attack_recover, grab, idle, point, spin_start, spin, spin_end, throw_windup, throw, walk, jump, jump_land, laugh, dizzy
+  state int: 0=attack_windup  1=attack  2=attack_recover  3=grab  4=idle  5=point  6=spin_start  7=spin  8=spin_end  9=throw_windup  10=throw  11=walk  12=jump  13=jump_land  14=laugh  15=dizzy
+
+PhoenixBossController
+  spac: boss/phoenix/* (4 spacs, phase 1+2)
+  states: idle, peck_charge, peck, fire_charge, fire, escape, egg_crack, egg, walk, fly, flap_charge, flap, fly_charge, charge_fire, fly_end, death
+  state int: 0=idle  2=peck  4=fly_charge  5=fly  6=idle  7=flap_charge  11=egg  12=egg_crack  13=idle  14=charge_fire  15=flap_charge  17=walk  19=escape  20=fly_end
+
+MinervasOwlBossController
+  spac: minerva/Minerva_animations + minerva/minerva_head_animations
+  states: idle, peck_charge, peck, lightning_charge, lightning, blur, walk, fly, flap_charge, flap, fly_charge, charge_lightning, fly_end, death
+  state int: 0=idle  1=peck_charge  2=peck  4=fly_charge  5=fly  6=idle  8=flap  11=blur  13=charge_lightning  14=flap_charge/lightning  16=walk  19=fly_end
+
+TalosChainCannonController (boss device)
+  spac: boss/talos/chain_cannon
+  states: idle, charging, shoot
+  state int: 0=shoot  1=charging
+
+TalosWeakSpotController (boss device)
+  spac: boss/talos/steam_vent
+  states: inactive, erupt, erupt_loop, erupt_to_inactive
+  note: state-int mapping not readable (states listed only)
+
+TargetDummyController
+  spac: target_dummy
+  states: idle, hit, critical
+  state int: 1=hit  2=critical
+
+LeverController
+  spac: lever_animations
+  states: on, off, flip_on, flip_off, flip_on_retract, flip_off_retract, off_retracted, on_retracted, on_retracted_extend_flip_off
+  state int: 0=off/flip_off/on_retracted_extend_flip_off  1=on/flip_on  2=flip_on_retract/on_retracted  3=flip_off_retract/off_retracted
+  server state ints observed but mapping unreadable: 0, 1, 2, 3
+
+GateSwitchLeverController
+  spac: lever_animations
+  states: on, off, flip_on, flip_off, flip_on_retract, flip_off_retract, off_retracted, on_retracted, on_missing_rod, off_missing_rod
+  state int: 0=off/flip_off  1=on/flip_on  2=flip_on_retract/on_retracted  3=flip_off_retract/off_retracted  5=on_missing_rod  6=off_missing_rod
+  server state ints observed but mapping unreadable: 0, 1, 2, 3, 5
+
+ChestController
+  spac: chest_animations
+  states: closed, opening_glowing, open_glowing, closing_glowing, opening, open, closing
+  state int: 2=open_glowing  4=open
+
+PlaceableChestController
+  spac: chest_bulky_animations
+  states: closed, opening, open, closing
+  note: state-int mapping not readable (states listed only)
+
+CauldronController
+  spac: cauldron_animations
+  states: active
+
+ExplosivePotController
+  spac: exploding_pot
+  states: inactive, active, flashing
+  state int: 0=inactive  1=active  2=flashing
+
+IncendiaryPotController
+  spac: incendiary_pot
+  states: inactive, active
+  state int: 0=inactive  1=active
+
+LightningPotController
+  spac: lightning_pot
+  states: inactive, active
+  state int: 0=inactive  1=active
+
+PoisonPotController
+  spac: poison_pot
+  states: inactive, active
+  state int: 0=inactive  1=active
+
+SpikeTrapController
+  spac: spike_trap
+  states: inactive, opening, active, closing
+  state int: 0=closing  1=opening
+  server state ints observed but mapping unreadable: 0, 1
+
+ActivatedSpikeTrapController
+  spac: spike_trap
+  states: inactive, opening, active, closing
+  note: state-int mapping not readable (states listed only)
+
+CoalTrapController
+  spac: coal_trap
+  states: inactive, active
+  state int: 0=inactive  1=active
+  server state ints observed but mapping unreadable: 0, 1
+
+FireStatueController
+  spac: fire_statue_animations
+  states: inactive, active
+  state int: 0=inactive  1=active
+
+LaserStatueController
+  spac: laser_statue_animations
+  states: idle_passive, idle_aggressive, open_eyes, close_eyes, open_mouth, close_mouth, mouth_stay_open, attack
+  state int: 0=idle_passive  1=idle_aggressive  2=open_eyes  3=close_eyes  4=open_mouth  5=close_mouth  8=attack
+
+BulletHellTrapController
+  spac: laser_statue_animations
+  states: idle_passive, idle_aggressive, open_eyes, close_eyes, open_mouth, close_mouth, mouth_stay_open, attack
+  state int: 0=idle_passive  1=idle_aggressive  2=open_eyes  3=close_eyes  4=open_mouth  5=close_mouth  6=mouth_stay_open  7=attack
+
+SulphurVentController
+  spac: environment/sulphur_vent / environment/sulphur_vent_large
+  states: inactive, erupt, erupt_loop, erupt_to_inactive
+  state int: 0=erupt_to_inactive/inactive  1=erupt/erupt_loop
+
+AutoBallistaControllerBase
+  spac: auto_ballista_animations
+  states: idle_empty, idle_loaded, shoot, build_start, build_mid
+  state int: 0=idle_empty  1=shoot  2=idle_loaded  3=build_start  4=build_mid
+  server state ints observed but mapping unreadable: 1, 2
+
+OldWolfController / OldAlphaWolfController
+  spac: wolf_new_animations
+  states: idle, run, walk
+  server state ints observed but mapping unreadable: 0, 1, 5, 6, 8

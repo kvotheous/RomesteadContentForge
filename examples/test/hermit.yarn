@@ -1,0 +1,27 @@
+title: Start
+---
+<<Actor cftest_hermit>>
+cftest_hermit: Ah... a visitor. Few find their way into this room. #line:hermit_01
+cftest_hermit: This chamber was made by the Content Forge - as was I. #line:hermit_02
+-> Who are you? #line:hermit_opt_who
+    cftest_hermit: I am the Test Hermit. I exist to prove that pack authors can write dialogue in plain text. #line:hermit_03
+    cftest_hermit: A .yarn file beside the pack, compiled when the game loads. No tools, no editors. #line:hermit_04
+-> I could use a blessing. (heals you) #line:hermit_opt_bless
+    cftest_hermit: Hold still. #line:hermit_05
+    <<ForgeHeal 25>>
+    cftest_hermit: There. The warmth will linger a few moments. #line:hermit_06
+-> Have you anything to trade? (give 2 coal, get a relic) #line:hermit_opt_trade
+    <<if GetInventoryItemAmount("material:coal") >= 2>>
+        cftest_hermit: Coal! Splendid. Take this old relic - I have no use for it. #line:hermit_07
+        <<ForgeTakeItem "material:coal" 2>>
+        <<ForgeGiveItem "cftest:t01_relic" 1>>
+    <<else>>
+        cftest_hermit: Bring me two lumps of coal and we shall talk. #line:hermit_08
+    <<endif>>
+-> I was sent to seek you. <<if GetInventoryItemAmount("cftest:hermit_token") == 0>> #line:hermit_opt_seek
+    cftest_hermit: Then your search ends here. Take my blessing as proof. #line:hermit_11
+    <<ForgeGiveItem "cftest:hermit_token" 1>>
+-> Farewell. #line:hermit_opt_bye
+    cftest_hermit: May your packs always validate. #line:hermit_09
+cftest_hermit: Safe travels, wanderer. #line:hermit_10
+===

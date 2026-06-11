@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>cfvalidate</AssemblyName>
+    <RootNamespace>RomesteadContentForge.Validator</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <!-- DTO fields are populated by the JSON deserializer via reflection. -->
+    <NoWarn>CS0649</NoWarn>
+  </PropertyGroup>
+
+  <!-- Reuse the exact pack DTOs the mod uses, so the validator and the loader never drift. -->
+  <ItemGroup>
+    <Compile Include="..\ContentPack.cs" Link="ContentPack.cs" />
+  </ItemGroup>
+
+</Project>
