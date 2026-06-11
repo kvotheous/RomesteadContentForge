@@ -18,7 +18,7 @@ Content Forge is a modding framework: drop a `.json` "content pack" in a folder 
 - **Custom held looks** — reuse a vanilla model, **recolor** one with a custom **palette** (dye), or paint your **own held sprite sheet**.
 - **Swing trails** — recolor the slash, replace its **shape** with your own art, or **hide** it (for staves).
 - **Custom VFX** — your own sprite-animation effects (hit flashes, bursts, auras), or reskin a vanilla effect.
-- **Custom sounds** — reuse the game's audio, or load your own **FMOD bank** for new `event:/…` sounds.
+- **Custom sounds** — reuse the game's audio, or just ship your own **wav/ogg/mp3/flac** files (FMOD banks also supported for advanced setups).
 - **Loot** — add your items to **mob/chest drop tables** with a % chance — or straight onto a **creature** (wildlife included: bears and wolves can finally drop your items).
 - **Summons (necromancer)** — a spell can spawn creatures that **fight for you** (skeletons, skulls, wolves…), with a per-cast **count** and a **max-active cap** (oldest despawns). Set each summon to **guardian** (stays put) or **companion** (blinks to your side when you wander off).
 - **Playable classes** — add a **profession to character creation** (skill head-start + starting gear/clothes/favour). The bundled **Necromancer** example ships a class, a 2-skeleton book, a staff, a robe and a recipe.
@@ -34,6 +34,7 @@ Content Forge is a modding framework: drop a `.json` "content pack" in a folder 
 - **Player skins** — new **hair styles in character creation**, reskins of vanilla character parts, and brand-new **worn armor looks** your items can wear (dyeable via palettes).
 - **Custom skills** — real **skills-screen entries** (icon, localized name, levels 0–100, favour on level-up) trained by your weapons and spells.
 - **Favour-tree nodes** — new nodes in the gods' favour tree (stat bonuses / auras / recipe unlocks), **uninstall-safe** (removing a pack auto-refunds the point — never blocks login).
+- **Forge tab** — a "Forge" toggle in the Skills & Favours window lists installed packs, pack skills and learned pack favours.
 - **Custom favour screen** — packs can ship their **own fullscreen favour tree** (vanilla look: draggable grid, connection lines, click to unlock) behind a "Pack Favours" button in the Skills & Favours window.
 - **Announcement banners** — event/arena/mod messages as **big red text top-center** (or the classic toast) — style, color, position, duration configurable in `RomesteadContentForge.cfg`.
 - **Drop-in sounds** — put a `.wav`/`.ogg` next to your pack and use it for spell casts, shrines, portals. No audio tools needed.
