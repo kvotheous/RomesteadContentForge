@@ -3235,6 +3235,44 @@
      "type": "int",
      "default": 300,
      "help": "race: abort if nobody finishes in time"
+    },
+    {
+     "key": "wolves",
+     "type": "int",
+     "default": 0,
+     "help": "werewolf: wolf count; 0 = auto (1 / 2 at 7+ / 3 at 10+ players)"
+    },
+    {
+     "key": "seer",
+     "type": "bool",
+     "default": true,
+     "help": "werewolf: include the Seer role (auto-skipped under 5 players)"
+    },
+    {
+     "key": "nightSeconds",
+     "type": "int",
+     "default": 45,
+     "help": "werewolf: night phase length"
+    },
+    {
+     "key": "daySeconds",
+     "type": "int",
+     "default": 120,
+     "help": "werewolf: day discussion length"
+    },
+    {
+     "key": "voteSeconds",
+     "type": "int",
+     "default": 30,
+     "help": "werewolf: vote window length"
+    },
+    {
+     "key": "ghostPen",
+     "type": "array",
+     "item": {
+      "type": "float"
+     },
+     "help": "werewolf: REQUIRED [x,y] map px - walled spectator pen"
     }
    ]
   },

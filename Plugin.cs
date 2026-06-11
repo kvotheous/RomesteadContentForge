@@ -134,6 +134,10 @@ public class Plugin : BasePlugin
         h.PatchAll(typeof(PvpExactKillPatch));
         h.PatchAll(typeof(HandshakeServerPatch));
         h.PatchAll(typeof(HandshakeClientPatch));
+        h.PatchAll(typeof(WerewolfRespawnPatch));     // Werewolf: ghost respawn -> spectator pen
+        h.PatchAll(typeof(WerewolfGhostChatPatch));   // Werewolf: dead players chat only with the dead
+        h.PatchAll(typeof(WerewolfClientHookPatch));  // Werewolf: client cf-ww-* subscriptions on join
+        h.PatchAll(typeof(WerewolfClientPumpPatch));  // Werewolf: client inbox pump (UI thread)
         h.PatchAll(typeof(AttackTuningPatch));
         h.PatchAll(typeof(RawSound3DPatch));
         h.PatchAll(typeof(RawSound2DPatch));
@@ -462,6 +466,7 @@ internal static class CompanionPatch
         EventsFeature.Tick(dt);   // arena matches share the server tick (internally guarded; no-op with 0 arenas)
         EventsPlusFeature.Tick(dt);   // wave/boss/hunt/raid events share the server tick (no-op with 0 events)
         EventsCompetitiveFeature.Tick(dt);  // teamBattle/koth/race share the server tick (no-op with 0 events)
+        WerewolfFeature.Tick(dt);  // werewolf social-deduction matches share the server tick (no-op with 0 events)
         var set = ContentLoader.CompanionSummons;
         if (set.Count == 0) return;
         try
@@ -1253,7 +1258,7 @@ internal static class ContentLoader
         if (pack.Events != null)
             foreach (EventDef ev in pack.Events)
                 if (ev != null && !string.IsNullOrWhiteSpace(ev.Id) && !string.IsNullOrWhiteSpace(ev.Type))
-                { NsCheck(ev.Id, "event"); if (!EventsCompetitiveFeature.RegisterEvent(ev)) EventsPlusFeature.RegisterEvent(ev); }
+                { NsCheck(ev.Id, "event"); if (!WerewolfFeature.RegisterEvent(ev) && !EventsCompetitiveFeature.RegisterEvent(ev)) EventsPlusFeature.RegisterEvent(ev); }
                 else Plugin.Log.LogWarning($"[{name}] event skipped (needs id + type).");
 
         if (pack.Shops != null)

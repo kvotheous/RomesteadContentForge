@@ -1947,6 +1947,23 @@
    "timeLimitSeconds": 120,
    "minPlayers": 1,
    "reward": "cftest:t57_trophy"
+  },
+  {
+   "id": "cftest:t91_werewolf",
+   "name": "T91 Versipellis",
+   "type": "werewolf",
+   "map": "cftest:t46_arena",
+   "minPlayers": 2,
+   "wolves": 1,
+   "seer": false,
+   "nightSeconds": 30,
+   "daySeconds": 45,
+   "voteSeconds": 20,
+   "ghostPen": [
+    32,
+    32
+   ],
+   "reward": "cftest:t57_trophy"
   }
  ],
  "townBuildings": [

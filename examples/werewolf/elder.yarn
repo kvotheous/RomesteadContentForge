@@ -1,0 +1,15 @@
+title: Start
+---
+<<Actor ww_elder>>
+ww_elder: You arrive at a bad hour, stranger. The moon is nearly full. #line:elder_01
+ww_elder: One of us is not one of us. By dawn, somebody will be missing. #line:elder_02
+-> What do you mean? #line:elder_opt_what
+    ww_elder: A versipellis - a skin-changer. It wears a neighbour's face by day and sheds it by night. #line:elder_03
+    ww_elder: Lock your doors when the howling starts. Trust the quiet ones least. #line:elder_04
+-> How do we stop it? #line:elder_opt_stop
+    ww_elder: Watch. Listen. When the sun rises we gather in the plaza and vote. #line:elder_05
+    ww_elder: Pray we choose the wolf, and not another poor shepherd. #line:elder_06
+-> I'm not afraid. #line:elder_opt_brave
+    ww_elder: The last man who said that is penned up behind the north wall, watching us through the stones. #line:elder_07
+ww_elder: Keep a torch lit, stranger. And lock your doors. #line:elder_08
+===

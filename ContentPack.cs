@@ -909,6 +909,13 @@ internal sealed class EventDef
     public List<float[]> Checkpoints;       // race: ordered [x,y] checkpoints in map px
     public float CheckpointRadius = 40f;    // race: "passed" within this many px
     public int TimeLimitSeconds = 300;      // race: abort if nobody finishes in time
+    // Werewolf (social deduction — see Werewolf.cs):
+    public int Wolves;                      // werewolf: wolf count; 0 = auto by player count (1 / 2 at 7+ / 3 at 10+)
+    public bool Seer = true;                // werewolf: include the Seer role (auto-skipped under 5 players)
+    public int NightSeconds = 45;           // werewolf: night phase length
+    public int DaySeconds = 120;            // werewolf: day discussion length
+    public int VoteSeconds = 30;            // werewolf: vote window length
+    public float[] GhostPen;                // werewolf: REQUIRED [x,y] map px — the walled spectator pen for the dead
 }
 
 internal sealed class WaveDef

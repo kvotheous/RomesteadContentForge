@@ -527,7 +527,7 @@ def validate_pack_data(pack, d):
         if rw and rw not in item_ids:
             warn(f"arena '{aid}': winnerReward '{rw}' is not an item in this pack (ok if vanilla/other-pack).")
 
-    EVENT_TYPES = {"wavedefense", "bossrush", "huntcontest", "scheduledraid", "teambattle", "koth", "race"}
+    EVENT_TYPES = {"wavedefense", "bossrush", "huntcontest", "scheduledraid", "teambattle", "koth", "race", "werewolf"}
     for ev in (pack.get("events") or []):
         if not isinstance(ev, dict):
             continue
@@ -540,7 +540,7 @@ def validate_pack_data(pack, d):
             err(f"event '{evid}' has no 'type' (waveDefense/bossRush/huntContest/scheduledRaid/teamBattle/koth/race).")
         elif et not in EVENT_TYPES:
             err(f"event '{evid}': unknown type '{ev.get('type')}'.")
-        if et in ("wavedefense", "bossrush", "teambattle", "koth", "race"):
+        if et in ("wavedefense", "bossrush", "teambattle", "koth", "race", "werewolf"):
             if not ev.get("map"):
                 err(f"event '{evid}': type '{ev.get('type')}' needs a 'map' (a map in this pack).")
             elif ev["map"] not in pack_map_ids:
@@ -553,6 +553,12 @@ def validate_pack_data(pack, d):
             err(f"event '{evid}': scheduledRaid needs 'raidData' (e.g. raid:rats).")
         if et == "koth" and (not isinstance(ev.get("point"), list) or len(ev.get("point") or []) < 2):
             err(f"event '{evid}': koth needs 'point' [x, y] (the hill center in map px).")
+        if et == "werewolf":
+            gp = ev.get("ghostPen")
+            if not isinstance(gp, list) or len(gp) < 2:
+                err(f"event '{evid}': werewolf needs 'ghostPen' [x, y] (the walled spectator pen in map px).")
+            if (ev.get("minPlayers") or 1) < 2:
+                warn(f"event '{evid}': werewolf with minPlayers < 2 can never produce a real match (4+ recommended; 2 = debug).")
         if et == "race":
             cps = ev.get("checkpoints")
             if not isinstance(cps, list) or len(cps) < 2:
