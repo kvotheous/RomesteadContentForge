@@ -543,6 +543,18 @@ internal static class CompanionPatch
                 // inflated Z (UpdateFloorHeight seeds its query with current Z), so it never self-heals.
                 var to = player.Position + new Vector3(MathF.Cos(ang) * PlaceDist, MathF.Sin(ang) * PlaceDist, 0f);
                 to.Z = 0f;
+                // Don't blink onto a BlockMovement tile (ruins/walls): many "walls" (StructureType.Ruin)
+                // have NO physical collision at all — vanilla creatures stay out of them purely because
+                // the A* refuses BlockMovement tiles (the vanilla wander goal-picker test, cs2:124023).
+                // A blink that lands inside lets the companion roam "through walls". Fall back beside you.
+                try
+                {
+                    var (tx, ty) = WorldTileHelper.GetTilePosition(to.X, to.Y);
+                    if (CandideServer.Helpers.ServerWorldTileHelper.TryGetWorldTile(world, tx, ty, out Shared.Models.WorldTile blinkTile)
+                        && TileDataBase.Structures[(uint)blinkTile.Structure].Flags.HasFlags(StructureTileFlags.BlockMovement))
+                        to = new Vector3(player.Position.X, player.Position.Y, 0f);
+                }
+                catch { }
                 me.Velocity = Vector3.Zero;
                 EntitySController.UpdateEntityPosition(comps[i], to);
                 me.System.UpdateFloorHeight(me.Eid);                  // re-ground at the destination
