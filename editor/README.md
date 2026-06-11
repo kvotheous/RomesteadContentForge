@@ -20,7 +20,7 @@ same editor, packaged from this folder via `build.py` (see below).
   World & Maps, NPCs & Citizens, Placeables & Buildings, Quests & Progression, PvP & Events, Visuals & Audio,
   Player Looks, Advanced). **Every** `ContentPack.cs` section has a form — including `sounds`, `icons`,
   `strings`, `shopAdditions`, `citizenOverrides`, `playerAnimations`, `townBuildings`, `workRecipes`,
-  from-scratch `spacs` (with the `animations` dict), and the EventsPlus2 event types (teamBattle / koth / race).
+  from-scratch `spacs` (with the `animations` dict), and the competitive event types (teamBattle / koth / race).
   Packs that use the `placeables` or `structures` alias keys open in the same Placeables section.
 - **Middle** = entries in that section (**+ Add** / **Remove**).
 - **Right** = the form for the selected entry — section title on top, every field from the manifest, with:

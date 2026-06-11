@@ -20,7 +20,7 @@ using System.Text.Json;
 namespace RomesteadContentForge;
 
 // ---------------------------------------------------------------------------------------------------------
-// Fixes round 2 — three independent gap-closers:
+// Creature gap-closers — three independent fixes:
 //
 // 1) SUMMON KILL ATTRIBUTION (RESEARCH.md §9): a player's summon landing the killing blow read "not a
 //    player" in PvpExactKillPatch (the summon entity is the DamageResult source; vanilla carries no owner).
@@ -46,7 +46,7 @@ namespace RomesteadContentForge;
 //    carries Direction to clients, and the teleport only happens when no enemy is near (idle AI, so nothing
 //    immediately overwrites it).
 // ---------------------------------------------------------------------------------------------------------
-internal static class Fixes2
+internal static class CreatureFixes
 {
     // ---- FIX 1: summon owner resolution (consumed by PvpExactKillPatch in Pvp.cs) ----
 
@@ -222,7 +222,7 @@ internal static class CreatureDropsPatch
     [HarmonyPatch(typeof(ServerEntityDataManager), nameof(ServerEntityDataManager.LoadDoodadDatabase))]
     private static void Postfix()
     {
-        try { Fixes2.ApplyCreatureDrops(); }
+        try { CreatureFixes.ApplyCreatureDrops(); }
         catch (Exception e) { Plugin.Log.LogWarning($"Creature drop inject failed: {e.Message}"); }
     }
 }

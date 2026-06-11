@@ -901,7 +901,7 @@ internal sealed class EventDef
     public int MinPlayers = 1;          // players needed (in the map's world for waves/boss; online for hunt/raid)
     public bool AnnounceWaves = true;   // chat lines per wave/boss
     public int CooldownSeconds = 300;   // huntContest without a schedule: pause between contests
-    // EventsPlus2 (teamBattle / koth / race — see EventsPlus2.cs):
+    // EventsCompetitive (teamBattle / koth / race — see EventsCompetitive.cs):
     public int KillsToWin = 10;             // teamBattle: team kills needed to win
     public float[] Point;                   // koth: hill center [x,y] in map px (same space as doodads)
     public float HillRadius = 80f;          // koth: hill radius in px

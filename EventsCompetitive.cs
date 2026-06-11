@@ -32,13 +32,13 @@ namespace RomesteadContentForge;
 //                (per-player progress from position polling EVERY tick, so sprinting can't skip one).
 //                First through the last checkpoint wins + reward; timeLimitSeconds (300) aborts the race.
 //
-// Scheduling: EventsPlus2Feature.Tick(dt) chains after EventsPlusFeature.Tick in CompanionPatch's existing
+// Scheduling: EventsCompetitiveFeature.Tick(dt) chains after EventsPlusFeature.Tick in CompanionPatch's existing
 // EntityServerSystem.Update postfix — no extra per-tick patch, and NO Harmony patch of its own at all
 // (team kills ride the PvpFeature.PlayerKilledInPvp event; koth/race are pure position polling).
 // State machine, reload-abort safety (server empties -> everything back to Idle), world resolution
 // (DungeonServerManager.GetDungeonRoomFromWorldId) and reward path (TryAddItemAmounts) all mirror
 // EventsPlusFeature; runtime state is keyed by the int peer/player id (what the damage gate holds).
-internal static class EventsPlus2Feature
+internal static class EventsCompetitiveFeature
 {
     private enum EvType { TeamBattle, Koth, Race }
     private enum EvState { Idle, Running, Cooldown }
@@ -167,7 +167,7 @@ internal static class EventsPlus2Feature
             _scanTimer = ScanInterval;
             Scan();
         }
-        catch (Exception e) { Plugin.Log.LogWarning($"EventsPlus2 tick failed: {e.Message}"); }
+        catch (Exception e) { Plugin.Log.LogWarning($"EventsCompetitive tick failed: {e.Message}"); }
     }
 
     // ---- once-per-second state machine ----
@@ -295,7 +295,7 @@ internal static class EventsPlus2Feature
                 return;   // one battle per world
             }
         }
-        catch (Exception e) { Plugin.Log.LogWarning($"EventsPlus2 kill handling failed: {e.Message}"); }
+        catch (Exception e) { Plugin.Log.LogWarning($"EventsCompetitive kill handling failed: {e.Message}"); }
     }
 
     private static void EndTeamBattle(EventRuntime rt, int winTeam, string reason)

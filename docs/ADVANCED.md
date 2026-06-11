@@ -37,7 +37,7 @@ which is why Content Forge can swap them per creature:
   animation state machine from data (`spac` + `anim-map`), removing the "same family only" rule.
 - Addon DLL custom AI: subclass `ServerBehaviorMachineController`, override `CreateStateMachine()` (the
   game's behavior-tree pieces — wander/chase/flee/cast — are public), register via the controller map.
-  CreatureAi.cs + CreatureAi2.cs are the worked examples: eight complete presets built exactly this way.
+  CreatureAi.cs + CreatureAiPresets.cs are the worked examples: eight complete presets built exactly this way.
 
 Save/co-op: saves store only the creature's BaseId (never controller types); the AI runs host-only;
 clients need the pack for the body. Removing the mod = the creature is absent from old saves (the same

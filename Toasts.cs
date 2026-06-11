@@ -52,7 +52,7 @@ internal static class ChatToastPatch
     // Exact sender strings used by our broadcasters, mapped to short toast titles:
     //   Events.cs        Broadcast(): sender "Arena"
     //   EventsPlus.cs    Broadcast(): sender "Content Forge Events"
-    //   EventsPlus2.cs   Broadcast(): sender "Content Forge Events"
+    //   EventsCompetitive.cs   Broadcast(): sender "Content Forge Events"
     //   ModHandshake.cs  Broadcast(): sender "Content Forge"
     // All are sent as ChatMessageType.WorldEvent; matching the sender alone is sufficient (vanilla
     // never uses these names) and keeps working if a future sender uses another message type.

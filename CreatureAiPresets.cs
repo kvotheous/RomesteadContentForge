@@ -63,7 +63,7 @@ namespace RomesteadContentForge;
 // SMBuilder capacity args — one transition too many is an IndexOutOfRangeException at build time.
 // ---------------------------------------------------------------------------------------------------------
 
-internal static class CreatureAi2Feature
+internal static class CreatureAiPresetsFeature
 {
     // pre-normalized names (lowercase, no "server"/"controller" affixes) -> server controller types.
     internal static readonly Dictionary<string, Type> ServerAiControllers = new()
@@ -90,13 +90,13 @@ internal static class CreatureAi2Feature
 }
 
 // Same chokepoint as CreatureAiControllerMapPatch: right after vanilla builds the SERVER controller map.
-internal static class CreatureAi2ControllerMapPatch
+internal static class CreatureAiPresetsControllerMapPatch
 {
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ServerEntityControllerLoader), nameof(ServerEntityControllerLoader.Initialize))]
     private static void Postfix()
     {
-        try { CreatureAi2Feature.Inject(); }
+        try { CreatureAiPresetsFeature.Inject(); }
         catch (Exception e) { Plugin.Log.LogWarning($"Creature-AI-2 controller-map inject failed: {e.Message}"); }
     }
 }

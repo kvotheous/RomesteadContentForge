@@ -227,7 +227,7 @@ internal static class PvpDamageGatePatch
                     return false;
                 // teamBattle: swallow same-team damage server-side (attacker's client still shows a
                 // predicted hit that never applies/rebroadcasts — cosmetic; teams are host-only state).
-                if (EventsPlus2Feature.SameTeam(sourcePlayer.Id, victimPlayer.Id)) return false;
+                if (EventsCompetitiveFeature.SameTeam(sourcePlayer.Id, victimPlayer.Id)) return false;
                 PvpFeature.NoteHit(victimPlayer.Id, sourcePlayer.CharacterModel?.Character?.Name);
                 return true;
             }
@@ -278,7 +278,7 @@ internal static class PvpDeathEventPatch
 // call site; phoenix-feather saves return false at OnOutOfHealth and never get here). OnPlayerDied runs
 // INSIDE this call, so the prefix always lands before the death postfix consumes the record. Covers
 // player hits AND player-applied DoT ticks (server aura ticks carry the owner as SourceEntity). Summon
-// killing blows resolve to the summon's OWNER via the cf-owner stamp (Fixes2).
+// killing blows resolve to the summon's OWNER via the cf-owner stamp (CreatureFixes).
 internal static class PvpExactKillPatch
 {
     [HarmonyPrefix]
@@ -297,7 +297,7 @@ internal static class PvpExactKillPatch
                 killer = killerPlayer.CharacterModel?.Character?.Name;
             // Summon killing blow: vanilla carries no owner on the summon — resolve our cf-owner stamp.
             if (killer == null && src != null
-                && Fixes2.TryResolveSummonOwner(src, out ServerJoinedPlayerModel sOwner) && sOwner.Id != victim.Id)
+                && CreatureFixes.TryResolveSummonOwner(src, out ServerJoinedPlayerModel sOwner) && sOwner.Id != victim.Id)
                 killer = sOwner.CharacterModel?.Character?.Name;
             PvpFeature.NoteExactKill(victim.Id, killer);
         }

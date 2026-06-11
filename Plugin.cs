@@ -80,7 +80,7 @@ public class Plugin : BasePlugin
         ForgeConfig.Bind(Config); // [Notifications] banner/toast style + banner color/position/duration
         StationsFeature.Init();   // register the forge_station controller preset
         CreatureAiFeature.Init(); // register the forge_guard/forge_coward/forge_ranged creature-AI presets
-        CreatureAi2Feature.Init(); // register forge_patrol/forge_pack/forge_summoner/forge_healer/forge_turret
+        CreatureAiPresetsFeature.Init(); // register forge_patrol/forge_pack/forge_summoner/forge_healer/forge_turret
         CompositeFeature.Init();  // register the forge_composite controller pair (multi-part placeables)
         var h = new Harmony(MyPluginInfo.PLUGIN_GUID);
         h.PatchAll(typeof(SetupPatch));
@@ -96,8 +96,8 @@ public class Plugin : BasePlugin
         h.PatchAll(typeof(CompanionPatch));
         h.PatchAll(typeof(PlaceableRecipePatch));
         h.PatchAll(typeof(CreatureServerPatch));
-        h.PatchAll(typeof(SummonOwnerStampPatch));   // Fixes2: cf-owner stamp for summon kill attribution
-        h.PatchAll(typeof(CreatureDropsPatch));      // Fixes2: drops[].creature -> prototype drop component
+        h.PatchAll(typeof(SummonOwnerStampPatch));   // CreatureFixes: cf-owner stamp for summon kill attribution
+        h.PatchAll(typeof(CreatureDropsPatch));      // CreatureFixes: drops[].creature -> prototype drop component
         h.PatchAll(typeof(CreatureClientPatch));
         h.PatchAll(typeof(NpcBodyServerPatch));
         h.PatchAll(typeof(NpcBodyClientPatch));
@@ -169,7 +169,7 @@ public class Plugin : BasePlugin
         h.PatchAll(typeof(ChatToastPatch));          // Toasts: event chat lines also pop top-screen notifications
         h.PatchAll(typeof(CreatureAnimClientMapPatch));
         h.PatchAll(typeof(CreatureAiControllerMapPatch));
-        h.PatchAll(typeof(CreatureAi2ControllerMapPatch));
+        h.PatchAll(typeof(CreatureAiPresetsControllerMapPatch));
         h.PatchAll(typeof(CompositeServerPatch));    // AFTER InteractiveServerPatch: postfix order = patch order
         h.PatchAll(typeof(CompositeClientPatch));    // (the composite pass edits the parent proto Interactive registers)
         Log.LogInfo($"{MyPluginInfo.PLUGIN_NAME} {MyPluginInfo.PLUGIN_VERSION} loaded. Packs: {PacksDir}");
@@ -461,7 +461,7 @@ internal static class CompanionPatch
     {
         EventsFeature.Tick(dt);   // arena matches share the server tick (internally guarded; no-op with 0 arenas)
         EventsPlusFeature.Tick(dt);   // wave/boss/hunt/raid events share the server tick (no-op with 0 events)
-        EventsPlus2Feature.Tick(dt);  // teamBattle/koth/race share the server tick (no-op with 0 events)
+        EventsCompetitiveFeature.Tick(dt);  // teamBattle/koth/race share the server tick (no-op with 0 events)
         var set = ContentLoader.CompanionSummons;
         if (set.Count == 0) return;
         try
@@ -511,7 +511,7 @@ internal static class CompanionPatch
                 var to = player.Position + new Vector3(MathF.Cos(ang) * PlaceDist, MathF.Sin(ang) * PlaceDist, 0f);
                 me.Velocity = Vector3.Zero;
                 EntitySController.UpdateEntityPosition(comps[i], to);
-                Fixes2.FaceToward(me, player.EntityWrapper);   // face the player once at the blink (replicated per tick)
+                CreatureFixes.FaceToward(me, player.EntityWrapper);   // face the player once at the blink (replicated per tick)
             }
         }
         catch (Exception e) { Plugin.Log.LogWarning($"Companion teleport failed: {e.Message}"); }
@@ -1253,7 +1253,7 @@ internal static class ContentLoader
         if (pack.Events != null)
             foreach (EventDef ev in pack.Events)
                 if (ev != null && !string.IsNullOrWhiteSpace(ev.Id) && !string.IsNullOrWhiteSpace(ev.Type))
-                { NsCheck(ev.Id, "event"); if (!EventsPlus2Feature.RegisterEvent(ev)) EventsPlusFeature.RegisterEvent(ev); }
+                { NsCheck(ev.Id, "event"); if (!EventsCompetitiveFeature.RegisterEvent(ev)) EventsPlusFeature.RegisterEvent(ev); }
                 else Plugin.Log.LogWarning($"[{name}] event skipped (needs id + type).");
 
         if (pack.Shops != null)
