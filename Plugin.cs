@@ -359,6 +359,23 @@ internal static class SummonFactionPatch
             ContentLoader.AllSummons.Add(__result.Id);
             if (ally) ContentLoader.AllySummons.Add(__result.Id);
 
+            // GROUND THE SUMMON. Summon spells spawn at the spell's CAST height (Z ≈ 10) and creatures
+            // carry no Movable component, so gravity never lands them — and collision only applies when
+            // Z-intervals overlap (IntervalOverlap, sh:82330), so a summon floating at Z=10 clears every
+            // wall/rock collision band and walks straight through the world. Snap it to the floor once.
+            try
+            {
+                var gw = __result.EntityWrapper;
+                if (gw != null && gw.Position.Z > 0.01f)
+                {
+                    gw.System.UpdateFloorHeight(gw.Eid);
+                    var gp = gw.Position;
+                    gp.Z = gw.System.General[gw.Eid].FloorHeight;
+                    gw.Position = gp;
+                }
+            }
+            catch (Exception ge) { Plugin.Log.LogWarning($"summon grounding failed: {ge.Message}"); }
+
             // companion? remember it so CompanionPatch teleport-leashes it to the player
             if (ContentLoader.CompanionSpells.Contains(spellId)) ContentLoader.CompanionSummons.Add(__result.Id);
 
