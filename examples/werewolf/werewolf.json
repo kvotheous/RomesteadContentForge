@@ -37,6 +37,26 @@
      }
     }
    }
+  },
+  {
+   "id": "ww:moon_tome",
+   "name": "Moon Tome",
+   "nameLocalized": {
+    "tr_TR": "Ay Kitabı"
+   },
+   "description": "The beast within answers. Summons a loyal werewolf companion (howls included).",
+   "descriptionLocalized": {
+    "tr_TR": "İçindeki canavar cevap verir. Sadık bir kurt adam yoldaş çağırır."
+   },
+   "icon": "ww:icon_wolf",
+   "tier": 5,
+   "maxStack": 1,
+   "equippable": {
+    "equipmentType": "Offhand",
+    "spellTome": {
+     "spellId": "ww:summon_wolf"
+    }
+   }
   }
  ],
  "creatures": [
@@ -70,17 +90,31 @@
    "frameHeight": 48,
    "animations": {
     "idle": {
-     "frames": [0, 1, 2, 1],
+     "frames": [
+      0,
+      1,
+      2,
+      1
+     ],
      "tickLength": 14,
      "loop": true
     },
     "walk": {
-     "frames": [3, 4, 5, 6],
+     "frames": [
+      3,
+      4,
+      5,
+      6
+     ],
      "tickLength": 7,
      "loop": true
     },
     "attack": {
-     "frames": [7, 8, 9],
+     "frames": [
+      7,
+      8,
+      9
+     ],
      "tickLength": 5
     }
    }
@@ -95,7 +129,12 @@
    "frameHeight": 32,
    "animations": {
     "slash": {
-     "frames": [0, 1, 2, 3],
+     "frames": [
+      0,
+      1,
+      2,
+      3
+     ],
      "tickLength": 4
     }
    }
@@ -107,7 +146,12 @@
    "texture": "mist1.png",
    "frameWidth": 32,
    "frameHeight": 32,
-   "color": [0.65, 0.7, 0.85, 0.5],
+   "color": [
+    0.65,
+    0.7,
+    0.85,
+    0.5
+   ],
    "emissiveness": 0.1,
    "maxLife": 3.5,
    "fade": {
@@ -120,7 +164,12 @@
    "texture": "mist2.png",
    "frameWidth": 28,
    "frameHeight": 28,
-   "color": [0.6, 0.66, 0.82, 0.45],
+   "color": [
+    0.6,
+    0.66,
+    0.82,
+    0.45
+   ],
    "emissiveness": 0.1,
    "maxLife": 4.0,
    "fade": {
@@ -133,7 +182,12 @@
    "texture": "mist3.png",
    "frameWidth": 20,
    "frameHeight": 20,
-   "color": [0.68, 0.72, 0.88, 0.4],
+   "color": [
+    0.68,
+    0.72,
+    0.88,
+    0.4
+   ],
    "emissiveness": 0.1,
    "maxLife": 3.0,
    "fade": {
@@ -146,10 +200,20 @@
    "texture": "moonmote.png",
    "frameWidth": 8,
    "frameHeight": 8,
-   "frames": [0, 1, 2, 3],
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
    "frameDuration": 0.18,
    "loop": true,
-   "color": [0.85, 0.9, 1.0, 0.9],
+   "color": [
+    0.85,
+    0.9,
+    1.0,
+    0.9
+   ],
    "emissiveness": 0.8,
    "maxLife": 2.5,
    "fade": {
@@ -158,7 +222,11 @@
    },
    "light": {
     "radius": 10,
-    "color": [0.7, 0.8, 1.0]
+    "color": [
+     0.7,
+     0.8,
+     1.0
+    ]
    }
   }
  ],
@@ -184,12 +252,20 @@
    "spawnArea": {
     "type": "cylinder",
     "radius": 40,
-    "size": [0, 0, 6]
+    "size": [
+     0,
+     0,
+     6
+    ]
    },
    "velocity": {
     "min": 3,
     "max": 8,
-    "direction": [1, 0, 0.05]
+    "direction": [
+     1,
+     0,
+     0.05
+    ]
    }
   },
   {
@@ -209,7 +285,11 @@
    "velocity": {
     "min": 2,
     "max": 5,
-    "direction": [0, 0, 1]
+    "direction": [
+     0,
+     0,
+     1
+    ]
    }
   }
  ],
@@ -226,23 +306,39 @@
    "tmx": "village.tmx",
    "exitDirection": 1,
    "pvp": true,
-   "ambientLight": [0.45, 0.42, 0.55],
+   "ambientLight": [
+    0.45,
+    0.42,
+    0.55
+   ],
    "doodads": [
     {
      "entity": "CampFire",
-     "position": [280, 184]
+     "position": [
+      280,
+      184
+     ]
     },
     {
      "entity": "CampFire",
-     "position": [392, 184]
+     "position": [
+      392,
+      184
+     ]
     },
     {
      "entity": "CampFire",
-     "position": [280, 288]
+     "position": [
+      280,
+      288
+     ]
     },
     {
      "entity": "CampFire",
-     "position": [392, 288]
+     "position": [
+      392,
+      288
+     ]
     }
    ]
   }
@@ -276,7 +372,10 @@
   {
    "id": "ww:elder",
    "map": "ww:village",
-   "position": [344, 216],
+   "position": [
+    344,
+    216
+   ],
    "yarn": "elder.yarn",
    "startNode": "Start",
    "actors": {
@@ -301,9 +400,27 @@
    "nightSeconds": 45,
    "daySeconds": 120,
    "voteSeconds": 30,
-   "ghostPen": [592, 48],
+   "ghostPen": [
+    592,
+    48
+   ],
    "reward": "ww:laurel",
    "rewardAmount": 1
+  }
+ ],
+ "spells": [
+  {
+   "id": "ww:summon_wolf",
+   "displayName": "Call of the Moon",
+   "castSound": "cf:sound:ww:howl",
+   "summon": {
+    "creature": "ww:werewolf",
+    "entityType": "PlayerSummon",
+    "count": 1,
+    "maxActive": 1,
+    "behavior": "companion",
+    "dismissOnUnequip": true
+   }
   }
  ]
 }
