@@ -1953,7 +1953,7 @@
    "name": "T91 Versipellis",
    "type": "werewolf",
    "map": "cftest:t46_arena",
-   "minPlayers": 2,
+   "minPlayers": 1,
    "wolves": 1,
    "seer": false,
    "nightSeconds": 30,
@@ -1963,7 +1963,8 @@
     32,
     32
    ],
-   "reward": "cftest:t57_trophy"
+   "reward": "cftest:t57_trophy",
+   "debugSolo": true
   }
  ],
  "townBuildings": [

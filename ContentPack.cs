@@ -916,6 +916,8 @@ internal sealed class EventDef
     public int DaySeconds = 120;            // werewolf: day discussion length
     public int VoteSeconds = 30;            // werewolf: vote window length
     public float[] GhostPen;                // werewolf: REQUIRED [x,y] map px — the walled spectator pen for the dead
+    public bool DebugSolo;                  // werewolf TESTING ONLY: arm with 1 player; the wolf may target
+                                            // THEMSELF (full kill/ghost/vote loop testable solo). Never ship on.
 }
 
 internal sealed class WaveDef

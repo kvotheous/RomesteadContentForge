@@ -136,7 +136,8 @@ internal static class WerewolfFeature
         }
         if (def.GhostPen == null || def.GhostPen.Length < 2)
         { Plugin.Log.LogWarning($"Event '{def.Id}' skipped: werewolf needs ghostPen [x,y] (map px, doodad space)."); return true; }
-        if (def.MinPlayers < 2) def.MinPlayers = 4;     // explicit 2/3 = debug modes; unset/1 -> the real minimum
+        if (def.DebugSolo) { if (def.MinPlayers < 1) def.MinPlayers = 1; }      // solo test rig: self-targeting allowed
+        else if (def.MinPlayers < 2) def.MinPlayers = 4;  // explicit 2/3 = debug modes; unset/1 -> the real minimum
         if (def.NightSeconds < 10) def.NightSeconds = 45;
         if (def.DaySeconds < 10) def.DaySeconds = 120;
         if (def.VoteSeconds < 10) def.VoteSeconds = 30;
@@ -336,7 +337,9 @@ internal static class WerewolfFeature
         SendToParticipants(rt, "cf-ww-phase", $"night:{rt.Def.NightSeconds}");
 
         // Action windows: wolves pick among the alive non-wolves; the seer inspects any other living soul.
-        string prey = BuildList(rt, exclude: Role.Wolf, excludePid: -1);
+        string prey = rt.Def.DebugSolo
+            ? BuildList(rt, exclude: null, excludePid: -1)            // debug: the wolf may pick anyone, itself included
+            : BuildList(rt, exclude: Role.Wolf, excludePid: -1);
         foreach (var kv in rt.Roles)
         {
             if (rt.Ghosts.Contains(kv.Key)) continue;
@@ -551,6 +554,7 @@ internal static class WerewolfFeature
     private static bool CheckWin(MatchRuntime rt)
     {
         if (!rt.Running && rt.Phase != Phase.Starting) return true;
+        if (rt.Def.DebugSolo && rt.Ghosts.Count == 0) return false;   // solo rig: 1 wolf, 0 villagers would insta-end
         int wolves = 0, others = 0;
         foreach (var kv in rt.Roles)
         {
@@ -624,7 +628,7 @@ internal static class WerewolfFeature
             {
                 if (rt.Phase != Phase.Night || !rt.Roles.TryGetValue(sender, out Role role)) continue;
                 if (role != Role.Wolf || rt.Ghosts.Contains(sender)) return;
-                if (!rt.Roles.TryGetValue(target, out Role tr) || tr == Role.Wolf || rt.Ghosts.Contains(target)) return;
+                if (!rt.Roles.TryGetValue(target, out Role tr) || (tr == Role.Wolf && !rt.Def.DebugSolo) || rt.Ghosts.Contains(target)) return;
                 rt.NightPick = target;   // pack consensus v1: the last wolf to pick decides
                 return;
             }
