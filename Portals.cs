@@ -172,11 +172,19 @@ public sealed class ForgePortalServerController : AbstractController
                     SpacVfxId = _vfx
                 });
             if (!string.IsNullOrEmpty(_sfx))
+            {
+                // 3D at the portal for bystanders…
                 ServerSoundAndVfxService.Send_PlaySfxOnEntity(new PlaySfxOnEntityMessage
                 {
                     FmodEventName = _sfx,
                     EntityId = Entity.Id
                 }, SyncStrategy.SendToAll);
+                // …and 2D to the TRAVELER: the 3D shot plays at the portal they just LEFT — by the time it
+                // starts they're in the destination world, far outside positional falloff and hear nothing.
+                if (ServerGlobals.LastEventBusArgs?.Peer != null)
+                    ServerSoundAndVfxService.Send_PlaySfxToPeer(new PlaySfxMessage { FmodEventName = _sfx },
+                        ServerGlobals.LastEventBusArgs.Peer);
+            }
         }
         catch (Exception e) { Plugin.Log.LogWarning($"forge_portal interact failed: {e.Message}"); }
     }
