@@ -107,6 +107,7 @@ internal static class ScratchSpacFeature
         public int Directions;
         public Dictionary<string, string> Sheets;   // sheet name -> PNG (insertion order = sheet index order)
         public int FrameWidth, FrameHeight;
+        public int FeetRow;                         // px from cell top where the feet touch (0 = cell center)
         public Dictionary<string, SpacAnimDef> Animations;
         public string Dir, Pack;
     }
@@ -115,7 +116,7 @@ internal static class ScratchSpacFeature
     private static readonly HashSet<string> Built = new();   // ids we finished (or permanently failed)
 
     internal static void Register(string id, int directions, Dictionary<string, string> sheets,
-        int frameWidth, int frameHeight, Dictionary<string, SpacAnimDef> animations, string packDir, string packName)
+        int frameWidth, int frameHeight, int feetRow, Dictionary<string, SpacAnimDef> animations, string packDir, string packName)
     {
         Defs.Add(new Def
         {
@@ -124,6 +125,7 @@ internal static class ScratchSpacFeature
             Sheets = sheets,
             FrameWidth = frameWidth,
             FrameHeight = frameHeight,
+            FeetRow = feetRow,
             Animations = animations,
             Dir = packDir,
             Pack = packName,
@@ -193,6 +195,11 @@ internal static class ScratchSpacFeature
         }
 
         // 2) Animations: name -> SpacDirectionsAnimation with one SpacAnimation per direction.
+        // Where the art's feet sit, in px from the cell TOP (anchors the sprite to the ground line).
+        // Default = cell center (Offset 0) for centered art; creature sheets with the body filling the
+        // cell should set it explicitly (e.g. 48px cell, feet at row 46 -> feetRow 46).
+        float feetRow = def.FeetRow > 0 ? def.FeetRow : def.FrameHeight / 2f;
+
         var anims = new List<SpacDirectionsAnimation>(def.Animations.Count);
         foreach (KeyValuePair<string, SpacAnimDef> kv in def.Animations)
         {
@@ -241,19 +248,22 @@ internal static class ScratchSpacFeature
                             {
                                 SpriteSheetIndex = sheetIndex,
                                 Frame = cell,
-                                Offset = Vector2.Zero,
+                                // Vanilla creature recipe (extracted from skeleton_animations in spacs.xnb):
+                                // VERTICAL quad + flat ground copy (HorizontalAndVertical=true, Horizontal3D
+                                // =false; Horizontal3D=true would take the ground-DECAL branch whose constant
+                                // depth ~1 loses the depth test to every wall/tree pixel — the under/inside-
+                                // everything look). Offset.Y plants the art's FEET on the ground line:
+                                // negative raises the quad ("translation.Y -= result.Y", rdll:119878);
+                                // feet at `feetRow` px from the cell top → Offset.Y = frameHeight/2 - feetRow
+                                // (skeleton: 80px cells, feet row ~58 → authored Offset (0,-15) ≈ this -3px).
+                                Offset = new Vector2(0f, def.FrameHeight / 2f - feetRow),
                                 Opacity = 1f,            // (opacity*tints).W <= 0 culls the sprite (rdll:119852)
                                 Angle = 0f,
                                 Flip = false,
                                 Scale = 1f,              // quad size = SpriteWidth/Height * Scale (rdll:119857)
                                 Tag = 0,                 // Tag 0 = never enters the skins path
-                                // STANDING, not flat: the draw branch applies the -pi/2 X-rotation (the
-                                // upright billboard) only when args.Horizontal3DPlane XOR sprite.Horizontal3D
-                                // (rdll:119874). Creature machines render with SpacRenderingArgs.Default
-                                // (Horizontal3DPlane=false), so the sprite flag must be TRUE — false drew
-                                // every from-scratch creature lying in the ground plane like a rug.
-                                Horizontal3D = true,
-                                HorizontalAndVertical = false,
+                                Horizontal3D = false,
+                                HorizontalAndVertical = true,
                                 DepthOffset = 0f,
                                 VariationName = string.Empty,   // vanilla ParseSpacData always assigns it (cc:13641)
                                 Hidden = false,
