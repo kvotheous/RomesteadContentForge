@@ -380,18 +380,6 @@ internal static class SummonFactionPatch
             }
             catch (Exception ge) { Plugin.Log.LogWarning($"summon grounding failed: {ge.Message}"); }
 
-            // TEMP DIAGNOSTIC v2 (no-clip hunt): full collision geometry of the spawned summon.
-            try
-            {
-                var dw = __result.EntityWrapper;
-                if (dw != null && dw.Shape != null)
-                    Plugin.Log.LogInfo($"[collision-diag2] '{spellId}': Z={dw.Position.Z:F1} " +
-                        $"H3D={dw.Shape.Height3D:F1} box={dw.Shape.BoundingBox.Width}x{dw.Shape.BoundingBox.Height} " +
-                        $"terrStep={dw.TerrainStepHeight:F1} entStep={dw.EntityStepHeight:F1} " +
-                        $"floor={dw.System.General[dw.Eid].FloorHeight:F1}");
-            }
-            catch (Exception de) { Plugin.Log.LogWarning($"[collision-diag2] failed: {de.Message}"); }
-
             // companion? remember it so CompanionPatch teleport-leashes it to the player
             if (ContentLoader.CompanionSpells.Contains(spellId)) ContentLoader.CompanionSummons.Add(__result.Id);
 
