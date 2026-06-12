@@ -3417,6 +3417,12 @@
      "help": "from-scratch: cell height px"
     },
     {
+     "key": "feetRow",
+     "type": "int",
+     "default": 0,
+     "help": "from-scratch: px from cell TOP where the art's feet touch the ground (0 = cell center)"
+    },
+    {
      "key": "animations",
      "type": "dict",
      "valueType": "object",

@@ -1132,7 +1132,7 @@ internal static class ContentLoader
                 else if (!string.IsNullOrWhiteSpace(sp.Base))
                 { NsCheck(sp.Id, "spac"); SpacForgeFeature.Register(sp, dir, name); }
                 else if (sp.Sheets is { Count: > 0 } && sp.Animations is { Count: > 0 })
-                { NsCheck(sp.Id, "spac"); ScratchSpacFeature.Register(sp.Id, sp.Directions, sp.Sheets, sp.FrameWidth, sp.FrameHeight, sp.Animations, dir, name); }
+                { NsCheck(sp.Id, "spac"); ScratchSpacFeature.Register(sp.Id, sp.Directions, sp.Sheets, sp.FrameWidth, sp.FrameHeight, sp.FeetRow, sp.Animations, dir, name); }
                 else Plugin.Log.LogWarning($"[{name}] spac '{sp.Id}' skipped (needs `base`, OR `sheets` + `animations` for a from-scratch spac).");
 
         // Player animation remixes: retime one of the player's 47 animation states (visual-only).

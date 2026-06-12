@@ -280,12 +280,13 @@ public sealed class ForgeCreatureAnimController : AbstractController
             _machine.Args.SetDefaultEntityOffset(Entity);
             // Visual tuning knobs (from-scratch art rarely matches the vanilla cell-margin conventions):
             //   sprite-scale    — multiplies the quad size (default 1)
-            //   sprite-offset-y — px added to the vertical anchor (positive = sprite drawn HIGHER; the
-            //                     default anchor is collision-box-height/2 via SetDefaultEntityOffset)
+            //   sprite-offset-y — px added to the sprite's HEIGHT (world Z = render height; positive = drawn
+            //                     higher). NOTE: args.Offset is WORLD-space, applied before ToXzy — its Y
+            //                     component is DEPTH (down-screen), so height tweaks must go on Z.
             float sScale = Parameters.GetFloat("sprite-scale", 1f);
             if (sScale > 0f && sScale != 1f) _machine.Args.Scale = sScale;
             float sOffY = Parameters.GetFloat("sprite-offset-y", 0f);
-            if (sOffY != 0f) _machine.Args.Offset += new Microsoft.Xna.Framework.Vector3(0f, sOffY, 0f);
+            if (sOffY != 0f) _machine.Args.Offset += new Microsoft.Xna.Framework.Vector3(0f, 0f, sOffY);
             Entity.UsesSpac = true;
 
             // Initial state: spawn sets controller.State from the server model BEFORE EntityInitialize

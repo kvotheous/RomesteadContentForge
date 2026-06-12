@@ -998,6 +998,8 @@ internal sealed class SpacDef
     public int Directions = 1;                         // 1 (no facing), 4 (rows E,S,W,N) or 8 (rows E,SE,S,SW,W,NW,N,NE)
     public int FrameWidth;                             // cell width px (0 = whole PNG is one frame)
     public int FrameHeight;                            // cell height px
+    public int FeetRow;                                // px from cell TOP where the art's feet touch the ground
+                                                       // (anchors the sprite; 0 = cell center, for centered art)
     public Dictionary<string, SpacAnimDef> Animations; // animation name -> frames/timing (SpacAnimDef in SpacForge.cs)
 }
 
