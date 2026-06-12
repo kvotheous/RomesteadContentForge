@@ -309,34 +309,34 @@
    "exitDirection": 1,
    "pvp": true,
    "ambientLight": [
-    0.45,
-    0.42,
-    0.55
+    0.6,
+    0.55,
+    0.65
    ],
    "doodads": [
     {
-     "entity": "CampFire",
+     "entity": "c1496246-784d-445a-acda-94b4b3c1af0a",
      "position": [
       280,
       184
      ]
     },
     {
-     "entity": "CampFire",
+     "entity": "c1496246-784d-445a-acda-94b4b3c1af0a",
      "position": [
       392,
       184
      ]
     },
     {
-     "entity": "CampFire",
+     "entity": "c1496246-784d-445a-acda-94b4b3c1af0a",
      "position": [
       280,
       288
      ]
     },
     {
-     "entity": "CampFire",
+     "entity": "c1496246-784d-445a-acda-94b4b3c1af0a",
      "position": [
       392,
       288
