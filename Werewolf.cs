@@ -1107,7 +1107,7 @@ internal sealed class WerewolfWindow : CandideWindow
 
     private void Choose(string idOrSkip)
     {
-        try { NetworkManager.SendMessage(_sendKey, idOrSkip, 2); }
+        try { RomesteadShared.Net.SendMessage(_sendKey, idOrSkip, 2); }
         catch (Exception e) { Plugin.Log.LogWarning($"Werewolf action send failed: {e.Message}"); }
         CloseOpen();
     }
