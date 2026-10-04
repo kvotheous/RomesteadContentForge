@@ -90,7 +90,7 @@ internal static class ModHandshake
             sb.Append(Clean(p.Id)).Append('@').Append(Clean(p.Version));
             first = false;
         }
-        NetworkManager.SendMessage(EventKey, sb.ToString(), 2);
+        RomesteadShared.Net.SendMessage(EventKey, sb.ToString(), 2);
         Plugin.Log.LogInfo($"Handshake sent to host ({ContentLoader.LoadedPacks.Count} pack(s)).");
     }
 

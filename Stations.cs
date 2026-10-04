@@ -180,9 +180,10 @@ internal static class StationStringsPatch
 // "message"/"message-color" floating text on interact, and the Tier-2 ambient sprite animation.
 public sealed class ForgeStationClientController : ForgeClientController
 {
-    public override void OnInteract(EntityWrapper otherEntity)
+    public override void OnInteract(EntityWrapper otherEntity, bool interactionHeld)
     {
-        base.OnInteract(otherEntity);   // optional floating "message" param
+        if (interactionHeld) return;   // hold = vanilla pickup/demolish, not our tap action
+        base.OnInteract(otherEntity, interactionHeld);   // optional floating "message" param
         try
         {
             if (Entity == null || PlayerUi.DisallowMoreInteractions) return;   // same guard as vanilla stations

@@ -361,8 +361,9 @@ public abstract class ForgeClientController : AbstractController
         return tip == null ? (null, null) : (tip, ParseColor(Parameters.GetString("tooltip-color", null)) ?? Color.White);
     }
 
-    public override void OnInteract(EntityWrapper otherEntity)
+    public override void OnInteract(EntityWrapper otherEntity, bool interactionHeld)
     {
+        if (interactionHeld) return;   // hold = vanilla pickup/demolish, not our tap action
         string msg = Parameters?.GetString("message", null);
         if (string.IsNullOrEmpty(msg) || Entity == null) return;
         FloatingTextSystem.AddNewFloatText(msg, Entity.Position2, ParseColor(Parameters.GetString("message-color", null)) ?? Color.LightGreen);
@@ -393,9 +394,10 @@ public sealed class ForgeLeverClientController : ForgeClientController
 // inside, so a statue can bless, a tombstone can trade. Dialogue is client-side (same rule as NPCs).
 public sealed class ForgeDialogueClientController : ForgeClientController
 {
-    public override void OnInteract(EntityWrapper otherEntity)
+    public override void OnInteract(EntityWrapper otherEntity, bool interactionHeld)
     {
-        base.OnInteract(otherEntity);   // optional floating "message" param
+        if (interactionHeld) return;   // hold = vanilla pickup/demolish, not our tap action
+        base.OnInteract(otherEntity, interactionHeld);   // optional floating "message" param
         try
         {
             string path = Parameters?.GetString("yarn-path", null);
@@ -464,8 +466,9 @@ public sealed class ForgeShrineServerController : AbstractController
         if (_cooldownRemaining > 0f) _cooldownRemaining -= Entity.Fdt;   // vanilla furniture timers use Fdt
     }
 
-    public override void OnInteract(EntityWrapper otherEntity)
+    public override void OnInteract(EntityWrapper otherEntity, bool interactionHeld)
     {
+        if (interactionHeld) return;   // hold = vanilla pickup/demolish, not our tap action
         try
         {
             if (_cooldownRemaining > 0f) return;
@@ -520,8 +523,9 @@ public sealed class ForgeLeverServerController : AbstractController
         if (State == -1) OnServerSetState(0);   // fresh spawn: start "off" (mirrors ServerGateController)
     }
 
-    public override void OnInteract(EntityWrapper otherEntity)
+    public override void OnInteract(EntityWrapper otherEntity, bool interactionHeld)
     {
+        if (interactionHeld) return;   // hold = vanilla pickup/demolish, not our tap action
         try
         {
             int next = State == 1 ? 0 : 1;
