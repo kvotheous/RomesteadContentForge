@@ -1,4 +1,5 @@
 using Candide;                              // Globals
+using Candide.CandideUI.UiInput;
 using Candide.CandideUI;                    // CandideThickness, CandideUiElement, CandideUiSystem, VerticalAlignment, DragDirection, CandideExtendedInteractionsHandler, PlayerUi
 using Candide.CandideUI.Components;         // CandideIcon, CandideTextLabel, CandideHorizontalSeparator, DraggablePanel
 using Candide.CandideUI.Components.Buttons; // CandideIconButton, CandideToggleIconLabelButton

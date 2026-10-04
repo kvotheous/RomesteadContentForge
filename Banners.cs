@@ -1,5 +1,6 @@
 using BepInEx.Configuration;           // ConfigFile, ConfigEntry
 using Candide;                          // Globals
+using Candide.CandideUI.UiInput;
 using Candide.CandideUI;                // CandideDesktop, CandideThickness, VerticalAlignment, CandideUiSystem
 using Candide.CandideUI.Components;     // CandideTextLabel, CandideTextStyle
 using Candide.CandideUI.Containers;     // CandideWindow, WindowGraphics

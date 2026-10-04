@@ -68,7 +68,7 @@ internal static class SpellsPlus
                 Radius = a.Radius <= 0f ? 48f : a.Radius,
                 Height = a.Height <= 0f ? 16f : a.Height,
                 TimeBetweenTicks = a.TickSeconds <= 0f ? 0.5f : a.TickSeconds,
-                ProjectileParticleId = string.IsNullOrEmpty(d.ParticleTrail) ? null : d.ParticleTrail,
+                ParticleEmitterId = string.IsNullOrEmpty(d.ParticleTrail) ? null : d.ParticleTrail,
                 ApplyAuraId = string.IsNullOrEmpty(a.ApplyAura) ? null : a.ApplyAura,
                 HasLightsource = a.Lightsource,
                 CanAffectEnvironment = a.AffectsEnvironment,

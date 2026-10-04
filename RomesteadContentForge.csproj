@@ -42,6 +42,11 @@
     <PackageReference Include="YarnSpinner.Compiler" Version="2.5.0" />
   </ItemGroup>
 
+  <!-- Version-proof networking shim (resolves SendMessage signature at runtime; works on stable + 0.25.2_1). -->
+  <ItemGroup>
+    <Compile Include="..\Shared\Net.cs" Link="Shared\Net.cs" />
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="Romestead">
       <HintPath>$(GameDir)\Romestead.dll</HintPath>

@@ -92,8 +92,9 @@ public sealed class ForgePortalServerController : AbstractController
             Plugin.Log.LogWarning("forge_portal: no 'map' parameter set — the portal will do nothing.");
     }
 
-    public override void OnInteract(EntityWrapper otherEntity)
+    public override void OnInteract(EntityWrapper otherEntity, bool interactionHeld)
     {
+        if (interactionHeld) return;   // hold = vanilla pickup/demolish, not our tap action
         try
         {
             if (string.IsNullOrWhiteSpace(_map)) return;
