@@ -407,6 +407,7 @@ public sealed class ForgeDialogueClientController : ForgeClientController
             string d = Parameters.GetString("dialogue-distance", null);
             if (d != null) float.TryParse(d, System.Globalization.NumberStyles.Float,
                 System.Globalization.CultureInfo.InvariantCulture, out dist);
+            if (dist <= 0f) dist = 32f;   // unparseable value: TryParse zeroes `dist`, which closes the window at once
             PlayerUi.ShowDialogueWindow(new CandideDialogueContext
             {
                 CurrentCitizenId = null,
