@@ -94,6 +94,19 @@ every id, PNG previews, per-language text, and one-click validation. It writes t
 
 ---
 
+## Documentation
+
+All docs ship in the **Authoring zip** (`docs/` folder) and are also readable online on GitHub:
+
+- [Getting started](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/GETTING_STARTED.md) — your first pack in a few minutes.
+- [Pack reference (PACKS.md)](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/PACKS.md) — every field, valid values, stat keys, damage types.
+- [Cookbook](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/COOKBOOK.md) — ready-to-copy recipes.
+- [Id catalogs](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/REFERENCE.md) — every referenceable game id.
+- [Advanced](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/ADVANCED.md) — C# controllers and AI, addon DLLs, art extraction, FMOD banks.
+- Changelogs: [mod](https://github.com/kvotheous/RomesteadContentForge/blob/main/CHANGELOG.md) · [authoring kit](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/AUTHORING_CHANGELOG.md) · [editor](https://github.com/kvotheous/RomesteadContentForge/blob/main/editor/CHANGELOG.md).
+
+---
+
 ## Requirements
 
 - **Romestead**
