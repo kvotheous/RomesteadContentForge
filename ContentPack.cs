@@ -1018,3 +1018,58 @@ internal sealed class DoodadDef
     public float SpriteFrameDuration = 0.15f; // seconds each animation frame shows
     public float[] SpriteOffset3D;     // optional render offset [x, up, depth] px
 }
+
+// JSON DTO for spacs[].animations.<name> (referenced by SpacDef.Animations once that field is added).
+internal sealed class SpacAnimDef
+{
+    public int[] Frames;          // cell indices, in play order (directions>1: column indices; see contract)
+    public float TickLength = 8f; // ticks each frame shows (60 ticks = 1 second); 8 ≈ 7.5 fps
+    public bool Loop;             // advisory only: looping is chosen where the spac is USED (vfx id playback
+                                  // is always one-shot; forge_creature_anim uses anim-map :loop/:once flags
+                                  // + the idle/walk/run/... name heuristic) — kept so authors can document intent
+    public string Sheet;          // multi-sheet spacs: which `sheets` key this animation draws from
+                                  // (default: the first sheet) — the vanilla one-sheet-per-animation pattern
+}
+
+// A new town job-building cloned from a vanilla one. The base fixes maps/footprint/slots/controller; you
+// re-skin the identity and economy around it.
+internal sealed class TownBuildingDef
+{
+    public string Id;                              // required, namespaced ("mymod:grand_bakery") — the construction id;
+                                                   // the building data id becomes "building:<id>"
+    public string Base;                            // required: vanilla BuildingData id to clone ("building:bakery:0",
+                                                   // "building:blacksmith:0", "building:farmstead:1", ...)
+    public string Name;                            // build-menu name (loc key "<id>*construction:name")
+    public Dictionary<string, string> NameLocalized;
+    public string Description;                     // build-menu description
+    public Dictionary<string, string> DescriptionLocalized;
+    public string Icon;                            // build-menu/building icon (vanilla id or pack icon); default: base's
+    public Dictionary<string, int> Materials;      // construction cost, e.g. { "resource:lumber": 5 }; default: base's
+    public float BuildProgress = -1f;              // hammering effort; default: base construction's
+    public float Appeal = -1f;                     // MaxBuildingAppeal (decoration cap); default: base's
+    public string Job;                             // optional: replace the slot job ("job:blacksmith") — the worker
+                                                   // type employed inside; default: base's (bakery -> job:baker)
+    public int? TownDefence;                       // optional town defence contribution; default: base construction's
+}
+
+// A new work recipe (what a citizen produces at its job-building), unlocked at a job level.
+internal sealed class WorkRecipeDef
+{
+    public string Id;                              // required ("recipe:mymod:garum_bread" — vanilla convention is "recipe:")
+    public string Job;                             // required: the job that learns it ("job:baker", "job:blacksmith", ...)
+    public int Level = 1;                          // job level that unlocks it (appended to group "<job>:<level>")
+    public string Output;                          // required: crafted item id (or construction resource id, see below)
+    public int Amount = 1;                         // produced per completion
+    public bool ResourceOutput;                    // true = Output is a construction RESOURCE ("resource:lumber" tier)
+    public Dictionary<string, int> Ingredients;    // item id -> count, pulled from the building's storage
+    public Dictionary<string, int> Resources;      // construction resource -> count (internal resource storage)
+    public float Progress = 30f;                   // work effort (bread 30, armor ~60-150)
+    public float Experience = 3f;                  // job XP per completion
+    public bool Fuel;                              // true = needs the building's furnace lit (bakery/blacksmith have one)
+    public string Name;                            // optional display name; default: the output item's name
+    public Dictionary<string, string> NameLocalized;
+    public string Description;                     // optional tooltip text
+    public Dictionary<string, string> DescriptionLocalized;
+    public string Icon;                            // optional; default: the output item's icon
+    public bool Unrepeatable;                      // true = can't be set to repeat in the work queue
+}
