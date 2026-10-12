@@ -1,6 +1,9 @@
 [center][size=6][b][color=#f0bd77]Romestead Content Forge[/color][/b][/size]
 [i]Add your own items, weapons, spells, and more to Romestead — from simple JSON files. No coding, no game edits.[/i][/center]
 
+[quote][b]Version 1.0.1 — works with the Romestead 2026-10-04 update. Provided as-is, not actively maintained.[/b]
+I made this for myself and won't be updating it regularly. It's experimental: much of it is tested, some features aren't, and future game updates can break things. The full source is on [url=https://github.com/kvotheous/RomesteadContentForge]GitHub[/url] (MIT license) — anyone is welcome to fork it, fix it or build on it.[/quote]
+
 [line]
 
 Content Forge is a modding framework: drop a [i].json[/i] "content pack" in a folder and it injects brand-new content straight into the game's databases at load. Your creations behave like real game content — they spawn, equip, deal damage, heal, craft, and show up in the [b]Item Spawner[/b] automatically.
@@ -57,7 +60,7 @@ Content Forge is a modding framework: drop a [i].json[/i] "content pack" in a fo
 [*][b]Multi-language[/b] — names/descriptions per language; follows the player's game language. NPC dialogue translates too.
 [*][b]Consumables[/b] (food/potions), [b]light sources[/b] (torches), and [b]crafting recipes[/b].
 [/list]
-Many packs coexist safely: each declares an [b]id / namespace / version / dependencies[/b], so different authors' content never collides. A cross-platform [b]visual editor[/b] ships with the mod for those who'd rather not write JSON.
+Many packs coexist safely: each declares an [b]id / namespace / version / dependencies[/b], so different authors' content never collides. A [b]visual editor[/b] ([i]ForgeEditor.exe[/i]) is available for those who'd rather not write JSON.
 
 [size=5][b][color=#f0bd77]How it works[/color][/b][/size]
 [list=1]
@@ -65,7 +68,7 @@ Many packs coexist safely: each declares an [b]id / namespace / version / depend
 [*]Edit or add [i].json[/i] files there (and drop [i].png[/i] icons alongside).
 [*]Launch — your content is in the game. Spawn it via [b]Item Spawner (F1)[/b], craft it, or find it where you placed it.
 [/list]
-Full authoring guide with every field, valid values, stat keys, and damage types is in [b]PACKS.md[/b] (in the mod folder).
+Full authoring guide with every field, valid values, stat keys, and damage types is in [b]docs/PACKS.md[/b] in the Authoring zip (also on [url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/PACKS.md]GitHub[/url]).
 
 A taste:
 [code]{
@@ -102,11 +105,15 @@ A taste:
 
 [size=5][b][color=#f0bd77]Notes & Compatibility[/color][/b][/size]
 [list]
+[*][b]Game updates:[/b] built for the Romestead [b]2026-10-04[/b] update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows "Patch ... failed") and the rest keeps working.
 [*][b]Co-op:[/b] the [b]host[/b] must run the mod (content is server-authoritative); ideally all players run it with the [b]same packs[/b]. Against an unmodded host, modded content won't be present.
 [*][b]Save-safe:[/b] if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
 [*][b]Custom icons[/b] should be authored at [b]18×18[/b] (the game's item-icon size) with a transparent margin.
 [*]Pairs with the author's other Romestead mods (Item/Building/Citizen/Creature Spawners, Map Travel, Cheat Menu, QoL).
 [/list]
+
+[size=5][b][color=#f0bd77]Source code & contributing[/color][/b][/size]
+[url=https://github.com/kvotheous/RomesteadContentForge]github.com/kvotheous/RomesteadContentForge[/url] — MIT licensed. Fork it, fix it, or send a pull request. There's also an unfinished [b]Werewolf Village[/b] game mode (social deduction: wolves, villagers, a seer, its own village map and art) on the [i]werewolf[/i] branch, if anyone wants to pick it up.
 
 [size=5][b][color=#f0bd77]Credits[/color][/b][/size]
 [list]

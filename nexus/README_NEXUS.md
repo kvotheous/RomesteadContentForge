@@ -2,6 +2,11 @@
 
 **Add your own items, weapons, spells, and more to Romestead — from simple JSON files. No coding, no game edits.**
 
+> **Version 1.0.1 — works with the Romestead 2026-10-04 update. Provided as-is, not actively maintained.**
+> I made this for myself and won't be updating it regularly. It's experimental: much of it is tested, some
+> features aren't, and future game updates can break things. The full source is on
+> [GitHub](https://github.com/kvotheous/RomesteadContentForge) (MIT license) — anyone is welcome to fork it, fix it or build on it.
+
 Content Forge is a modding framework: drop a `.json` "content pack" in a folder and it injects brand-new content straight into the game's databases at load. Your creations behave like real game content — they spawn, equip, deal damage, heal, craft, and show up in the **Item Spawner** automatically.
 
 ---
@@ -68,7 +73,7 @@ Many packs coexist safely: each declares an **id / namespace / version / depende
 2. Edit or add `.json` files there (and drop `.png` icons alongside).
 3. Launch — your content is in the game. Spawn it via **Item Spawner (F1)**, craft it, or find it where you placed it.
 
-Full authoring guide with every field, valid values, stat keys, and damage types: see **`PACKS.md`** in the mod folder (and on this page).
+Full authoring guide with every field, valid values, stat keys, and damage types: see **`docs/PACKS.md`** in the Authoring zip (also on [GitHub](https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/PACKS.md)).
 
 A taste:
 ```json
@@ -84,7 +89,7 @@ A taste:
 }
 ```
 
-**Prefer not to write JSON?** A cross-platform **visual editor** ships with the mod (`editor/`) — dropdowns for
+**Prefer not to write JSON?** A **visual editor** (`ForgeEditor.exe`, or its Python source in the Authoring zip) — dropdowns for
 every id, PNG previews, per-language text, and one-click validation. It writes these same packs.
 
 ---
@@ -113,6 +118,7 @@ every id, PNG previews, per-language text, and one-click validation. It writes t
 
 ## Notes & Compatibility
 
+- **Game updates:** built for the Romestead **2026-10-04** update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows `Patch ... failed`) and the rest keeps working.
 - **Co-op:** the **host** must run the mod (content is server-authoritative); ideally all players run it with the **same packs** so everything matches. Against an unmodded host, modded content won't be present.
 - **Save-safe:** if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
 - **Custom icons** should be authored at **18×18** (the game's item-icon size) with a transparent margin.
@@ -123,7 +129,9 @@ every id, PNG previews, per-language text, and one-click validation. It writes t
 
 ## For modders
 
-Content packs are plain JSON — hand-edit them, use the included **visual editor** (`editor/`, cross-platform), or run the **`cfvalidate`** CLI to check a pack before launch. The format is the single source of truth, mirrored by the editor's schema. Share your packs in the comments!
+Content packs are plain JSON — hand-edit them, use the **visual editor**, or run the **`cfvalidate`** CLI to check a pack before launch. The format is the single source of truth, mirrored by the editor's schema.
+
+**Source code:** [github.com/kvotheous/RomesteadContentForge](https://github.com/kvotheous/RomesteadContentForge) — MIT licensed. Fork it, fix it, or send a pull request. There's also an unfinished **Werewolf Village** game mode (social deduction: wolves, villagers, a seer, its own village map and art) on the `werewolf` branch, if anyone wants to pick it up.
 
 ---
 
