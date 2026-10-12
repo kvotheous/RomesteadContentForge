@@ -1,5 +1,25 @@
 # Changelog — Romestead Content Forge
 
+## 1.0.1
+Compatibility + fixes release. **Required for the Romestead 2026-10-04 update** — 1.0.0 was built before it and is not compatible.
+
+- **Romestead 2026-10-04 update** — interactive placeables follow the new interact signature; a *held*
+  interaction (vanilla pickup/demolish) no longer triggers their tap action.
+- **Survives future game updates better** — each patch is applied on its own; if an update breaks one, only
+  that feature is disabled (logged as `Patch ... failed`) instead of the whole mod.
+- **Summons no longer walk through walls** — they spawned at spell-cast height, above every wall's collision.
+  Now grounded on spawn and when loaded from a save (older saves heal on load).
+- **Companion teleport** — never lands inside walls/ruins and no longer copies the player's height mid-jump.
+- **From-scratch creature sprites** stand upright and sit on the ground line; new spac field `feetRow` anchors
+  the art's feet. New `forge_creature_anim` params `sprite-scale` and `sprite-offset-y` for fine tuning.
+- **Portal sounds** now also play for the traveler, not just at the portal they left.
+- **Dialogue placeables** — an unparseable `dialogue-distance` falls back to the default instead of closing the
+  window immediately.
+- **`cfvalidate`** (C# validator) compiles again, and no longer warns about a recipe station that one of the
+  pack's own placeables declares.
+- **Test pack / Authoring zip** — art derived from vanilla sprites removed (T37 rotter is now a color tint; the
+  T42 hair sample is gone). The Authoring zip now includes the editor's `labels.json`, icon and `requirements.txt`.
+
 ## 1.0.0
 Initial release. Adds **brand-new content** to Romestead from JSON "content packs" in
 `BepInEx\config\RomesteadContentForge\packs\` — no game files touched, no compiling. See `docs/PACKS.md` for the

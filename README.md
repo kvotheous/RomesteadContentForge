@@ -4,7 +4,7 @@
 
 **Turn Romestead into a moddable platform — plain JSON content packs, no compiling, no game files touched.**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-d89a4e?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.1-d89a4e?style=flat-square)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f?style=flat-square)](LICENSE)
 [![BepInEx 6](https://img.shields.io/badge/BepInEx-6%20(CoreCLR)-5c2d91?style=flat-square)](https://github.com/BepInEx/BepInEx)
 [![Game](https://img.shields.io/badge/game-Romestead-b03a2e?style=flat-square)](https://store.steampowered.com/)
