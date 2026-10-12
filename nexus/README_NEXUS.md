@@ -1,6 +1,6 @@
 # Romestead Content Forge
 
-**Add your own items, weapons, spells, and more to Romestead — from simple JSON files. No coding, no game edits.**
+**Add your own items, weapons, creatures, dungeons and more to Romestead with JSON content packs — ready-made AI and behaviors included, C# optional. No game files edited.**
 
 > **Version 1.0.1 — works with the Romestead 2026-10-04 update. Provided as-is — fixes when I have time, no promises.**
 > I made this for myself and may fix things now and then, but I can't promise updates or a timeline. It's experimental: much of it is tested, some
