@@ -308,11 +308,11 @@
    "base": "SkeletonWarrior",
    "name": "T37 Rotting Skeleton",
    "healthMultiplier": 2,
-   "sheets": {
-    "skeletonidle": "rot_skeletonidle.png",
-    "skeletonwalk": "rot_skeletonwalk.png",
-    "skeletonattack": "rot_skeletonattack.png"
-   }
+   "color": [
+    110,
+    200,
+    90
+   ]
   },
   {
    "id": "cftest:t69_marksman",
@@ -1313,13 +1313,6 @@
   }
  ],
  "playerSkins": {
-  "hair": [
-   {
-    "name": "T42 Forge Green",
-    "sheet": "hair_forge.png",
-    "sheet2": "hair_forge-2.png"
-   }
-  ],
   "looks": [
    {
     "id": "cdd:cftest:emerald",
