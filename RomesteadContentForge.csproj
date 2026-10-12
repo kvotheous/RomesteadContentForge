@@ -42,10 +42,8 @@
     <PackageReference Include="YarnSpinner.Compiler" Version="2.5.0" />
   </ItemGroup>
 
-  <!-- Version-proof networking shim (resolves SendMessage signature at runtime; works on stable + 0.25.2_1). -->
-  <ItemGroup>
-    <Compile Include="..\Shared\Net.cs" Link="Shared\Net.cs" />
-  </ItemGroup>
+  <!-- Shared\Net.cs = version-proof networking shim (resolves SendMessage signature at runtime; works on
+       stable + 0.25.2_1). Compiled by the default glob like every other source file. -->
 
   <ItemGroup>
     <Reference Include="Romestead">
