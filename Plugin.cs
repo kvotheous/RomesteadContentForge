@@ -83,96 +83,104 @@ public class Plugin : BasePlugin
         CreatureAiPresetsFeature.Init(); // register forge_patrol/forge_pack/forge_summoner/forge_healer/forge_turret
         CompositeFeature.Init();  // register the forge_composite controller pair (multi-part placeables)
         var h = new Harmony(MyPluginInfo.PLUGIN_GUID);
-        h.PatchAll(typeof(SetupPatch));
-        h.PatchAll(typeof(LocalizationPatch));
-        h.PatchAll(typeof(WeaponTrailTintPatch));
-        h.PatchAll(typeof(SkinSetupPatch));
-        h.PatchAll(typeof(OnUseDoubleCastPatch));
-        h.PatchAll(typeof(SoundBankPatch));
-        h.PatchAll(typeof(DropTablesPatch));
-        h.PatchAll(typeof(SummonFactionPatch));
-        h.PatchAll(typeof(SummonClientSpawnFactionPatch));
-        h.PatchAll(typeof(SummonCastFactionPatch));
-        h.PatchAll(typeof(CompanionPatch));
-        h.PatchAll(typeof(PlaceableRecipePatch));
-        h.PatchAll(typeof(CreatureServerPatch));
-        h.PatchAll(typeof(SummonOwnerStampPatch));   // CreatureFixes: cf-owner stamp for summon kill attribution
-        h.PatchAll(typeof(CreatureDropsPatch));      // CreatureFixes: drops[].creature -> prototype drop component
-        h.PatchAll(typeof(CreatureClientPatch));
-        h.PatchAll(typeof(NpcBodyServerPatch));
-        h.PatchAll(typeof(NpcBodyClientPatch));
-        h.PatchAll(typeof(KnownRecipePatch));
-        h.PatchAll(typeof(SummonProtectPatch));
-        h.PatchAll(typeof(UnequipDismissPatch));
-        h.PatchAll(typeof(SummonClientProtectPatch));
-        h.PatchAll(typeof(SummonDamageMessagePatch));
-        h.PatchAll(typeof(MapFilesPatch));
-        h.PatchAll(typeof(MapRoomPatch));
-        h.PatchAll(typeof(MapPoiPatch));
-        h.PatchAll(typeof(RetroPoiPatch));
-        h.PatchAll(typeof(HitVfxPatch));
-        h.PatchAll(typeof(ParticleLoadPatch));
-        h.PatchAll(typeof(CropServerPatch));
-        h.PatchAll(typeof(CropClientPatch));
-        h.PatchAll(typeof(InteractiveControllerMapServerPatch));
-        h.PatchAll(typeof(InteractiveControllerMapClientPatch));
-        h.PatchAll(typeof(InteractiveServerPatch));
-        h.PatchAll(typeof(InteractiveClientPatch));
-        h.PatchAll(typeof(NpcFilesPatch));
-        h.PatchAll(typeof(NpcStringsPatch));
-        h.PatchAll(typeof(ForgeYarnCommandsPatch));
-        h.PatchAll(typeof(IndestructiblePatch));
-        h.PatchAll(typeof(SummonRestorePatch));
-        h.PatchAll(typeof(SkillBackfillPatch));
-        h.PatchAll(typeof(SkillGrantGuardPatch));
-        h.PatchAll(typeof(SpellRequiresPatch));
-        h.PatchAll(typeof(PvpCastSpellPatch));
-        h.PatchAll(typeof(PvpClientHitPatch));
-        h.PatchAll(typeof(PvpGravePatch));
-        h.PatchAll(typeof(PvpDamageGatePatch));
-        h.PatchAll(typeof(PvpDeathEventPatch));
-        h.PatchAll(typeof(PvpExactKillPatch));
-        h.PatchAll(typeof(HandshakeServerPatch));
-        h.PatchAll(typeof(HandshakeClientPatch));
-        h.PatchAll(typeof(AttackTuningPatch));
-        h.PatchAll(typeof(RawSound3DPatch));
-        h.PatchAll(typeof(RawSound2DPatch));
-        h.PatchAll(typeof(RawSoundUnloadPatch));
-        h.PatchAll(typeof(PlayerRigPatch));
-        h.PatchAll(typeof(FavourStripOnSavePatch));
-        h.PatchAll(typeof(FavourRegrantPatch));
-        h.PatchAll(typeof(AtmosphereTracksPatch));
-        h.PatchAll(typeof(NpcBodyRetintPatch));
-        h.PatchAll(typeof(EventsPlusKillPatch));
-        h.PatchAll(typeof(QuestRewardInjectPatch));
-        h.PatchAll(typeof(ComboTuningPatch));
-        h.PatchAll(typeof(SpacForgePatch));
-        h.PatchAll(typeof(ScratchSpacPatch));
-        h.PatchAll(typeof(PlayerAnimRemixPatch));
-        h.PatchAll(typeof(WorkRecipeGroupsPatch));
-        h.PatchAll(typeof(CitizenDataBasePatch));
-        h.PatchAll(typeof(CitizenCreatePatch));
-        h.PatchAll(typeof(CitizenWildRecruitPatch));
-        h.PatchAll(typeof(CitizenSpawnParamPatch));
-        h.PatchAll(typeof(CitizenClientLookPatch));
-        h.PatchAll(typeof(StationSetupPatch));
-        h.PatchAll(typeof(StationStringsPatch));
-        h.PatchAll(typeof(TwoHandedEnforcePatch));
-        h.PatchAll(typeof(TwoHandedLoginPatch));
-        h.PatchAll(typeof(DoodadServerPatch));
-        h.PatchAll(typeof(DoodadClientPatch));
-        h.PatchAll(typeof(TiledObjectsServerDbPatch));
-        h.PatchAll(typeof(TiledObjectsClientDbPatch));
-        h.PatchAll(typeof(ForgeTabPatch));
-        h.PatchAll(typeof(ForgeFavourScreenTabPatch));   // "Pack Favours" button -> custom favour screen
-        h.PatchAll(typeof(BannerPumpPatch));             // center-screen announcement banners
-        h.PatchAll(typeof(ChatToastPatch));          // Toasts: event chat lines also pop top-screen notifications
-        h.PatchAll(typeof(CreatureAnimClientMapPatch));
-        h.PatchAll(typeof(CreatureAiControllerMapPatch));
-        h.PatchAll(typeof(CreatureAiPresetsControllerMapPatch));
-        h.PatchAll(typeof(CompositeServerPatch));    // AFTER InteractiveServerPatch: postfix order = patch order
-        h.PatchAll(typeof(CompositeClientPatch));    // (the composite pass edits the parent proto Interactive registers)
+        SafePatch(h, typeof(SetupPatch));
+        SafePatch(h, typeof(LocalizationPatch));
+        SafePatch(h, typeof(WeaponTrailTintPatch));
+        SafePatch(h, typeof(SkinSetupPatch));
+        SafePatch(h, typeof(OnUseDoubleCastPatch));
+        SafePatch(h, typeof(SoundBankPatch));
+        SafePatch(h, typeof(DropTablesPatch));
+        SafePatch(h, typeof(SummonFactionPatch));
+        SafePatch(h, typeof(SummonClientSpawnFactionPatch));
+        SafePatch(h, typeof(SummonCastFactionPatch));
+        SafePatch(h, typeof(CompanionPatch));
+        SafePatch(h, typeof(PlaceableRecipePatch));
+        SafePatch(h, typeof(CreatureServerPatch));
+        SafePatch(h, typeof(SummonOwnerStampPatch));   // CreatureFixes: cf-owner stamp for summon kill attribution
+        SafePatch(h, typeof(CreatureDropsPatch));      // CreatureFixes: drops[].creature -> prototype drop component
+        SafePatch(h, typeof(CreatureClientPatch));
+        SafePatch(h, typeof(NpcBodyServerPatch));
+        SafePatch(h, typeof(NpcBodyClientPatch));
+        SafePatch(h, typeof(KnownRecipePatch));
+        SafePatch(h, typeof(SummonProtectPatch));
+        SafePatch(h, typeof(UnequipDismissPatch));
+        SafePatch(h, typeof(SummonClientProtectPatch));
+        SafePatch(h, typeof(SummonDamageMessagePatch));
+        SafePatch(h, typeof(MapFilesPatch));
+        SafePatch(h, typeof(MapRoomPatch));
+        SafePatch(h, typeof(MapPoiPatch));
+        SafePatch(h, typeof(RetroPoiPatch));
+        SafePatch(h, typeof(HitVfxPatch));
+        SafePatch(h, typeof(ParticleLoadPatch));
+        SafePatch(h, typeof(CropServerPatch));
+        SafePatch(h, typeof(CropClientPatch));
+        SafePatch(h, typeof(InteractiveControllerMapServerPatch));
+        SafePatch(h, typeof(InteractiveControllerMapClientPatch));
+        SafePatch(h, typeof(InteractiveServerPatch));
+        SafePatch(h, typeof(InteractiveClientPatch));
+        SafePatch(h, typeof(NpcFilesPatch));
+        SafePatch(h, typeof(NpcStringsPatch));
+        SafePatch(h, typeof(ForgeYarnCommandsPatch));
+        SafePatch(h, typeof(IndestructiblePatch));
+        SafePatch(h, typeof(SummonRestorePatch));
+        SafePatch(h, typeof(SkillBackfillPatch));
+        SafePatch(h, typeof(SkillGrantGuardPatch));
+        SafePatch(h, typeof(SpellRequiresPatch));
+        SafePatch(h, typeof(PvpCastSpellPatch));
+        SafePatch(h, typeof(PvpClientHitPatch));
+        SafePatch(h, typeof(PvpGravePatch));
+        SafePatch(h, typeof(PvpDamageGatePatch));
+        SafePatch(h, typeof(PvpDeathEventPatch));
+        SafePatch(h, typeof(PvpExactKillPatch));
+        SafePatch(h, typeof(HandshakeServerPatch));
+        SafePatch(h, typeof(HandshakeClientPatch));
+        SafePatch(h, typeof(AttackTuningPatch));
+        SafePatch(h, typeof(RawSound3DPatch));
+        SafePatch(h, typeof(RawSound2DPatch));
+        SafePatch(h, typeof(RawSoundUnloadPatch));
+        SafePatch(h, typeof(PlayerRigPatch));
+        SafePatch(h, typeof(FavourStripOnSavePatch));
+        SafePatch(h, typeof(FavourRegrantPatch));
+        SafePatch(h, typeof(AtmosphereTracksPatch));
+        SafePatch(h, typeof(NpcBodyRetintPatch));
+        SafePatch(h, typeof(EventsPlusKillPatch));
+        SafePatch(h, typeof(QuestRewardInjectPatch));
+        SafePatch(h, typeof(ComboTuningPatch));
+        SafePatch(h, typeof(SpacForgePatch));
+        SafePatch(h, typeof(ScratchSpacPatch));
+        SafePatch(h, typeof(PlayerAnimRemixPatch));
+        SafePatch(h, typeof(WorkRecipeGroupsPatch));
+        SafePatch(h, typeof(CitizenDataBasePatch));
+        SafePatch(h, typeof(CitizenCreatePatch));
+        SafePatch(h, typeof(CitizenWildRecruitPatch));
+        SafePatch(h, typeof(CitizenSpawnParamPatch));
+        SafePatch(h, typeof(CitizenClientLookPatch));
+        SafePatch(h, typeof(StationSetupPatch));
+        SafePatch(h, typeof(StationStringsPatch));
+        SafePatch(h, typeof(TwoHandedEnforcePatch));
+        SafePatch(h, typeof(TwoHandedLoginPatch));
+        SafePatch(h, typeof(DoodadServerPatch));
+        SafePatch(h, typeof(DoodadClientPatch));
+        SafePatch(h, typeof(TiledObjectsServerDbPatch));
+        SafePatch(h, typeof(TiledObjectsClientDbPatch));
+        SafePatch(h, typeof(ForgeTabPatch));
+        SafePatch(h, typeof(ForgeFavourScreenTabPatch));   // "Pack Favours" button -> custom favour screen
+        SafePatch(h, typeof(BannerPumpPatch));             // center-screen announcement banners
+        SafePatch(h, typeof(ChatToastPatch));          // Toasts: event chat lines also pop top-screen notifications
+        SafePatch(h, typeof(CreatureAnimClientMapPatch));
+        SafePatch(h, typeof(CreatureAiControllerMapPatch));
+        SafePatch(h, typeof(CreatureAiPresetsControllerMapPatch));
+        SafePatch(h, typeof(CompositeServerPatch));    // AFTER InteractiveServerPatch: postfix order = patch order
+        SafePatch(h, typeof(CompositeClientPatch));    // (the composite pass edits the parent proto Interactive registers)
         Log.LogInfo($"{MyPluginInfo.PLUGIN_NAME} {MyPluginInfo.PLUGIN_VERSION} loaded. Packs: {PacksDir}");
+    }
+
+    // One patch class at a time: when a game update renames a patched method, only that feature goes dark —
+    // an unguarded throw here would skip every patch after it and leave the mod half-applied.
+    private static void SafePatch(Harmony h, Type patchClass)
+    {
+        try { h.PatchAll(patchClass); }
+        catch (Exception e) { Log.LogError($"Patch {patchClass.Name} failed (game update?), that feature is disabled: {e.Message}"); }
     }
 }
 
