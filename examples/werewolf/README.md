@@ -1,6 +1,6 @@
 # Versipellis — the Werewolf Village demo pack (`ww`)
 
-> **Status: unfinished, not maintained.** This branch holds a work-in-progress game mode (`Werewolf.cs` +
+> **Status: unfinished. I may get back to it, but no promises.** This branch holds a work-in-progress game mode (`Werewolf.cs` +
 > this pack). It builds and its packs validate, but it hasn't been tested in a real 4+ player match.
 > You're welcome to pick it up, fix it and open a pull request — no promises it'll get reviewed quickly.
 > The `cftest:t91_werewolf` event in the test pack is a solo debug rig (`debugSolo`, `minPlayers: 1`); the
