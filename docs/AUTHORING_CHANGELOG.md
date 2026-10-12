@@ -12,7 +12,7 @@ lists, tools). Mod changes are in [../CHANGELOG.md](../CHANGELOG.md); editor cha
   placeables.
 - Test pack: art derived from vanilla sprites removed — the T37 rotter is now a color tint and the T42 hair
   sample is gone; `TESTING.md` / `TESTPLAN.md` updated to match.
-- Added the MIT `LICENSE` file.
+- Added the MIT `LICENSE` file and `THIRD-PARTY-NOTICES.txt`.
 
 ## 1.0.0
 - Initial creator kit: full docs (field reference, cookbook, getting started, advanced), the GUI editor

@@ -19,6 +19,8 @@ Compatibility + fixes release. **Required for the Romestead 2026-10-04 update** 
   pack's own placeables declares.
 - **Test pack / Authoring zip** — art derived from vanilla sprites removed (T37 rotter is now a color tint; the
   T42 hair sample is gone). The Authoring zip now includes the editor's `labels.json`, icon and `requirements.txt`.
+- **License notices** — every download now includes `THIRD-PARTY-NOTICES.txt` (licenses of the bundled open-source
+  libraries); the editor ships as `ForgeEditor-<version>.zip` (exe + notices).
 
 ## 1.0.0
 Initial release. Adds **brand-new content** to Romestead from JSON "content packs" in
