@@ -120,7 +120,9 @@ All docs ship in the **Authoring zip** (`docs/` folder) and are also readable on
 **Which file do I download?**
 - **`RomesteadContentForge-<version>.zip`** — the mod itself (`BepInEx\plugins\` DLLs). **Everyone needs this** — both players installing packs and pack creators.
 - **`RomesteadContentForge-Authoring-<version>.zip`** — the **creator kit**: all docs (field reference, cookbook, getting-started), the GUI editor, art/asset tools, worked example packs and 17 id catalogs. Only needed if you **create** packs; unzips anywhere (nothing installs into the game).
-- **`ForgeEditor.exe`** — optional standalone GUI editor for creators who want just the editor.
+- **`ForgeEditor-<version>.zip`** — optional standalone GUI editor (`ForgeEditor.exe`, no Python needed) for creators who want just the editor.
+
+Each download includes `THIRD-PARTY-NOTICES.txt` — the licenses of the open-source libraries it bundles.
 
 1. Install the **Romestead BepInEx Mod Loader** and confirm it works.
 2. Download the mod zip and extract it **into your Romestead game folder** (the archive has the correct `BepInEx\plugins\` layout).
