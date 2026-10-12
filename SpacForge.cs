@@ -81,21 +81,9 @@ namespace RomesteadContentForge;
 // REGISTRATION runs on the same hook as SpacForgeFeature (PlayerSkinManager.Setup postfix — right after
 // SpacDataBase.LoadSpacs, GraphicsDevice + Content defaults alive, rdll:10912-10913) into the same two maps:
 // SpacDataBase.SpacMap (spac consumers) + VfxSpacAnimationDataBase.AnimationDataMap (vfx-id consumers).
-// This file is self-contained (Register takes plain values + the SpacAnimDef DTO below, the CreatureAnim.cs
+// This file is self-contained (Register takes plain values + the SpacAnimDef DTO in ContentPack.cs, the CreatureAnim.cs
 // pattern) so it compiles before SpacDef grows the new fields.
 // ---------------------------------------------------------------------------------------------------------
-
-// JSON DTO for spacs[].animations.<name> (referenced by SpacDef.Animations once that field is added).
-internal sealed class SpacAnimDef
-{
-    public int[] Frames;          // cell indices, in play order (directions>1: column indices; see contract)
-    public float TickLength = 8f; // ticks each frame shows (60 ticks = 1 second); 8 ≈ 7.5 fps
-    public bool Loop;             // advisory only: looping is chosen where the spac is USED (vfx id playback
-                                  // is always one-shot; forge_creature_anim uses anim-map :loop/:once flags
-                                  // + the idle/walk/run/... name heuristic) — kept so authors can document intent
-    public string Sheet;          // multi-sheet spacs: which `sheets` key this animation draws from
-                                  // (default: the first sheet) — the vanilla one-sheet-per-animation pattern
-}
 
 // Builds brand-new Spacs from pack PNGs + frame definitions and registers them in BOTH databases.
 // ContentLoader routes `spacs` entries WITHOUT `base` here at parse time.

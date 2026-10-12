@@ -52,14 +52,14 @@ are named `T## …` so they match the rows. Get items via the **Item Spawner** (
 | T34 | **Talking placeable** | "T34 Talking Stone" built from menu → speaks via its own .yarn; blessing heals 15 | ✅ |
 | T35 | **Indestructible placeables** | demolish attempt on the Talking Stone | ✅ blocked; shrine demolishes cleanly |
 | T36 | **Custom-sprite placeable** | "T36 Forge Crystal" | ✅ (after fixing the sprite-only controller defaulting that silently skipped it) |
-| T37 | **Custom creature rig** | Rotter Book summon | ✅ green repainted skeleton, full animations |
+| T37 | **Custom creature** | Rotter Book summon | ✅ green-tinted skeleton (the repainted-sheet art was removed from the repo: it was derived from vanilla art) |
 | T39 | **Custom skill** | Runeology in the skills screen, trained by the T04 sword | ✅ |
 | T40 | **World atmosphere** | RETEST after fix (atmosphere `music`/`ambience` take **track ids** or `event:/` paths now — the placeholder "music not available" loop is fixed): enter the realm → dungeon music + crypt ambience + ink-purple dark. Keeper loop: 3 wood sticks → ember → quest completes → craft the **Storyteller's Charm** | 🔁 |
 | T45 | **Unique NPC bodies** | the Keeper of Tales is **violet-tinted** (npc `tint`), not a plain satyr; `sheets` (full repaint) follows the same path | 🔁 |
 | T41 | **Portal (from anywhere)** | Crypt Portal built in the overworld → teleports into the T21 room; exit returns beside the portal | ✅ |
 | T43 | **SpellsPlus (magic expansion)** | Fire Lob (burning pool), Heal (30 over time), Bolt fan | ✅ |
 | T44 | **Spell requirements** | Bolt at Runeology 0 → red deny message; at Runeology 3 → casts | ✅ |
-| T42 | **Player skins** | hair option in char creation ✅; **T42 Emerald Plate** renders olive-green metal (metal palette row 6 — NOTE: metal palette is 5×7, rows 0–6 only) ✅ | ✅ |
+| T42 | **Player skins** | **T42 Emerald Plate** renders olive-green metal (metal palette row 6 — NOTE: metal palette is 5×7, rows 0–6 only) ✅ | ✅ |
 | T46 | **PvP arena + duel match** (needs co-op, 2 players) | build the **T46 Arena Portal** (1 stone) → both players enter → hit each other: **damage lands** (it never does outside) → kill: chat announces "X slew Y in the Test Colosseum", **no grave** (inventory kept), match winner gets the **Champion's Belt**. Outside the arena player damage still blocked | 🔁 |
 | T47 | **Mod handshake** (co-op) | modded client joins → host log shows its pack list; client with a missing/mismatched pack → chat warning from "Content Forge"; vanilla client → "no Content Forge" warning + can't fight in T46 | 🔁 |
 | T48 | **Swing-arc tuning** | T48 Wide Cleaver: 300° cone hits beside/behind (vs T04's frontal 144°). Note: the visual trail stays the class art (cosmetic; hide or reskin via `hideTrail`/`trailSheet`) | ✅ |

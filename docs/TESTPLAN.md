@@ -39,13 +39,11 @@ the same **T57 Arena Trophy** (`cftest:t57_trophy`) — tell results apart by th
 
 ## Single-player, quick spawns (18 tests — one session, open ground)
 
-**T42 Player skins (armor half + hair half) — ✅ PASSED**
-- Prereqs: none (hair half needs a throwaway character creation).
-- Steps: 1. F1 → `cftest:t42_armor` → spawn **T42 Emerald Plate** → equip in Armor slot.
-  2. Main menu → create a new character → scroll the hair list.
-- Pass: worn chest renders as a differently-tinted metal armour (greenish metal, not the vanilla color);
-  hair list contains **"T42 Forge Green"** and it previews green.
-- Repeat/Reset: any time; hair styles are append-only saved indexes, so the entry persists across sessions.
+**T42 Player skins (armor) — ✅ PASSED**
+- Prereqs: none. (The hair half was removed: its sample sheet was derived from vanilla art.)
+- Steps: F1 → `cftest:t42_armor` → spawn **T42 Emerald Plate** → equip in Armor slot.
+- Pass: worn chest renders as a differently-tinted metal armour (greenish metal, not the vanilla color).
+- Repeat/Reset: any time.
 
 **T49 Raw audio (sounds map) — ✅ PASSED**
 - Prereqs: sound effects slider up (not 0).
@@ -509,8 +507,7 @@ text, and the T82 `t82.tmx` (Tiled). Don't install them yet.
 7. Overworld: **T56** (kill 2 Bears — only if the bear quest is still open in this save) · **T52** (recruit a
    jobless wanderer) · **T59** announces itself throughout — just note one "X wins" line · save/reload once
    (T84 persistence) · **T60**: sleep to next day → rat raid (off-day + day-3 raid can ride later sessions).
-8. **T61** if the save has an unvisited forest bear den; **T42** hair via a quick throwaway character
-   creation on the way out.
+8. **T61** if the save has an unvisited forest bear den.
 9. Quit to menu, demolish-check done → ready for T51.
 
 **2 — T51 refund block (2 launches):** remove test pack → launch → login OK + point refunded → restore pack

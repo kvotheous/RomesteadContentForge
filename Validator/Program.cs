@@ -78,6 +78,13 @@ internal static class Program
         var spellIds = new HashSet<string>((pack.Spells ?? new()).Where(s => s?.Id != null).Select(s => s.Id), StringComparer.Ordinal);
         var itemIds = new HashSet<string>((pack.Items ?? new()).Where(i => i?.Id != null).Select(i => i.Id), StringComparer.Ordinal);
         var seen = new HashSet<string>(StringComparer.Ordinal);
+        // stations declared by this pack's own placeables (comma-separated) — same rule as editor/validate.py
+        var packStations = new HashSet<string>(
+            new[] { pack.Placeables, pack.Furniture, pack.Structures }
+                .SelectMany(l => l ?? new())
+                .Where(p => !string.IsNullOrEmpty(p?.Station))
+                .SelectMany(p => p.Station.Split(',').Select(s => s.Trim())),
+            StringComparer.Ordinal);
 
         // Custom icon files exist?
         if (pack.Icons != null)
@@ -143,8 +150,8 @@ internal static class Program
             if (!seen.Add("recipe:" + r.Id)) Err(name, $"duplicate recipe id '{r.Id}'.");
             if (string.IsNullOrWhiteSpace(r.Crafted)) Err(name, $"recipe '{r.Id}': missing 'crafted' item id.");
             else if (!itemIds.Contains(r.Crafted)) Warn(name, $"recipe '{r.Id}': crafts '{r.Crafted}' which isn't an item in this pack (ok if vanilla/other-pack).");
-            if (!string.IsNullOrEmpty(r.Station) && !Stations.Contains(r.Station))
-                Warn(name, $"recipe '{r.Id}': unknown station '{r.Station}'.");
+            if (!string.IsNullOrEmpty(r.Station) && !Stations.Contains(r.Station) && !packStations.Contains(r.Station))
+                Warn(name, $"recipe '{r.Id}': unknown station '{r.Station}' (not vanilla and no placeable declares it — never craftable).");
             if (r.Ingredients != null)
                 foreach (var kv in r.Ingredients)
                     if (kv.Value <= 0) Warn(name, $"recipe '{r.Id}': ingredient '{kv.Key}' has count {kv.Value}.");
