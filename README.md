@@ -37,6 +37,17 @@ Don't want to write JSON by hand? Download **`ForgeEditor-<version>.zip`**, unzi
 
 More: [editor/README.md](editor/README.md).
 
+## 🧩 More than an injector: built-in building blocks
+
+It's not just a content injector: Content Forge ships ready-made systems your packs can use by name.
+
+- **Creature AI**: **8 ready-made AI brains**: guard, coward, ranged caster, patroller, pack hunter, summoner, healer, turret. Give any creature one by name.
+- **Interactive objects**: **ready-made behaviors** for placeables: crafting stations, portals, healing shrines, levers, talking objects (dialogue), props and multi-part buildings, plus a data-driven animation controller for fully custom creatures.
+- **World events**: **wave defense, boss rush, hunt contest, scheduled raids, team battles, king of the hill, races** and PvP duel arenas, all configured in JSON.
+- **Dialogue commands**: NPC conversations can **give items, take payment and heal** (`ForgeGiveItem`, `ForgeTakeItem`, `ForgeHeal`).
+- **C# when you want it**: addon DLLs can register their **own behaviors and AI** with one call, and any pack can then use them by name (see [ADVANCED.md](docs/ADVANCED.md)).
+- **Worked examples**: **3 example packs** (a story world, a necromancer class, and a test pack covering every feature) plus a **cookbook** of copy-paste recipes.
+
 ## 📦 Downloads — which zip is which
 
 The release ships as **two main zips** plus the optional editor zip (Nexus Files tab / GitHub Releases):
