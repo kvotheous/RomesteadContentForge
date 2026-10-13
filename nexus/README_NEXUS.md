@@ -9,6 +9,15 @@
 
 Content Forge is a modding framework: drop a `.json` "content pack" in a folder and it injects brand-new content straight into the game's databases at load. Your creations behave like real game content — they spawn, equip, deal damage, heal, craft, and show up in the **Item Spawner** automatically.
 
+## Easiest way to start: the Forge Editor
+
+Don't want to write JSON by hand? Download **`ForgeEditor-<version>.zip`**, unzip, and run **`ForgeEditor.exe`** (no Python, no install):
+
+- **Every game value is built in** — items, creatures, icons, sounds, effects and more are picked from dropdowns, so you never guess an id.
+- **Forms for every field**, with PNG previews and per-language text.
+- **One-click validation** catches mistakes before you launch the game.
+- It saves the same `.json` packs the mod reads, so you can switch between the editor and hand-editing anytime.
+
 ---
 
 ## What you can make
