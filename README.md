@@ -30,6 +30,8 @@ Don't want to write JSON by hand? Download **`ForgeEditor-<version>.zip`**, unzi
 - **Every game value is built in** — items, creatures, icons, sounds, effects and more are picked from dropdowns,
   so you never guess an id.
 - **Forms for every field**, with PNG previews and per-language text.
+- **Built-in dialogue editor** — write NPC conversations (Yarn) with syntax highlighting, a node outline,
+  error checks, and a side-by-side translation grid that tracks how much is translated.
 - **One-click validation** catches mistakes before you launch the game.
 - It saves the same `.json` packs the mod reads, so you can switch between the editor and hand-editing anytime.
 
