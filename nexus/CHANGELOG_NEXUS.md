@@ -2,7 +2,7 @@
 
 Full versions: mod [../CHANGELOG.md](../CHANGELOG.md) · authoring kit
 [../docs/AUTHORING_CHANGELOG.md](../docs/AUTHORING_CHANGELOG.md) · editor
-[../editor/CHANGELOG.md](../editor/CHANGELOG.md).
+[../editor/CHANGELOG.md](../editor/CHANGELOG.md) · server build [../Server/CHANGELOG.md](../Server/CHANGELOG.md).
 
 ## Mod — 1.1.0
 New: dedicated server support — a separate server build (RomesteadContentForge-Server zip) runs Content Forge on a headless Romestead Dedicated Server. Setup steps on the mod page.
@@ -11,6 +11,14 @@ Fixed: hunt contests counted no kills on a dedicated server and always ended wit
 The ForgeGiveItem / ForgeTakeItem / ForgeHeal dialogue commands still need a player host.
 Changed: the default icon is now a plain scroll instead of the game's "sam" placeholder photo.
 Validators warn when a recipe ingredient is a construction resource (resource:...), which can't be crafted with.
+
+## Server build — 1.1.0
+New: first release of the dedicated-server build (RomesteadContentForge-Server zip). It runs Content Forge on a headless Romestead Dedicated Server: items, spells, recipes, creatures + AI, NPCs, maps and portals, events and arenas, crafting stations, placeables.
+New: start-modded-server.bat starts the server with BepInEx loaded (use it instead of Steam's Play button).
+The server DLL stays inactive if it's installed next to the game client by mistake.
+Fixed: the co-op handshake could report a modded player as "has no Content Forge".
+Fixed: hunt contests counted no kills and always ended with no victor.
+The ForgeGiveItem / ForgeTakeItem / ForgeHeal dialogue commands still need a player host.
 
 ## Mod — 1.0.1
 Compatible with the Romestead 2026-10-04 update (1.0.0 is not).
