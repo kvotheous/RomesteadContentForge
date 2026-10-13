@@ -7,6 +7,7 @@ Full versions: mod [../CHANGELOG.md](../CHANGELOG.md) · authoring kit
 ## Mod — 1.1.0
 New: dedicated server support — a separate server build (RomesteadContentForge-Server zip) runs Content Forge on a headless Romestead Dedicated Server. Setup steps on the mod page.
 Fixed: the co-op handshake could report a modded player as "has no Content Forge" on a dedicated server.
+Fixed: hunt contests counted no kills on a dedicated server and always ended with no victor.
 The ForgeGiveItem / ForgeTakeItem / ForgeHeal dialogue commands still need a player host.
 Changed: the default icon is now a plain scroll instead of the game's "sam" placeholder photo.
 Validators warn when a recipe ingredient is a construction resource (resource:...), which can't be crafted with.
