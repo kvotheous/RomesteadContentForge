@@ -20,7 +20,8 @@
 `BepInEx\config\RomesteadContentForge\packs\` — and the mod injects their items, weapons, spells, summons,
 creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. Ready-made AI and
 behaviors are built in — C# is optional, for when you want to go further. No compiling, no game files touched;
-works in single-player and co-op (server-authoritative, save-safe uninstall).
+works in single-player and co-op (server-authoritative, save-safe uninstall). Dedicated servers are not supported —
+co-op means a player hosts from the game.
 
 ## 🛠️ Easiest way to start: the Forge Editor
 

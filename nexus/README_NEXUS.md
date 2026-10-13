@@ -158,6 +158,7 @@ Each download includes `THIRD-PARTY-NOTICES.txt` — the licenses of the open-so
 
 - **Game updates:** built for the Romestead **2026-10-04** update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows `Patch ... failed`) and the rest keeps working.
 - **Co-op:** the **host** must run the mod (content is server-authoritative); ideally all players run it with the **same packs** so everything matches. Against an unmodded host, modded content won't be present.
+- **Dedicated servers:** not supported. Content Forge works in single-player and in co-op where a player hosts from the game.
 - **Save-safe:** if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
 - **Custom icons** should be authored at **18×18** (the game's item-icon size) with a transparent margin.
 - **Custom VFX** (sprite-animation effects) are supported; **custom audio** is plain files — point a pack's `sounds` at `wav`/`ogg`/`mp3`/`flac`, no FMOD tooling needed (FMOD banks are also supported for advanced users).
