@@ -28,7 +28,7 @@ The release ships as **two zips** (Nexus Files tab / GitHub Releases):
 | Zip | Contents | Who needs it |
 |---|---|---|
 | **`RomesteadContentForge-<version>.zip`** — *the mod* | `BepInEx\plugins\` DLLs (the mod + its YarnSpinner/CSV libraries). Extract over the game folder. | **Everyone** — players just installing packs, and creators. |
-| **`RomesteadContentForge-Authoring-<version>.zip`** — *the creator kit* | All docs (this index, PACKS/COOKBOOK/GETTING_STARTED…), the **GUI editor** (`ForgeEditor.exe` + source), `tools/` (art extraction, asset catalog, held-sheet generator), `examples/` (3 worked packs incl. the full test bench) and `reference/` (17 id catalogs). Unzip anywhere — nothing installs into the game. | **Pack creators.** Players don't need it. |
+| **`RomesteadContentForge-Authoring-<version>.zip`** — *the creator kit* | All docs (this index, PACKS/COOKBOOK/GETTING_STARTED…), the **GUI editor's Python source** (the ready-to-run `ForgeEditor.exe` is the separate `ForgeEditor-<version>.zip`), `tools/` (art extraction, asset catalog, held-sheet generator), `examples/` (3 worked packs incl. the full test bench) and `reference/` (17 id catalogs). Unzip anywhere — nothing installs into the game. | **Pack creators.** Players don't need it. |
 
 `ForgeEditor-<version>.zip` (just `ForgeEditor.exe` + license notices) is also offered as its own optional file for creators who only want the editor. Third-party licenses for everything the downloads bundle are in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
 
