@@ -1,7 +1,7 @@
 [center][size=6][b][color=#f0bd77]Romestead Content Forge[/color][/b][/size]
 [i]Add your own items, weapons, creatures, dungeons and more to Romestead with JSON content packs — ready-made AI and behaviors included, C# optional. No game files edited.[/i][/center]
 
-[quote][b]Version 1.0.1 — works with the Romestead 2026-10-04 update. Provided as-is — fixes when I have time, no promises.[/b]
+[quote][b]Version 1.1.0 — works with the Romestead 2026-10-04 update, including dedicated servers. Provided as-is — fixes when I have time, no promises.[/b]
 I made this for myself and may fix things now and then, but I can't promise updates or a timeline. It's experimental: much of it is tested, some features aren't, and future game updates can break things. The full source is on [url=https://github.com/kvotheous/RomesteadContentForge]GitHub[/url] (MIT license) — anyone is welcome to fork it, fix it or build on it.[/quote]
 
 [line]
@@ -127,6 +127,7 @@ All docs ship in the [b]Authoring zip[/b] ([i]docs/[/i] folder) and are also rea
 [*][b]RomesteadContentForge-<version>.zip[/b] — the mod itself ([i]BepInEx\plugins\[/i] DLLs). [b]Everyone needs this[/b].
 [*][b]RomesteadContentForge-Authoring-<version>.zip[/b] — the [b]creator kit[/b]: all docs (field reference, cookbook, getting-started), the editor's Python source (for the ready-to-run app, get [i]ForgeEditor-<version>.zip[/i]), art/asset tools, worked example packs and 17 id catalogs. Only for pack [b]creators[/b]; unzips anywhere (nothing installs into the game).
 [*][b]ForgeEditor-<version>.zip[/b] — optional standalone GUI editor ([i]ForgeEditor.exe[/i], no Python needed), for creators who want just the editor.
+[*][b]RomesteadContentForge-Server-<version>.zip[/b] — only for a [b]dedicated server[/b] (see [i]Dedicated servers[/i]); players don't need it.
 [/list]
 Each download includes [i]THIRD-PARTY-NOTICES.txt[/i] — the licenses of the open-source libraries it bundles.
 
@@ -137,11 +138,30 @@ Each download includes [i]THIRD-PARTY-NOTICES.txt[/i] — the licenses of the op
 [*]Edit the sample or add your own packs, then relaunch.
 [/list]
 
+[size=5][b][color=#f0bd77]Dedicated servers[/color][/b][/size]
+
+Content Forge has a separate [b]dedicated-server build[/b], [i]RomesteadContentForge.Server.dll[/i] — the normal mod can't load on a headless server (there's no game client there).
+
+[list=1]
+[*][b]Set up BepInEx on the server[/b] — extract the [i]Romestead BepInEx Mod Loader[/i] next to [i]Server.exe[/i] (leave out [i]d3d11.dll[/i], the client's hook).
+[*][b]Extract [i]RomesteadContentForge-Server-<version>.zip[/i][/b] into the server folder: the DLL goes to [i]BepInEx\plugins\[/i], and [i]start-modded-server.bat[/i] lands next to [i]Server.exe[/i].
+[*][b]Copy your packs[/b] to the server's [i]BepInEx\config\RomesteadContentForge\packs\[/i] — the [b]same packs every player has[/b].
+[*][b]Start the server with [i]start-modded-server.bat[/i][/b] (not Steam's Play button). The log shows [i]"Romestead Content Forge (Dedicated Server) … loaded"[/i] and [i]"loaded N pack(s)"[/i].
+[/list]
+
+Players keep the normal mod and the same packs. The co-op handshake warns in chat about missing or mismatched packs, as on a player host.
+
+[list]
+[*][b]Works on a dedicated server:[/b] items, spells, recipes, creatures + AI, NPCs, maps and portals, events and arenas, crafting stations, placeables.
+[*][b]Host-only:[/b] the dialogue commands [i]ForgeGiveItem[/i] / [i]ForgeTakeItem[/i] / [i]ForgeHeal[/i] (dialogue still opens and talks; these three need a player host).
+[*]Using the other kvotheous mods on the same server? Add the [b]Kvotheous Dedicated Server Kit[/b] — same loader, same [i]start-modded-server.bat[/i].
+[/list]
+
 [size=5][b][color=#f0bd77]Notes & Compatibility[/color][/b][/size]
 [list]
 [*][b]Game updates:[/b] built for the Romestead [b]2026-10-04[/b] update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows "Patch ... failed") and the rest keeps working.
 [*][b]Co-op:[/b] the [b]host[/b] must run the mod (content is server-authoritative); ideally all players run it with the [b]same packs[/b]. Against an unmodded host, modded content won't be present.
-[*][b]Dedicated servers:[/b] not supported. Content Forge works in single-player and in co-op where a player hosts from the game.
+[*][b]Dedicated servers:[/b] supported with the separate server build — see [i]Dedicated servers[/i] above.
 [*][b]Save-safe:[/b] if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
 [*][b]Custom icons[/b] should be authored at [b]18×18[/b] (the game's item-icon size) with a transparent margin.
 [*]Pairs with the author's other Romestead mods (Item/Building/Citizen/Creature Spawners, Map Travel, Cheat Menu, QoL).

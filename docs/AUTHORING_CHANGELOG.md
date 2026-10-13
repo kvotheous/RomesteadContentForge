@@ -4,6 +4,10 @@ What changed in `RomesteadContentForge-Authoring-<version>.zip` (docs, example p
 lists, tools). Mod changes are in [../CHANGELOG.md](../CHANGELOG.md); editor changes in
 [../editor/CHANGELOG.md](../editor/CHANGELOG.md).
 
+## 1.1.0
+- README documents dedicated servers (the new `RomesteadContentForge-Server` zip). No changes to docs content,
+  examples or the editor.
+
 ## 1.0.1
 - Docs: `PACKS.md` documents the spac field `feetRow` and the `forge_creature_anim` params `sprite-scale` and
   `sprite-offset-y`.

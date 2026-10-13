@@ -2,7 +2,7 @@
 
 **Add your own items, weapons, creatures, dungeons and more to Romestead with JSON content packs — ready-made AI and behaviors included, C# optional. No game files edited.**
 
-> **Version 1.0.1 — works with the Romestead 2026-10-04 update. Provided as-is — fixes when I have time, no promises.**
+> **Version 1.1.0 — works with the Romestead 2026-10-04 update, including dedicated servers. Provided as-is — fixes when I have time, no promises.**
 > I made this for myself and may fix things now and then, but I can't promise updates or a timeline. It's experimental: much of it is tested, some
 > features aren't, and future game updates can break things. The full source is on
 > [GitHub](https://github.com/kvotheous/RomesteadContentForge) (MIT license) — anyone is welcome to fork it, fix it or build on it.
@@ -144,6 +144,7 @@ All docs ship in the **Authoring zip** (`docs/` folder) and are also readable on
 - **`RomesteadContentForge-<version>.zip`** — the mod itself (`BepInEx\plugins\` DLLs). **Everyone needs this** — both players installing packs and pack creators.
 - **`RomesteadContentForge-Authoring-<version>.zip`** — the **creator kit**: all docs (field reference, cookbook, getting-started), the editor's Python source (for the ready-to-run app, get `ForgeEditor-<version>.zip`), art/asset tools, worked example packs and 17 id catalogs. Only needed if you **create** packs; unzips anywhere (nothing installs into the game).
 - **`ForgeEditor-<version>.zip`** — optional standalone GUI editor (`ForgeEditor.exe`, no Python needed) for creators who want just the editor.
+- **`RomesteadContentForge-Server-<version>.zip`** — only for a **dedicated server** (see *Dedicated servers*); players don't need it.
 
 Each download includes `THIRD-PARTY-NOTICES.txt` — the licenses of the open-source libraries it bundles.
 
@@ -154,11 +155,28 @@ Each download includes `THIRD-PARTY-NOTICES.txt` — the licenses of the open-so
 
 ---
 
+## Dedicated servers
+
+Content Forge has a separate **dedicated-server build**, `RomesteadContentForge.Server.dll` — the normal mod can't load on a headless server (there's no game client there).
+
+1. **Set up BepInEx on the server** — extract the *Romestead BepInEx Mod Loader* next to `Server.exe` (leave out `d3d11.dll`, the client's hook).
+2. **Extract `RomesteadContentForge-Server-<version>.zip`** into the server folder: the DLL goes to `BepInEx\plugins\`, and `start-modded-server.bat` lands next to `Server.exe`.
+3. **Copy your packs** to the server's `BepInEx\config\RomesteadContentForge\packs\` — the **same packs every player has**.
+4. **Start the server with `start-modded-server.bat`** (not Steam's Play button). The log shows *"Romestead Content Forge (Dedicated Server) … loaded"* and *"loaded N pack(s)"*.
+
+Players keep the normal mod and the same packs. The co-op handshake warns in chat about missing or mismatched packs, as on a player host.
+
+- **Works on a dedicated server:** items, spells, recipes, creatures + AI, NPCs, maps and portals, events and arenas, crafting stations, placeables.
+- **Host-only:** the dialogue commands `ForgeGiveItem` / `ForgeTakeItem` / `ForgeHeal` (dialogue still opens and talks; these three need a player host).
+- Using the other kvotheous mods on the same server? Add the **Kvotheous Dedicated Server Kit** — same loader, same `start-modded-server.bat`.
+
+---
+
 ## Notes & Compatibility
 
 - **Game updates:** built for the Romestead **2026-10-04** update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows `Patch ... failed`) and the rest keeps working.
 - **Co-op:** the **host** must run the mod (content is server-authoritative); ideally all players run it with the **same packs** so everything matches. Against an unmodded host, modded content won't be present.
-- **Dedicated servers:** not supported. Content Forge works in single-player and in co-op where a player hosts from the game.
+- **Dedicated servers:** supported with the separate server build — see *Dedicated servers* above.
 - **Save-safe:** if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
 - **Custom icons** should be authored at **18×18** (the game's item-icon size) with a transparent margin.
 - **Custom VFX** (sprite-animation effects) are supported; **custom audio** is plain files — point a pack's `sounds` at `wav`/`ogg`/`mp3`/`flac`, no FMOD tooling needed (FMOD banks are also supported for advanced users).

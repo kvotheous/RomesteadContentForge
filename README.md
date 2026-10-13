@@ -4,7 +4,7 @@
 
 **Turn Romestead into a moddable platform — plain JSON content packs, no compiling, no game files touched.**
 
-[![Version](https://img.shields.io/badge/version-1.0.1-d89a4e?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-d89a4e?style=flat-square)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f?style=flat-square)](LICENSE)
 [![BepInEx 6](https://img.shields.io/badge/BepInEx-6%20(CoreCLR)-5c2d91?style=flat-square)](https://github.com/BepInEx/BepInEx)
 [![Game](https://img.shields.io/badge/game-Romestead-b03a2e?style=flat-square)](https://store.steampowered.com/)
@@ -20,8 +20,8 @@
 `BepInEx\config\RomesteadContentForge\packs\` — and the mod injects their items, weapons, spells, summons,
 creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. Ready-made AI and
 behaviors are built in — C# is optional, for when you want to go further. No compiling, no game files touched;
-works in single-player and co-op (server-authoritative, save-safe uninstall). Dedicated servers are not supported —
-co-op means a player hosts from the game.
+works in single-player, co-op and on **dedicated servers** (server-authoritative, save-safe uninstall) — see
+[Dedicated servers](nexus/README_NEXUS.md#dedicated-servers).
 
 ## 🛠️ Easiest way to start: the Forge Editor
 
@@ -51,7 +51,7 @@ It's not just a content injector: Content Forge ships ready-made systems your pa
 
 ## 📦 Downloads — which zip is which
 
-The release ships as **two main zips** plus the optional editor zip (Nexus Files tab / GitHub Releases):
+The release ships as **two main zips** plus the optional editor and dedicated-server zips (Nexus Files tab / GitHub Releases):
 
 | Zip | Contents | Who needs it |
 |---|---|---|
@@ -59,6 +59,8 @@ The release ships as **two main zips** plus the optional editor zip (Nexus Files
 | **`RomesteadContentForge-Authoring-<version>.zip`** — *the creator kit* | All docs (this index, PACKS/COOKBOOK/GETTING_STARTED…), the **GUI editor's Python source** (the ready-to-run `ForgeEditor.exe` is the separate `ForgeEditor-<version>.zip`), `tools/` (art extraction, asset catalog, held-sheet generator), `examples/` (3 worked packs incl. the full test bench) and `reference/` (17 id catalogs). Unzip anywhere — nothing installs into the game. | **Pack creators.** Players don't need it. |
 
 `ForgeEditor-<version>.zip` (just `ForgeEditor.exe` + license notices) is also offered as its own optional file for creators who only want the editor. Third-party licenses for everything the downloads bundle are in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
+
+`RomesteadContentForge-Server-<version>.zip` is the **dedicated-server build** (`RomesteadContentForge.Server.dll` + `start-modded-server.bat`) — only for people running a headless Romestead Dedicated Server; see [Dedicated servers](nexus/README_NEXUS.md#dedicated-servers).
 
 ## 🧭 Find what you need
 

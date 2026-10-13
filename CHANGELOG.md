@@ -1,5 +1,15 @@
 # Changelog — Romestead Content Forge
 
+## 1.1.0
+- **New: dedicated server support.** A separate server build, `RomesteadContentForge.Server.dll`
+  (`RomesteadContentForge-Server-<version>.zip`), runs Content Forge on a headless Romestead Dedicated Server — items,
+  spells, recipes, creatures + AI, NPCs, maps and portals, events, crafting stations, placeables. It's the same code
+  with the client-only parts (visuals, UI, sounds) left out; it stays inactive if installed next to the game client.
+  Setup: *Dedicated servers* on the mod page.
+- **Fixed: the co-op handshake mixed up players on a dedicated server.** It used the network connection number as the
+  player id, which differ on a dedicated server — so a modded player could be reported as "has no Content Forge".
+- The `ForgeGiveItem` / `ForgeTakeItem` / `ForgeHeal` dialogue commands still need a player host (documented).
+
 ## 1.0.1
 Compatibility + fixes release. **Required for the Romestead 2026-10-04 update** — 1.0.0 was built before it and is not compatible.
 

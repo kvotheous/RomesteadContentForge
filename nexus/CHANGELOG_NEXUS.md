@@ -4,6 +4,11 @@ Full versions: mod [../CHANGELOG.md](../CHANGELOG.md) · authoring kit
 [../docs/AUTHORING_CHANGELOG.md](../docs/AUTHORING_CHANGELOG.md) · editor
 [../editor/CHANGELOG.md](../editor/CHANGELOG.md).
 
+## Mod — 1.1.0
+New: dedicated server support — a separate server build (RomesteadContentForge-Server zip) runs Content Forge on a headless Romestead Dedicated Server. Setup steps on the mod page.
+Fixed: the co-op handshake could report a modded player as "has no Content Forge" on a dedicated server.
+The ForgeGiveItem / ForgeTakeItem / ForgeHeal dialogue commands still need a player host.
+
 ## Mod — 1.0.1
 Compatible with the Romestead 2026-10-04 update (1.0.0 is not).
 Interactive placeables: holding the interact key (vanilla pickup/demolish) no longer triggers their action.
@@ -17,6 +22,9 @@ Every download now includes THIRD-PARTY-NOTICES.txt (licenses of the bundled ope
 
 ## Mod — 1.0.0
 Initial release: content packs for items, weapons, spells, creatures, NPCs, maps, events, crafting stations, quests and more.
+
+## Authoring kit — 1.1.0
+README documents dedicated servers and the new server zip.
 
 ## Authoring kit — 1.0.1
 PACKS.md documents "feetRow", "sprite-scale" and "sprite-offset-y".
