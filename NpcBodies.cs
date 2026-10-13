@@ -1,5 +1,7 @@
+#if !CF_SERVER
 using Candide;                              // Globals (client GraphicsDevice / Reflection)
 using Candide.Database.Doodad;              // DoodadDatabaseManager (client entity registry)
+#endif
 using CandideCreator.Shared.Graphics;       // SpriteSheet
 using CandideCreator.Shared.Serialization;  // CandideReflection
 using CandideServer;                        // ServerGlobals
@@ -120,7 +122,9 @@ internal static class NpcBodies
                 if (def.Tint != null && def.Tint.Length >= 3)
                     clone.General[0].Color = new Color(Clamp255(def.Tint[0]), Clamp255(def.Tint[1]), Clamp255(def.Tint[2]));
 
+#if !CF_SERVER
                 if (!serverSide) ApplySheets(clone, def, dir);   // visuals are client-only (see header)
+#endif
 
                 protos[guid] = clone;
                 Plugin.Log.LogInfo($"Registered npc body '{def.Id}' (clone of {BaseDoodadName}, "
@@ -131,6 +135,7 @@ internal static class NpcBodies
         }
     }
 
+#if !CF_SERVER
     // Swap the clone's General.SpriteSheet for the author's repaint. The satyr's mesh UVs map the 48x48
     // sheet 1:1, so we keep EVERYTHING but the texture (normal/metal maps, frame size, offset, the mesh).
     private static void ApplySheets(EntitySystem clone, NpcDef def, string packDir)
@@ -181,6 +186,7 @@ internal static class NpcBodies
         _textureCache[path] = tex;
         return tex;
     }
+#endif
 
     // Stable Guid from the npc id (MD5-based, deterministic across machines -> co-op-safe). The same
     // construction as Plugin.GuidFromId (private there). NOTE: shares its Guid space with custom creatures —
@@ -231,6 +237,7 @@ internal static class NpcBodyServerPatch
     }
 }
 
+#if !CF_SERVER
 // And into the CLIENT entity registry (renders the repaint/tint). Same Guid both sides.
 internal static class NpcBodyClientPatch
 {
@@ -311,3 +318,4 @@ internal static class NpcBodyRetintPatch
         catch (Exception e) { Plugin.Log.LogWarning($"NPC body re-tint failed: {e.Message}"); }
     }
 }
+#endif

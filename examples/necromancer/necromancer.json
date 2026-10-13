@@ -66,7 +66,7 @@
     { "id": "necro:bone_brazier", "name": "Bone Brazier",
       "nameLocalized": { "tr_TR": "Kemik Mangalı" },
       "description": "A grim brazier for the necromancer's lair.",
-      "spawnedId": "brazier:2", "icon": "sam",
+      "spawnedId": "brazier:2", "icon": "scroll:brown",
       "materials": { "material:coal": 5, "resource:stone": 3 },
       "width": 1, "height": 1 }
   ]

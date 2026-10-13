@@ -1,7 +1,9 @@
+#if !CF_SERVER
 using Candide;                              // Globals (client GraphicsDevice / client entity registry reflection)
 using Candide.Database.Doodad;              // DoodadDatabaseManager (client entity registry)
 using Candide.Entities.Animations;          // EntitySpacAnimationStateMachine
 using Candide.Graphics.VFX;                 // SpacRenderingArgs
+#endif
 using CandideCreator.Shared;                // Content (DefaultNormalMap/DefaultMetalMap)
 using CandideCreator.Shared.Collision;      // CollisionRectangle
 using CandideCreator.Shared.Graphics;       // SpriteSheet
@@ -100,7 +102,7 @@ internal static class CompositeFeature
     public static void Init()
     {
         InteractiveFeature.RegisterController("forge_composite",
-            typeof(ForgeCompositeClientController), typeof(ForgeCompositeServerController));
+            InteractiveFeature.ClientType("ForgeCompositeClientController"), typeof(ForgeCompositeServerController));
     }
 
     // ------------------------------------------------------------------ parse time (BuildPack)
@@ -230,6 +232,7 @@ internal static class CompositeFeature
         }
     }
 
+#if !CF_SERVER
     // ------------------------------------------------------------------ the composite Spac (client only)
 
     // One single-frame Spac per composite: Directions=1, one looping "idle" animation, one SpacFrame whose
@@ -343,6 +346,7 @@ internal static class CompositeFeature
         sm.Args = args;
         return sm;
     }
+#endif
 }
 
 // ------------------------------------------------ patches ------------------------------------------------
@@ -360,6 +364,7 @@ internal static class CompositeServerPatch
     }
 }
 
+#if !CF_SERVER
 // And in the CLIENT registry (co-op clients resolve replicated children by BaseId from here). Same Guids.
 internal static class CompositeClientPatch
 {
@@ -371,9 +376,11 @@ internal static class CompositeClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Composite client prototype pass failed: {e.Message}"); }
     }
 }
+#endif
 
 // ----------------------------------------------- controllers -----------------------------------------------
 
+#if !CF_SERVER
 // CLIENT: renders the composite. Builds the (cached) Spac, owns a per-instance state machine, registers it
 // with the deferred renderer every frame — the exact static-spac-entity pattern vanilla controllers use.
 public sealed class ForgeCompositeClientController : ForgeClientController
@@ -399,6 +406,7 @@ public sealed class ForgeCompositeClientController : ForgeClientController
         if (_sm != null && Entity != null) _sm.Draw(Entity);   // -> DeferredRenderer.RegisterEntitySpac
     }
 }
+#endif
 
 // SERVER: owns the child blockers. First Update tick after every (re)spawn validates/spawns them (deferred
 // out of EntityInitialize — see header); OnRemove cascades real removals to the children.

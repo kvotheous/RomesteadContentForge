@@ -6,7 +6,7 @@
     <Product>Romestead Content Forge</Product>
     <Authors>kvotheous</Authors>
     <Company>kvotheous</Company>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <EnablePreviewFeatures>true</EnablePreviewFeatures>
@@ -28,9 +28,10 @@
     <GameDir Condition="'$(GameDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\romestead</GameDir>
   </PropertyGroup>
 
-  <!-- The standalone validator is its own console project; keep its sources out of the mod build. -->
+  <!-- The standalone validator and the dedicated-server build are their own projects; keep their sources out of the mod build. -->
   <ItemGroup>
     <Compile Remove="Validator\**\*.cs" />
+    <Compile Remove="Server\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>

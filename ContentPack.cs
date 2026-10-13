@@ -69,7 +69,7 @@ internal sealed class FavourDef
     public string Description;                     // tooltip text; {0}/{1} expand to flagValue1/flagValue2.
                                                    // Omit it with statBonuses and the stat lines auto-describe.
     public Dictionary<string, string> DescriptionLocalized; // optional langcode -> description
-    public string Icon = "sam";                    // icon id (vanilla or your custom icon)
+    public string Icon = "scroll:brown";                    // icon id (vanilla or your custom icon)
     public string Parent;                          // required: the favour id to attach under (vanilla "<god>_favour:<name>" or another of YOUR nodes).
                                                    // With screen:true the parent is optional (empty = root) and must be another screen node.
     public int[] Position;                         // required [column,row] tree-grid cell. Vanilla fills
@@ -136,7 +136,7 @@ internal sealed class SkillDef
     public Dictionary<string, string> NameLocalized;
     public string Description;
     public Dictionary<string, string> DescriptionLocalized;
-    public string Icon = "sam";                    // vanilla icon id or your custom icon
+    public string Icon = "scroll:brown";                    // vanilla icon id or your custom icon
     public float Value = 0.5f;                     // per-level effect scalar (damage bonus = Value * level/100)
     public float XpGainFactor = 1f;                // XP multiplier for this skill
 }
@@ -227,7 +227,7 @@ internal sealed class SeedDef
     public string Name;                            // item name shown in inventory/shop
     public Dictionary<string, string> NameLocalized;        // optional langcode -> name
     public Dictionary<string, string> DescriptionLocalized; // optional langcode -> description
-    public string Icon = "sam";                    // icon id (vanilla or your custom icon)
+    public string Icon = "scroll:brown";                    // icon id (vanilla or your custom icon)
     public int Price = 10;                          // buy price (sell = 20%)
     public int Tier = 1;
     public int MaxStack = 100;
@@ -426,7 +426,7 @@ internal sealed class PlaceableDef
     public string Name;                            // display name in the build menu
     public string Description;                      // optional tooltip text
     public string SpawnedId;                        // required: vanilla decoration to place — see reference/decoration-ids.txt
-    public string Icon = "sam";                     // build-menu icon (vanilla icon id or your custom icon)
+    public string Icon = "scroll:brown";                     // build-menu icon (vanilla icon id or your custom icon)
     public Dictionary<string, int> Materials;       // build cost: resourceId -> amount (e.g. "resource:stone": 5). Empty = free
     public int Width = 2;                            // tile footprint width
     public int Height = 2;                           // tile footprint height
@@ -637,7 +637,7 @@ internal sealed class ItemDef
     public Dictionary<string, string> NameLocalized;        // per-language name: { "tr_TR": "...", "de_DE": "..." }
     public string Description;                      // literal tooltip description (default/fallback)
     public Dictionary<string, string> DescriptionLocalized; // per-language description, keyed by language code
-    public string Icon = "sam";                    // existing icon id to reuse ("sam" = placeholder)
+    public string Icon = "scroll:brown";           // existing icon id to reuse (default: a plain scroll)
     public int MaxStack = 1;
     public int? Tier;
     public string Flags;                            // ItemFlag name(s), comma-separated (e.g. "Food")

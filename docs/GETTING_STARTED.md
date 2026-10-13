@@ -9,9 +9,10 @@ You write a small **JSON file** (a "content pack"), drop it in a folder, and you
 classes/placeables/creatures/dungeons are **in the game**. No compiling, no game files touched.
 
 ## 1. Install (once)
-There are **two downloads**: the **mod zip** (`RomesteadContentForge-<version>.zip` — the `BepInEx\plugins\`
-DLLs; everyone needs this) and the **Authoring zip** (`...-Authoring-<version>.zip` — docs, GUI editor,
-tools, examples, id catalogs; only pack **creators** need it, and it unzips anywhere).
+There are **two main downloads**: the **mod zip** (`RomesteadContentForge-<version>.zip` — the `BepInEx\plugins\`
+DLLs; everyone needs this) and the **Authoring zip** (`...-Authoring-<version>.zip` — docs, the editor's Python
+source, tools, examples, id catalogs; only pack **creators** need it, and it unzips anywhere). The ready-to-run
+editor (`ForgeEditor.exe`, no Python needed) is the optional **`ForgeEditor-<version>.zip`**.
 
 1. Everything is on **Nexus Mods**: download **Content Forge** (the mod zip), install the **Romestead BepInEx
    Mod Loader** (linked in the mod's Requirements section), then put the zip's `BepInEx` folder over the

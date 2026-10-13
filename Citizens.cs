@@ -12,8 +12,10 @@ using Shared.Text;                          // StringId
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if !CF_SERVER
 // The client controller lives in a namespace that ends with its own name — alias to stay readable.
 using ClientCitizenController = Candide.Entities.Controllers.CitizenController.CitizenController;
+#endif
 
 namespace RomesteadContentForge;
 
@@ -324,6 +326,7 @@ internal static class CitizenSpawnParamPatch
     }
 }
 
+#if !CF_SERVER
 // CLIENT: re-skin a fixed-look citizen entity after vanilla applied the Guid-seeded random appearance.
 // Runs on every machine with the mod+pack (the look fields/displayIds resolve through PlayerSkinManager
 // .Parts + CharacterDisplayDataBase — pack "cdd:" looks registered by ApplyDisplayData/playerSkins work).
@@ -344,3 +347,4 @@ internal static class CitizenClientLookPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Citizen client look failed: {e.Message}"); }
     }
 }
+#endif

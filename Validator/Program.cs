@@ -154,7 +154,11 @@ internal static class Program
                 Warn(name, $"recipe '{r.Id}': unknown station '{r.Station}' (not vanilla and no placeable declares it — never craftable).");
             if (r.Ingredients != null)
                 foreach (var kv in r.Ingredients)
+                {
                     if (kv.Value <= 0) Warn(name, $"recipe '{r.Id}': ingredient '{kv.Key}' has count {kv.Value}.");
+                    if (kv.Key != null && kv.Key.StartsWith("resource:", StringComparison.Ordinal))
+                        Warn(name, $"recipe '{r.Id}': ingredient '{kv.Key}' is a construction resource, not an item — crafting can't use it (use an item id such as 'material:...').");
+                }
         }
 
         foreach (NpcDef n in pack.Npcs ?? new())

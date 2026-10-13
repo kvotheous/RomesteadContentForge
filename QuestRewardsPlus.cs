@@ -159,7 +159,7 @@ internal static class QuestRewardsPlusFeature
             list.Add(new RewardData
             {
                 Id = kv.Key,
-                Icon = "sam",
+                Icon = "scroll:brown",
                 RewardStrategies = new IRewardStrategy[] { new ForgeItemRewardStrategy(kv.Key, kv.Value) },
             });
         }

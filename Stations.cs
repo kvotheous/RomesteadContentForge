@@ -1,6 +1,8 @@
 using Candide;                      // Globals (LanguageCode)
+#if !CF_SERVER
 using Candide.CandideUI;            // PlayerUi (ShowSecondaryCraftingWindow)
 using Candide.GameModels.Managers;  // LocalizationManager
+#endif
 using HarmonyLib;
 using Shared.Data;                  // SharedDataSetup, CraftingStationDataBase
 using Shared.Entity;                // EntityWrapper
@@ -65,7 +67,7 @@ internal static class StationsFeature
     // (idempotent — RegisterController is an indexer assignment).
     internal static void Init()
         => InteractiveFeature.RegisterController("forge_station",
-            typeof(ForgeStationClientController), typeof(ForgeStationServerController));
+            InteractiveFeature.ClientType("ForgeStationClientController"), typeof(ForgeStationServerController));
 
     // Called from BuildPack for every placeable (early-outs unless `station` is set), BEFORE TryBuildPlaceable:
     // turn the placeable into a crafting station. Order note: this runs after the yarn block, so a placeable
@@ -89,7 +91,7 @@ internal static class StationsFeature
         foreach (string id in SplitStations(f.Station))
         {
             if (VanillaStationIds.Contains(id)) continue;
-            _stations.TryAdd(id, (string.IsNullOrWhiteSpace(f.Icon) ? "sam" : f.Icon,
+            _stations.TryAdd(id, (string.IsNullOrWhiteSpace(f.Icon) ? "scroll:brown" : f.Icon,
                 string.IsNullOrWhiteSpace(f.Name) ? id : f.Name, f.NameLocalized));
         }
     }
@@ -118,7 +120,11 @@ internal static class StationsFeature
     internal static void ApplyStrings()
     {
         if (_stations.Count == 0) return;
+#if CF_SERVER
+        const string lang = "en";   // no UI language on a dedicated server
+#else
         string lang = Globals.LanguageCode ?? "en";
+#endif
         foreach (var kv in _stations)
         {
             string key = kv.Key + CraftingStationDataBase.SuffixName;
@@ -153,6 +159,7 @@ internal static class StationSetupPatch
     }
 }
 
+#if !CF_SERVER
 // Station display names survive language changes: SetLocalization clears StringDefinitions.Strings and
 // refills it from the language file, dropping our "<id>*crafting_station:name" keys — add them back.
 [HarmonyPatch(typeof(LocalizationManager), nameof(LocalizationManager.SetLocalization))]
@@ -165,9 +172,11 @@ internal static class StationStringsPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Station string injection failed: {e.Message}"); }
     }
 }
+#endif
 
 // ----------------------------------------------- controllers -----------------------------------------------
 
+#if !CF_SERVER
 // CLIENT station: interact -> open the vanilla secondary crafting window scoped to this station's id(s) —
 // the exact call the vanilla WarTableController makes, with our ids instead of the entity's Furniture
 // CraftingStationFlags (our clones don't need the Furniture component at all). The window itself does the
@@ -198,6 +207,7 @@ public sealed class ForgeStationClientController : ForgeClientController
         catch (Exception e) { Plugin.Log.LogWarning($"forge_station interact failed: {e.Message}"); }
     }
 }
+#endif
 
 // SERVER station: nothing to simulate — crafting itself is an ordinary inventory craft message the server
 // already handles (and the server performs no station checks; see header). A server controller type must

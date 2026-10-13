@@ -259,6 +259,7 @@ internal static class TiledObjectsServerDbPatch
     }
 }
 
+#if !CF_SERVER
 // Same chokepoint on the CLIENT entity registry (DoodadClientPatch's postfix needs the harvested defs too).
 internal static class TiledObjectsClientDbPatch
 {
@@ -271,3 +272,4 @@ internal static class TiledObjectsClientDbPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Tiled object harvest (client) failed: {e.Message}"); }
     }
 }
+#endif

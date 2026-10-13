@@ -1,9 +1,33 @@
 [center][size=6][b][color=#f0bd77]Romestead Content Forge[/color][/b][/size]
-[i]Add your own items, weapons, spells, and more to Romestead — from simple JSON files. No coding, no game edits.[/i][/center]
+[i]Add your own items, weapons, creatures, dungeons and more to Romestead with JSON content packs — ready-made AI and behaviors included, C# optional. No game files edited.[/i][/center]
+
+[quote][b]Version 1.1.0 — works with the Romestead 2026-10-04 update, including dedicated servers. Provided as-is — fixes when I have time, no promises.[/b]
+I made this for myself and may fix things now and then, but I can't promise updates or a timeline. It's experimental: much of it is tested, some features aren't, and future game updates can break things. The full source is on [url=https://github.com/kvotheous/RomesteadContentForge]GitHub[/url] (MIT license) — anyone is welcome to fork it, fix it or build on it.[/quote]
 
 [line]
 
 Content Forge is a modding framework: drop a [i].json[/i] "content pack" in a folder and it injects brand-new content straight into the game's databases at load. Your creations behave like real game content — they spawn, equip, deal damage, heal, craft, and show up in the [b]Item Spawner[/b] automatically.
+
+[size=5][b][color=#f0bd77]Easiest way to start: the Forge Editor[/color][/b][/size]
+Don't want to write JSON by hand? Download [b]ForgeEditor-<version>.zip[/b], unzip, and run [b]ForgeEditor.exe[/b] (no Python, no install):
+[list]
+[*][b]Every game value is built in[/b] — items, creatures, icons, sounds, effects and more are picked from dropdowns, so you never guess an id.
+[*][b]Forms for every field[/b], with PNG previews and per-language text.
+[*][b]Built-in dialogue editor[/b] — write NPC conversations (Yarn) with syntax highlighting, a node outline, error checks, and a side-by-side translation grid that tracks how much is translated.
+[*][b]One-click validation[/b] catches mistakes before you launch the game.
+[*]It saves the same [i].json[/i] packs the mod reads, so you can switch between the editor and hand-editing anytime.
+[/list]
+
+[size=5][b][color=#f0bd77]More than an injector: built-in building blocks[/color][/b][/size]
+It's not just a content injector: Content Forge ships ready-made systems your packs can use by name.
+[list]
+[*][b]Creature AI[/b]: [b]8 ready-made AI brains[/b]: guard, coward, ranged caster, patroller, pack hunter, summoner, healer, turret. Give any creature one by name.
+[*][b]Interactive objects[/b]: [b]ready-made behaviors[/b] for placeables: crafting stations, portals, healing shrines, levers, talking objects (dialogue), props and multi-part buildings, plus a data-driven animation controller for fully custom creatures.
+[*][b]World events[/b]: [b]wave defense, boss rush, hunt contest, scheduled raids, team battles, king of the hill, races[/b] and PvP duel arenas, all configured in JSON.
+[*][b]Dialogue commands[/b]: NPC conversations can [b]give items, take payment and heal[/b] ([i]ForgeGiveItem[/i], [i]ForgeTakeItem[/i], [i]ForgeHeal[/i]).
+[*][b]C# when you want it[/b]: addon DLLs can register their [b]own behaviors and AI[/b] with one call, and any pack can then use them by name (see [url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/ADVANCED.md]Advanced[/url]).
+[*][b]Worked examples[/b]: [b]3 example packs[/b] (a story world, a necromancer class, and a test pack covering every feature) plus a [b]cookbook[/b] of copy-paste recipes.
+[/list]
 
 [size=5][b][color=#f0bd77]What you can make[/color][/b][/size]
 [list]
@@ -57,7 +81,7 @@ Content Forge is a modding framework: drop a [i].json[/i] "content pack" in a fo
 [*][b]Multi-language[/b] — names/descriptions per language; follows the player's game language. NPC dialogue translates too.
 [*][b]Consumables[/b] (food/potions), [b]light sources[/b] (torches), and [b]crafting recipes[/b].
 [/list]
-Many packs coexist safely: each declares an [b]id / namespace / version / dependencies[/b], so different authors' content never collides. A cross-platform [b]visual editor[/b] ships with the mod for those who'd rather not write JSON.
+Many packs coexist safely: each declares an [b]id / namespace / version / dependencies[/b], so different authors' content never collides. A [b]visual editor[/b] ([i]ForgeEditor.exe[/i]) is available for those who'd rather not write JSON.
 
 [size=5][b][color=#f0bd77]How it works[/color][/b][/size]
 [list=1]
@@ -65,7 +89,7 @@ Many packs coexist safely: each declares an [b]id / namespace / version / depend
 [*]Edit or add [i].json[/i] files there (and drop [i].png[/i] icons alongside).
 [*]Launch — your content is in the game. Spawn it via [b]Item Spawner (F1)[/b], craft it, or find it where you placed it.
 [/list]
-Full authoring guide with every field, valid values, stat keys, and damage types is in [b]PACKS.md[/b] (in the mod folder).
+Full authoring guide with every field, valid values, stat keys, and damage types is in [b]docs/PACKS.md[/b] in the Authoring zip (also on [url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/PACKS.md]GitHub[/url]).
 
 A taste:
 [code]{
@@ -77,6 +101,17 @@ A taste:
         "weapon": { "class": "Sword", "minDamage": { "pyro": 80 }, "maxDamage": { "pyro": 120 } } } }
   ]
 }[/code]
+
+[size=5][b][color=#f0bd77]Documentation[/color][/b][/size]
+All docs ship in the [b]Authoring zip[/b] ([i]docs/[/i] folder) and are also readable online on GitHub:
+[list]
+[*][url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/GETTING_STARTED.md]Getting started[/url] — your first pack in a few minutes.
+[*][url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/PACKS.md]Pack reference (PACKS.md)[/url] — every field, valid values, stat keys, damage types.
+[*][url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/COOKBOOK.md]Cookbook[/url] — ready-to-copy recipes.
+[*][url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/REFERENCE.md]Id catalogs[/url] — every referenceable game id.
+[*][url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/ADVANCED.md]Advanced[/url] — C# controllers and AI, addon DLLs, art extraction, FMOD banks.
+[*]Changelogs: [url=https://github.com/kvotheous/RomesteadContentForge/blob/main/CHANGELOG.md]mod[/url] · [url=https://github.com/kvotheous/RomesteadContentForge/blob/main/docs/AUTHORING_CHANGELOG.md]authoring kit[/url] · [url=https://github.com/kvotheous/RomesteadContentForge/blob/main/editor/CHANGELOG.md]editor[/url]
+[/list]
 
 [size=5][b][color=#f0bd77]Requirements[/color][/b][/size]
 [list]
@@ -90,9 +125,12 @@ A taste:
 [b]Which file do I download?[/b]
 [list]
 [*][b]RomesteadContentForge-<version>.zip[/b] — the mod itself ([i]BepInEx\plugins\[/i] DLLs). [b]Everyone needs this[/b].
-[*][b]RomesteadContentForge-Authoring-<version>.zip[/b] — the [b]creator kit[/b]: all docs (field reference, cookbook, getting-started), the GUI editor, art/asset tools, worked example packs and 17 id catalogs. Only for pack [b]creators[/b]; unzips anywhere (nothing installs into the game).
-[*][b]ForgeEditor.exe[/b] — optional standalone GUI editor, for creators who want just the editor.
+[*][b]RomesteadContentForge-Authoring-<version>.zip[/b] — the [b]creator kit[/b]: all docs (field reference, cookbook, getting-started), the editor's Python source (for the ready-to-run app, get [i]ForgeEditor-<version>.zip[/i]), art/asset tools, worked example packs and 17 id catalogs. Only for pack [b]creators[/b]; unzips anywhere (nothing installs into the game).
+[*][b]ForgeEditor-<version>.zip[/b] — optional standalone GUI editor ([i]ForgeEditor.exe[/i], no Python needed), for creators who want just the editor.
+[*][b]RomesteadContentForge-Server-<version>.zip[/b] — only for a [b]dedicated server[/b] (see [i]Dedicated servers[/i]); players don't need it.
 [/list]
+Each download includes [i]THIRD-PARTY-NOTICES.txt[/i] — the licenses of the open-source libraries it bundles.
+
 [list=1]
 [*]Install the [b]Romestead BepInEx Mod Loader[/b] and confirm it works.
 [*]Download this mod's archive and extract it [b]into your Romestead game folder[/b] (the archive has the correct [i]BepInEx\plugins\[/i] layout).
@@ -100,13 +138,37 @@ A taste:
 [*]Edit the sample or add your own packs, then relaunch.
 [/list]
 
+[size=5][b][color=#f0bd77]Dedicated servers[/color][/b][/size]
+
+Content Forge has a separate [b]dedicated-server build[/b], [i]RomesteadContentForge.Server.dll[/i] — the normal mod can't load on a headless server (there's no game client there).
+
+[list=1]
+[*][b]Set up BepInEx on the server[/b] — extract the [i]Romestead BepInEx Mod Loader[/i] next to [i]Server.exe[/i] (leave out [i]d3d11.dll[/i], the client's hook).
+[*][b]Extract [i]RomesteadContentForge-Server-<version>.zip[/i][/b] into the server folder: the DLL goes to [i]BepInEx\plugins\[/i], and [i]start-modded-server.bat[/i] lands next to [i]Server.exe[/i].
+[*][b]Copy your packs[/b] to the server's [i]BepInEx\config\RomesteadContentForge\packs\[/i] — the [b]same packs every player has[/b].
+[*][b]Start the server with [i]start-modded-server.bat[/i][/b] (not Steam's Play button). The log shows [i]"Romestead Content Forge (Dedicated Server) … loaded"[/i] and [i]"loaded N pack(s)"[/i].
+[/list]
+
+Players keep the normal mod and the same packs. The co-op handshake warns in chat about missing or mismatched packs, as on a player host.
+
+[list]
+[*][b]Works on a dedicated server:[/b] items, spells, recipes, creatures + AI, NPCs, maps and portals, events and arenas, crafting stations, placeables.
+[*][b]Host-only:[/b] the dialogue commands [i]ForgeGiveItem[/i] / [i]ForgeTakeItem[/i] / [i]ForgeHeal[/i] (dialogue still opens and talks; these three need a player host).
+[*]Using the other kvotheous mods on the same server? Add the [b]Kvotheous Dedicated Server Kit[/b] — same loader, same [i]start-modded-server.bat[/i].
+[/list]
+
 [size=5][b][color=#f0bd77]Notes & Compatibility[/color][/b][/size]
 [list]
+[*][b]Game updates:[/b] built for the Romestead [b]2026-10-04[/b] update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows "Patch ... failed") and the rest keeps working.
 [*][b]Co-op:[/b] the [b]host[/b] must run the mod (content is server-authoritative); ideally all players run it with the [b]same packs[/b]. Against an unmodded host, modded content won't be present.
+[*][b]Dedicated servers:[/b] supported with the separate server build — see [i]Dedicated servers[/i] above.
 [*][b]Save-safe:[/b] if you remove a pack, its items turn into harmless placeholders in old saves — no crashes.
 [*][b]Custom icons[/b] should be authored at [b]18×18[/b] (the game's item-icon size) with a transparent margin.
 [*]Pairs with the author's other Romestead mods (Item/Building/Citizen/Creature Spawners, Map Travel, Cheat Menu, QoL).
 [/list]
+
+[size=5][b][color=#f0bd77]Source code & contributing[/color][/b][/size]
+[url=https://github.com/kvotheous/RomesteadContentForge]github.com/kvotheous/RomesteadContentForge[/url] — MIT licensed. Fork it, fix it, or send a pull request. There's also an unfinished [b]Werewolf Village[/b] game mode (social deduction: wolves, villagers, a seer, its own village map and art) on the [i]werewolf[/i] branch, if anyone wants to pick it up.
 
 [size=5][b][color=#f0bd77]Credits[/color][/b][/size]
 [list]

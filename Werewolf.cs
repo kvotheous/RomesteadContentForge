@@ -1,3 +1,4 @@
+#if !CF_SERVER
 using Candide;                              // Globals (client)
 using Candide.CandideUI;                    // CandideThickness, VerticalAlignment
 using Candide.CandideUI.Components;         // CandideTextLabel
@@ -7,6 +8,7 @@ using Candide.GameModels.Managers;          // GameStateManager (client join hoo
 using Candide.LegacyUI;                     // HorizontalAlignment
 using Candide.Multiplayer.Network;          // NetworkManager (client -> server messages)
 using Candide.UISystems.Notification;       // UiNotificationSystem (client main-thread pump host)
+#endif
 using CandideServer;                        // ServerGlobals
 using CandideServer.EventBus;               // EventBusManager, EventBusArgs
 using CandideServer.MessageModels;          // ChatLogMessage, PlayerChatLogMessage
@@ -713,7 +715,10 @@ internal static class WerewolfFeature
     {
         try
         {
+#if !CF_SERVER
+            // (a dedicated server has no hosting player — everyone is remote)
             if (playerId == ServerGlobals.HostingPlayerId) { WerewolfClient.HandleLocal(key, payload); return; }
+#endif
             if (PlayerServerService.JoinedPlayers.TryGetValue(playerId, out ServerJoinedPlayerModel p) && p != null)
                 BaseServer.Instance.SendHostMessage(key, payload, p.Peer);
         }
@@ -870,6 +875,7 @@ internal static class WerewolfGhostChatPatch
     }
 }
 
+#if !CF_SERVER
 // ---------------------------------------------------------------------------------------------------------
 // CLIENT — message handling + the action window. Everything the server sends lands in a thread-safe inbox
 // (network dispatch AND the host's direct local delivery from the server thread) and is handled on the UI
@@ -1142,3 +1148,4 @@ internal static class WerewolfClientPumpPatch
         try { WerewolfClient.Pump(); } catch { }
     }
 }
+#endif

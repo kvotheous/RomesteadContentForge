@@ -251,11 +251,11 @@ hit YOU mid-fight; ally factions sync to the client too).
 - Repeat/Reset: every unvisited bear den shows it; previously-visited dens may keep their old interior.
 
 **T65 Custom crafting station**
-- Prereqs: 2 stone (build) + 1 stone (craft).
+- Prereqs: 2 stone (build) + 1 wood stick (craft).
 - Steps: 1. Build **T65 Runeforge** from the construction menu. 2. Press **E** on it. 3. Craft the rune.
   4. Open basic crafting, a campfire, and the war-table and search the rune.
 - Pass: a crafting window titled **"T65 Runeforge"** lists ONLY the Glowing Rune recipe; crafting consumes
-  1 stone → 1 **T65 Glowing Rune**; the rune appears in NO other station; log has no "Invalid crafting
+  1 wood stick → 1 **T65 Glowing Rune**; the rune appears in NO other station; log has no "Invalid crafting
   station".
 - Repeat/Reset: craft repeatedly; the runeforge persists in the save (it's an interactive placeable — fine as
   long as the MOD stays installed; pack removal alone is also fine for placeables).
@@ -470,7 +470,7 @@ All temp packs go in the packs dir next to the others. Validate before launching
 - Prereqs: in Tiled, copy `testroom.tmx` → `t82.tmx` and DELETE every layer except `ground`/`structure`
   (data-only map). Create `_temp_t82.json`:
   `{ "id": "_temp_t82", "namespace": "t82", "maps": [ { "id": "t82:bare", "tmx": "t82.tmx",
-  "exitDirection": 1 } ], "placeables": [ { "id": "t82:portal", "name": "T82 Portal", "icon": "sam",
+  "exitDirection": 1 } ], "placeables": [ { "id": "t82:portal", "name": "T82 Portal", "icon": "scroll:brown",
   "materials": { "resource:stone": 1 }, "width": 2, "height": 2, "cloneEntity": "WorkbenchGuid",
   "controller": "forge_portal", "controllerParams": { "map": "t82:bare" } } ] }`  (both files in the packs dir)
 - Steps: 1. Relaunch → check the log. 2. Build the T82 Portal → enter. 3. Walk the room edges.

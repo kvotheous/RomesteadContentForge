@@ -241,7 +241,7 @@ A Runeforge that crafts runes only at the forge — its recipes don't clutter th
 {
   "id": "my", "namespace": "my",
   "placeables": [{
-    "id": "my:runeforge", "name": "Runeforge", "icon": "sam",
+    "id": "my:runeforge", "name": "Runeforge", "icon": "scroll:brown",
     "cloneEntity": "WorkbenchGuid",
     "station": "my:runeforge",
     "materials": { "resource:stone": 10 }
@@ -288,7 +288,7 @@ parts with `collision` become invisible blockers that live and die with it.
 
 ```jsonc
 "placeables": [{
-  "id": "mymod:monument", "name": "Twin Crystal Monument", "icon": "sam",
+  "id": "mymod:monument", "name": "Twin Crystal Monument", "icon": "scroll:brown",
   "materials": { "resource:stone": 6 }, "width": 4, "height": 2,
   "parts": [
     { "sprite": "crystal.png", "offset": [-16, 0], "collision": [14, 10] },

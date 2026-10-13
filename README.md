@@ -4,7 +4,7 @@
 
 **Turn Romestead into a moddable platform — plain JSON content packs, no compiling, no game files touched.**
 
-[![Version](https://img.shields.io/badge/version-1.0.1-d89a4e?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.1.0-d89a4e?style=flat-square)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f?style=flat-square)](LICENSE)
 [![BepInEx 6](https://img.shields.io/badge/BepInEx-6%20(CoreCLR)-5c2d91?style=flat-square)](https://github.com/BepInEx/BepInEx)
 [![Game](https://img.shields.io/badge/game-Romestead-b03a2e?style=flat-square)](https://store.steampowered.com/)
@@ -18,19 +18,49 @@
 **Content Forge** is a BepInEx mod for Romestead that turns the game into a moddable platform: authors write
 **content packs** — plain JSON files (plus PNG / TMX / WAV / `.yarn` assets) dropped into
 `BepInEx\config\RomesteadContentForge\packs\` — and the mod injects their items, weapons, spells, summons,
-creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. No compiling, no
-game files touched; works in single-player and co-op (server-authoritative, save-safe uninstall).
+creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. Ready-made AI and
+behaviors are built in — C# is optional, for when you want to go further. No compiling, no game files touched;
+works in single-player, co-op and on **dedicated servers** (server-authoritative, save-safe uninstall) — see
+[Dedicated servers](nexus/README_NEXUS.md#dedicated-servers).
+
+## 🛠️ Easiest way to start: the Forge Editor
+
+Don't want to write JSON by hand? Download **`ForgeEditor-<version>.zip`**, unzip, and run **`ForgeEditor.exe`**
+(no Python, no install):
+
+- **Every game value is built in** — items, creatures, icons, sounds, effects and more are picked from dropdowns,
+  so you never guess an id.
+- **Forms for every field**, with PNG previews and per-language text.
+- **Built-in dialogue editor** — write NPC conversations (Yarn) with syntax highlighting, a node outline,
+  error checks, and a side-by-side translation grid that tracks how much is translated.
+- **One-click validation** catches mistakes before you launch the game.
+- It saves the same `.json` packs the mod reads, so you can switch between the editor and hand-editing anytime.
+
+More: [editor/README.md](editor/README.md).
+
+## 🧩 More than an injector: built-in building blocks
+
+It's not just a content injector: Content Forge ships ready-made systems your packs can use by name.
+
+- **Creature AI**: **8 ready-made AI brains**: guard, coward, ranged caster, patroller, pack hunter, summoner, healer, turret. Give any creature one by name.
+- **Interactive objects**: **ready-made behaviors** for placeables: crafting stations, portals, healing shrines, levers, talking objects (dialogue), props and multi-part buildings, plus a data-driven animation controller for fully custom creatures.
+- **World events**: **wave defense, boss rush, hunt contest, scheduled raids, team battles, king of the hill, races** and PvP duel arenas, all configured in JSON.
+- **Dialogue commands**: NPC conversations can **give items, take payment and heal** (`ForgeGiveItem`, `ForgeTakeItem`, `ForgeHeal`).
+- **C# when you want it**: addon DLLs can register their **own behaviors and AI** with one call, and any pack can then use them by name (see [ADVANCED.md](docs/ADVANCED.md)).
+- **Worked examples**: **3 example packs** (a story world, a necromancer class, and a test pack covering every feature) plus a **cookbook** of copy-paste recipes.
 
 ## 📦 Downloads — which zip is which
 
-The release ships as **two zips** (Nexus Files tab / GitHub Releases):
+The release ships as **two main zips** plus the optional editor and dedicated-server zips (Nexus Files tab / GitHub Releases):
 
 | Zip | Contents | Who needs it |
 |---|---|---|
 | **`RomesteadContentForge-<version>.zip`** — *the mod* | `BepInEx\plugins\` DLLs (the mod + its YarnSpinner/CSV libraries). Extract over the game folder. | **Everyone** — players just installing packs, and creators. |
-| **`RomesteadContentForge-Authoring-<version>.zip`** — *the creator kit* | All docs (this index, PACKS/COOKBOOK/GETTING_STARTED…), the **GUI editor** (`ForgeEditor.exe` + source), `tools/` (art extraction, asset catalog, held-sheet generator), `examples/` (3 worked packs incl. the full test bench) and `reference/` (17 id catalogs). Unzip anywhere — nothing installs into the game. | **Pack creators.** Players don't need it. |
+| **`RomesteadContentForge-Authoring-<version>.zip`** — *the creator kit* | All docs (this index, PACKS/COOKBOOK/GETTING_STARTED…), the **GUI editor's Python source** (the ready-to-run `ForgeEditor.exe` is the separate `ForgeEditor-<version>.zip`), `tools/` (art extraction, asset catalog, held-sheet generator), `examples/` (3 worked packs incl. the full test bench) and `reference/` (17 id catalogs). Unzip anywhere — nothing installs into the game. | **Pack creators.** Players don't need it. |
 
-`ForgeEditor.exe` is also offered as its own optional file for creators who only want the editor.
+`ForgeEditor-<version>.zip` (just `ForgeEditor.exe` + license notices) is also offered as its own optional file for creators who only want the editor. Third-party licenses for everything the downloads bundle are in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
+
+`RomesteadContentForge-Server-<version>.zip` is the **dedicated-server build** (`RomesteadContentForge.Server.dll` + `start-modded-server.bat`) — only for people running a headless Romestead Dedicated Server; see [Dedicated servers](nexus/README_NEXUS.md#dedicated-servers).
 
 ## 🧭 Find what you need
 

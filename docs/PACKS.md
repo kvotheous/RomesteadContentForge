@@ -146,7 +146,7 @@ there's also a drop-in-a-wav path with no FMOD Studio at all — the `sounds` ma
 | `nameLocalized` | object | none | **Per-language** name: `{ "tr_TR": "...", "de_DE": "..." }`. The mod shows the entry for the current game language, falling back to `name`. | language codes below |
 | `description` | string | none | **Literal** tooltip description (default / fallback). | any text |
 | `descriptionLocalized` | object | none | Per-language description, keyed by language code. | language codes below |
-| `icon` | string | `sam` | Inventory icon. | an existing icon id **or** your custom `icons` id. List: `reference/icon-ids.txt` (520) — e.g. `sword:iron`, `ring:red`, `apple:red`, `scroll:brown`, `shield:iron`, `crossbow` |
+| `icon` | string | `scroll:brown` | Inventory icon. | an existing icon id **or** your custom `icons` id. List: `reference/icon-ids.txt` (520) — e.g. `sword:iron`, `ring:red`, `apple:red`, `scroll:brown`, `shield:iron`, `crossbow` |
 | `maxStack` | int | 1 | Max stack size. | ≥1 |
 | `tier` | int | none | Rarity tier (cosmetic). | typically 0–6 |
 | `flags` | string | none | Item category flags (comma-sep). | `Food`, `Material`, `Ammunition`, `Money`, `Millable`, `Quest`, `Seed`, `Offering` |
@@ -915,7 +915,7 @@ so it just works. Build cost, name, icon, footprint and menu entry are all yours
 | `name` | string | `id` | Name shown in the build menu. | any text |
 | `description` | string | none | Tooltip text. | any text |
 | `spawnedId` | string | — | **Which vanilla decoration's art to place.** | a name from `reference/decoration-ids.txt` — e.g. `brazier:2`, `monument:0`, `vulcan_statue:0`, `bonfire:1` |
-| `icon` | string | `sam` | Build-menu icon. | a vanilla icon id, or your own custom icon id |
+| `icon` | string | `scroll:brown` | Build-menu icon. | a vanilla icon id, or your own custom icon id |
 | `materials` | object (resourceId→int) | none | Build cost. Empty = free to build. | resource/item ids, e.g. `{ "resource:stone": 5, "material:coal": 3 }` |
 | `width` | int | 2 | Tile footprint width — **match the decoration art's real size** (the game can't infer it; a too-small footprint lets things overlap the sprite). | ≥1 |
 | `height` | int | 2 | Tile footprint height (same note). | ≥1 |
@@ -946,7 +946,7 @@ add `controllerParams` `tooltip` for hover text, or combine `sprite` with any in
 | `spriteOffset3D` | `[x, up, depth]` px render nudge. |
 
 ```json
-{ "id": "mymod:crystal", "name": "Forge Crystal", "icon": "sam",
+{ "id": "mymod:crystal", "name": "Forge Crystal", "icon": "scroll:brown",
   "materials": { "resource:stone": 2 },
   "cloneEntity": "WorkbenchGuid", "sprite": "crystal.png",
   "spriteFrameWidth": 32, "spriteFrameHeight": 48, "spriteFrames": [0, 1, 2, 3],
@@ -989,7 +989,7 @@ Rules worth knowing:
   its anchor like any tall single-sprite building.
 
 ```jsonc
-{ "id": "mymod:monument", "name": "Twin Crystal Monument", "icon": "sam",
+{ "id": "mymod:monument", "name": "Twin Crystal Monument", "icon": "scroll:brown",
   "materials": { "resource:stone": 6 }, "width": 4, "height": 2,
   "parts": [
     { "sprite": "crystal.png", "offset": [-16, 0], "collision": [14, 10] },
@@ -1030,7 +1030,7 @@ The interactive system lives in the mod's `Interactive.cs`.
 
 ```jsonc
 // forge_shrine — interact: heal 30 HP (10s cooldown per shrine)
-{ "id": "mymod:healing_shrine", "name": "Healing Shrine", "icon": "sam",
+{ "id": "mymod:healing_shrine", "name": "Healing Shrine", "icon": "scroll:brown",
   "materials": { "resource:stone": 5 },
   "cloneEntity": "WorkbenchGuid", "controller": "forge_shrine",
   "controllerParams": { "heal": "30", "cooldown": "10", "tooltip": "Healing Shrine" } }
@@ -1038,7 +1038,7 @@ The interactive system lives in the mod's `Interactive.cs`.
 
 ```jsonc
 // forge_lever — interact: toggle a replicated on/off state
-{ "id": "mymod:secret_lever", "name": "Secret Lever", "icon": "sam",
+{ "id": "mymod:secret_lever", "name": "Secret Lever", "icon": "scroll:brown",
   "materials": { "resource:stone": 2 },
   "cloneEntity": "WorkbenchGuid", "controller": "forge_lever",
   "controllerParams": { "tooltip": "Pull me", "message": "Click.", "vfx": "dust_poof_big" } }
@@ -1046,7 +1046,7 @@ The interactive system lives in the mod's `Interactive.cs`.
 
 ```jsonc
 // forge_dialogue — interact: opens a Yarn conversation (just set `yarn`; the controller is implied)
-{ "id": "mymod:talking_stone", "name": "Talking Stone", "icon": "sam",
+{ "id": "mymod:talking_stone", "name": "Talking Stone", "icon": "scroll:brown",
   "materials": { "resource:stone": 3 },
   "cloneEntity": "WorkbenchGuid", "yarn": "stone.yarn",
   "actors": { "mymod_stone": "The Old Stone" } }
@@ -1054,7 +1054,7 @@ The interactive system lives in the mod's `Interactive.cs`.
 
 ```jsonc
 // forge_prop — inert decor with hover text (here with vanilla art; add `sprite` for your own)
-{ "id": "mymod:relic_stand", "name": "Relic Stand", "icon": "sam",
+{ "id": "mymod:relic_stand", "name": "Relic Stand", "icon": "scroll:brown",
   "materials": { "resource:stone": 2 },
   "cloneEntity": "WorkbenchGuid", "controller": "forge_prop",
   "controllerParams": { "tooltip": "An empty stand." } }
@@ -1062,7 +1062,7 @@ The interactive system lives in the mod's `Interactive.cs`.
 
 ```jsonc
 // forge_portal — interact: teleport into one of this pack's maps
-{ "id": "mymod:crypt_portal", "name": "Crypt Portal", "icon": "sam",
+{ "id": "mymod:crypt_portal", "name": "Crypt Portal", "icon": "scroll:brown",
   "materials": { "resource:stone": 1 },
   "cloneEntity": "WorkbenchGuid", "controller": "forge_portal",
   "controllerParams": { "map": "mymod:crypt", "vfx": "dust_poof_big" } }
@@ -1274,7 +1274,7 @@ the skill's level scales that weapon's damage) or a spell's `attack.skillId`.
 |---|---|---|---|
 | `id` | string | — | Keep the `skill:` prefix (e.g. `skill:runeology`). |
 | `name` / `nameLocalized` / `description` / `descriptionLocalized` | strings | — | Skills-screen text. |
-| `icon` | string | `sam` | Vanilla icon or your custom icon. |
+| `icon` | string | `scroll:brown` | Vanilla icon or your custom icon. |
 | `value` | float | 0.5 | Per-level effect scalar (damage bonus = value × level/100). |
 | `xpGainFactor` | float | 1 | XP multiplier. |
 
@@ -1290,7 +1290,7 @@ costing 1 favour point like every node. Carries **one** effect.
 |---|---|---|---|
 | `id` | string | — | Required, namespaced (e.g. `mymod:ember_heart`). |
 | `name` / `nameLocalized` / `description` / `descriptionLocalized` | strings | — | Tooltip text. With `statBonuses` you can omit the description — the stat lines auto-describe. In a description, `{0}`/`{1}` expand to `flagValue1`/`flagValue2` (avoid other literal `{`). |
-| `icon` | string | `sam` | Vanilla icon id or your custom icon. |
+| `icon` | string | `scroll:brown` | Vanilla icon id or your custom icon. |
 | `parent` | string | — | Required: the node to attach under — a vanilla id (`<god>_favour:<name>`, e.g. `minerva_favour:lumber_axe_power`) or another of **your** nodes defined earlier. The node becomes unlockable once its parent is learned. With `screen: true` the parent is **optional** (empty = root node) and must be another `screen` node defined earlier. |
 | `position` | `[col,row]` | — | Required tree-grid cell. Vanilla fills columns 0–14 of rows 0–9 — **row 10+ is always free**; pick a cell next to your parent (a connecting line is drawn). Adjacency is **cosmetic** — only the connecting line; the unlock requirement is the **`parent`** link, not the grid cell. A taken cell skips the node with a log warning. With `screen: true` the cell is on the pack screen's **own grid** — start at `[0,0]`, vanilla cells don't matter. |
 | `screen` | bool | `false` | `true` = the node lives on the **custom "Pack Favours" fullscreen tree** instead of the vanilla tree (see below). |

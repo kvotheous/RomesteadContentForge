@@ -1,6 +1,8 @@
+#if !CF_SERVER
 using Candide;                              // Globals (GraphicsDevice)
 using Candide.Data;                         // ClientDataSetup, CropDisplayData, CropDisplayStage
 using Candide.Database;                     // CropDisplayDataBase
+#endif
 using CandideCreator.Shared;                // Content (SpriteSheet loader, default normal/metal maps)
 using CandideCreator.Shared.Graphics;       // SpriteSheet, FrameAnimation
 using CandideServer.Data.DataModels;        // CropData, CropType
@@ -118,6 +120,7 @@ internal static class CropsFeature
         return DropTableSystem.FromDropTableModel(new DropTableModel { DropTableItemSpawns = spawns });
     }
 
+#if !CF_SERVER
     // ---------------------------------------------------- client ----------------------------------------------------
 
     // Build + register the client-side CropDisplayData. Called from a SetupClientData postfix — the display
@@ -196,6 +199,7 @@ internal static class CropsFeature
         _customSheets[key] = sheet;
         return sheet;
     }
+#endif
 
     // ---------------------------------------------------- seed item ----------------------------------------------------
 
@@ -216,7 +220,7 @@ internal static class CropsFeature
             Id = seed.Id,
             Name = string.IsNullOrWhiteSpace(seed.Name) ? seed.Id : seed.Name,
             Description = string.IsNullOrWhiteSpace(seed.Description) ? (Shared.Text.StringId?)null : seed.Description,
-            Icon = string.IsNullOrWhiteSpace(seed.Icon) ? "sam" : seed.Icon,
+            Icon = string.IsNullOrWhiteSpace(seed.Icon) ? "scroll:brown" : seed.Icon,
             MaxStackSize = seed.MaxStack < 1 ? 100 : seed.MaxStack,
             Tier = seed.Tier < 1 ? 1 : seed.Tier,
             Flags = ItemFlag.Seed,
@@ -267,6 +271,7 @@ internal static class CropServerPatch
     }
 }
 
+#if !CF_SERVER
 // Client crop displays register right after the vanilla ones: SetupClientData() runs SetupCropDisplays +
 // CropDisplayDataBase.Add inside it (and ClearAllClientDataBases wipes the map on reload, so we re-add).
 internal static class CropClientPatch
@@ -279,3 +284,4 @@ internal static class CropClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Crop display registration failed: {e.Message}"); }
     }
 }
+#endif
