@@ -170,6 +170,10 @@ Players keep the normal mod and the same packs. The co-op handshake warns in cha
 - **Host-only:** the dialogue commands `ForgeGiveItem` / `ForgeTakeItem` / `ForgeHeal` (dialogue still opens and talks; these three need a player host).
 - Using the other kvotheous mods on the same server? Add the **Kvotheous Dedicated Server Kit** — same loader, same `start-modded-server.bat`.
 
+### Rented / hosted servers (untested)
+
+A rented server works the same way if the host gives you **file access** (to upload BepInEx, the plugin and your packs) and a way to **set an environment variable or edit the start command**: set `DOTNET_STARTUP_HOOKS` to the full path of `BepInEx.NET.CoreCLR.dll` in the server folder (that's all `start-modded-server.bat` does). On a Linux host the server should start with `DOTNET_STARTUP_HOOKS="$PWD/BepInEx.NET.CoreCLR.dll" dotnet Server.dll`. Hosts with only a Start button can't load mods. Not tested on any rented server yet; details on the **Kvotheous Dedicated Server Kit** page.
+
 ---
 
 ## Notes & Compatibility

@@ -157,6 +157,10 @@ Players keep the normal mod and the same packs. The co-op handshake warns in cha
 [*]Using the other kvotheous mods on the same server? Add the [b]Kvotheous Dedicated Server Kit[/b] — same loader, same [i]start-modded-server.bat[/i].
 [/list]
 
+[size=4][b]Rented / hosted servers (untested)[/b][/size]
+
+A rented server works the same way if the host gives you [b]file access[/b] (to upload BepInEx, the plugin and your packs) and a way to [b]set an environment variable or edit the start command[/b]: set [i]DOTNET_STARTUP_HOOKS[/i] to the full path of [i]BepInEx.NET.CoreCLR.dll[/i] in the server folder (that's all [i]start-modded-server.bat[/i] does). On a Linux host the server should start with [i]DOTNET_STARTUP_HOOKS="$PWD/BepInEx.NET.CoreCLR.dll" dotnet Server.dll[/i]. Hosts with only a Start button can't load mods. Not tested on any rented server yet; details on the [b]Kvotheous Dedicated Server Kit[/b] page.
+
 [size=5][b][color=#f0bd77]Notes & Compatibility[/color][/b][/size]
 [list]
 [*][b]Game updates:[/b] built for the Romestead [b]2026-10-04[/b] update. If a later update breaks part of the mod, that feature switches itself off (the BepInEx log shows "Patch ... failed") and the rest keeps working.
