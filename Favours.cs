@@ -1,4 +1,6 @@
-using Candide.Save;                     // CharacterSaveManager
+#if !CF_SERVER
+using Candide.Save;                     // CharacterSaveManager (client — characters save on their own client)
+#endif
 using CandideServer;                    // ServerGameState
 using CandideServer.Entities;           // ServerEntityModel
 using CandideServer.Models.Player;      // ServerPlayerCharacter
@@ -223,6 +225,7 @@ internal static class FavoursFeature
     }
 }
 
+#if !CF_SERVER
 // Strip every modded favour out of the character the instant it is saved, and put it back the instant the
 // serializer is done — the on-disk save never contains a modded favour id (which would fail the server's
 // login sanity check once the pack is gone). SaveCharacterData serializes to a MemoryStream synchronously
@@ -275,6 +278,7 @@ internal static class FavourStripOnSavePatch
         catch (Exception e) { Plugin.Log.LogWarning($"favour restore-after-save failed: {e.Message}"); }
     }
 }
+#endif
 
 // Re-grant flagged favours at login, server-side (mirrors SkillBackfillPatch: SetupCharacter runs for every
 // joining player — host and co-op clients — BEFORE the login response, so the converted model is what the

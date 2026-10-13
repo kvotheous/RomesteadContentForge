@@ -1,6 +1,8 @@
+#if !CF_SERVER
 using Candide;                              // Globals (client CandideReflection)
 using Candide.Database.Doodad;              // DoodadDatabaseManager (client entity registry)
 using Candide.Entities;                     // ClientEntityControllerLoader
+#endif
 using CandideCreator.Shared.Serialization;  // CandideReflection
 using CandideServer;                        // ServerGlobals (server CandideReflection)
 using CandideServer.Entities;               // ServerEntityControllerLoader, ServerEntityDataManager
@@ -18,9 +20,11 @@ using Shared.Entity.Components;             // Component, ControllerComponent
 using Shared.Models.Construction;           // ConstructionModel, ConstructionType, ConstructionSpaceInfo, ...
 using Shared.Models.Interaction;            // InteractionType
 using Shared.Text;                          // StringId
+#if !CF_SERVER
 using Candide.CandideUI;                    // PlayerUi (talking furniture opens the dialogue window)
 using Candide.GameModels.Managers;          // CandideDialogueContext
 using Candide.Graphics;                     // FloatingTextSystem (client interact message)
+#endif
 using System;
 using System.Collections.Generic;
 using System.Text;                          // StringBuilder (GetToolTip)
@@ -81,12 +85,17 @@ internal static class InteractiveFeature
     // RegisterController before the world loads; packs reference the name in furniture.controller.
     internal static readonly Dictionary<string, (Type Client, Type Server)> ForgeControllers = new()
     {
-        ["forge_shrine"] = (typeof(ForgeShrineClientController), typeof(ForgeShrineServerController)),
-        ["forge_lever"] = (typeof(ForgeLeverClientController), typeof(ForgeLeverServerController)),
-        ["forge_dialogue"] = (typeof(ForgeDialogueClientController), typeof(ForgeDialogueServerController)),
-        ["forge_prop"] = (typeof(ForgePropClientController), typeof(ForgeDialogueServerController)),   // inert prop (custom-sprite decor); server side reuses the no-op
-        ["forge_portal"] = (typeof(ForgePortalClientController), typeof(ForgePortalServerController)),  // teleports into a pack map (Portals.cs)
+        ["forge_shrine"] = (ClientType("ForgeShrineClientController"), typeof(ForgeShrineServerController)),
+        ["forge_lever"] = (ClientType("ForgeLeverClientController"), typeof(ForgeLeverServerController)),
+        ["forge_dialogue"] = (ClientType("ForgeDialogueClientController"), typeof(ForgeDialogueServerController)),
+        ["forge_prop"] = (ClientType("ForgePropClientController"), typeof(ForgeDialogueServerController)),   // inert prop (custom-sprite decor); server side reuses the no-op
+        ["forge_portal"] = (ClientType("ForgePortalClientController"), typeof(ForgePortalServerController)),  // teleports into a pack map (Portals.cs)
     };
+
+    // A client controller type by name. Client controllers derive from client-assembly types, so the
+    // dedicated-server build (CF_SERVER) doesn't contain them: there this returns null, which is fine —
+    // a server only ever injects/creates the Server half.
+    internal static Type ClientType(string name) => typeof(InteractiveFeature).Assembly.GetType("RomesteadContentForge." + name);
 
     public static void RegisterController(string name, Type clientType, Type serverType)
     {
@@ -168,7 +177,9 @@ internal static class InteractiveFeature
         // normally already did this; calling again is harmless (Initialize() early-outs when filled, and
         // injection uses indexer assignment).
         if (serverSide) { ServerEntityControllerLoader.Initialize(); InjectControllerTypes(serverSide: true); }
+#if !CF_SERVER
         else { ClientEntityControllerLoader.Initialize(); InjectControllerTypes(serverSide: false); }
+#endif
 
         foreach ((PlaceableDef f, string dir) in _interactiveDefs)
         {
@@ -191,9 +202,13 @@ internal static class InteractiveFeature
                 // CreateController lowercases/strips the name, news the type up and calls AttachEntity.
                 EntityWrapper wrapper = clone.General[0].Wrapper;
                 string name = NormalizeControllerName(f.Controller);
+#if CF_SERVER
+                AbstractController controller = ServerEntityControllerLoader.CreateController(name, wrapper);
+#else
                 AbstractController controller = serverSide
                     ? ServerEntityControllerLoader.CreateController(name, wrapper)
                     : ClientEntityControllerLoader.CreateController(name, wrapper);
+#endif
                 if (controller == null)
                 { Plugin.Log.LogWarning($"furniture '{f.Id}': controller '{name}' unknown on the {(serverSide ? "server" : "client")} side — not registered."); continue; }
 
@@ -215,7 +230,9 @@ internal static class InteractiveFeature
                 wrapper.InteractionType = InteractionType.Entity;   // default scan path ("press E" prompt)
                 wrapper.IsInteractionArea = false;
 
-                SpriteSwap.Apply(clone, f, dir, serverSide);        // Tier 2 custom sprite (no-op without f.Sprite)
+#if !CF_SERVER
+                SpriteSwap.Apply(clone, f, dir, serverSide);        // Tier 2 custom sprite (no-op without f.Sprite; client-only)
+#endif
 
                 protos[guid] = clone;
                 Plugin.Log.LogInfo($"Registered interactive furniture '{f.Id}' (clone of {f.CloneEntity}, controller {name}, {(serverSide ? "server" : "client")}).");
@@ -228,9 +245,14 @@ internal static class InteractiveFeature
     // pre-normalized (lowercase, no "controller" suffix) to match what CreateController looks up.
     internal static void InjectControllerTypes(bool serverSide)
     {
+#if CF_SERVER
+        if (!serverSide) return;   // no client controller map on a dedicated server
+        Dictionary<string, Type> map = ServerEntityControllerLoader.ControllerMap;
+#else
         Dictionary<string, Type> map = serverSide
             ? ServerEntityControllerLoader.ControllerMap
             : ClientEntityControllerLoader.ControllerMap;
+#endif
         if (map == null) return;   // client map is null until ClientEntityControllerLoader.Initialize ran
         foreach (var kv in ForgeControllers)
             map[kv.Key] = serverSide ? kv.Value.Server : kv.Value.Client;
@@ -282,6 +304,7 @@ internal static class InteractiveControllerMapServerPatch
     }
 }
 
+#if !CF_SERVER
 // Same for the CLIENT controller map (built in RomesteadGame.Initialize).
 internal static class InteractiveControllerMapClientPatch
 {
@@ -293,6 +316,7 @@ internal static class InteractiveControllerMapClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Interactive-furniture client controller-map inject failed: {e.Message}"); }
     }
 }
+#endif
 
 // Register the furniture entity prototypes into the SERVER registry right after the vanilla doodad DB loads
 // (same chokepoint as CreatureServerPatch — the base prototypes we clone are present from here on).
@@ -307,6 +331,7 @@ internal static class InteractiveServerPatch
     }
 }
 
+#if !CF_SERVER
 // And into the CLIENT registry (renders the entity + provides the cosmetic controller). Same Guid both sides.
 internal static class InteractiveClientPatch
 {
@@ -318,6 +343,7 @@ internal static class InteractiveClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Interactive-furniture client entity registration failed: {e.Message}"); }
     }
 }
+#endif
 
 // Indestructible placeables: block player-initiated removal (demolish, kill) of marked entities. Unloading
 // (world save/exit) must always pass or the entity would leak across world reloads.
@@ -343,6 +369,7 @@ internal static class IndestructiblePatch
 
 // ----------------------------------------------- controllers -----------------------------------------------
 
+#if !CF_SERVER
 // CLIENT base: gameplay no-op — every real effect happens on the server and arrives as replicated
 // state/vfx/aura/inventory messages. What IS client-side here is pure presentation: a hover tooltip
 // (params "tooltip", optional "tooltip-color" #rrggbb) and a floating message on interact (params
@@ -423,6 +450,7 @@ public sealed class ForgeDialogueClientController : ForgeClientController
 public sealed class ForgePropClientController : ForgeClientController
 {
 }
+#endif
 
 // Server side of the talking furniture: nothing to simulate — the dialogue runs on each client, and any
 // gameplay effects go through the Forge dialogue commands' own server calls.

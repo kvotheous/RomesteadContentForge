@@ -1,6 +1,8 @@
+#if !CF_SERVER
 using Candide;                              // Globals (client reflection)
 using Candide.Database.Doodad;              // DoodadDatabaseManager (client entity registry)
 using Candide.Entities;                     // ClientEntityControllerLoader
+#endif
 using CandideCreator.Shared.Collision;      // CollisionRectangle
 using CandideCreator.Shared.Models;         // World, WorldDoodad
 using CandideCreator.Shared.Serialization;  // CandideReflection
@@ -205,7 +207,9 @@ internal static class DoodadsFeature
                     {
                         injected = true;
                         if (serverSide) { ServerEntityControllerLoader.Initialize(); InteractiveFeature.InjectControllerTypes(serverSide: true); }
+#if !CF_SERVER
                         else { ClientEntityControllerLoader.Initialize(); InteractiveFeature.InjectControllerTypes(serverSide: false); }
+#endif
                     }
 
                     var clone = new EntitySystem(1);
@@ -220,9 +224,13 @@ internal static class DoodadsFeature
                     // The inert prop controller pair: client ticks the ambient sprite animation + optional
                     // tooltip params, server is a no-op. Same vanilla attach pattern as InteractiveFeature.
                     EntityWrapper wrapper = clone.General[0].Wrapper;
+#if CF_SERVER
+                    AbstractController controller = ServerEntityControllerLoader.CreateController("forge_prop", wrapper);
+#else
                     AbstractController controller = serverSide
                         ? ServerEntityControllerLoader.CreateController("forge_prop", wrapper)
                         : ClientEntityControllerLoader.CreateController("forge_prop", wrapper);
+#endif
                     if (controller == null)
                     { Plugin.Log.LogWarning($"doodad '{label}': forge_prop controller unknown on the {(serverSide ? "server" : "client")} side — prop skipped."); continue; }
                     clone.ControllerComponent[0] = new ControllerComponent { Controller = controller };
@@ -245,7 +253,9 @@ internal static class DoodadsFeature
 
                     // The Tier-2 sprite swap (UsesSpac=false, EntityMesh=null, animation params onto the
                     // controller — must run AFTER the controller is attached; serverSide => visual no-op).
+#if !CF_SERVER
                     SpriteSwap.Apply(clone, Synthetic(dd, label), dir, serverSide);
+#endif
 
                     protos[guid] = clone;
                     Plugin.Log.LogInfo($"Registered doodad prop '{label}' ('{dd.Sprite}'"
@@ -318,6 +328,7 @@ internal static class DoodadServerPatch
     }
 }
 
+#if !CF_SERVER
 // And into the CLIENT entity registry (renders the PNG + ticks the ambient animation). Same Guid both sides.
 internal static class DoodadClientPatch
 {
@@ -329,3 +340,4 @@ internal static class DoodadClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Doodad prop client registration failed: {e.Message}"); }
     }
 }
+#endif

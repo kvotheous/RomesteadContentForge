@@ -1,4 +1,6 @@
-using Candide.GameModels;
+#if !CF_SERVER
+using Candide.GameModels;   // GameState.LocalPlayer (client) — host-side notice only
+#endif
 using CandideServer;
 using CandideServer.Helpers;
 using CandideServer.MessageModels.Inventories;
@@ -132,6 +134,9 @@ internal static class TwoHandedFeature
     // host's process; remote players see the item visibly jump to their bag via the normal inventory sync).
     private static void NotifyLocal(Guid charEntityId, bool toBag, bool stowedWeapon)
     {
+#if CF_SERVER
+        // dedicated server: no local player to notify — remote players see the item move via inventory sync
+#else
         try
         {
             if (GameState.LocalPlayer?.EntityId != charEntityId) return;
@@ -143,6 +148,7 @@ internal static class TwoHandedFeature
             BannerSystem.Announce(tr ? "Çift Elli" : "Two-Handed", msg);
         }
         catch { }
+#endif
     }
 }
 

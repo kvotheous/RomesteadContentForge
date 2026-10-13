@@ -1,6 +1,8 @@
+#if !CF_SERVER
 using Candide.Entities.PlayerState;     // NetworkPlayerController
 using Candide.GameModels;               // GameState (client world registry)
 using Candide.Multiplayer;              // PlayerHelper
+#endif
 using CandideServer;                    // ServerGameState
 using CandideServer.Entities;           // ServerEntityModel
 using CandideServer.MessageModels;      // DealDamageMessage
@@ -67,8 +69,10 @@ internal static class PvpFeature
             _pvpWorldNames ??= BuildWorldNames();
             if (ServerGameState.Worlds.TryGetValue(worldId, out var sw) && sw?.MapName != null)
                 return _pvpWorldNames.Contains(sw.MapName);
+#if !CF_SERVER
             if (GameState.Worlds.TryGetValue(worldId, out var cw) && cw?.MapName != null)
                 return _pvpWorldNames.Contains(cw.MapName);
+#endif
         }
         catch { }   // combat hot path — never throw into a hit resolution
         return false;
@@ -152,6 +156,7 @@ internal static class PvpCastSpellPatch
     }
 }
 
+#if !CF_SERVER
 // (client) PvP gate 2/2: the CONTROLLER veto. NetworkPlayerController.OnProjectileHit returns false for any
 // Casted projectile owned by the LOCAL player — your own attacks never connect with a remote player, before
 // the faction flags are even consulted. In a pvp world we lift the veto (__result = true) so the hit lands;
@@ -175,6 +180,7 @@ internal static class PvpClientHitPatch
         catch { return true; }
     }
 }
+#endif
 
 // (server) No grave in pvp worlds. SpawnGrave dumps the dying player's whole inventory into a grave entity;
 // skipping it means the player respawns with everything (RespawnPlayer only resets health/position/Dead).

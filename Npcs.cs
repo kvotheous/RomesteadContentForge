@@ -2,7 +2,9 @@ using CandideCreator.Shared.Helpers;
 using CandideCreator.Shared.Models;
 using CandideCreator.Shared.Serialization;
 using CandideServer.Data.ServerDataSetups;
+#if !CF_SERVER
 using Google.Protobuf;
+#endif
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Shared.Text;
@@ -13,7 +15,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Yarn.Compiler;
+#if !CF_SERVER
+using Yarn.Compiler;   // YarnSpinner isn't on a dedicated server — dialogue compiles on each client
+#endif
 
 namespace RomesteadContentForge;
 
@@ -123,6 +127,15 @@ internal static class NpcsFeature
         }
     }
 
+#if CF_SERVER
+    // Dedicated server: the dialogue runs (and compiles) on each player's client, never on the server — just
+    // confirm the .yarn is there, which is what lets AddNpcDoodads place the NPC in its map.
+    private static void GenerateOne(NpcDef def, string packDir)
+    {
+        if (!string.IsNullOrWhiteSpace(def.Yarn) && File.Exists(Path.Combine(packDir, def.Yarn))) _compiled.Add(def.Id);
+        else Plugin.Log.LogWarning($"npc '{def.Id}': yarn '{def.Yarn}' not found next to the pack.");
+    }
+#else
     private static void GenerateOne(NpcDef def, string packDir)
     {
         string srcYarn = Path.Combine(packDir, def.Yarn);
@@ -240,6 +253,8 @@ internal static class NpcsFeature
         File.WriteAllBytes(dst, file);
     }
 
+#endif
+
     // ------------------------------------------------------------------ 2) NPC doodads in the generated cmx
 
     // Called by MapsFeature.GenerateOne right before the world is serialized. Appends one neutral_satyr
@@ -331,7 +346,11 @@ internal static class NpcsFeature
     public static void ApplyActorStrings()
     {
         // Re-applied on every SetLocalization, so resolving against the CURRENT language live-switches names.
+#if CF_SERVER
+        const string lang = "en";   // no UI language on a dedicated server
+#else
         string lang = Candide.Globals.LanguageCode;
+#endif
         foreach ((NpcDef def, _) in ContentLoader.NpcDefs.Concat(ContentLoader.PlaceableDialogues))
         {
             if (def.Actors == null) continue;
@@ -373,6 +392,7 @@ internal static class NpcStringsPatch
     }
 }
 
+#if !CF_SERVER
 // Forge dialogue commands — fill the one gap in the game's Yarn API: vanilla dialogue can CHECK and TAKE
 // (HandInItem) but never GIVE. Unknown <<commands>> fall through to a library-function DynamicInvoke with
 // STRING args, so these register as string-typed delegates on the same library every dialogue runner builds:
@@ -454,3 +474,4 @@ internal static class ForgeYarnCommandsPatch
         catch (Exception e) { Plugin.Log.LogWarning($"<<ForgeHeal>> failed: {e.Message}"); }
     }
 }
+#endif

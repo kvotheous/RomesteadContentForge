@@ -2,6 +2,8 @@ using BepInEx;
 using BepInEx.Logging;
 using BepInEx.NET.Common;
 using Candide;
+#if !CF_SERVER
+// client assembly — not referenced by the dedicated-server build (CF_SERVER)
 using Candide.Data;
 using Candide.Database;
 using Candide.GameModels;
@@ -9,11 +11,14 @@ using Candide.GameModels.Helpers;
 using Candide.GameModels.Managers;
 using Candide.Graphics.VFX;
 using Candide.Multiplayer;
+#endif
 using CandideCreator.Shared;
 using CandideCreator.Shared.Graphics;
 using CandideCreator.Shared.Models.SpritesAnimationCollections;
 using CandideCreator.Shared.Models.VFX;
+#if !CF_SERVER
 using FMOD.Studio;
+#endif
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Shared.Entity;
@@ -35,8 +40,10 @@ using CandideServer.ServerControllers;
 using CandideServer.ServerSystems;
 using CandideServer.ServerServices;
 using CandideServer.Entities;
+#if !CF_SERVER
 using Candide.Database.Doodad;
 using Candide.Entities.Bridge;
+#endif
 using CandideServer.MessageModels;
 using CandideServer.MessageModels.Inventories;
 using Shared.Models.Construction;
@@ -73,11 +80,22 @@ public class Plugin : BasePlugin
     public override void Load()
     {
         Log = base.Log;
+#if CF_SERVER
+        // DEDICATED-SERVER build. On a normal game the client mod is installed and already runs the host's
+        // server side in-process — stay completely inactive there, or every server patch would apply twice.
+        if (AppDomain.CurrentDomain.GetAssemblies().Any(a => string.Equals(a.GetName().Name, "Romestead", StringComparison.OrdinalIgnoreCase)))
+        {
+            Log.LogInfo("Romestead client detected — the normal Content Forge mod handles this game; the dedicated-server build stays inactive.");
+            return;
+        }
+#endif
         PacksDir = Path.Combine(Paths.ConfigPath, "RomesteadContentForge", "packs");
         Directory.CreateDirectory(PacksDir);
         ContentLoader.WriteSampleIfEmpty(PacksDir);
 
+#if !CF_SERVER
         ForgeConfig.Bind(Config); // [Notifications] banner/toast style + banner color/position/duration
+#endif
         StationsFeature.Init();   // register the forge_station controller preset
         CreatureAiFeature.Init(); // register the forge_guard/forge_coward/forge_ranged creature-AI presets
         CreatureAiPresetsFeature.Init(); // register forge_patrol/forge_pack/forge_summoner/forge_healer/forge_turret
@@ -85,94 +103,110 @@ public class Plugin : BasePlugin
         var h = new Harmony(MyPluginInfo.PLUGIN_GUID);
         SafePatch(h, typeof(SetupPatch));
         SafePatch(h, typeof(LocalizationPatch));
-        SafePatch(h, typeof(WeaponTrailTintPatch));
-        SafePatch(h, typeof(SkinSetupPatch));
-        SafePatch(h, typeof(OnUseDoubleCastPatch));
-        SafePatch(h, typeof(SoundBankPatch));
+        ClientPatch(h, "WeaponTrailTintPatch");
+        ClientPatch(h, "SkinSetupPatch");
+        ClientPatch(h, "OnUseDoubleCastPatch");
+        ClientPatch(h, "SoundBankPatch");
         SafePatch(h, typeof(DropTablesPatch));
         SafePatch(h, typeof(SummonFactionPatch));
-        SafePatch(h, typeof(SummonClientSpawnFactionPatch));
+        ClientPatch(h, "SummonClientSpawnFactionPatch");
         SafePatch(h, typeof(SummonCastFactionPatch));
         SafePatch(h, typeof(CompanionPatch));
         SafePatch(h, typeof(PlaceableRecipePatch));
         SafePatch(h, typeof(CreatureServerPatch));
         SafePatch(h, typeof(SummonOwnerStampPatch));   // CreatureFixes: cf-owner stamp for summon kill attribution
         SafePatch(h, typeof(CreatureDropsPatch));      // CreatureFixes: drops[].creature -> prototype drop component
-        SafePatch(h, typeof(CreatureClientPatch));
+        ClientPatch(h, "CreatureClientPatch");
         SafePatch(h, typeof(NpcBodyServerPatch));
-        SafePatch(h, typeof(NpcBodyClientPatch));
-        SafePatch(h, typeof(KnownRecipePatch));
+        ClientPatch(h, "NpcBodyClientPatch");
+        ClientPatch(h, "KnownRecipePatch");
         SafePatch(h, typeof(SummonProtectPatch));
         SafePatch(h, typeof(UnequipDismissPatch));
-        SafePatch(h, typeof(SummonClientProtectPatch));
+        ClientPatch(h, "SummonClientProtectPatch");
         SafePatch(h, typeof(SummonDamageMessagePatch));
         SafePatch(h, typeof(MapFilesPatch));
         SafePatch(h, typeof(MapRoomPatch));
         SafePatch(h, typeof(MapPoiPatch));
         SafePatch(h, typeof(RetroPoiPatch));
-        SafePatch(h, typeof(HitVfxPatch));
-        SafePatch(h, typeof(ParticleLoadPatch));
+        ClientPatch(h, "HitVfxPatch");
+        ClientPatch(h, "ParticleLoadPatch");
         SafePatch(h, typeof(CropServerPatch));
-        SafePatch(h, typeof(CropClientPatch));
+        ClientPatch(h, "CropClientPatch");
         SafePatch(h, typeof(InteractiveControllerMapServerPatch));
-        SafePatch(h, typeof(InteractiveControllerMapClientPatch));
+        ClientPatch(h, "InteractiveControllerMapClientPatch");
         SafePatch(h, typeof(InteractiveServerPatch));
-        SafePatch(h, typeof(InteractiveClientPatch));
+        ClientPatch(h, "InteractiveClientPatch");
         SafePatch(h, typeof(NpcFilesPatch));
         SafePatch(h, typeof(NpcStringsPatch));
-        SafePatch(h, typeof(ForgeYarnCommandsPatch));
+        ClientPatch(h, "ForgeYarnCommandsPatch");
         SafePatch(h, typeof(IndestructiblePatch));
         SafePatch(h, typeof(SummonRestorePatch));
         SafePatch(h, typeof(SkillBackfillPatch));
-        SafePatch(h, typeof(SkillGrantGuardPatch));
-        SafePatch(h, typeof(SpellRequiresPatch));
+        ClientPatch(h, "SkillGrantGuardPatch");
+        ClientPatch(h, "SpellRequiresPatch");
         SafePatch(h, typeof(PvpCastSpellPatch));
-        SafePatch(h, typeof(PvpClientHitPatch));
+        ClientPatch(h, "PvpClientHitPatch");
         SafePatch(h, typeof(PvpGravePatch));
         SafePatch(h, typeof(PvpDamageGatePatch));
         SafePatch(h, typeof(PvpDeathEventPatch));
         SafePatch(h, typeof(PvpExactKillPatch));
         SafePatch(h, typeof(HandshakeServerPatch));
-        SafePatch(h, typeof(HandshakeClientPatch));
-        SafePatch(h, typeof(AttackTuningPatch));
-        SafePatch(h, typeof(RawSound3DPatch));
-        SafePatch(h, typeof(RawSound2DPatch));
-        SafePatch(h, typeof(RawSoundUnloadPatch));
-        SafePatch(h, typeof(PlayerRigPatch));
-        SafePatch(h, typeof(FavourStripOnSavePatch));
+        ClientPatch(h, "HandshakeClientPatch");
+        ClientPatch(h, "AttackTuningPatch");
+        ClientPatch(h, "RawSound3DPatch");
+        ClientPatch(h, "RawSound2DPatch");
+        ClientPatch(h, "RawSoundUnloadPatch");
+        ClientPatch(h, "PlayerRigPatch");
+        ClientPatch(h, "FavourStripOnSavePatch");
         SafePatch(h, typeof(FavourRegrantPatch));
-        SafePatch(h, typeof(AtmosphereTracksPatch));
-        SafePatch(h, typeof(NpcBodyRetintPatch));
+        ClientPatch(h, "AtmosphereTracksPatch");
+        ClientPatch(h, "NpcBodyRetintPatch");
         SafePatch(h, typeof(EventsPlusKillPatch));
         SafePatch(h, typeof(QuestRewardInjectPatch));
-        SafePatch(h, typeof(ComboTuningPatch));
-        SafePatch(h, typeof(SpacForgePatch));
-        SafePatch(h, typeof(ScratchSpacPatch));
-        SafePatch(h, typeof(PlayerAnimRemixPatch));
+        ClientPatch(h, "ComboTuningPatch");
+        ClientPatch(h, "SpacForgePatch");
+        ClientPatch(h, "ScratchSpacPatch");
+        ClientPatch(h, "PlayerAnimRemixPatch");
         SafePatch(h, typeof(WorkRecipeGroupsPatch));
         SafePatch(h, typeof(CitizenDataBasePatch));
         SafePatch(h, typeof(CitizenCreatePatch));
         SafePatch(h, typeof(CitizenWildRecruitPatch));
         SafePatch(h, typeof(CitizenSpawnParamPatch));
-        SafePatch(h, typeof(CitizenClientLookPatch));
+        ClientPatch(h, "CitizenClientLookPatch");
         SafePatch(h, typeof(StationSetupPatch));
-        SafePatch(h, typeof(StationStringsPatch));
+        ClientPatch(h, "StationStringsPatch");
         SafePatch(h, typeof(TwoHandedEnforcePatch));
         SafePatch(h, typeof(TwoHandedLoginPatch));
         SafePatch(h, typeof(DoodadServerPatch));
-        SafePatch(h, typeof(DoodadClientPatch));
+        ClientPatch(h, "DoodadClientPatch");
         SafePatch(h, typeof(TiledObjectsServerDbPatch));
-        SafePatch(h, typeof(TiledObjectsClientDbPatch));
-        SafePatch(h, typeof(ForgeTabPatch));
-        SafePatch(h, typeof(ForgeFavourScreenTabPatch));   // "Pack Favours" button -> custom favour screen
-        SafePatch(h, typeof(BannerPumpPatch));             // center-screen announcement banners
-        SafePatch(h, typeof(ChatToastPatch));          // Toasts: event chat lines also pop top-screen notifications
-        SafePatch(h, typeof(CreatureAnimClientMapPatch));
+        ClientPatch(h, "TiledObjectsClientDbPatch");
+        ClientPatch(h, "ForgeTabPatch");
+        ClientPatch(h, "ForgeFavourScreenTabPatch");   // "Pack Favours" button -> custom favour screen
+        ClientPatch(h, "BannerPumpPatch");             // center-screen announcement banners
+        ClientPatch(h, "ChatToastPatch");          // Toasts: event chat lines also pop top-screen notifications
+        ClientPatch(h, "CreatureAnimClientMapPatch");
         SafePatch(h, typeof(CreatureAiControllerMapPatch));
         SafePatch(h, typeof(CreatureAiPresetsControllerMapPatch));
         SafePatch(h, typeof(CompositeServerPatch));    // AFTER InteractiveServerPatch: postfix order = patch order
-        SafePatch(h, typeof(CompositeClientPatch));    // (the composite pass edits the parent proto Interactive registers)
+        ClientPatch(h, "CompositeClientPatch");    // (the composite pass edits the parent proto Interactive registers)
         Log.LogInfo($"{MyPluginInfo.PLUGIN_NAME} {MyPluginInfo.PLUGIN_VERSION} loaded. Packs: {PacksDir}");
+    }
+
+    // Client-only patch classes (visuals, UI, client registries) are not compiled into the dedicated-server
+    // build (CF_SERVER), so they're listed by NAME: on a server the lookup finds nothing and the patch is
+    // skipped; on the client a missing name is an error (a rename that forgot this list).
+    private static void ClientPatch(Harmony h, string patchClass)
+    {
+        Type t = typeof(Plugin).Assembly.GetType("RomesteadContentForge." + patchClass);
+        if (t == null)
+        {
+#if !CF_SERVER
+            Log.LogError($"Patch class {patchClass} not found — renamed without updating Plugin.Load?");
+#endif
+            return;
+        }
+        SafePatch(h, t);
     }
 
     // One patch class at a time: when a game update renames a patched method, only that feature goes dark —
@@ -195,8 +229,10 @@ internal static class SetupPatch
         try
         {
             ContentLoader.EnsureParsed(Plugin.PacksDir);
+#if !CF_SERVER
             ContentLoader.ApplyIcons();     // register custom icons before items reference them
             ContentLoader.ApplyDisplayData(); // register composed held looks
+#endif
             ContentLoader.InjectSpells();   // register spells before scrolls/tomes reference them
             ContentLoader.InjectItems();
             ContentLoader.InjectRecipes();  // recipes reference crafted item ids
@@ -232,6 +268,7 @@ internal static class LocalizationPatch
     }
 }
 
+#if !CF_SERVER
 // Inject custom held-weapon skins after the skin system builds its registry (it (re)creates Parts here).
 [HarmonyPatch(typeof(PlayerSkinManager), nameof(PlayerSkinManager.Setup))]
 internal static class SkinSetupPatch
@@ -319,6 +356,7 @@ internal static class SoundBankPatch
         catch (Exception e) { Plugin.Log.LogError($"Sound bank load failed: {e}"); }
     }
 }
+#endif
 
 // The spawn chokepoint for summons. Does three things for any entity carrying our summon params:
 //   1) faction — join the summoner's faction (the game only does this for ServerJumpingSkullController, so other
@@ -451,6 +489,7 @@ internal static class SummonAllyFactionSync
     }
 }
 
+#if !CF_SERVER
 internal static class SummonClientSpawnFactionPatch
 {
     [HarmonyPostfix]
@@ -458,6 +497,7 @@ internal static class SummonClientSpawnFactionPatch
         nameof(Candide.GameModels.Controllers.EntityController.SpawnEntity), new[] { typeof(ServerEntityModel) })]
     private static void Postfix(EntityWrapper __result) => SummonAllyFactionSync.Apply(__result);
 }
+#endif
 
 internal static class SummonCastFactionPatch
 {
@@ -619,6 +659,7 @@ internal static class UnequipDismissPatch
     }
 }
 
+#if !CF_SERVER
 // Suppress the client-side PREDICTED hit on your own summons (the floating damage number, the local health
 // drop, hit sounds): the client calculates and displays damage before the server ever sees it, so the server
 // guard alone leaves cosmetic numbers. IgnoreDoDamage aborts the whole client-side hit at the source.
@@ -637,7 +678,9 @@ internal static class SummonClientProtectPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Summon client protect failed: {e.Message}"); }
     }
 }
+#endif
 
+#if !CF_SERVER
 // Spell casting requirements: gate the player's weapon/tome casts of a pack spell behind skill level,
 // favour, finished quest, or class. CastPlayerWeaponSpell is the player's casting entry (chains and enemy
 // casts go through CastSpell and are deliberately NOT gated — the parent cast already was).
@@ -684,6 +727,7 @@ internal static class SpellRequiresPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Spell requirement check failed: {e.Message}"); return true; }
     }
 }
+#endif
 
 // Custom skills exist on a CHARACTER only if its skill dictionary contains them — vanilla fills it once at
 // character creation, so EXISTING characters never get new skills (and the XP-grant API crashes on a missing
@@ -704,6 +748,7 @@ internal static class SkillBackfillPatch
     }
 }
 
+#if !CF_SERVER
 internal static class SkillGrantGuardPatch
 {
     [HarmonyPrefix]
@@ -718,7 +763,9 @@ internal static class SkillGrantGuardPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Skill grant guard failed: {e.Message}"); }
     }
 }
+#endif
 
+#if !CF_SERVER
 // Weapon hitVfx: play a pack-defined VFX at the hit position when one of our weapons lands a hit. The game
 // derives impact VFX from damage-type enums only (no per-weapon id exists), so we resolve the attacker's
 // equipped weapon client-side and play additively through the same VfxPlayer calls vanilla uses. Works for
@@ -750,6 +797,7 @@ internal static class HitVfxPatch
         catch (Exception e) { Plugin.Log.LogWarning($"hitVfx failed: {e.Message}"); }
     }
 }
+#endif
 
 // Co-op hardening: the server's DamageEntity also BROADCASTS the hit to other clients even when ApplyDamage is
 // blocked, so without this gate other players would still see damage on someone's summons. Swallow the whole
@@ -841,6 +889,7 @@ internal static class SummonProtectPatch
     }
 }
 
+#if !CF_SERVER
 // Make our crafting recipes VISIBLE. The crafting window lists GameState.ItemRecipes (the player's known
 // recipes — a hardcoded starter list built here), NOT the recipe database; a recipe only in the DB never shows.
 // We append ours each time the state is built — except quest-reward recipes, which stay locked until their
@@ -859,6 +908,7 @@ internal static class KnownRecipePatch
         catch (Exception e) { Plugin.Log.LogWarning($"Known-recipe injection failed: {e.Message}"); }
     }
 }
+#endif
 
 // Register custom creatures into the SERVER entity registry, right after the vanilla doodad DB loads (so the base
 // prototypes we clone are present). The server simulates the creature from here.
@@ -873,6 +923,7 @@ internal static class CreatureServerPatch
     }
 }
 
+#if !CF_SERVER
 // Register custom creatures into the CLIENT entity registry (renders/predicts them). Same Guid as the server side.
 internal static class CreatureClientPatch
 {
@@ -884,6 +935,7 @@ internal static class CreatureClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Client creature registration failed: {e.Message}"); }
     }
 }
+#endif
 
 // Inject custom loot after the server builds its drop tables (server-authoritative; runs in-process even in
 // single-player). Re-applies idempotently if the server rebuilds the tables.
@@ -940,7 +992,9 @@ internal static class ContentLoader
     // key -> { languageCode -> text }. ApplyStrings picks the current game language, falling back to _strings.
     private static readonly Dictionary<string, Dictionary<string, string>> _locStrings = new();
     private static readonly Dictionary<string, string> _icons = new();   // iconId -> absolute .png path
+#if !CF_SERVER
     private static bool _iconsBuilt;
+#endif
     private static readonly List<SpellDataModel> _spells = new();
     private static readonly List<ItemRecipe> _recipes = new();
     private static readonly List<PlayerClassModel> _classes = new();
@@ -986,17 +1040,23 @@ internal static class ContentLoader
     // recipes the player should always see in the crafting menu (registered recipes minus quest rewards)
     internal static IEnumerable<string> AutoKnownRecipeIds =>
         _recipes.Where(r => !_questRewardRecipeIds.Contains(r.Id)).Select(r => r.Id);
+#if !CF_SERVER
     private static readonly List<CharacterDisplayData> _displayData = new();
+#endif
     // Custom held-weapon skins: requests (tag, name, png path, frame w/h) parsed from packs, and the built
     // parts (textures loaded once; re-inserted into PlayerSkinManager.Parts after each Setup clears it).
     private static readonly List<(int tag, string name, string path, int w, int h)> _customSkins = new();
+#if !CF_SERVER
     private static readonly List<(int tag, string name, PlayerSkinPart part)> _skinParts = new();
     private static bool _customSkinsBuilt;
     private static bool _palettesBuilt;
+#endif
     // Custom sprite-animation VFX parsed from packs (id, sheet path, frame w/h, cell order, ticks/frame, scale).
     private static readonly List<(string id, string path, int fw, int fh, int[] frames, int dur, float scale)> _vfx = new();
+#if !CF_SERVER
     private static bool _vfxBuilt;
     private static bool _banksLoaded;
+#endif
     // Custom loot: add an item to an existing drop table (table id, item id, %chance, min, max, aura).
     private static readonly List<(string table, string item, float chance, int min, int max, string aura)> _drops = new();
 
@@ -1108,6 +1168,8 @@ internal static class ContentLoader
         if (pack.Icons != null)
             foreach (var kv in pack.Icons) _icons[kv.Key] = Path.Combine(dir, kv.Value);
 
+#if !CF_SERVER
+        // --- client-only pack sections (audio, spac art, animation remixes); the dedicated server ignores them.
         // Raw audio: "sounds": { "ding": "ding.wav" } -> playable anywhere as "cf:sound:<ns>:ding".
         if (pack.Sounds != null)
             foreach (var kv in pack.Sounds)
@@ -1130,6 +1192,7 @@ internal static class ContentLoader
         if (pack.PlayerAnimations != null)
             foreach (var kv in pack.PlayerAnimations)
                 PlayerAnimRemixFeature.Register(kv.Key, kv.Value, name);
+#endif
 
         if (pack.Palettes != null)
             foreach (PaletteDef p in pack.Palettes)
@@ -1200,17 +1263,21 @@ internal static class ContentLoader
                     if (!string.IsNullOrWhiteSpace(def.Equippable?.Weapon?.HitVfx))
                         HitVfxByItemId[def.Id] = (def.Equippable.Weapon.HitVfx,
                             def.Equippable.Weapon.HitVfxScale <= 0f ? 1f : def.Equippable.Weapon.HitVfxScale);
+#if !CF_SERVER
                     // attack tuning: per-weapon swing arc/offset (cone melee only; applied client-side at cast)
                     if (def.Equippable?.Weapon != null &&
                         (def.Equippable.Weapon.AttackArcDegrees > 0f || def.Equippable.Weapon.AttackArcOffsetPx != 0f))
                         AttackTuningFeature.ByItemId[def.Id] = (def.Equippable.Weapon.AttackArcDegrees * (float)Math.PI / 180f,
                             def.Equippable.Weapon.AttackArcOffsetPx);
+#endif
                     // two-handed: this weapon keeps the offhand slot empty while equipped (host-side enforcement)
                     if (def.Equippable?.Weapon?.TwoHanded == true)
                         TwoHandedFeature.TwoHandedItemIds.Add(def.Id);
-                    // per-combo-step tuning: damage/arc/timing per hit of the chain (cone melee only)
+#if !CF_SERVER
+                    // per-combo-step tuning: damage/arc/timing per hit of the chain (cone melee only; client-side)
                     if (def.Equippable?.Weapon?.ComboSteps is { Count: > 0 })
                         ComboTuningFeature.Register(def.Id, def.Equippable.Weapon.ComboSteps);
+#endif
                     _items.Add(data);
                 }
                 else skipped++;
@@ -1476,7 +1543,8 @@ internal static class ContentLoader
                 }
                 else Plugin.Log.LogWarning($"[{name}] workRecipe skipped (needs id).");
 
-        // Player skins: reskins / new hair / new parts / worn looks. Consumed by PlayerSkinsFeature.
+#if !CF_SERVER
+        // Player skins: reskins / new hair / new parts / worn looks. Consumed by PlayerSkinsFeature (client).
         if (pack.PlayerSkins != null)
         {
             var ps = pack.PlayerSkins;
@@ -1494,6 +1562,7 @@ internal static class ContentLoader
                     PlayerSkinsFeature.LookDefs.Add((l, dir, name));
                 }
         }
+#endif
     }
 
     // Build a Tier-1 furniture construction: a decoration that reuses an existing vanilla decoration's art.
@@ -1599,6 +1668,7 @@ internal static class ContentLoader
         return true;
     }
 
+#if !CF_SERVER
     // Load custom .png icons into the icon database (once — textures are GPU resources). Each becomes an
     // IconData whose sprite wraps the loaded texture; items reference it by its icon id. Needs the
     // GraphicsDevice, which is ready by the time the world's data loads; we retry until it is.
@@ -1634,6 +1704,7 @@ internal static class ContentLoader
         _iconsBuilt = true;
         Plugin.Log.LogInfo($"Content Forge: {built.Count} custom icon(s) loaded.");
     }
+#endif
 
     // Add our spells to the spell database (AddData uses TryAdd — re-running is safe).
     public static void InjectSpells()
@@ -1718,9 +1789,12 @@ internal static class ContentLoader
                 clone.General[0].Id = guid;
                 clone.General[0].BaseGuid = guid;
                 string cname = c.Name;
+#if !CF_SERVER
+                // the dedicated server has no UI language — it keeps the default name (players see their own)
                 if (c.NameLocalized != null && Globals.LanguageCode != null
                     && c.NameLocalized.TryGetValue(Globals.LanguageCode, out string cloc) && !string.IsNullOrWhiteSpace(cloc))
                     cname = cloc;
+#endif
                 if (!string.IsNullOrWhiteSpace(cname)) clone.General[0].Name = cname;
                 if (c.Color != null && c.Color.Length >= 3)
                     clone.General[0].Color = new Color(Clamp255(c.Color[0]), Clamp255(c.Color[1]), Clamp255(c.Color[2]));
@@ -1764,9 +1838,11 @@ internal static class ContentLoader
                 // CUSTOM CLIENT VISUALS (client side only): swap the clone's CLIENT controller — the mirror
                 // of the server AI swap above. "forge_creature_anim" + controllerParams (spac/anim-map/...)
                 // animates a cross-family AI that would otherwise freeze the base's hardcoded animations.
+#if !CF_SERVER
                 if (!creatureServerSide && !string.IsNullOrWhiteSpace(c.ClientController))
                     CreatureAnimFeature.ApplyClientController(clone, c.Id, c.ClientController, c.ControllerParams);
                 RigSwap.Apply(clone, c, Plugin.PacksDir, creatureServerSide);
+#endif
                 protos[guid] = clone;
                 Plugin.Log.LogInfo($"Registered custom creature '{c.Id}' (base {c.Base}).");
             }
@@ -1787,6 +1863,7 @@ internal static class ContentLoader
         return true;
     }
 
+#if !CF_SERVER
     // Register composed held-weapon looks (skin shape + palette) so items can reference them by DisplayId.
     public static void ApplyDisplayData()
     {
@@ -1929,6 +2006,7 @@ internal static class ContentLoader
         }
         Plugin.Log.LogInfo($"Content Forge: loaded {ok}/{files.Count} custom sound bank(s).");
     }
+#endif
 
     // Add custom items to existing loot tables (server-authoritative). Each drop appends an ItemDrop to the
     // table's drop list; the list field is readonly so we replace it via reflection. Idempotent (skips if our
@@ -1955,6 +2033,7 @@ internal static class ContentLoader
             Plugin.Log.LogInfo($"Content Forge: applied {added} custom drop(s)" + (missing > 0 ? $", {missing} missing table(s)" : "") + ".");
     }
 
+#if !CF_SERVER
     // Build (once, then cache) a custom-shape swing-trail spac for a weapon. We clone the vanilla trail
     // spac the weapon's class plays (baseSpacId, e.g. vfx_swordslash) and swap its first sprite sheet for
     // the author's repaint, keeping all animation timing/offset/direction data. Returns the clone id to use
@@ -1996,6 +2075,7 @@ internal static class ContentLoader
             return baseSpacId;
         }
     }
+#endif
 
     // Build a projectile damage spell. Reuses a built-in SpellTypeId (default single_projectile_attack)
     // so no new spell behavior is needed; damage lives in AttackSpellArgs, visuals/sound in the display/
@@ -2167,7 +2247,11 @@ internal static class ContentLoader
     public static void ApplyStrings()
     {
         // Pick the current game language for any string that has localized variants; otherwise the fallback.
+#if CF_SERVER
+        const string lang = "en";   // a dedicated server has no UI language; players' clients localize themselves
+#else
         string lang = Globals.LanguageCode ?? "en";
+#endif
         foreach (var kv in _strings)
         {
             string text = kv.Value;
@@ -2224,6 +2308,8 @@ internal static class ContentLoader
             if (disp != null && (!string.IsNullOrEmpty(disp.SkinName) || !string.IsNullOrEmpty(disp.Sheet)))
             {
                 string ddId = "cf:dd:" + d.Id;
+#if !CF_SERVER
+                // the held-look art itself is client-side; the server only needs the matching DisplayId
                 CharacterDisplayFragment frag;
                 if (!string.IsNullOrEmpty(disp.Sheet))
                 {
@@ -2238,6 +2324,7 @@ internal static class ContentLoader
                     frag = new CharacterDisplayFragment(disp.SkinTag, disp.SkinName, disp.Palette ?? "weapon", disp.PaletteRow);
                 }
                 _displayData.Add(new CharacterDisplayData { Id = ddId, Fragments = new[] { frag } });
+#endif
                 equippable.DisplayId = ddId;
             }
             // Melee/ranged weapon: damage + behavior from WeaponStats.

@@ -1,5 +1,7 @@
-using Candide.GameModels.Managers;
+#if !CF_SERVER
+using Candide.GameModels.Managers;     // client assembly (GameStateManager) — not in the CF_SERVER build
 using Candide.Multiplayer.Network;
+#endif
 using CandideServer;
 using CandideServer.EventBus;
 using CandideServer.MessageModels;
@@ -128,7 +130,9 @@ internal static class ModHandshake
         try
         {
             if (payload is not string s || !s.StartsWith(Prefix)) return;
-            int playerId = args.Peer.Id; // AuthorizationCheck guarantees this peer has joined
+            // The network PEER id is not the player id (a dedicated server numbers peers from 0 but players
+            // from 1) — resolve the joined player that owns this peer. Fallback keeps the old behavior.
+            int playerId = PlayerServerService.GetPlayerInfoFromPeerId(args.Peer.Id)?.Item2?.Id ?? args.Peer.Id;
             string[] parts = s.Split('|', 3);
             var rep = new PeerReport { ModVersion = parts.Length > 1 ? parts[1] : "?" };
             if (parts.Length > 2 && parts[2].Length > 0)
@@ -233,6 +237,7 @@ internal static class HandshakeServerPatch
     }
 }
 
+#if !CF_SERVER
 // CLIENT: the moment we've received the host's full game state (i.e. the join completed), send our report.
 internal static class HandshakeClientPatch
 {
@@ -244,3 +249,4 @@ internal static class HandshakeClientPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Handshake report failed: {e.Message}"); }
     }
 }
+#endif

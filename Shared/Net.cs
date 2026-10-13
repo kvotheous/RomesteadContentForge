@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
-using Candide.Multiplayer.Network;
+#if !CF_SERVER
+using Candide.Multiplayer.Network;   // client assembly — absent on a dedicated server (CF_SERVER build)
+#endif
 using CandideServer.Server;
 
 namespace RomesteadShared;
@@ -30,6 +32,7 @@ public static class Net
         _resolved = true;
         try
         {
+#if !CF_SERVER
             foreach (var m in typeof(NetworkManager).GetMethods(BindingFlags.Public | BindingFlags.Static))
             {
                 if (m.Name != "SendMessage") continue;
@@ -38,6 +41,7 @@ public static class Net
                     && p[1].ParameterType == typeof(object) && p[2].ParameterType == typeof(byte))
                 { _send = m; _sendCount = p.Length; break; }
             }
+#endif
             foreach (var m in typeof(BaseServer).GetMethods(BindingFlags.Public | BindingFlags.Instance))
             {
                 if (m.Name != "SendHostMessageToAll") continue;

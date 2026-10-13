@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Content Forge for HEADLESS DEDICATED SERVERS. Same source files as the mod, built with CF_SERVER and
+       compiled ONLY against the dedicated server's own assemblies (no Romestead.dll client assembly, no
+       YarnSpinner): the compiler refuses any code that touches a client type, so this build always loads on
+       a dedicated server. Client visuals/UI files are left out entirely; mixed files guard their client
+       half with #if !CF_SERVER. Install on the dedicated server only — it stays inactive next to the client. -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>RomesteadContentForge.Server</AssemblyName>
+    <Product>Romestead Content Forge (Dedicated Server)</Product>
+    <Authors>kvotheous</Authors>
+    <Company>kvotheous</Company>
+    <Version>1.1.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <NoWarn>CA1416;CA2252;CS0649</NoWarn>
+    <DefineConstants>$(DefineConstants);CF_SERVER</DefineConstants>
+    <RootNamespace>RomesteadContentForge</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+  </PropertyGroup>
+
+  <!-- Path to your Romestead DEDICATED SERVER install. Override: dotnet build -p:ServerDir="D:\romestead-server" -->
+  <PropertyGroup>
+    <ServerDir Condition="'$(ServerDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\romestead-server</ServerDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.NET.CoreCLR" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+  </ItemGroup>
+
+  <!-- Shared sources. Left out: client-only visuals/UI (they never run on a server). -->
+  <ItemGroup>
+    <Compile Include="..\*.cs" Exclude="..\AttackTuning.cs;..\AttackTuningPlus.cs;..\Banners.cs;..\CreatureAnim.cs;..\FavourScreen.cs;..\ForgeTab.cs;..\Particles.cs;..\PlayerRig.cs;..\PlayerSkins.cs;..\Rigs.cs;..\SpacForge.cs;..\Sprites.cs;..\Toasts.cs;..\Sounds.cs" />
+    <Compile Include="..\Shared\Net.cs" Link="Shared\Net.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CandideServer"><HintPath>$(ServerDir)\CandideServer.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Shared"><HintPath>$(ServerDir)\Shared.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="CandideCreator.Shared"><HintPath>$(ServerDir)\CandideCreator.Shared.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="MonoGame.Framework"><HintPath>$(ServerDir)\MonoGame.Framework.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+</Project>

@@ -350,6 +350,7 @@ internal static class MapPoiPatch
     }
 }
 
+#if !CF_SERVER
 // Map atmosphere ids are MusicTracksDataBase / AmbienceTracksDataBase TRACK ids ("dungeon", "crypt", ...) —
 // NOT raw FMOD events; an unknown id plays the game's "music not available" placeholder loop. So authors can
 // also write raw "event:/..." paths, each such id is registered as its own track at client data setup.
@@ -377,3 +378,4 @@ internal static class AtmosphereTracksPatch
         catch (Exception e) { Plugin.Log.LogWarning($"Atmosphere track registration failed: {e.Message}"); }
     }
 }
+#endif

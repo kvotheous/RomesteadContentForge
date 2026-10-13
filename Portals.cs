@@ -67,9 +67,11 @@ namespace RomesteadContentForge;
 
 // CLIENT portal: cosmetic only — the inherited base already shows the optional "tooltip" and floating
 // "message" params; the actual move arrives as the vanilla "update-active-dungeon" + "enter-room" messages.
+#if !CF_SERVER
 public sealed class ForgePortalClientController : ForgeClientController
 {
 }
+#endif
 
 // SERVER portal: the authoritative "teleport player into map M at P" — a faithful mirror of
 // DungeonServerManager.TryEnterDungeon + EnterInterior with a custom arrival position and no intro cinematic.
