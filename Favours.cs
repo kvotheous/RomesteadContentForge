@@ -184,7 +184,7 @@ internal static class FavoursFeature
                 Id = f.Id,
                 Name = (StringId)(string.IsNullOrWhiteSpace(f.Name) ? f.Id : f.Name),   // rewritten to "<id>*favour:name" by AddFavours
                 GodId = god,
-                Icon = string.IsNullOrWhiteSpace(f.Icon) ? "sam" : f.Icon,
+                Icon = string.IsNullOrWhiteSpace(f.Icon) ? "scroll:brown" : f.Icon,
                 Description = string.IsNullOrWhiteSpace(f.Description) ? (StringId?)null : f.Description,
                 AuraId = auraId,
                 PlayerCraftingRecipeId = string.IsNullOrWhiteSpace(f.Recipe) ? null : f.Recipe,

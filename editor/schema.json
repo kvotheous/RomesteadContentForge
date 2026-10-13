@@ -500,7 +500,7 @@
     {
      "key": "icon",
      "type": "string",
-     "default": "sam",
+     "default": "scroll:brown",
      "source": "icons",
      "help": "Vanilla icon id or your icons id"
     },
@@ -1620,7 +1620,7 @@
      "key": "icon",
      "type": "string",
      "source": "icons",
-     "default": "sam",
+     "default": "scroll:brown",
      "help": "build-menu icon"
     },
     {
@@ -2652,7 +2652,7 @@
        "key": "icon",
        "type": "string",
        "source": "icons",
-       "default": "sam"
+       "default": "scroll:brown"
       },
       {
        "key": "price",
@@ -2778,7 +2778,7 @@
      "key": "icon",
      "type": "string",
      "source": "icons",
-     "default": "sam"
+     "default": "scroll:brown"
     },
     {
      "key": "value",
@@ -3023,7 +3023,7 @@
      "key": "icon",
      "type": "string",
      "source": "icons",
-     "default": "sam"
+     "default": "scroll:brown"
     },
     {
      "key": "screen",

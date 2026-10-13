@@ -134,7 +134,7 @@ internal static class InteractiveFeature
             Id = f.Id,
             Name = string.IsNullOrWhiteSpace(f.Name) ? f.Id : f.Name,                  // rewritten to loc key by AddConstructions
             Description = string.IsNullOrWhiteSpace(f.Description) ? (StringId?)null : f.Description,
-            IconId = string.IsNullOrWhiteSpace(f.Icon) ? "sam" : f.Icon,
+            IconId = string.IsNullOrWhiteSpace(f.Icon) ? "scroll:brown" : f.Icon,
             UpgradeLevel = 0,
             RequiredConstructionProgress = 0f,
             ConstructionMaterialsRequirement = new ConstructionMaterialsAggregate

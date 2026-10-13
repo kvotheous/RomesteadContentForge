@@ -91,7 +91,7 @@ internal static class StationsFeature
         foreach (string id in SplitStations(f.Station))
         {
             if (VanillaStationIds.Contains(id)) continue;
-            _stations.TryAdd(id, (string.IsNullOrWhiteSpace(f.Icon) ? "sam" : f.Icon,
+            _stations.TryAdd(id, (string.IsNullOrWhiteSpace(f.Icon) ? "scroll:brown" : f.Icon,
                 string.IsNullOrWhiteSpace(f.Name) ? id : f.Name, f.NameLocalized));
         }
     }

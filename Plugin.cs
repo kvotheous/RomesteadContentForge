@@ -1462,7 +1462,7 @@ internal static class ContentLoader
                         Id = sk.Id,
                         Name = string.IsNullOrWhiteSpace(sk.Name) ? sk.Id : sk.Name,
                         Description = string.IsNullOrWhiteSpace(sk.Description) ? default : (StringId)sk.Description,
-                        Icon = string.IsNullOrWhiteSpace(sk.Icon) ? "sam" : sk.Icon,
+                        Icon = string.IsNullOrWhiteSpace(sk.Icon) ? "scroll:brown" : sk.Icon,
                         Value = sk.Value,
                         ExperienceGainFactor = sk.XpGainFactor <= 0f ? 1f : sk.XpGainFactor,
                     });
@@ -1585,7 +1585,7 @@ internal static class ContentLoader
             Id = f.Id,
             Name = string.IsNullOrWhiteSpace(f.Name) ? f.Id : f.Name,                  // rewritten to loc key by AddConstructions
             Description = string.IsNullOrWhiteSpace(f.Description) ? (StringId?)null : f.Description,
-            IconId = string.IsNullOrWhiteSpace(f.Icon) ? "sam" : f.Icon,
+            IconId = string.IsNullOrWhiteSpace(f.Icon) ? "scroll:brown" : f.Icon,
             UpgradeLevel = 0,
             RequiredConstructionProgress = 0f,
             ConstructionMaterialsRequirement = new ConstructionMaterialsAggregate
@@ -2278,7 +2278,7 @@ internal static class ContentLoader
             // string-key convention (NOT ItemData.Name's own value). We set those keys here and register
             // the actual text in RegisterItemStrings so both the tooltip and the spawner resolve.
             Name = d.Id + ItemDataBase.SuffixName,
-            Icon = string.IsNullOrEmpty(d.Icon) ? "sam" : d.Icon,
+            Icon = string.IsNullOrEmpty(d.Icon) ? "scroll:brown" : d.Icon,
             MaxStackSize = d.MaxStack <= 0 ? 1 : d.MaxStack,
             Tier = d.Tier,
             Flags = ParseFlags(d.Flags, pack, d.Id),

@@ -220,7 +220,7 @@ internal static class CropsFeature
             Id = seed.Id,
             Name = string.IsNullOrWhiteSpace(seed.Name) ? seed.Id : seed.Name,
             Description = string.IsNullOrWhiteSpace(seed.Description) ? (Shared.Text.StringId?)null : seed.Description,
-            Icon = string.IsNullOrWhiteSpace(seed.Icon) ? "sam" : seed.Icon,
+            Icon = string.IsNullOrWhiteSpace(seed.Icon) ? "scroll:brown" : seed.Icon,
             MaxStackSize = seed.MaxStack < 1 ? 100 : seed.MaxStack,
             Tier = seed.Tier < 1 ? 1 : seed.Tier,
             Flags = ItemFlag.Seed,

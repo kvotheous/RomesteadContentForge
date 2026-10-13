@@ -185,6 +185,8 @@ def validate_pack_data(pack, d):
         for k, v in (r.get("ingredients") or {}).items():
             if not isinstance(v, int) or v <= 0:
                 warn(f"recipe '{rid}': ingredient '{k}' has count {v}.")
+            if str(k).startswith("resource:"):
+                warn(f"recipe '{rid}': ingredient '{k}' is a construction resource, not an item — crafting can't use it (use an item id such as 'material:...').")
 
     for dr in (pack.get("drops") or []):
         if not isinstance(dr, dict):

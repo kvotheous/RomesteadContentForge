@@ -56,7 +56,7 @@
         "tr_TR": "Masalcinin Kemeri"
       },
       "description": "Build it anywhere; step through into the World of Tales.",
-      "icon": "sam",
+      "icon": "scroll:brown",
       "materials": {
         "resource:stone": 4,
         "material:wood_stick": 2

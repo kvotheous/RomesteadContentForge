@@ -82,7 +82,7 @@ internal static class BannerSystem
                 lock (Pending) { if (Pending.Count < MaxQueue) Pending.Enqueue(text); }
             }
             else
-                UiNotificationSystem.ShowNotification(title, message, null, "sam", null);
+                UiNotificationSystem.ShowNotification(title, message, null, "scroll:brown", null);
         }
         catch { }
     }
