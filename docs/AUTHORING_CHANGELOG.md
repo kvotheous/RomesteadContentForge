@@ -5,8 +5,10 @@ lists, tools). Mod changes are in [../CHANGELOG.md](../CHANGELOG.md); editor cha
 [../editor/CHANGELOG.md](../editor/CHANGELOG.md).
 
 ## 1.1.0
-- README documents dedicated servers (the new `RomesteadContentForge-Server` zip). No changes to docs content,
-  examples or the editor.
+- README documents dedicated servers (the new `RomesteadContentForge-Server` zip).
+- Default icon is now `scroll:brown` everywhere (docs, examples, editor) — `sam` is the game's placeholder photo.
+- Test pack: the T65 recipe takes a wood stick (`resource:stone` is a construction resource, not an item).
+- Both validators warn about `resource:` recipe ingredients.
 
 ## 1.0.1
 - Docs: `PACKS.md` documents the spac field `feetRow` and the `forge_creature_anim` params `sprite-scale` and
