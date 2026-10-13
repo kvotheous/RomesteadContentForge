@@ -18,12 +18,26 @@
 **Content Forge** is a BepInEx mod for Romestead that turns the game into a moddable platform: authors write
 **content packs** — plain JSON files (plus PNG / TMX / WAV / `.yarn` assets) dropped into
 `BepInEx\config\RomesteadContentForge\packs\` — and the mod injects their items, weapons, spells, summons,
-creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. No compiling, no
-game files touched; works in single-player and co-op (server-authoritative, save-safe uninstall).
+creatures, dungeons, NPCs, quests, classes, placeables, events and more into the live game. Ready-made AI and
+behaviors are built in — C# is optional, for when you want to go further. No compiling, no game files touched;
+works in single-player and co-op (server-authoritative, save-safe uninstall).
+
+## 🛠️ Easiest way to start: the Forge Editor
+
+Don't want to write JSON by hand? Download **`ForgeEditor-<version>.zip`**, unzip, and run **`ForgeEditor.exe`**
+(no Python, no install):
+
+- **Every game value is built in** — items, creatures, icons, sounds, effects and more are picked from dropdowns,
+  so you never guess an id.
+- **Forms for every field**, with PNG previews and per-language text.
+- **One-click validation** catches mistakes before you launch the game.
+- It saves the same `.json` packs the mod reads, so you can switch between the editor and hand-editing anytime.
+
+More: [editor/README.md](editor/README.md).
 
 ## 📦 Downloads — which zip is which
 
-The release ships as **two zips** (Nexus Files tab / GitHub Releases):
+The release ships as **two main zips** plus the optional editor zip (Nexus Files tab / GitHub Releases):
 
 | Zip | Contents | Who needs it |
 |---|---|---|
