@@ -679,3 +679,19 @@ internal static class EventsPlusKillPatch
     private static void Postfix(Guid killedEntityId, Guid killedEntityBaseId, Guid killerEntityId)
         => EventsPlusFeature.OnEntityKilled(killedEntityId, killedEntityBaseId, killerEntityId);
 }
+
+// (server) Kills the server simulates itself — every creature a player kills on a dedicated server — reach
+// OnEntityKilledEvent.Send WITHOUT a killer id, so the postfix above can't credit them. The killer is still
+// on the DamageInfo here: credit the player behind DamageInfo.SourceEntity. No double count: the Send that
+// this method makes carries an empty killer, which OnEntityKilled ignores.
+[HarmonyPatch(typeof(CandideServer.Entities.Bridges.ServerEntitySystemBridge), nameof(CandideServer.Entities.Bridges.ServerEntitySystemBridge.OnEntityKilled))]
+internal static class EventsPlusServerKillPatch
+{
+    [HarmonyPostfix]
+    private static void Postfix(Shared.Combat.DamageInfo damageInfo)
+    {
+        Guid killer = PlayerServerManager.GetPlayerFromEntity(damageInfo?.SourceEntity)?.CharacterModel?.Character?.EntityId ?? Guid.Empty;
+        if (killer == Guid.Empty) return;
+        EventsPlusFeature.OnEntityKilled(damageInfo.Victim.Id, damageInfo.Victim.BaseGuid, killer);
+    }
+}

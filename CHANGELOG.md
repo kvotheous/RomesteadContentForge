@@ -8,7 +8,16 @@
   Setup: *Dedicated servers* on the mod page.
 - **Fixed: the co-op handshake mixed up players on a dedicated server.** It used the network connection number as the
   player id, which differ on a dedicated server — so a modded player could be reported as "has no Content Forge".
+- **Fixed: hunt contests counted no kills on a dedicated server.** There the server itself simulates creature
+  deaths and reports them without a killer, so every `huntContest` ended "no victor". Kills are now credited to the
+  player who dealt the killing blow.
 - The `ForgeGiveItem` / `ForgeTakeItem` / `ForgeHeal` dialogue commands still need a player host (documented).
+- **Changed: the default icon is a plain scroll.** Anything a pack left without an icon used the game's `sam`
+  placeholder — a developer's photo — which showed up as a face (e.g. in a crafting station's window). The default
+  is now the vanilla `scroll:brown` icon; the example packs use it too.
+- **Fixed in the test pack:** the T65 Runeforge recipe used `resource:stone` as an ingredient, which is a
+  construction resource, not an item, so it could never be crafted. It now takes a wood stick. Both validators now
+  warn about `resource:` ingredients.
 
 ## 1.0.1
 Compatibility + fixes release. **Required for the Romestead 2026-10-04 update** — 1.0.0 was built before it and is not compatible.

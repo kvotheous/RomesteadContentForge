@@ -7,7 +7,10 @@ Full versions: mod [../CHANGELOG.md](../CHANGELOG.md) · authoring kit
 ## Mod — 1.1.0
 New: dedicated server support — a separate server build (RomesteadContentForge-Server zip) runs Content Forge on a headless Romestead Dedicated Server. Setup steps on the mod page.
 Fixed: the co-op handshake could report a modded player as "has no Content Forge" on a dedicated server.
+Fixed: hunt contests counted no kills on a dedicated server and always ended with no victor.
 The ForgeGiveItem / ForgeTakeItem / ForgeHeal dialogue commands still need a player host.
+Changed: the default icon is now a plain scroll instead of the game's "sam" placeholder photo.
+Validators warn when a recipe ingredient is a construction resource (resource:...), which can't be crafted with.
 
 ## Mod — 1.0.1
 Compatible with the Romestead 2026-10-04 update (1.0.0 is not).
@@ -25,6 +28,9 @@ Initial release: content packs for items, weapons, spells, creatures, NPCs, maps
 
 ## Authoring kit — 1.1.0
 README documents dedicated servers and the new server zip.
+Default icon in the docs, examples and editor: scroll:brown (was the sam placeholder photo).
+Test pack: T65 recipe fixed (wood stick instead of a construction resource).
+Validators warn about resource:... recipe ingredients.
 
 ## Authoring kit — 1.0.1
 PACKS.md documents "feetRow", "sprite-scale" and "sprite-offset-y".
@@ -35,6 +41,10 @@ Added the MIT LICENSE file and THIRD-PARTY-NOTICES.txt.
 
 ## Authoring kit — 1.0.0
 Initial creator kit: docs, editor source, 3 example packs, 17 id reference lists, art/asset tools.
+
+## Forge Editor — 1.1.0
+New pack elements default to the scroll icon (was the sam placeholder photo).
+Validation warns about resource:... recipe ingredients.
 
 ## Forge Editor — 1.0.1
 Knows the new from-scratch spac field "feetRow".

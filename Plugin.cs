@@ -166,6 +166,7 @@ public class Plugin : BasePlugin
         ClientPatch(h, "AtmosphereTracksPatch");
         ClientPatch(h, "NpcBodyRetintPatch");
         SafePatch(h, typeof(EventsPlusKillPatch));
+        SafePatch(h, typeof(EventsPlusServerKillPatch));
         SafePatch(h, typeof(QuestRewardInjectPatch));
         ClientPatch(h, "ComboTuningPatch");
         ClientPatch(h, "SpacForgePatch");

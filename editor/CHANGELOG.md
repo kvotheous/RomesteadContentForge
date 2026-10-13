@@ -2,6 +2,10 @@
 
 The editor's version follows the mod release it ships with.
 
+## 1.1.0
+- New pack elements default to the vanilla `scroll:brown` icon (was `sam`, the game's placeholder photo).
+- Validation warns when a recipe ingredient is a construction resource (`resource:...`) — those can't be crafted with.
+
 ## 1.0.1
 - Knows the new from-scratch spac field **`feetRow`** (pixel row where the art's feet touch the ground).
 - `ForgeEditor.exe` rebuilt against the 1.0.1 schema.
